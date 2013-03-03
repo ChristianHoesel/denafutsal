@@ -71,6 +71,9 @@
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Game">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="time" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//ELong"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="report" lowerBound="1"
+        eType="#//Report"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="board" lowerBound="1" eType="#//Board"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Report">
     <eStructuralFeatures xsi:type="ecore:EReference" name="teams" lowerBound="2" upperBound="2"
