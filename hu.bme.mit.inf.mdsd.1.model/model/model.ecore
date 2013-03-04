@@ -77,9 +77,13 @@
         eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="position" eType="#//Position"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="team" lowerBound="1" eType="#//Team"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="link" eType="#//Staff"
+        eOpposite="#//Staff/link"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Staff" eSuperTypes="#//TeamMember">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="role" eType="#//Role"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="link" eType="#//Player"
+        eOpposite="#//Player/link"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Goal">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="time" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//ELong"/>
