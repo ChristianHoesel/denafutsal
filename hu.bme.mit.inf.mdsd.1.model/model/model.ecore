@@ -7,13 +7,8 @@
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Player" eSuperTypes="#//TeamMember">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="position" eType="#//Position"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="goals" upperBound="-1"
-        eType="#//Event" containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="yellowCard" eType="#//Event"
-        containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="shirtNo" lowerBound="1"
         upperBound="99" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EShort"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="id" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EEnum" name="Type">
     <eLiterals name="League"/>
@@ -57,6 +52,8 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="teams" lowerBound="2" upperBound="2"
         eType="#//Team" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="timer" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//ELong"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="events" upperBound="-1"
+        eType="#//Event" containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Person">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
@@ -80,15 +77,22 @@
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="timer" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//ELong"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="TeamMember" abstract="true" eSuperTypes="#//Person">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="redCard" eType="#//Event"
-        containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="team" lowerBound="1" eType="#//Team"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="id" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="StaffMember" eSuperTypes="#//TeamMember">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="role" eType="#//Role"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Event">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="time" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//ELong"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="teamMember" lowerBound="1"
+        eType="#//TeamMember"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="type" eType="#//EventType"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="StaffPlayer" eSuperTypes="#//StaffMember #//Player"/>
+  <eClassifiers xsi:type="ecore:EEnum" name="EventType">
+    <eLiterals name="Goal"/>
+    <eLiterals name="RedCard" value="1"/>
+    <eLiterals name="YellowCard" value="2"/>
+  </eClassifiers>
 </ecore:EPackage>
