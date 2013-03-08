@@ -3,13 +3,16 @@
     xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="model" nsURI="http://model/1.0" nsPrefix="model">
   <eClassifiers xsi:type="ecore:EClass" name="TeamData">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="timeoutTimer" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//ELong"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="timeoutState" eType="#//State"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="/timeoutState" eType="#//State"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="foulCounter" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EShort"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Player" eSuperTypes="#//TeamMember">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="position" eType="#//Position"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="shirtNo" lowerBound="1"
         upperBound="99" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EShort"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="goals" upperBound="-1"
+        eType="#//Event"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="yellowCard" eType="#//Event"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EEnum" name="Type">
     <eLiterals name="League"/>
@@ -74,22 +77,30 @@
         upperBound="7" eType="#//Player" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="staff" upperBound="-1"
         eType="#//StaffMember" containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="match" eType="#//Match"
+    <eStructuralFeatures xsi:type="ecore:EReference" name="match" lowerBound="1" eType="#//Match"
         eOpposite="#//Match/teams"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="notFirstHalfData" lowerBound="1"
         eType="#//TeamData" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="goals" upperBound="-1"
+        eType="#//Event"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="notSentOffMembers" upperBound="-1"
+        eType="#//TeamMember"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="/hasTimeout" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="RedCounter">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="startTime" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//ELong"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="team" eType="#//Team" eOpposite="#//Team/counters"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="clock" lowerBound="1" eType="#//Clock"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="state" eType="#//State"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="/state" eType="#//State"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="/timeLeft" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//ELong"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="clock" eType="#//Clock"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="TeamMember" abstract="true" eSuperTypes="#//Person">
     <eStructuralFeatures xsi:type="ecore:EReference" name="team" lowerBound="1" eType="#//Team"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="id" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="events" upperBound="-1"
         eType="#//Event" eOpposite="#//Event/teamMember"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="redCard" eType="#//Event"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="StaffMember" eSuperTypes="#//TeamMember">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="role" eType="#//Role"/>
@@ -111,8 +122,9 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="counters" eType="#//RedCounter"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="halfTimeLong" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//ELong"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="extraHalfTimeLong" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//ELong"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="timePart" eType="#//TimePart"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="state" eType="#//State"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="/timePart" eType="#//TimePart"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="/state" eType="#//State"
+        derived="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EEnum" name="TimePart">
     <eLiterals name="FirstHalf"/>
@@ -124,5 +136,8 @@
     <eLiterals name="Active"/>
     <eLiterals name="NotActive" value="1"/>
     <eLiterals name="Waiting" value="2"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="PlayerType">
+    <eLiterals name="Start"/>
   </eClassifiers>
 </ecore:EPackage>
