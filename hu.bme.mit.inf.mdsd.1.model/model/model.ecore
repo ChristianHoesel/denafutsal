@@ -3,7 +3,7 @@
     xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="model" nsURI="http://model/1.0" nsPrefix="model">
   <eClassifiers xsi:type="ecore:EClass" name="TeamData">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="timeoutTimer" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//ELong"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="/timeoutState" eType="#//State"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="_timeoutState" eType="#//State"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="foulCounter" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EShort"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Player" eSuperTypes="#//TeamMember">
@@ -13,6 +13,7 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="goals" upperBound="-1"
         eType="#//Event"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="yellowCard" eType="#//Event"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="_hasYellow" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EEnum" name="Type">
     <eLiterals name="League"/>
@@ -68,7 +69,7 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="firstHalfData" lowerBound="1"
         eType="#//TeamData" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="counters" upperBound="-1"
-        eType="#//RedCounter" containment="true" eOpposite="#//RedCounter/team"/>
+        eType="#//RedCounter" eOpposite="#//RedCounter/team"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="captain" lowerBound="1"
         eType="#//Player" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="startingLine" lowerBound="5"
@@ -85,15 +86,15 @@
         eType="#//Event"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="notSentOffMembers" upperBound="-1"
         eType="#//TeamMember"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="/hasTimeout" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="_hasTimeout" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="penalties" upperBound="-1"
+        eType="#//Penalty.1" containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="RedCounter">
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="startTime" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//ELong"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="team" eType="#//Team" eOpposite="#//Team/counters"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="clock" lowerBound="1" eType="#//Clock"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="/state" eType="#//State"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="/timeLeft" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//ELong"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="clock" eType="#//Clock"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="team" lowerBound="1" eType="#//Team"
+        eOpposite="#//Team/counters"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="_state" eType="#//State"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="_timeLeft" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//ELong"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="TeamMember" abstract="true" eSuperTypes="#//Person">
     <eStructuralFeatures xsi:type="ecore:EReference" name="team" lowerBound="1" eType="#//Team"/>
@@ -101,6 +102,7 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="events" upperBound="-1"
         eType="#//Event" eOpposite="#//Event/teamMember"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="redCard" eType="#//Event"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="_hasRed" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="StaffMember" eSuperTypes="#//TeamMember">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="role" eType="#//Role"/>
@@ -110,6 +112,8 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="teamMember" lowerBound="1"
         eType="#//TeamMember" eOpposite="#//TeamMember/events"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="type" eType="#//EventType"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="redCounter" eType="#//RedCounter"
+        containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="StaffPlayer" eSuperTypes="#//StaffMember #//Player"/>
   <eClassifiers xsi:type="ecore:EEnum" name="EventType">
@@ -122,8 +126,8 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="counters" eType="#//RedCounter"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="halfTimeLong" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//ELong"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="extraHalfTimeLong" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//ELong"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="/timePart" eType="#//TimePart"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="/state" eType="#//State"
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="_timePart" eType="#//TimePart"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="state" eType="#//State"
         derived="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EEnum" name="TimePart">
@@ -139,5 +143,12 @@
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EEnum" name="PlayerType">
     <eLiterals name="Start"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="Penalty">
+    <eLiterals name="Success"/>
+    <eLiterals name="Failed" value="1"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Penalty">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="isSuccess" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
   </eClassifiers>
 </ecore:EPackage>
