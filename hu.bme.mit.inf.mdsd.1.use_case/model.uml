@@ -78,4 +78,27 @@
       <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_r6Ad1oljEeKYb6Wuzz2Tnw" value="1"/>
     </ownedEnd>
   </packagedElement>
+  <packagedElement xmi:type="uml:Package" xmi:id="_84LWsImFEeK8sKk1_jhPGQ" name="package"/>
+  <packagedElement xmi:type="uml:UseCase" xmi:id="_Dvpk0ImGEeK8sKk1_jhPGQ" name="Increase or decrease Team-Foults"/>
+  <packagedElement xmi:type="uml:UseCase" xmi:id="_JUyBUImGEeK8sKk1_jhPGQ" name="Decrease Team-Foults"/>
+  <packagedElement xmi:type="uml:UseCase" xmi:id="_XspewImGEeK8sKk1_jhPGQ" name="Add or Delete Cards"/>
+  <packagedElement xmi:type="uml:UseCase" xmi:id="_ctYNsImGEeK8sKk1_jhPGQ" name="CRUD Yellow Card"/>
+  <packagedElement xmi:type="uml:UseCase" xmi:id="_gsl1QImGEeK8sKk1_jhPGQ" name="CRUD Red Card"/>
+  <packagedElement xmi:type="uml:UseCase" xmi:id="_v_uoIImGEeK8sKk1_jhPGQ" name="CRUD Goal"/>
+  <packagedElement xmi:type="uml:UseCase" xmi:id="_yb-oIImGEeK8sKk1_jhPGQ" name="Start/Reset/Set Timeout"/>
+  <packagedElement xmi:type="uml:UseCase" xmi:id="_1BiVIImGEeK8sKk1_jhPGQ" name="Start/Stop/Reset/Set clock"/>
+  <packagedElement xmi:type="uml:UseCase" xmi:id="_lOFOAImHEeK8sKk1_jhPGQ" name=" 2min Red Card"/>
+  <packagedElement xmi:type="uml:Association" xmi:id="_-1hiQImHEeK8sKk1_jhPGQ" name="A_crud red card_ 2min red card" memberEnd="_-1hiQYmHEeK8sKk1_jhPGQ _-1hiRImHEeK8sKk1_jhPGQ">
+    <ownedEnd xmi:id="_-1hiQYmHEeK8sKk1_jhPGQ" name="crud red card" type="_gsl1QImGEeK8sKk1_jhPGQ" association="_-1hiQImHEeK8sKk1_jhPGQ">
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_-1hiQomHEeK8sKk1_jhPGQ" value="1"/>
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_-1hiQ4mHEeK8sKk1_jhPGQ" value="1"/>
+    </ownedEnd>
+    <ownedEnd xmi:id="_-1hiRImHEeK8sKk1_jhPGQ" name=" 2min red card" type="_lOFOAImHEeK8sKk1_jhPGQ" association="_-1hiQImHEeK8sKk1_jhPGQ">
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_-1hiRYmHEeK8sKk1_jhPGQ" value="1"/>
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_-1hiRomHEeK8sKk1_jhPGQ" value="1"/>
+    </ownedEnd>
+  </packagedElement>
+  <packagedElement xmi:type="uml:UseCase" xmi:id="_DTHH4ImIEeK8sKk1_jhPGQ" name="Initialize Match Data"/>
+  <packagedElement xmi:type="uml:UseCase" xmi:id="_FELc4ImIEeK8sKk1_jhPGQ" name="Initialize Team Data"/>
+  <packagedElement xmi:type="uml:UseCase" xmi:id="_9mefwImIEeK8sKk1_jhPGQ" name="Add or Revoke Penalty"/>
 </uml:Model>
