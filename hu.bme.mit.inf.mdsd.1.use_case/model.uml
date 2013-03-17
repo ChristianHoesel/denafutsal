@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <uml:Model xmi:version="20110701" xmlns:xmi="http://www.omg.org/spec/XMI/20110701" xmlns:uml="http://www.eclipse.org/uml2/4.0.0/UML" xmi:id="_sUnLoIliEeKYb6Wuzz2Tnw" name="model">
   <packagedElement xmi:type="uml:Actor" xmi:id="_CNduQIljEeKYb6Wuzz2Tnw" name="3rd referee"/>
-  <packagedElement xmi:type="uml:UseCase" xmi:id="_WzkPkIljEeKYb6Wuzz2Tnw" name="Generate report"/>
-  <packagedElement xmi:type="uml:UseCase" xmi:id="_ZJ_UYIljEeKYb6Wuzz2Tnw" name="Send report"/>
+  <packagedElement xmi:type="uml:UseCase" xmi:id="_WzkPkIljEeKYb6Wuzz2Tnw" name="Generate Report"/>
+  <packagedElement xmi:type="uml:UseCase" xmi:id="_ZJ_UYIljEeKYb6Wuzz2Tnw" name="Send Report"/>
   <packagedElement xmi:type="uml:UseCase" xmi:id="_arZcwIljEeKYb6Wuzz2Tnw" name="Manage fouls"/>
   <packagedElement xmi:type="uml:UseCase" xmi:id="_cPlzYIljEeKYb6Wuzz2Tnw" name="Manage clock"/>
   <packagedElement xmi:type="uml:UseCase" xmi:id="_dwhaoIljEeKYb6Wuzz2Tnw" name="Manage goals"/>
@@ -101,4 +101,157 @@
   <packagedElement xmi:type="uml:UseCase" xmi:id="_DTHH4ImIEeK8sKk1_jhPGQ" name="Initialize Match Data"/>
   <packagedElement xmi:type="uml:UseCase" xmi:id="_FELc4ImIEeK8sKk1_jhPGQ" name="Initialize Team Data"/>
   <packagedElement xmi:type="uml:UseCase" xmi:id="_9mefwImIEeK8sKk1_jhPGQ" name="Add or Revoke Penalty"/>
+  <packagedElement xmi:type="uml:UseCase" xmi:id="_HhZRgI7_EeKo3_0MxbrlCw" name="Increase Team-Foults"/>
+  <packagedElement xmi:type="uml:UseCase" xmi:id="_WgE3UI7_EeKo3_0MxbrlCw" name="Decrease Team-Foults"/>
+  <packagedElement xmi:type="uml:UseCase" xmi:id="_a35zMI7_EeKo3_0MxbrlCw" name="Handle Team-Foults">
+    <include xmi:id="_-GrOEI7_EeKo3_0MxbrlCw" addition="_HhZRgI7_EeKo3_0MxbrlCw"/>
+    <include xmi:id="_ADmNwI8AEeKo3_0MxbrlCw" addition="_WgE3UI7_EeKo3_0MxbrlCw"/>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Association" xmi:id="_CLThII8AEeKo3_0MxbrlCw" name="A_3rd referee_handle team-foults" memberEnd="_CLThIY8AEeKo3_0MxbrlCw _CLThJI8AEeKo3_0MxbrlCw">
+    <ownedEnd xmi:id="_CLThIY8AEeKo3_0MxbrlCw" name="3rd referee" type="_CNduQIljEeKYb6Wuzz2Tnw" association="_CLThII8AEeKo3_0MxbrlCw">
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_CLThIo8AEeKo3_0MxbrlCw" value="1"/>
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_CLThI48AEeKo3_0MxbrlCw" value="1"/>
+    </ownedEnd>
+    <ownedEnd xmi:id="_CLThJI8AEeKo3_0MxbrlCw" name="increase team-foults" type="_a35zMI7_EeKo3_0MxbrlCw" association="_CLThII8AEeKo3_0MxbrlCw">
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_CLThJY8AEeKo3_0MxbrlCw" value="1"/>
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_CLThJo8AEeKo3_0MxbrlCw" value="1"/>
+    </ownedEnd>
+  </packagedElement>
+  <packagedElement xmi:type="uml:UseCase" xmi:id="_bPmFAI8AEeKo3_0MxbrlCw" name="Manage Red Cards">
+    <generalization xmi:id="_edtKUI8BEeKo3_0MxbrlCw" general="_aDS0gI8BEeKo3_0MxbrlCw"/>
+    <include xmi:id="_r63IcI8AEeKo3_0MxbrlCw" addition="_dppsoI8AEeKo3_0MxbrlCw"/>
+    <include xmi:id="_snLb4I8AEeKo3_0MxbrlCw" addition="_mqBg8I8AEeKo3_0MxbrlCw"/>
+    <include xmi:id="_tU1MEI8AEeKo3_0MxbrlCw" addition="_h0G64I8AEeKo3_0MxbrlCw"/>
+    <include xmi:id="_uFcJoI8AEeKo3_0MxbrlCw" addition="_f18lEI8AEeKo3_0MxbrlCw"/>
+  </packagedElement>
+  <packagedElement xmi:type="uml:UseCase" xmi:id="_dppsoI8AEeKo3_0MxbrlCw" name="Create Red Card"/>
+  <packagedElement xmi:type="uml:UseCase" xmi:id="_f18lEI8AEeKo3_0MxbrlCw" name="Delete Red Card"/>
+  <packagedElement xmi:type="uml:UseCase" xmi:id="_h0G64I8AEeKo3_0MxbrlCw" name="Update Red Card"/>
+  <packagedElement xmi:type="uml:UseCase" xmi:id="_mqBg8I8AEeKo3_0MxbrlCw" name="Read Red Card"/>
+  <packagedElement xmi:type="uml:Association" xmi:id="_u9H_kI8AEeKo3_0MxbrlCw" name="A_3rd referee_manage yellow cards" memberEnd="_u9H_kY8AEeKo3_0MxbrlCw _u9H_lI8AEeKo3_0MxbrlCw">
+    <ownedEnd xmi:id="_u9H_kY8AEeKo3_0MxbrlCw" name="3rd referee" type="_CNduQIljEeKYb6Wuzz2Tnw" association="_u9H_kI8AEeKo3_0MxbrlCw">
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_u9H_ko8AEeKo3_0MxbrlCw" value="1"/>
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_u9H_k48AEeKo3_0MxbrlCw" value="1"/>
+    </ownedEnd>
+    <ownedEnd xmi:id="_u9H_lI8AEeKo3_0MxbrlCw" name="manage yellow cards" type="_bPmFAI8AEeKo3_0MxbrlCw" association="_u9H_kI8AEeKo3_0MxbrlCw">
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_u9H_lY8AEeKo3_0MxbrlCw" value="1"/>
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_u9H_lo8AEeKo3_0MxbrlCw" value="1"/>
+    </ownedEnd>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Association" xmi:id="_OcLAYI8BEeKo3_0MxbrlCw" name="A_3rd referee_manage red cards" memberEnd="_OcLAYY8BEeKo3_0MxbrlCw _OcLAZI8BEeKo3_0MxbrlCw">
+    <ownedEnd xmi:id="_OcLAYY8BEeKo3_0MxbrlCw" name="3rd referee" type="_CNduQIljEeKYb6Wuzz2Tnw" association="_OcLAYI8BEeKo3_0MxbrlCw">
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_OcLAYo8BEeKo3_0MxbrlCw" value="1"/>
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_OcLAY48BEeKo3_0MxbrlCw" value="1"/>
+    </ownedEnd>
+    <ownedEnd xmi:id="_OcLAZI8BEeKo3_0MxbrlCw" name="manage red cards" type="_bPmFAI8AEeKo3_0MxbrlCw" association="_OcLAYI8BEeKo3_0MxbrlCw">
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_OcLAZY8BEeKo3_0MxbrlCw" value="1"/>
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_OcLAZo8BEeKo3_0MxbrlCw" value="1"/>
+    </ownedEnd>
+  </packagedElement>
+  <packagedElement xmi:type="uml:UseCase" xmi:id="_aDS0gI8BEeKo3_0MxbrlCw" name="Manage 2min Red Card">
+    <generalization xmi:id="_gzFGQI8BEeKo3_0MxbrlCw" general="_bPmFAI8AEeKo3_0MxbrlCw"/>
+    <include xmi:id="_ndmdgI8BEeKo3_0MxbrlCw" addition="_k90oYI8BEeKo3_0MxbrlCw"/>
+  </packagedElement>
+  <packagedElement xmi:type="uml:UseCase" xmi:id="_k90oYI8BEeKo3_0MxbrlCw" name="Start 2min Timer"/>
+  <packagedElement xmi:type="uml:UseCase" xmi:id="_w7kz0I8BEeKo3_0MxbrlCw" name="Manage Goals">
+    <include xmi:id="_dhmR8I8CEeKo3_0MxbrlCw" addition="_zL-wMI8BEeKo3_0MxbrlCw"/>
+    <include xmi:id="_fIvO4I8CEeKo3_0MxbrlCw" addition="_BsGKsI8CEeKo3_0MxbrlCw"/>
+    <include xmi:id="_fyeIYI8CEeKo3_0MxbrlCw" addition="_Tfn2sI8CEeKo3_0MxbrlCw"/>
+    <include xmi:id="_gfdKMI8CEeKo3_0MxbrlCw" addition="_VJn6YI8CEeKo3_0MxbrlCw"/>
+  </packagedElement>
+  <packagedElement xmi:type="uml:UseCase" xmi:id="_zL-wMI8BEeKo3_0MxbrlCw" name="Create Goal Entry"/>
+  <packagedElement xmi:type="uml:UseCase" xmi:id="_BsGKsI8CEeKo3_0MxbrlCw" name="Read Goal Entry"/>
+  <packagedElement xmi:type="uml:UseCase" xmi:id="_Tfn2sI8CEeKo3_0MxbrlCw" name="Update Goal Entry"/>
+  <packagedElement xmi:type="uml:UseCase" xmi:id="_VJn6YI8CEeKo3_0MxbrlCw" name="Delete Goal Entry"/>
+  <packagedElement xmi:type="uml:Association" xmi:id="_hNNBAI8CEeKo3_0MxbrlCw" name="A_3rd referee_manage goals" memberEnd="_hNNBAY8CEeKo3_0MxbrlCw _hNNBBI8CEeKo3_0MxbrlCw">
+    <ownedEnd xmi:id="_hNNBAY8CEeKo3_0MxbrlCw" name="3rd referee" type="_CNduQIljEeKYb6Wuzz2Tnw" association="_hNNBAI8CEeKo3_0MxbrlCw">
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_hNNBAo8CEeKo3_0MxbrlCw" value="1"/>
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_hNNBA48CEeKo3_0MxbrlCw" value="1"/>
+    </ownedEnd>
+    <ownedEnd xmi:id="_hNNBBI8CEeKo3_0MxbrlCw" name="manage goals" type="_w7kz0I8BEeKo3_0MxbrlCw" association="_hNNBAI8CEeKo3_0MxbrlCw">
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_hNNBBY8CEeKo3_0MxbrlCw" value="1"/>
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_hNNBBo8CEeKo3_0MxbrlCw" value="1"/>
+    </ownedEnd>
+  </packagedElement>
+  <packagedElement xmi:type="uml:UseCase" xmi:id="_oOjj4I8CEeKo3_0MxbrlCw" name="Initialize Match Data"/>
+  <packagedElement xmi:type="uml:UseCase" xmi:id="_q2EYsI8CEeKo3_0MxbrlCw" name="Add Players"/>
+  <packagedElement xmi:type="uml:UseCase" xmi:id="_s0ChQI8CEeKo3_0MxbrlCw" name="Add Teams"/>
+  <packagedElement xmi:type="uml:Association" xmi:id="_wvH2wI8CEeKo3_0MxbrlCw" name="A_3rd referee_initialize match data" memberEnd="_wvH2wY8CEeKo3_0MxbrlCw _wvH2xI8CEeKo3_0MxbrlCw">
+    <ownedEnd xmi:id="_wvH2wY8CEeKo3_0MxbrlCw" name="3rd referee" type="_CNduQIljEeKYb6Wuzz2Tnw" association="_wvH2wI8CEeKo3_0MxbrlCw">
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_wvH2wo8CEeKo3_0MxbrlCw" value="1"/>
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_wvH2w48CEeKo3_0MxbrlCw" value="1"/>
+    </ownedEnd>
+    <ownedEnd xmi:id="_wvH2xI8CEeKo3_0MxbrlCw" name="initialize match data" type="_oOjj4I8CEeKo3_0MxbrlCw" association="_wvH2wI8CEeKo3_0MxbrlCw">
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_wvH2xY8CEeKo3_0MxbrlCw" value="1"/>
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_wvH2xo8CEeKo3_0MxbrlCw" value="1"/>
+    </ownedEnd>
+  </packagedElement>
+  <packagedElement xmi:type="uml:UseCase" xmi:id="_ycL1gI8CEeKo3_0MxbrlCw" name="UseCase"/>
+  <packagedElement xmi:type="uml:UseCase" xmi:id="_ydPlcI8CEeKo3_0MxbrlCw" name="Initialize Team Data"/>
+  <packagedElement xmi:type="uml:Association" xmi:id="_3e5hcI8CEeKo3_0MxbrlCw" name="A_3rd referee_initialize team data" memberEnd="_3e5hcY8CEeKo3_0MxbrlCw _3e5hdI8CEeKo3_0MxbrlCw">
+    <ownedEnd xmi:id="_3e5hcY8CEeKo3_0MxbrlCw" name="3rd referee" type="_CNduQIljEeKYb6Wuzz2Tnw" association="_3e5hcI8CEeKo3_0MxbrlCw">
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_3e5hco8CEeKo3_0MxbrlCw" value="1"/>
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_3e5hc48CEeKo3_0MxbrlCw" value="1"/>
+    </ownedEnd>
+    <ownedEnd xmi:id="_3e5hdI8CEeKo3_0MxbrlCw" name="initialize team data" type="_ydPlcI8CEeKo3_0MxbrlCw" association="_3e5hcI8CEeKo3_0MxbrlCw">
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_3e5hdY8CEeKo3_0MxbrlCw" value="1"/>
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_3e5hdo8CEeKo3_0MxbrlCw" value="1"/>
+    </ownedEnd>
+  </packagedElement>
+  <packagedElement xmi:type="uml:UseCase" xmi:id="_569UMI8CEeKo3_0MxbrlCw" name="Handle Clock">
+    <include xmi:id="_CbVZ0I8DEeKo3_0MxbrlCw" addition="_-A7EAI8CEeKo3_0MxbrlCw"/>
+    <include xmi:id="_C6jscI8DEeKo3_0MxbrlCw" addition="__W4KUI8CEeKo3_0MxbrlCw"/>
+    <include xmi:id="_DvX0kI8DEeKo3_0MxbrlCw" addition="_8HWTQI8CEeKo3_0MxbrlCw"/>
+    <include xmi:id="_Eai4gI8DEeKo3_0MxbrlCw" addition="_8_-kYI8CEeKo3_0MxbrlCw"/>
+  </packagedElement>
+  <packagedElement xmi:type="uml:UseCase" xmi:id="_8_-kYI8CEeKo3_0MxbrlCw" name="Stop Clock"/>
+  <packagedElement xmi:type="uml:UseCase" xmi:id="_-A7EAI8CEeKo3_0MxbrlCw" name="Reset Clock"/>
+  <packagedElement xmi:type="uml:UseCase" xmi:id="__W4KUI8CEeKo3_0MxbrlCw" name="Set clock"/>
+  <packagedElement xmi:type="uml:Association" xmi:id="_GERPYI8DEeKo3_0MxbrlCw" name="A_3rd referee_handle clock" memberEnd="_GERPYY8DEeKo3_0MxbrlCw _GERPZI8DEeKo3_0MxbrlCw">
+    <ownedEnd xmi:id="_GERPYY8DEeKo3_0MxbrlCw" name="3rd referee" type="_CNduQIljEeKYb6Wuzz2Tnw" association="_GERPYI8DEeKo3_0MxbrlCw">
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_GERPYo8DEeKo3_0MxbrlCw" value="1"/>
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_GERPY48DEeKo3_0MxbrlCw" value="1"/>
+    </ownedEnd>
+    <ownedEnd xmi:id="_GERPZI8DEeKo3_0MxbrlCw" name="handle clock" type="_569UMI8CEeKo3_0MxbrlCw" association="_GERPYI8DEeKo3_0MxbrlCw">
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_GERPZY8DEeKo3_0MxbrlCw" value="1"/>
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_GERPZo8DEeKo3_0MxbrlCw" value="1"/>
+    </ownedEnd>
+  </packagedElement>
+  <packagedElement xmi:type="uml:UseCase" xmi:id="_L_tTEI8DEeKo3_0MxbrlCw" name="Handle Timeout">
+    <include xmi:id="_T7CK4I8DEeKo3_0MxbrlCw" addition="_QIcqEI8DEeKo3_0MxbrlCw"/>
+    <include xmi:id="_UdszEI8DEeKo3_0MxbrlCw" addition="_OJJEwI8DEeKo3_0MxbrlCw"/>
+    <include xmi:id="_VHuAcI8DEeKo3_0MxbrlCw" addition="_NOsOsI8DEeKo3_0MxbrlCw"/>
+    <include xmi:id="_V6DcUI8DEeKo3_0MxbrlCw" addition="_PDyIEI8DEeKo3_0MxbrlCw"/>
+  </packagedElement>
+  <packagedElement xmi:type="uml:UseCase" xmi:id="_NOsOsI8DEeKo3_0MxbrlCw" name="Start Timeout"/>
+  <packagedElement xmi:type="uml:UseCase" xmi:id="_OJJEwI8DEeKo3_0MxbrlCw" name="Reset Timeout"/>
+  <packagedElement xmi:type="uml:UseCase" xmi:id="_PDyIEI8DEeKo3_0MxbrlCw" name="Set Timeout"/>
+  <packagedElement xmi:type="uml:UseCase" xmi:id="_QIcqEI8DEeKo3_0MxbrlCw" name="Stop Timeout"/>
+  <packagedElement xmi:type="uml:Association" xmi:id="_XIwEEI8DEeKo3_0MxbrlCw" name="A_3rd referee_handle timeout" memberEnd="_XIwEEY8DEeKo3_0MxbrlCw _XIwEFI8DEeKo3_0MxbrlCw">
+    <ownedEnd xmi:id="_XIwEEY8DEeKo3_0MxbrlCw" name="3rd referee" type="_CNduQIljEeKYb6Wuzz2Tnw" association="_XIwEEI8DEeKo3_0MxbrlCw">
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_XIwEEo8DEeKo3_0MxbrlCw" value="1"/>
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_XIwEE48DEeKo3_0MxbrlCw" value="1"/>
+    </ownedEnd>
+    <ownedEnd xmi:id="_XIwEFI8DEeKo3_0MxbrlCw" name="handle timeout" type="_L_tTEI8DEeKo3_0MxbrlCw" association="_XIwEEI8DEeKo3_0MxbrlCw">
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_XIwEFY8DEeKo3_0MxbrlCw" value="1"/>
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_XIwEFo8DEeKo3_0MxbrlCw" value="1"/>
+    </ownedEnd>
+  </packagedElement>
+  <packagedElement xmi:type="uml:UseCase" xmi:id="_Yeg9II8DEeKo3_0MxbrlCw" name="Manage Penalties">
+    <include xmi:id="_dufpAI8DEeKo3_0MxbrlCw" addition="_Z-TU4I8DEeKo3_0MxbrlCw"/>
+    <include xmi:id="_eMxgcI8DEeKo3_0MxbrlCw" addition="_a0vNoI8DEeKo3_0MxbrlCw"/>
+  </packagedElement>
+  <packagedElement xmi:type="uml:UseCase" xmi:id="_Z-TU4I8DEeKo3_0MxbrlCw" name="Add Penalty"/>
+  <packagedElement xmi:type="uml:UseCase" xmi:id="_a0vNoI8DEeKo3_0MxbrlCw" name="Revoke Penalty"/>
+  <packagedElement xmi:type="uml:Association" xmi:id="_h2FwgI8DEeKo3_0MxbrlCw" name="A_3rd referee_manage penalties" memberEnd="_h2FwgY8DEeKo3_0MxbrlCw _h2FwhI8DEeKo3_0MxbrlCw">
+    <ownedEnd xmi:id="_h2FwgY8DEeKo3_0MxbrlCw" name="3rd referee" type="_CNduQIljEeKYb6Wuzz2Tnw" association="_h2FwgI8DEeKo3_0MxbrlCw">
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_h2Fwgo8DEeKo3_0MxbrlCw" value="1"/>
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_h2Fwg48DEeKo3_0MxbrlCw" value="1"/>
+    </ownedEnd>
+    <ownedEnd xmi:id="_h2FwhI8DEeKo3_0MxbrlCw" name="manage penalties" type="_Yeg9II8DEeKo3_0MxbrlCw" association="_h2FwgI8DEeKo3_0MxbrlCw">
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_h2FwhY8DEeKo3_0MxbrlCw" value="1"/>
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_h2Fwho8DEeKo3_0MxbrlCw" value="1"/>
+    </ownedEnd>
+  </packagedElement>
+  <packagedElement xmi:type="uml:UseCase" xmi:id="_8HWTQI8CEeKo3_0MxbrlCw" name="Start Clock"/>
 </uml:Model>
