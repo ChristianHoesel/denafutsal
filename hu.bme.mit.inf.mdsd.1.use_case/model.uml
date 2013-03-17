@@ -254,4 +254,24 @@
     </ownedEnd>
   </packagedElement>
   <packagedElement xmi:type="uml:UseCase" xmi:id="_8HWTQI8CEeKo3_0MxbrlCw" name="Start Clock"/>
+  <packagedElement xmi:type="uml:UseCase" xmi:id="_LP7dII8dEeKdxf-aC1AKYw" name="Manage Yellow Cards">
+    <include xmi:id="_pQz20I8dEeKdxf-aC1AKYw" addition="_UDyfcI8dEeKdxf-aC1AKYw"/>
+    <include xmi:id="_qMNvII8dEeKdxf-aC1AKYw" addition="_aa7AoI8dEeKdxf-aC1AKYw"/>
+    <include xmi:id="_rYJWwI8dEeKdxf-aC1AKYw" addition="_bvKPsI8dEeKdxf-aC1AKYw"/>
+    <include xmi:id="_vGnzoI8dEeKdxf-aC1AKYw" addition="_mCC0wI8dEeKdxf-aC1AKYw"/>
+  </packagedElement>
+  <packagedElement xmi:type="uml:UseCase" xmi:id="_UDyfcI8dEeKdxf-aC1AKYw" name="Create Yellow Card"/>
+  <packagedElement xmi:type="uml:UseCase" xmi:id="_aa7AoI8dEeKdxf-aC1AKYw" name="Read Yellow Card"/>
+  <packagedElement xmi:type="uml:UseCase" xmi:id="_bvKPsI8dEeKdxf-aC1AKYw" name="Update Yellow Card"/>
+  <packagedElement xmi:type="uml:UseCase" xmi:id="_mCC0wI8dEeKdxf-aC1AKYw" name="Delete Yellow Card"/>
+  <packagedElement xmi:type="uml:Association" xmi:id="_wW8MAI8dEeKdxf-aC1AKYw" name="A_3rd referee_manage yellow cards" memberEnd="_wW8MAY8dEeKdxf-aC1AKYw _wW8MBI8dEeKdxf-aC1AKYw">
+    <ownedEnd xmi:id="_wW8MAY8dEeKdxf-aC1AKYw" name="3rd referee" type="_CNduQIljEeKYb6Wuzz2Tnw" association="_wW8MAI8dEeKdxf-aC1AKYw">
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_wW8MAo8dEeKdxf-aC1AKYw" value="1"/>
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_wW8MA48dEeKdxf-aC1AKYw" value="1"/>
+    </ownedEnd>
+    <ownedEnd xmi:id="_wW8MBI8dEeKdxf-aC1AKYw" name="manage yellow cards" type="_LP7dII8dEeKdxf-aC1AKYw" association="_wW8MAI8dEeKdxf-aC1AKYw">
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_wW8MBY8dEeKdxf-aC1AKYw" value="1"/>
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_wW8MBo8dEeKdxf-aC1AKYw" value="1"/>
+    </ownedEnd>
+  </packagedElement>
 </uml:Model>
