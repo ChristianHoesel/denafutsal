@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<genmodel:GenModel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore"
+    xmlns:genmodel="http://www.eclipse.org/emf/2002/GenModel" modelDirectory="/hu.bme.mit.inf.mdsd.1.model/src" modelPluginID="hu.bme.mit.inf.mdsd.1.model"
+    modelName="Model" importerID="org.eclipse.emf.importer.ecore" complianceLevel="7.0"
+    copyrightFields="false">
+  <foreignModel>model.ecore</foreignModel>
+  <genPackages prefix="Model" disposableProviderFactory="true" ecorePackage="model.ecore#/">
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="model.ecore#//Type">
+      <genEnumLiterals ecoreEnumLiteral="model.ecore#//Type/League"/>
+      <genEnumLiterals ecoreEnumLiteral="model.ecore#//Type/Cup"/>
+      <genEnumLiterals ecoreEnumLiteral="model.ecore#//Type/SuperCup"/>
+    </genEnums>
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="model.ecore#//AgeGroup">
+      <genEnumLiterals ecoreEnumLiteral="model.ecore#//AgeGroup/Adult"/>
+      <genEnumLiterals ecoreEnumLiteral="model.ecore#//AgeGroup/U19"/>
+      <genEnumLiterals ecoreEnumLiteral="model.ecore#//AgeGroup/U17"/>
+      <genEnumLiterals ecoreEnumLiteral="model.ecore#//AgeGroup/U15"/>
+      <genEnumLiterals ecoreEnumLiteral="model.ecore#//AgeGroup/U13"/>
+    </genEnums>
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="model.ecore#//Role">
+      <genEnumLiterals ecoreEnumLiteral="model.ecore#//Role/HeadCoach"/>
+      <genEnumLiterals ecoreEnumLiteral="model.ecore#//Role/TechnicalCoach"/>
+      <genEnumLiterals ecoreEnumLiteral="model.ecore#//Role/GoalkeeperCoach"/>
+      <genEnumLiterals ecoreEnumLiteral="model.ecore#//Role/Coach"/>
+      <genEnumLiterals ecoreEnumLiteral="model.ecore#//Role/Medical"/>
+      <genEnumLiterals ecoreEnumLiteral="model.ecore#//Role/Masseur"/>
+      <genEnumLiterals ecoreEnumLiteral="model.ecore#//Role/Other"/>
+    </genEnums>
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="model.ecore#//Position">
+      <genEnumLiterals ecoreEnumLiteral="model.ecore#//Position/Goalkeeper"/>
+      <genEnumLiterals ecoreEnumLiteral="model.ecore#//Position/FieldPlayer"/>
+    </genEnums>
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="model.ecore#//EventType">
+      <genEnumLiterals ecoreEnumLiteral="model.ecore#//EventType/Goal"/>
+      <genEnumLiterals ecoreEnumLiteral="model.ecore#//EventType/RedCard"/>
+      <genEnumLiterals ecoreEnumLiteral="model.ecore#//EventType/YellowCard"/>
+      <genEnumLiterals ecoreEnumLiteral="model.ecore#//EventType/RedCardWithBan"/>
+    </genEnums>
+    <genClasses ecoreClass="model.ecore#//Player">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute model.ecore#//Player/position"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute model.ecore#//Player/shirtNo"/>
+    </genClasses>
+    <genClasses ecoreClass="model.ecore#//Match">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute model.ecore#//Match/date"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute model.ecore#//Match/location"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute model.ecore#//Match/type"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute model.ecore#//Match/ageGroup"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute model.ecore#//Match/id"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference model.ecore#//Match/Referee"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference model.ecore#//Match/Assistant"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference model.ecore#//Match/ThirdReferee"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference model.ecore#//Match/Supervisor"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference model.ecore#//Match/teams"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference model.ecore#//Match/events"/>
+    </genClasses>
+    <genClasses ecoreClass="model.ecore#//Person">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute model.ecore#//Person/name"/>
+    </genClasses>
+    <genClasses ecoreClass="model.ecore#//Team">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute model.ecore#//Team/name"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference model.ecore#//Team/captain"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference model.ecore#//Team/startingLine"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference model.ecore#//Team/substitutes"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference model.ecore#//Team/staff"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference model.ecore#//Team/match"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference model.ecore#//Team/goals"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference model.ecore#//Team/penalties"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference model.ecore#//Team/cards"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference model.ecore#//Team/redBans"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute model.ecore#//Team/goalCount"/>
+    </genClasses>
+    <genClasses image="false" ecoreClass="model.ecore#//TeamMember">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference model.ecore#//TeamMember/team"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute model.ecore#//TeamMember/id"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute model.ecore#//TeamMember/isSentOff"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute model.ecore#//TeamMember/hasYellowCard"/>
+    </genClasses>
+    <genClasses ecoreClass="model.ecore#//StaffMember">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute model.ecore#//StaffMember/role"/>
+    </genClasses>
+    <genClasses ecoreClass="model.ecore#//Event">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute model.ecore#//Event/time"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute model.ecore#//Event/type"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference model.ecore#//Event/teamMember"/>
+    </genClasses>
+    <genClasses ecoreClass="model.ecore#//StaffPlayer"/>
+    <genClasses ecoreClass="model.ecore#//Penalty">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute model.ecore#//Penalty/isSuccess"/>
+    </genClasses>
+  </genPackages>
+</genmodel:GenModel>

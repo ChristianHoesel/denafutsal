@@ -4,3 +4,4 @@ Bundle-Name: hu.bme.mit.inf.mdsd.1.model
 Bundle-SymbolicName: hu.bme.mit.inf.mdsd.1.model; singleton:=true
 Bundle-Version: 0.1.0
 Require-Bundle: org.eclipse.emf.ecore
+Bundle-RequiredExecutionEnvironment: JavaSE-1.7
