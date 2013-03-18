@@ -7,4 +7,4 @@ encoding//META-INF/MANIFEST.MF=Cp1250
 encoding//src/org/yakindu/sct/generator/xpand/Main.xpt=Cp1250
 encoding/<project>=Cp1250
 encoding/build.properties=Cp1250
-encoding/futsal_report_generator.sct=UTF-8
+encoding/futsal.sct=UTF-8
