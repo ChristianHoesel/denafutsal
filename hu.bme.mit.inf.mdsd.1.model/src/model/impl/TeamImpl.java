@@ -26,6 +26,9 @@ import org.eclipse.emf.ecore.impl.EObjectImpl;
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.ecore.util.InternalEList;
+import org.eclipse.viatra2.emf.incquery.runtime.derived.IncqueryDerivedFeature;
+import org.eclipse.viatra2.emf.incquery.runtime.derived.FeatureKind;
+import org.eclipse.viatra2.emf.incquery.runtime.derived.IncqueryFeatureHelper;
 
 /**
  * <!-- begin-user-doc -->
@@ -296,7 +299,7 @@ public class TeamImpl extends EObjectImpl implements Team {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EList<Event> getGoals() {
+	public EList<Event> getGoalsGen() {
 		// TODO: implement this method to return the 'Goals' reference list
 		// Ensure that you remove @generated or mark it @generated NOT
 		// The list is expected to implement org.eclipse.emf.ecore.util.InternalEList and org.eclipse.emf.ecore.EStructuralFeature.Setting
@@ -321,7 +324,7 @@ public class TeamImpl extends EObjectImpl implements Team {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EList<Event> getCards() {
+	public EList<Event> getCardsGen() {
 		// TODO: implement this method to return the 'Cards' reference list
 		// Ensure that you remove @generated or mark it @generated NOT
 		// The list is expected to implement org.eclipse.emf.ecore.util.InternalEList and org.eclipse.emf.ecore.EStructuralFeature.Setting
@@ -334,7 +337,7 @@ public class TeamImpl extends EObjectImpl implements Team {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EList<Event> getRedBans() {
+	public EList<Event> getRedBansGen() {
 		// TODO: implement this method to return the 'Red Bans' reference list
 		// Ensure that you remove @generated or mark it @generated NOT
 		// The list is expected to implement org.eclipse.emf.ecore.util.InternalEList and org.eclipse.emf.ecore.EStructuralFeature.Setting
@@ -347,7 +350,7 @@ public class TeamImpl extends EObjectImpl implements Team {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public int getGoalCount() {
+	public int getGoalCountGen() {
 		// TODO: implement this method to return the 'Goal Count' attribute
 		// Ensure that you remove @generated or mark it @generated NOT
 		throw new UnsupportedOperationException();
@@ -560,6 +563,82 @@ public class TeamImpl extends EObjectImpl implements Team {
 		result.append(name);
 		result.append(')');
 		return result.toString();
+	}
+
+	/**
+	 * EMF-IncQuery handler for derived feature goals
+	 */
+	private IncqueryDerivedFeature goalsHandler;
+
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * @derived getter created by EMF-IncQuery for derived feature goals
+	 */
+	public EList<Event> getGoals() {
+		if (goalsHandler == null) {
+			goalsHandler = IncqueryFeatureHelper.getIncqueryDerivedFeature(
+					this, ModelPackageImpl.Literals.TEAM__GOALS,
+					"derived.goals", "team", "event",
+					FeatureKind.MANY_REFERENCE, true, false);
+		}
+		return goalsHandler.getManyReferenceValueAsEList(this);
+	}
+
+	/**
+	 * EMF-IncQuery handler for derived feature cards
+	 */
+	private IncqueryDerivedFeature cardsHandler;
+
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * @derived getter created by EMF-IncQuery for derived feature cards
+	 */
+	public EList<Event> getCards() {
+		if (cardsHandler == null) {
+			cardsHandler = IncqueryFeatureHelper.getIncqueryDerivedFeature(
+					this, ModelPackageImpl.Literals.TEAM__CARDS,
+					"derived.cards", "team", "event",
+					FeatureKind.MANY_REFERENCE, true, false);
+		}
+		return cardsHandler.getManyReferenceValueAsEList(this);
+	}
+
+	/**
+	 * EMF-IncQuery handler for derived feature redBans
+	 */
+	private IncqueryDerivedFeature redBansHandler;
+
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * @derived getter created by EMF-IncQuery for derived feature redBans
+	 */
+	public EList<Event> getRedBans() {
+		if (redBansHandler == null) {
+			redBansHandler = IncqueryFeatureHelper.getIncqueryDerivedFeature(
+					this, ModelPackageImpl.Literals.TEAM__RED_BANS,
+					"derived.redBans", "team", "event",
+					FeatureKind.MANY_REFERENCE, true, false);
+		}
+		return redBansHandler.getManyReferenceValueAsEList(this);
+	}
+
+	/**
+	 * EMF-IncQuery handler for derived feature goalCount
+	 */
+	private IncqueryDerivedFeature goalCountHandler;
+
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * @derived getter created by EMF-IncQuery for derived feature goalCount
+	 */
+	public int getGoalCount() {
+		if (goalCountHandler == null) {
+			goalCountHandler = IncqueryFeatureHelper.getIncqueryDerivedFeature(
+					this, ModelPackageImpl.Literals.TEAM__GOAL_COUNT,
+					"derived.goalCount", "team", "target",
+					FeatureKind.SINGLE_REFERENCE, true, false);
+		}
+		return (int) goalCountHandler.getSingleReferenceValue(this);
 	}
 
 } //TeamImpl

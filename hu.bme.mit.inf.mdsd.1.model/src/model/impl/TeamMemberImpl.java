@@ -12,6 +12,9 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
+import org.eclipse.viatra2.emf.incquery.runtime.derived.IncqueryDerivedFeature;
+import org.eclipse.viatra2.emf.incquery.runtime.derived.FeatureKind;
+import org.eclipse.viatra2.emf.incquery.runtime.derived.IncqueryFeatureHelper;
 
 /**
  * <!-- begin-user-doc -->
@@ -163,7 +166,7 @@ public abstract class TeamMemberImpl extends PersonImpl implements TeamMember {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public boolean isIsSentOff() {
+	public boolean isIsSentOffGen() {
 		// TODO: implement this method to return the 'Is Sent Off' attribute
 		// Ensure that you remove @generated or mark it @generated NOT
 		throw new UnsupportedOperationException();
@@ -174,7 +177,7 @@ public abstract class TeamMemberImpl extends PersonImpl implements TeamMember {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public boolean isHasYellowCard() {
+	public boolean isHasYellowCardGen() {
 		// TODO: implement this method to return the 'Has Yellow Card' attribute
 		// Ensure that you remove @generated or mark it @generated NOT
 		throw new UnsupportedOperationException();
@@ -271,6 +274,46 @@ public abstract class TeamMemberImpl extends PersonImpl implements TeamMember {
 		result.append(id);
 		result.append(')');
 		return result.toString();
+	}
+
+	/**
+	 * EMF-IncQuery handler for derived feature isSentOff
+	 */
+	private IncqueryDerivedFeature isSentOffHandler;
+
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * @derived getter created by EMF-IncQuery for derived feature isSentOff
+	 */
+	public boolean isIsSentOff() {
+		if (isSentOffHandler == null) {
+			isSentOffHandler = IncqueryFeatureHelper.getIncqueryDerivedFeature(
+					this, ModelPackageImpl.Literals.TEAM_MEMBER__IS_SENT_OFF,
+					"derived.isSentOff", "teamMember", "target",
+					FeatureKind.SINGLE_REFERENCE, true, false);
+		}
+		return (boolean) isSentOffHandler.getSingleReferenceValue(this);
+	}
+
+	/**
+	 * EMF-IncQuery handler for derived feature hasYellowCard
+	 */
+	private IncqueryDerivedFeature hasYellowCardHandler;
+
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * @derived getter created by EMF-IncQuery for derived feature hasYellowCard
+	 */
+	public boolean isHasYellowCard() {
+		if (hasYellowCardHandler == null) {
+			hasYellowCardHandler = IncqueryFeatureHelper
+					.getIncqueryDerivedFeature(
+							this,
+							ModelPackageImpl.Literals.TEAM_MEMBER__HAS_YELLOW_CARD,
+							"derived.hasYellowCard", "teamMember", "target",
+							FeatureKind.SINGLE_REFERENCE, true, false);
+		}
+		return (boolean) hasYellowCardHandler.getSingleReferenceValue(this);
 	}
 
 } //TeamMemberImpl

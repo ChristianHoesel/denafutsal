@@ -66,23 +66,47 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="match" lowerBound="1" eType="#//Match"
         eOpposite="#//Match/teams"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="goals" upperBound="-1"
-        eType="#//Event" changeable="false" volatile="true" transient="true" derived="true"/>
+        eType="#//Event" changeable="false" volatile="true" transient="true" derived="true">
+      <eAnnotations source="org.eclipse.viatra2.emf.incquery.derived.feature">
+        <details key="patternFQN" value="derived.goals"/>
+      </eAnnotations>
+    </eStructuralFeatures>
     <eStructuralFeatures xsi:type="ecore:EReference" name="penalties" upperBound="-1"
         eType="#//Penalty" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="cards" upperBound="-1"
-        eType="#//Event" changeable="false" volatile="true" transient="true" derived="true"/>
+        eType="#//Event" changeable="false" volatile="true" transient="true" derived="true">
+      <eAnnotations source="org.eclipse.viatra2.emf.incquery.derived.feature">
+        <details key="patternFQN" value="derived.cards"/>
+      </eAnnotations>
+    </eStructuralFeatures>
     <eStructuralFeatures xsi:type="ecore:EReference" name="redBans" upperBound="-1"
-        eType="#//Event" changeable="false" volatile="true" transient="true" derived="true"/>
+        eType="#//Event" changeable="false" volatile="true" transient="true" derived="true">
+      <eAnnotations source="org.eclipse.viatra2.emf.incquery.derived.feature">
+        <details key="patternFQN" value="derived.redBans"/>
+      </eAnnotations>
+    </eStructuralFeatures>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="goalCount" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"
-        changeable="false" volatile="true" transient="true" derived="true"/>
+        changeable="false" volatile="true" transient="true" derived="true">
+      <eAnnotations source="org.eclipse.viatra2.emf.incquery.derived.feature">
+        <details key="patternFQN" value="derived.goalCount"/>
+      </eAnnotations>
+    </eStructuralFeatures>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="TeamMember" abstract="true" eSuperTypes="#//Person">
     <eStructuralFeatures xsi:type="ecore:EReference" name="team" lowerBound="1" eType="#//Team"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="id" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="isSentOff" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"
-        changeable="false" volatile="true" transient="true" derived="true"/>
+        changeable="false" volatile="true" transient="true" derived="true">
+      <eAnnotations source="org.eclipse.viatra2.emf.incquery.derived.feature">
+        <details key="patternFQN" value="derived.isSentOff"/>
+      </eAnnotations>
+    </eStructuralFeatures>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="hasYellowCard" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"
-        changeable="false" volatile="true" transient="true" derived="true"/>
+        changeable="false" volatile="true" transient="true" derived="true">
+      <eAnnotations source="org.eclipse.viatra2.emf.incquery.derived.feature">
+        <details key="patternFQN" value="derived.hasYellowCard"/>
+      </eAnnotations>
+    </eStructuralFeatures>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="StaffMember" eSuperTypes="#//TeamMember">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="role" eType="#//Role"/>
