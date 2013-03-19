@@ -11,12 +11,12 @@ import org.eclipse.viatra2.emf.incquery.runtime.exception.IncQueryException;
 
 public final class GroupOfFileDerived extends BaseGeneratedPatternGroup {
   public GroupOfFileDerived() throws IncQueryException {
+    matcherFactories.add(IsSentOffMatcher.factory());
+    matcherFactories.add(HasYellowCardMatcher.factory());
+    matcherFactories.add(GoalCountMatcher.factory());
     matcherFactories.add(CardsMatcher.factory());
     matcherFactories.add(RedBansMatcher.factory());
     matcherFactories.add(GoalsMatcher.factory());
-    matcherFactories.add(HasYellowCardMatcher.factory());
-    matcherFactories.add(IsSentOffMatcher.factory());
-    matcherFactories.add(GoalCountMatcher.factory());
     
   }
 }
