@@ -1,0 +1,68 @@
+package derived
+
+import "http://model/1.0"
+import "http://www.eclipse.org/emf/2002/Ecore"
+
+@DerivedFeature
+pattern goals(team : Team, event : Event) {
+	Team.match.events(team, event);
+	Event.type(event, ::Goal);
+}
+
+@DerivedFeature
+pattern cards(team : Team, event : Event) {
+	Team.match.events(team, event);
+	Event.type(event, ::RedCard);
+} or {
+	Team.match.events(team, event);
+	Event.type(event, ::RedCardWithBan);	
+} or {
+	Team.match.events(team, event);
+	Event.type(event, ::YellowCard);	
+}
+
+@DerivedFeature
+pattern redBans(team : Team, event : Event) {
+	Team.match.events(team, event);
+	Event.type(event, ::RedCardWithBan);
+}
+
+@DerivedFeature
+pattern goalCount(team : Team, target : EInt) {
+	target == count find goals(team, _);
+}
+
+@DerivedFeature
+pattern isSentOff(teamMember : TeamMember, target : EBoolean) {
+	M == count find redCardsOfPlayer(teamMember, _);
+	M == 0;
+	target == false;
+} or {
+	M == count find redCardsOfPlayer(teamMember, _);
+	M == 1;
+	target == true;	
+}
+
+private pattern redCardsOfPlayer(teamMember : TeamMember, event : Event) {
+	TeamMember.team.match.events(teamMember, event);
+	Event.type(event, ::RedCard);
+} or {
+	TeamMember.team.match.events(teamMember, event);
+	Event.type(event, ::RedCardWithBan);
+}	
+
+@DerivedFeature
+pattern hasYellowCard(teamMember : TeamMember, target : EBoolean) {
+	M == count find yellowCardsOfPlayer(teamMember, _);
+	M == 0;
+	target == false;
+} or {
+	M == count find yellowCardsOfPlayer(teamMember, _);
+	M == 1;
+	target == true;	
+}
+
+private pattern yellowCardsOfPlayer(teamMember : TeamMember, event : Event) {
+	TeamMember.team.match.events(teamMember, event);
+	Event.type(event, ::YellowCard);
+}	
