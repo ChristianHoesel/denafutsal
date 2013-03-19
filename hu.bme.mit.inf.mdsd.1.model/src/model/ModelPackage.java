@@ -340,13 +340,31 @@ public interface ModelPackage extends EPackage {
 	int MATCH__EVENTS = 10;
 
 	/**
+	 * The feature id for the '<em><b>Home</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MATCH__HOME = 11;
+
+	/**
+	 * The feature id for the '<em><b>Visitor</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MATCH__VISITOR = 12;
+
+	/**
 	 * The number of structural features of the '<em>Match</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int MATCH_FEATURE_COUNT = 11;
+	int MATCH_FEATURE_COUNT = 13;
 
 	/**
 	 * The meta object id for the '{@link model.impl.TeamImpl <em>Team</em>}' class.
@@ -919,6 +937,28 @@ public interface ModelPackage extends EPackage {
 	EReference getMatch_Events();
 
 	/**
+	 * Returns the meta object for the reference '{@link model.Match#getHome <em>Home</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference '<em>Home</em>'.
+	 * @see model.Match#getHome()
+	 * @see #getMatch()
+	 * @generated
+	 */
+	EReference getMatch_Home();
+
+	/**
+	 * Returns the meta object for the reference '{@link model.Match#getVisitor <em>Visitor</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference '<em>Visitor</em>'.
+	 * @see model.Match#getVisitor()
+	 * @see #getMatch()
+	 * @generated
+	 */
+	EReference getMatch_Visitor();
+
+	/**
 	 * Returns the meta object for class '{@link model.Person <em>Person</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1414,6 +1454,22 @@ public interface ModelPackage extends EPackage {
 		 * @generated
 		 */
 		EReference MATCH__EVENTS = eINSTANCE.getMatch_Events();
+
+		/**
+		 * The meta object literal for the '<em><b>Home</b></em>' reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference MATCH__HOME = eINSTANCE.getMatch_Home();
+
+		/**
+		 * The meta object literal for the '<em><b>Visitor</b></em>' reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference MATCH__VISITOR = eINSTANCE.getMatch_Visitor();
 
 		/**
 		 * The meta object literal for the '{@link model.impl.PersonImpl <em>Person</em>}' class.

@@ -173,6 +173,7 @@ public interface Team extends EObject {
 	 * @return the value of the '<em>Goals</em>' reference list.
 	 * @see model.ModelPackage#getTeam_Goals()
 	 * @model transient="true" changeable="false" volatile="true" derived="true"
+	 *        annotation="org.eclipse.viatra2.emf.incquery.derived.feature patternFQN='derived.goals'"
 	 * @generated
 	 */
 	EList<Event> getGoals();
@@ -205,6 +206,7 @@ public interface Team extends EObject {
 	 * @return the value of the '<em>Cards</em>' reference list.
 	 * @see model.ModelPackage#getTeam_Cards()
 	 * @model transient="true" changeable="false" volatile="true" derived="true"
+	 *        annotation="org.eclipse.viatra2.emf.incquery.derived.feature patternFQN='derived.cards'"
 	 * @generated
 	 */
 	EList<Event> getCards();
@@ -221,6 +223,7 @@ public interface Team extends EObject {
 	 * @return the value of the '<em>Red Bans</em>' reference list.
 	 * @see model.ModelPackage#getTeam_RedBans()
 	 * @model transient="true" changeable="false" volatile="true" derived="true"
+	 *        annotation="org.eclipse.viatra2.emf.incquery.derived.feature patternFQN='derived.redBans'"
 	 * @generated
 	 */
 	EList<Event> getRedBans();
@@ -236,6 +239,7 @@ public interface Team extends EObject {
 	 * @return the value of the '<em>Goal Count</em>' attribute.
 	 * @see model.ModelPackage#getTeam_GoalCount()
 	 * @model transient="true" changeable="false" volatile="true" derived="true"
+	 *        annotation="org.eclipse.viatra2.emf.incquery.derived.feature patternFQN='derived.goalCount'"
 	 * @generated
 	 */
 	int getGoalCount();

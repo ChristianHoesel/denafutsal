@@ -46,6 +46,8 @@ import org.eclipse.emf.ecore.util.InternalEList;
  *   <li>{@link model.impl.MatchImpl#getSupervisor <em>Supervisor</em>}</li>
  *   <li>{@link model.impl.MatchImpl#getTeams <em>Teams</em>}</li>
  *   <li>{@link model.impl.MatchImpl#getEvents <em>Events</em>}</li>
+ *   <li>{@link model.impl.MatchImpl#getHome <em>Home</em>}</li>
+ *   <li>{@link model.impl.MatchImpl#getVisitor <em>Visitor</em>}</li>
  * </ul>
  * </p>
  *
@@ -537,6 +539,44 @@ public class MatchImpl extends EObjectImpl implements Match {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public Team getHome() {
+		Team home = basicGetHome();
+		return home != null && home.eIsProxy() ? (Team)eResolveProxy((InternalEObject)home) : home;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated NOT
+	 */
+	public Team basicGetHome() {
+		return getTeams().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public Team getVisitor() {
+		Team visitor = basicGetVisitor();
+		return visitor != null && visitor.eIsProxy() ? (Team)eResolveProxy((InternalEObject)visitor) : visitor;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated NOT
+	 */
+	public Team basicGetVisitor() {
+		return getTeams().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@SuppressWarnings("unchecked")
 	@Override
 	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
@@ -601,6 +641,12 @@ public class MatchImpl extends EObjectImpl implements Match {
 				return getTeams();
 			case ModelPackage.MATCH__EVENTS:
 				return getEvents();
+			case ModelPackage.MATCH__HOME:
+				if (resolve) return getHome();
+				return basicGetHome();
+			case ModelPackage.MATCH__VISITOR:
+				if (resolve) return getVisitor();
+				return basicGetVisitor();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -728,6 +774,10 @@ public class MatchImpl extends EObjectImpl implements Match {
 				return teams != null && !teams.isEmpty();
 			case ModelPackage.MATCH__EVENTS:
 				return events != null && !events.isEmpty();
+			case ModelPackage.MATCH__HOME:
+				return basicGetHome() != null;
+			case ModelPackage.MATCH__VISITOR:
+				return basicGetVisitor() != null;
 		}
 		return super.eIsSet(featureID);
 	}

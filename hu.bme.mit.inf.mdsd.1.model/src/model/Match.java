@@ -27,6 +27,8 @@ import org.eclipse.emf.ecore.EObject;
  *   <li>{@link model.Match#getSupervisor <em>Supervisor</em>}</li>
  *   <li>{@link model.Match#getTeams <em>Teams</em>}</li>
  *   <li>{@link model.Match#getEvents <em>Events</em>}</li>
+ *   <li>{@link model.Match#getHome <em>Home</em>}</li>
+ *   <li>{@link model.Match#getVisitor <em>Visitor</em>}</li>
  * </ul>
  * </p>
  *
@@ -308,5 +310,35 @@ public interface Match extends EObject {
 	 * @generated
 	 */
 	EList<Event> getEvents();
+
+	/**
+	 * Returns the value of the '<em><b>Home</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Home</em>' reference isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Home</em>' reference.
+	 * @see model.ModelPackage#getMatch_Home()
+	 * @model required="true" transient="true" changeable="false" volatile="true" derived="true"
+	 * @generated
+	 */
+	Team getHome();
+
+	/**
+	 * Returns the value of the '<em><b>Visitor</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Visitor</em>' reference isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Visitor</em>' reference.
+	 * @see model.ModelPackage#getMatch_Visitor()
+	 * @model required="true" transient="true" changeable="false" volatile="true" derived="true"
+	 * @generated
+	 */
+	Team getVisitor();
 
 } // Match

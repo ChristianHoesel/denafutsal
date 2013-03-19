@@ -52,6 +52,8 @@
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference model.ecore#//Match/Supervisor"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference model.ecore#//Match/teams"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference model.ecore#//Match/events"/>
+      <genFeatures property="Readonly" notify="false" createChild="false" ecoreFeature="ecore:EReference model.ecore#//Match/home"/>
+      <genFeatures property="Readonly" notify="false" createChild="false" ecoreFeature="ecore:EReference model.ecore#//Match/visitor"/>
     </genClasses>
     <genClasses ecoreClass="model.ecore#//Person">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute model.ecore#//Person/name"/>

@@ -86,6 +86,7 @@ public interface TeamMember extends Person {
 	 * @return the value of the '<em>Is Sent Off</em>' attribute.
 	 * @see model.ModelPackage#getTeamMember_IsSentOff()
 	 * @model transient="true" changeable="false" volatile="true" derived="true"
+	 *        annotation="org.eclipse.viatra2.emf.incquery.derived.feature patternFQN='derived.isSentOff'"
 	 * @generated
 	 */
 	boolean isIsSentOff();
@@ -101,6 +102,7 @@ public interface TeamMember extends Person {
 	 * @return the value of the '<em>Has Yellow Card</em>' attribute.
 	 * @see model.ModelPackage#getTeamMember_HasYellowCard()
 	 * @model transient="true" changeable="false" volatile="true" derived="true"
+	 *        annotation="org.eclipse.viatra2.emf.incquery.derived.feature patternFQN='derived.hasYellowCard'"
 	 * @generated
 	 */
 	boolean isHasYellowCard();
