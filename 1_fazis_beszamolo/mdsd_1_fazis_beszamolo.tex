@@ -107,14 +107,37 @@
 
 %###############################################################################
 %#
-%#                    MIRŐL IS LESZ SZÓ?
+%#                    A FELADAT
 %#
-\renewcommand{\slidecim}{Miről is lesz szó?}
+\renewcommand{\slidecim}{A feladat}
 \section{\slidecim}
 \setfootline{Interstellar Overdrive}
 \begin{frame}[t]
 \frametitle{\slidecim}
-\todo{•}
+\begin{itemize}
+    \item Eredményjelző és egy automatikus jegyzőkönyv generátor
+    \item Az 1. fáziban:
+        \begin{itemize}
+            \item Követelményanalízis
+                \begin{itemize}
+                     \item Magasszintű követelmények megfogalmazása az elkészítendő rendszerrel szemben
+                     \item Mit kell/szeretnénk megvalósítani?
+                     \item Kimenet: Use case diagram
+                \end{itemize}
+            \item Domain modellezés
+                \begin{itemize}
+                     \item Magasszintű domain modell elkészítése
+                     \item Mik a domain elemei?
+                     \item Kimenet: EMF modell és OCL kényszerek
+                \end{itemize}
+            \item Dinamikus modellezés
+                \begin{itemize}
+                    \item A kijelző működésének leírása
+                    \item Milyen állapotai vannak a rendszerünknek?
+                    \item Kimenet: Yakindu state chartok
+                \end{itemize}
+        \end{itemize}         
+\end{itemize}
 \end{frame}
 %#
 %###############################################################################
@@ -125,7 +148,7 @@
 %#
 \renewcommand{\slidecim}{Use case részlet - Piros lapok kezelése}
 \section{\slidecim}
-\setfootline{\todo{Keep floyding}}
+\setfootline{Green Is the Colour}
 \begin{frame}[c]
 \frametitle{\slidecim}
 \begin{figure}[!ht]
@@ -142,7 +165,7 @@
 %#
 \renewcommand{\slidecim}{Domain modell}
 \section{\slidecim}
-\setfootline{\todo{Keep floyding}}
+\setfootline{Wearing the Inside Out}
 \begin{frame}[c]
 \frametitle{\slidecim}
 \begin{figure}[!ht]
@@ -159,7 +182,7 @@
 %#
 \renewcommand{\slidecim}{Domain modell}
 \section{\slidecim}
-\setfootline{\todo{Keep floyding}}
+\setfootline{Wearing the Inside Out}
 \begin{frame}[c]
 \frametitle{\slidecim}
 \begin{figure}[!ht]
@@ -176,7 +199,7 @@
 %#
 \renewcommand{\slidecim}{Domain modell}
 \section{\slidecim}
-\setfootline{\todo{Keep floyding}}
+\setfootline{Wearing the Inside Out}
 \begin{frame}[c]
 \frametitle{\slidecim}
 \begin{figure}[!ht]
@@ -189,11 +212,55 @@
 
 %###############################################################################
 %#
+%#                    OCL KÉNYSZEREK
+%#
+\renewcommand{\slidecim}{OCL kényszerek}
+\section{\slidecim}
+\setfootline{Don't Leave Me Now}
+\begin{frame}[c]
+\frametitle{\slidecim}
+\begin{itemize}
+    \item Modell alapú kényszerek
+    \begin{itemize}
+        \item A modell megalkotásakor nem tudtunk őket kikényszeríteni
+    \end{itemize}
+    \item Szabály alapú kényszerek
+    \begin{itemize}
+        \item A játék speciális szabályaiból adódnak
+    \end{itemize}
+    \item Derived features
+    \begin{itemize}
+        \item Ezeket a feature-ket is meg lehet/kell fogalmazni OCL kényszerkén
+    \end{itemize}
+\end{itemize}
+\end{frame}
+%#
+%###############################################################################
+
+%###############################################################################
+%#
+%#                    ÁLLAPOT DIAGRAM - IDŐ MEGVALÓSÍTÁSA
+%#
+\renewcommand{\slidecim}{Állapot diagram - Idő megvalósítása}
+\section{\slidecim}
+\setfootline{Time}
+\begin{frame}[c]
+\frametitle{\slidecim}
+\begin{figure}[!ht]
+\centering
+\includegraphics[width=100mm, keepaspectratio]{figures/state_chart_main_region.png}
+\end{figure}
+\end{frame}
+%#
+%###############################################################################
+
+%###############################################################################
+%#
 %#                    EXTRÁK
 %#
 \renewcommand{\slidecim}{Extrák}
 \section{\slidecim}
-\setfootline{\todo{Keep floyding}}
+\setfootline{When You're In}
 \begin{frame}[c]
 \frametitle{\slidecim}
 \begin{itemize}
@@ -214,25 +281,35 @@
 
 %###############################################################################
 %#
-%#                    OCL KÉNYSZEREK
+%#                    PROBLÉMÁK, KIHÍVÁSOK
 %#
-\renewcommand{\slidecim}{OCL kényszerek}
+\renewcommand{\slidecim}{Problémák, kihívások}
 \section{\slidecim}
-\setfootline{\todo{Keep floyding}}
+\setfootline{Eclipse}
 \begin{frame}[c]
 \frametitle{\slidecim}
 \begin{itemize}
-    \item Modell alapú kényszerek
+\item Amivel nem volt gond:
     \begin{itemize}
-        \item A modell megalkotásakor nem tudtunk őket kikényszeríteni
+        \item A domain ismeretével
     \end{itemize}
-    \item Szabály alapú kényszerek
+\item Amivel viszont igen:
     \begin{itemize}
-        \item A játék speciális szabályaiból adódnak
-    \end{itemize}
-    \item Derived features
-    \begin{itemize}
-        \item Ezeket a feature-ket is meg lehet/kell fogalmazni OCL kényszerkén
+        \item A domain ismeret eltérő szintje a csapatagoknál
+        \item Eszközök együttműködése
+            \begin{itemize}
+                \item Papyrus vs. Yakindu
+            \end{itemize}             
+        \item Yakinduban események küldés (raise)
+             \begin{itemize}
+                \item Események helyett/mellett boolean változókat kell használni
+             \end{itemize}
+        \item Az egyes tervezési lépések közötti határok megtalálása
+            \begin{itemize}
+                \item Mi a domain modell része?
+                \item Mi kerül egy állapot diagramra?
+                \item Hogy lesz ebből egész?
+            \end{itemize}             
     \end{itemize}
 \end{itemize}
 \end{frame}
