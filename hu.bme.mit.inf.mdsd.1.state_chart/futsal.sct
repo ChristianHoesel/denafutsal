@@ -74,13 +74,13 @@
         <outgoingTransitions xmi:id="_R0K2AJC5EeKzFuuo9pMsyQ" specification="[ Fouls.home_counter == 5 &amp;&amp; !Fouls.home_done ]" target="_C0cHUJC5EeKzFuuo9pMsyQ"/>
         <outgoingTransitions xmi:id="_WCRDwJDdEeKAOoXbb-5waw" specification="[ Fouls.visitors_counter == 5 &amp;&amp; !Fouls.visitor_done]" target="_Ge74wJDdEeKAOoXbb-5waw"/>
       </vertices>
-      <vertices xsi:type="sgraph:State" xmi:id="_C0cHUJC5EeKzFuuo9pMsyQ" specification="oncycle / Timer.playSound&#xD;&#xA;exit / Fouls.home_done = true&#xD;&#xA;" name="Doing some noise to Home" incomingTransitions="_R0K2AJC5EeKzFuuo9pMsyQ">
+      <vertices xsi:type="sgraph:State" xmi:id="_C0cHUJC5EeKzFuuo9pMsyQ" specification="entry / Timer.playSound&#xD;&#xA;exit / Fouls.home_done = true&#xD;&#xA;" name="Doing some noise to Home" incomingTransitions="_R0K2AJC5EeKzFuuo9pMsyQ">
         <outgoingTransitions xmi:id="_STBVMJC5EeKzFuuo9pMsyQ" specification="" target="_AVO58JC5EeKzFuuo9pMsyQ"/>
       </vertices>
       <vertices xsi:type="sgraph:Entry" xmi:id="_Q5bsEJC5EeKzFuuo9pMsyQ">
         <outgoingTransitions xmi:id="_RVCC8JC5EeKzFuuo9pMsyQ" specification="" target="_AVO58JC5EeKzFuuo9pMsyQ"/>
       </vertices>
-      <vertices xsi:type="sgraph:State" xmi:id="_Ge74wJDdEeKAOoXbb-5waw" specification="oncycle / Timer.playSound&#xD;&#xA;exit / Fouls.visitor_done = true" name="Doing some noise to Visitor" incomingTransitions="_WCRDwJDdEeKAOoXbb-5waw">
+      <vertices xsi:type="sgraph:State" xmi:id="_Ge74wJDdEeKAOoXbb-5waw" specification="entry / Timer.playSound&#xD;&#xA;exit / Fouls.visitor_done = true" name="Doing some noise to Visitor" incomingTransitions="_WCRDwJDdEeKAOoXbb-5waw">
         <outgoingTransitions xmi:id="_a_MQwJDdEeKAOoXbb-5waw" specification="" target="_AVO58JC5EeKzFuuo9pMsyQ"/>
       </vertices>
     </regions>
@@ -489,7 +489,7 @@
         <layoutConstraint xsi:type="notation:Bounds" xmi:id="_4_olZJC4EeKzFuuo9pMsyQ"/>
       </children>
       <styles xsi:type="notation:ShapeStyle" xmi:id="_4_iewZC4EeKzFuuo9pMsyQ" fontName="Verdana" fillColor="15790320" lineColor="12632256"/>
-      <layoutConstraint xsi:type="notation:Bounds" xmi:id="_4_iewpC4EeKzFuuo9pMsyQ" x="2465" y="25" width="536" height="348"/>
+      <layoutConstraint xsi:type="notation:Bounds" xmi:id="_4_iewpC4EeKzFuuo9pMsyQ" x="2465" y="25" width="676" height="348"/>
     </children>
     <styles xsi:type="notation:DiagramStyle" xmi:id="_eR6fgY9NEeKdo4Ud0MIVEQ"/>
     <edges xmi:id="_DuNP8Y9QEeKdo4Ud0MIVEQ" type="Transition" element="_DuNP8I9QEeKdo4Ud0MIVEQ" source="_DVTAsY9QEeKdo4Ud0MIVEQ" target="_2xFEYpAOEeKAILd_p9EiHA">
