@@ -103,5 +103,22 @@
             package-nsUri="http://model/1.0">
       </wellbehaving-derived-feature>
    </extension>
+   <extension
+         id="derived.match"
+         point="org.eclipse.viatra2.emf.incquery.matcherfactory">
+      <matcher
+            factoryProvider="derived.match.MatchMatcherFactory$Provider"
+            id="derived.match">
+      </matcher>
+   </extension>
+   <extension
+         id="extension.derived.derived.match"
+         point="org.eclipse.viatra2.emf.incquery.base.wellbehaving.derived.features">
+      <wellbehaving-derived-feature
+            classifier-name="Team"
+            feature-name="match"
+            package-nsUri="http://model/1.0">
+      </wellbehaving-derived-feature>
+   </extension>
 
 </plugin>

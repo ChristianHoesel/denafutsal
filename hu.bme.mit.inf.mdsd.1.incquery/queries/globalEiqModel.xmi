@@ -278,27 +278,15 @@
       </type>
     </parameters>
     <bodies>
-      <constraints xsi:type="patternLanguage:CompareConstraint">
-        <leftOperand xsi:type="patternLanguage:VariableValue">
-          <value var="M"/>
-        </leftOperand>
-        <rightOperand xsi:type="patternLanguage:AggregatedValue">
-          <aggregator xsi:type="patternLanguage:CountAggregator"/>
-          <call patternRef="//@patterns.5">
-            <parameters xsi:type="patternLanguage:VariableValue">
-              <value var="teamMember"/>
-            </parameters>
-            <parameters xsi:type="patternLanguage:VariableValue">
-              <value var="_"/>
-            </parameters>
-          </call>
-        </rightOperand>
-      </constraints>
-      <constraints xsi:type="patternLanguage:CompareConstraint">
-        <leftOperand xsi:type="patternLanguage:VariableValue">
-          <value var="M"/>
-        </leftOperand>
-        <rightOperand xsi:type="patternLanguage:IntValue"/>
+      <constraints xsi:type="patternLanguage:PatternCompositionConstraint">
+        <call patternRef="//@patterns.5">
+          <parameters xsi:type="patternLanguage:VariableValue">
+            <value var="teamMember"/>
+          </parameters>
+          <parameters xsi:type="patternLanguage:VariableValue">
+            <value var="_"/>
+          </parameters>
+        </call>
       </constraints>
       <constraints xsi:type="patternLanguage:CompareConstraint">
         <leftOperand xsi:type="patternLanguage:VariableValue">
@@ -308,27 +296,15 @@
       </constraints>
     </bodies>
     <bodies>
-      <constraints xsi:type="patternLanguage:CompareConstraint">
-        <leftOperand xsi:type="patternLanguage:VariableValue">
-          <value var="M"/>
-        </leftOperand>
-        <rightOperand xsi:type="patternLanguage:AggregatedValue">
-          <aggregator xsi:type="patternLanguage:CountAggregator"/>
-          <call patternRef="//@patterns.5">
-            <parameters xsi:type="patternLanguage:VariableValue">
-              <value var="teamMember"/>
-            </parameters>
-            <parameters xsi:type="patternLanguage:VariableValue">
-              <value var="_"/>
-            </parameters>
-          </call>
-        </rightOperand>
-      </constraints>
-      <constraints xsi:type="patternLanguage:CompareConstraint">
-        <leftOperand xsi:type="patternLanguage:VariableValue">
-          <value var="M"/>
-        </leftOperand>
-        <rightOperand xsi:type="patternLanguage:IntValue" value="1"/>
+      <constraints xsi:type="patternLanguage:PatternCompositionConstraint" negative="true">
+        <call patternRef="//@patterns.5">
+          <parameters xsi:type="patternLanguage:VariableValue">
+            <value var="teamMember"/>
+          </parameters>
+          <parameters xsi:type="patternLanguage:VariableValue">
+            <value var="_"/>
+          </parameters>
+        </call>
       </constraints>
       <constraints xsi:type="patternLanguage:CompareConstraint">
         <leftOperand xsi:type="patternLanguage:VariableValue">
@@ -452,27 +428,15 @@
       </type>
     </parameters>
     <bodies>
-      <constraints xsi:type="patternLanguage:CompareConstraint">
-        <leftOperand xsi:type="patternLanguage:VariableValue">
-          <value var="M"/>
-        </leftOperand>
-        <rightOperand xsi:type="patternLanguage:AggregatedValue">
-          <aggregator xsi:type="patternLanguage:CountAggregator"/>
-          <call patternRef="//@patterns.7">
-            <parameters xsi:type="patternLanguage:VariableValue">
-              <value var="teamMember"/>
-            </parameters>
-            <parameters xsi:type="patternLanguage:VariableValue">
-              <value var="_"/>
-            </parameters>
-          </call>
-        </rightOperand>
-      </constraints>
-      <constraints xsi:type="patternLanguage:CompareConstraint">
-        <leftOperand xsi:type="patternLanguage:VariableValue">
-          <value var="M"/>
-        </leftOperand>
-        <rightOperand xsi:type="patternLanguage:IntValue"/>
+      <constraints xsi:type="patternLanguage:PatternCompositionConstraint">
+        <call patternRef="//@patterns.7">
+          <parameters xsi:type="patternLanguage:VariableValue">
+            <value var="teamMember"/>
+          </parameters>
+          <parameters xsi:type="patternLanguage:VariableValue">
+            <value var="_"/>
+          </parameters>
+        </call>
       </constraints>
       <constraints xsi:type="patternLanguage:CompareConstraint">
         <leftOperand xsi:type="patternLanguage:VariableValue">
@@ -482,27 +446,15 @@
       </constraints>
     </bodies>
     <bodies>
-      <constraints xsi:type="patternLanguage:CompareConstraint">
-        <leftOperand xsi:type="patternLanguage:VariableValue">
-          <value var="M"/>
-        </leftOperand>
-        <rightOperand xsi:type="patternLanguage:AggregatedValue">
-          <aggregator xsi:type="patternLanguage:CountAggregator"/>
-          <call patternRef="//@patterns.7">
-            <parameters xsi:type="patternLanguage:VariableValue">
-              <value var="teamMember"/>
-            </parameters>
-            <parameters xsi:type="patternLanguage:VariableValue">
-              <value var="_"/>
-            </parameters>
-          </call>
-        </rightOperand>
-      </constraints>
-      <constraints xsi:type="patternLanguage:CompareConstraint">
-        <leftOperand xsi:type="patternLanguage:VariableValue">
-          <value var="M"/>
-        </leftOperand>
-        <rightOperand xsi:type="patternLanguage:IntValue" value="1"/>
+      <constraints xsi:type="patternLanguage:PatternCompositionConstraint" negative="true">
+        <call patternRef="//@patterns.7">
+          <parameters xsi:type="patternLanguage:VariableValue">
+            <value var="teamMember"/>
+          </parameters>
+          <parameters xsi:type="patternLanguage:VariableValue">
+            <value var="_"/>
+          </parameters>
+        </call>
       </constraints>
       <constraints xsi:type="patternLanguage:CompareConstraint">
         <leftOperand xsi:type="patternLanguage:VariableValue">
@@ -564,6 +516,55 @@
           <src var="event"/>
           <dst xsi:type="eMFPatternLanguage:EnumValue">
             <literal href="http://model/1.0#//EventType/YellowCard"/>
+          </dst>
+        </head>
+      </constraints>
+    </bodies>
+  </patterns>
+  <patterns name="derived.match" fileName="platform:/resource/hu.bme.mit.inf.mdsd.1.incquery/src/derived/derived.eiq">
+    <annotations name="DerivedFeature"/>
+    <parameters name="team">
+      <type xsi:type="eMFPatternLanguage:ClassType">
+        <classname xsi:type="ecore:EClass" href="http://model/1.0#//Team"/>
+      </type>
+    </parameters>
+    <parameters name="match">
+      <type xsi:type="eMFPatternLanguage:ClassType">
+        <classname xsi:type="ecore:EClass" href="http://model/1.0#//Match"/>
+      </type>
+    </parameters>
+    <bodies>
+      <constraints xsi:type="patternLanguage:PathExpressionConstraint">
+        <head>
+          <type xsi:type="eMFPatternLanguage:ClassType">
+            <classname xsi:type="ecore:EClass" href="http://model/1.0#//Match"/>
+          </type>
+          <tail>
+            <type xsi:type="eMFPatternLanguage:ReferenceType">
+              <refname xsi:type="ecore:EReference" href="http://model/1.0#//Match/home"/>
+            </type>
+          </tail>
+          <src var="match"/>
+          <dst xsi:type="patternLanguage:VariableValue">
+            <value var="team"/>
+          </dst>
+        </head>
+      </constraints>
+    </bodies>
+    <bodies>
+      <constraints xsi:type="patternLanguage:PathExpressionConstraint">
+        <head>
+          <type xsi:type="eMFPatternLanguage:ClassType">
+            <classname xsi:type="ecore:EClass" href="http://model/1.0#//Match"/>
+          </type>
+          <tail>
+            <type xsi:type="eMFPatternLanguage:ReferenceType">
+              <refname xsi:type="ecore:EReference" href="http://model/1.0#//Match/visitor"/>
+            </type>
+          </tail>
+          <src var="match"/>
+          <dst xsi:type="patternLanguage:VariableValue">
+            <value var="team"/>
           </dst>
         </head>
       </constraints>

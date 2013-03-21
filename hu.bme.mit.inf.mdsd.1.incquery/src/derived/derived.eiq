@@ -34,12 +34,10 @@ pattern goalCount(team : Team, target : EInt) {
 
 @DerivedFeature
 pattern isSentOff(teamMember : TeamMember, target : EBoolean) {
-	M == count find redCardsOfPlayer(teamMember, _);
-	M == 0;
+	find redCardsOfPlayer(teamMember, _);
 	target == false;
 } or {
-	M == count find redCardsOfPlayer(teamMember, _);
-	M == 1;
+	neg find redCardsOfPlayer(teamMember, _);
 	target == true;	
 }
 
@@ -53,16 +51,21 @@ private pattern redCardsOfPlayer(teamMember : TeamMember, event : Event) {
 
 @DerivedFeature
 pattern hasYellowCard(teamMember : TeamMember, target : EBoolean) {
-	M == count find yellowCardsOfPlayer(teamMember, _);
-	M == 0;
+	find yellowCardsOfPlayer(teamMember, _);
 	target == false;
 } or {
-	M == count find yellowCardsOfPlayer(teamMember, _);
-	M == 1;
+	neg find yellowCardsOfPlayer(teamMember, _);
 	target == true;	
 }
 
 private pattern yellowCardsOfPlayer(teamMember : TeamMember, event : Event) {
 	TeamMember.team.match.events(teamMember, event);
 	Event.type(event, ::YellowCard);
-}	
+}
+
+@DerivedFeature
+pattern match(team : Team, match : Match) {
+	Match.home(match, team);
+} or {
+	Match.visitor(match, team);
+}

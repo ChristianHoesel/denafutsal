@@ -8,6 +8,7 @@ Export-Package: derived.cards,
  derived.goals,
  derived.hasyellowcard,
  derived.issentoff,
+ derived.match,
  derived.redbans
 Require-Bundle: org.eclipse.pde.core,
  org.eclipse.emf.ecore,
