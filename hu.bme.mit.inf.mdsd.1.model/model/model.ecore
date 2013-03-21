@@ -94,7 +94,11 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="members" lowerBound="8"
         upperBound="22" eType="#//TeamMember" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="match" lowerBound="1" eType="#//Match"
-        changeable="false" volatile="true" transient="true" derived="true"/>
+        changeable="false" volatile="true" transient="true" derived="true">
+      <eAnnotations source="org.eclipse.viatra2.emf.incquery.derived.feature">
+        <details key="patternFQN" value="derived.match"/>
+      </eAnnotations>
+    </eStructuralFeatures>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="TeamMember" eSuperTypes="#//Person">
     <eStructuralFeatures xsi:type="ecore:EReference" name="team" lowerBound="1" eType="#//Team"/>

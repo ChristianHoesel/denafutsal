@@ -641,4 +641,9 @@ public class TeamImpl extends EObjectImpl implements Team {
 		return (int) goalCountHandler.getSingleReferenceValue(this);
 	}
 
+	/**
+	 * EMF-IncQuery handler for derived feature match
+	 */
+	private IncqueryDerivedFeature matchHandler;
+
 } //TeamImpl
