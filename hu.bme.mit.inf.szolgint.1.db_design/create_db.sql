@@ -7,6 +7,46 @@ CREATE SCHEMA IF NOT EXISTS `mydb` DEFAULT CHARACTER SET utf8 COLLATE utf8_gener
 USE `mydb` ;
 
 -- -----------------------------------------------------
+-- Table `mydb`.`Address`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `mydb`.`Address` ;
+
+CREATE  TABLE IF NOT EXISTS `mydb`.`Address` (
+  `id` INT NOT NULL AUTO_INCREMENT ,
+  `country` VARCHAR(45) NULL ,
+  `state` VARCHAR(45) NULL ,
+  `settlement` VARCHAR(45) NULL ,
+  `zip_code` VARCHAR(45) NULL ,
+  `street` VARCHAR(45) NULL ,
+  `number` VARCHAR(45) NULL ,
+  PRIMARY KEY (`id`) )
+ENGINE = InnoDB;
+
+CREATE UNIQUE INDEX `id_UNIQUE` ON `mydb`.`Address` (`id` ASC) ;
+
+
+-- -----------------------------------------------------
+-- Table `mydb`.`Preferences`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `mydb`.`Preferences` ;
+
+CREATE  TABLE IF NOT EXISTS `mydb`.`Preferences` (
+  `id` INT NOT NULL AUTO_INCREMENT ,
+  `max_distance` INT NULL ,
+  `company` VARCHAR(45) NULL ,
+  `position` VARCHAR(45) NULL ,
+  `job_type` ENUM('fulltime', 'parttime', 'contract', 'internship', 'temporary') NULL ,
+  `country` VARCHAR(45) NULL ,
+  `state` VARCHAR(45) NULL ,
+  `city` VARCHAR(45) NULL ,
+  `salary` VARCHAR(45) NULL ,
+  PRIMARY KEY (`id`) )
+ENGINE = InnoDB;
+
+CREATE UNIQUE INDEX `idPreferences_UNIQUE` ON `mydb`.`Preferences` (`id` ASC) ;
+
+
+-- -----------------------------------------------------
 -- Table `mydb`.`Users`
 -- -----------------------------------------------------
 DROP TABLE IF EXISTS `mydb`.`Users` ;
@@ -19,12 +59,28 @@ CREATE  TABLE IF NOT EXISTS `mydb`.`Users` (
   `password` VARCHAR(45) NULL ,
   `birthday` DATE NULL ,
   `email` VARCHAR(45) NULL ,
-  PRIMARY KEY (`id`) )
+  `Address_id` INT NOT NULL ,
+  `Preferences_id` INT NOT NULL ,
+  PRIMARY KEY (`id`, `Address_id`, `Preferences_id`) ,
+  CONSTRAINT `fk_Users_Address1`
+    FOREIGN KEY (`Address_id` )
+    REFERENCES `mydb`.`Address` (`id` )
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_Users_Preferences1`
+    FOREIGN KEY (`Preferences_id` )
+    REFERENCES `mydb`.`Preferences` (`id` )
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
 CREATE UNIQUE INDEX `id_UNIQUE` ON `mydb`.`Users` (`id` ASC) ;
 
 CREATE UNIQUE INDEX `username_UNIQUE` ON `mydb`.`Users` (`username` ASC) ;
+
+CREATE INDEX `fk_Users_Address1_idx` ON `mydb`.`Users` (`Address_id` ASC) ;
+
+CREATE INDEX `fk_Users_Preferences1_idx` ON `mydb`.`Users` (`Preferences_id` ASC) ;
 
 
 -- -----------------------------------------------------
@@ -159,6 +215,7 @@ CREATE  TABLE IF NOT EXISTS `mydb`.`Jobs` (
   `date` DATETIME NULL ,
   `description` VARCHAR(512) NULL ,
   `expired` TINYINT(1) NULL ,
+  `job_type` ENUM('fulltime', 'parttime', 'contract', 'internship', 'temporary') NULL ,
   PRIMARY KEY (`id`) )
 ENGINE = InnoDB;
 
@@ -190,6 +247,32 @@ ENGINE = InnoDB;
 CREATE INDEX `fk_Users_has_Jobs_Jobs1_idx` ON `mydb`.`Users_has_Jobs` (`Jobs_id` ASC) ;
 
 CREATE INDEX `fk_Users_has_Jobs_Users1_idx` ON `mydb`.`Users_has_Jobs` (`Users_id` ASC) ;
+
+
+-- -----------------------------------------------------
+-- Table `mydb`.`Preferated_languages`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `mydb`.`Preferated_languages` ;
+
+CREATE  TABLE IF NOT EXISTS `mydb`.`Preferated_languages` (
+  `Preferences_id` INT NOT NULL ,
+  `Language_id` INT NOT NULL ,
+  PRIMARY KEY (`Preferences_id`, `Language_id`) ,
+  CONSTRAINT `fk_Preferences_has_Language_Preferences1`
+    FOREIGN KEY (`Preferences_id` )
+    REFERENCES `mydb`.`Preferences` (`id` )
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_Preferences_has_Language_Language1`
+    FOREIGN KEY (`Language_id` )
+    REFERENCES `mydb`.`Language` (`id` )
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
+CREATE INDEX `fk_Preferences_has_Language_Language1_idx` ON `mydb`.`Preferated_languages` (`Language_id` ASC) ;
+
+CREATE INDEX `fk_Preferences_has_Language_Preferences1_idx` ON `mydb`.`Preferated_languages` (`Preferences_id` ASC) ;
 
 USE `mydb` ;
 
