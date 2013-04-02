@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="ASCII"?>
+<model:definitions xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:di="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:di_1="http://www.omg.org/spec/DD/20100524/DI" xmlns:model="http://www.omg.org/spec/BPMN/20100524/MODEL" exporter="BonitaSoft" exporterVersion="5.10" expressionLanguage="http://groovy.codehaus.org/" targetNamespace="http://bonitasoft.com/IndeedProcessDiagram">
+  <model:collaboration id="IndeedProcessDiagram">
+    <model:documentation></model:documentation>
+    <model:participant id="Initiator">
+      <model:documentation>Person who takes the first action to start the process</model:documentation>
+    </model:participant>
+    <model:participant id="_FyqkwJu2EeKsF5J_fZrqyQ" name="Search Jobs on indeed.com" processRef="Search_Jobs_on_indeed_com"/>
+  </model:collaboration>
+  <model:process id="Search_Jobs_on_indeed_com" name="Search Jobs on indeed.com">
+    <model:documentation></model:documentation>
+    <model:userTask id="Show_results" name="Show results">
+      <model:documentation></model:documentation>
+    </model:userTask>
+    <model:startEvent id="Start1" name="Start1">
+      <model:documentation></model:documentation>
+    </model:startEvent>
+    <model:task id="Get_jobs_from_indeed_com" name="Get jobs from indeed.com">
+      <model:documentation></model:documentation>
+    </model:task>
+    <model:endEvent id="End1" name="End1">
+      <model:documentation></model:documentation>
+    </model:endEvent>
+    <model:task id="XMLParsing" name="XMLParsing">
+      <model:documentation>Az indeed-t&#x151;l kapott XML-t megfelel&#x151; v&#xe1;ltoz&#xf3;kba m&#xf3;koljuk.</model:documentation>
+    </model:task>
+    <model:userTask id="Step1" name="Create search query">
+      <model:documentation></model:documentation>
+    </model:userTask>
+    <model:scriptTask id="Step2" name="Dummy">
+      <model:documentation>Dummy task, amiben csin&#xe1;lunk egy query XML-t.</model:documentation>
+    </model:scriptTask>
+    <model:sequenceFlow id="_uFA-lZiSEeKvbLO0ZqGfVQ" sourceRef="Get_jobs_from_indeed_com" targetRef="XMLParsing">
+      <model:documentation></model:documentation>
+    </model:sequenceFlow>
+    <model:sequenceFlow id="_1qu9UJiTEeKvbLO0ZqGfVQ" sourceRef="Start1" targetRef="Step1">
+      <model:documentation></model:documentation>
+    </model:sequenceFlow>
+    <model:sequenceFlow id="_PqzM8JiUEeKvbLO0ZqGfVQ" sourceRef="Show_results" targetRef="End1">
+      <model:documentation></model:documentation>
+    </model:sequenceFlow>
+    <model:sequenceFlow id="_5Y4_8JuaEeK_AK0Zx0NJgw" sourceRef="XMLParsing" targetRef="Show_results">
+      <model:documentation></model:documentation>
+    </model:sequenceFlow>
+    <model:sequenceFlow id="_J9orAJujEeK9d-APmI0gYw" sourceRef="Step1" targetRef="Get_jobs_from_indeed_com">
+      <model:documentation></model:documentation>
+    </model:sequenceFlow>
+    <model:sequenceFlow id="_45GPIJumEeK9d-APmI0gYw" sourceRef="Step2" targetRef="Get_jobs_from_indeed_com">
+      <model:documentation></model:documentation>
+    </model:sequenceFlow>
+    <model:dataObject id="indeed_search_query" name="indeed_search_query" isCollection="false">
+      <model:documentation>Az indeed keres&#x151; kifejez&#xe9;se</model:documentation>
+    </model:dataObject>
+    <model:dataObject id="jobs" name="jobs" isCollection="true">
+      <model:documentation></model:documentation>
+    </model:dataObject>
+    <model:dataObject id="jobs_xml" name="jobs_xml" isCollection="false">
+      <model:documentation>Az indeed-t&#x151;l visszakapott v&#xe1;lasz XML-ben. Mivel a BOS ezen verzi&#xf3;ja nem t&#xe1;mogatja a tetsz&#x151;leges Java Objectumokat, ez&#xe9;rt XML-ben tologatjuk az adatokat.</model:documentation>
+    </model:dataObject>
+  </model:process>
+  <di:BPMNDiagram name="IndeedProcessDiagram">
+    <di:BPMNPlane id="plane_IndeedProcessDiagram" bpmnElement="IndeedProcessDiagram">
+      <di:BPMNShape id="_uEcW0JiSEeKvbLO0ZqGfVQ" bpmnElement="Search_Jobs_on_indeed_com" isHorizontal="true">
+        <dc:Bounds height="291.0" width="1000.0" x="30.0" y="30.0"/>
+      </di:BPMNShape>
+      <di:BPMNShape id="_uEidcZiSEeKvbLO0ZqGfVQ" bpmnElement="Show_results">
+        <dc:Bounds height="50.0" width="100.0" x="631.0" y="95.0"/>
+      </di:BPMNShape>
+      <di:BPMNShape id="_uEokEZiSEeKvbLO0ZqGfVQ" bpmnElement="Start1">
+        <dc:Bounds height="34.0" width="30.0" x="70.0" y="95.0"/>
+      </di:BPMNShape>
+      <di:BPMNShape id="_DsSMgZiUEeKvbLO0ZqGfVQ" bpmnElement="Get_jobs_from_indeed_com">
+        <dc:Bounds height="60.0" width="120.0" x="334.0" y="103.0"/>
+      </di:BPMNShape>
+      <di:BPMNShape id="_PqtGUZiUEeKvbLO0ZqGfVQ" bpmnElement="End1">
+        <dc:Bounds height="34.0" width="30.0" x="820.0" y="103.0"/>
+      </di:BPMNShape>
+      <di:BPMNShape id="_WILWYJoQEeKBOPaG7qcp7A" bpmnElement="XMLParsing">
+        <dc:Bounds height="50.0" width="100.0" x="407.0" y="199.0"/>
+      </di:BPMNShape>
+      <di:BPMNShape id="_HZdeEJujEeK9d-APmI0gYw" bpmnElement="Step1">
+        <dc:Bounds height="50.0" width="100.0" x="137.0" y="87.0"/>
+      </di:BPMNShape>
+      <di:BPMNShape id="_lBtYgJunEeK9d-APmI0gYw" bpmnElement="Step2">
+        <dc:Bounds height="50.0" width="100.0" x="179.0" y="225.0"/>
+      </di:BPMNShape>
+      <di:BPMNEdge id="_uFA-l5iSEeKvbLO0ZqGfVQ" bpmnElement="_uFA-lZiSEeKvbLO0ZqGfVQ">
+        <di_1:waypoint x="425.0" y="163.0"/>
+        <di_1:waypoint x="425.0" y="199.0"/>
+      </di:BPMNEdge>
+      <di:BPMNEdge id="_1qu9UpiTEeKvbLO0ZqGfVQ" bpmnElement="_1qu9UJiTEeKvbLO0ZqGfVQ">
+        <di_1:waypoint x="100.0" y="112.0"/>
+        <di_1:waypoint x="137.0" y="112.0"/>
+      </di:BPMNEdge>
+      <di:BPMNEdge id="_PqzM8piUEeKvbLO0ZqGfVQ" bpmnElement="_PqzM8JiUEeKvbLO0ZqGfVQ">
+        <di_1:waypoint x="731.0" y="120.0"/>
+        <di_1:waypoint x="820.0" y="120.0"/>
+      </di:BPMNEdge>
+      <di:BPMNEdge id="_5ZFNMJuaEeK_AK0Zx0NJgw" bpmnElement="_5Y4_8JuaEeK_AK0Zx0NJgw">
+        <di_1:waypoint x="507.0" y="230.0"/>
+        <di_1:waypoint x="641.0" y="230.0"/>
+        <di_1:waypoint x="641.0" y="145.0"/>
+      </di:BPMNEdge>
+      <di:BPMNEdge id="_J9orApujEeK9d-APmI0gYw" bpmnElement="_J9orAJujEeK9d-APmI0gYw">
+        <di_1:waypoint x="237.0" y="115.0"/>
+        <di_1:waypoint x="285.0" y="115.0"/>
+        <di_1:waypoint x="285.0" y="126.0"/>
+        <di_1:waypoint x="334.0" y="126.0"/>
+      </di:BPMNEdge>
+      <di:BPMNEdge id="_45MVwZumEeK9d-APmI0gYw" bpmnElement="_45GPIJumEeK9d-APmI0gYw">
+        <di_1:waypoint x="279.0" y="254.0"/>
+        <di_1:waypoint x="365.0" y="254.0"/>
+        <di_1:waypoint x="365.0" y="163.0"/>
+      </di:BPMNEdge>
+    </di:BPMNPlane>
+  </di:BPMNDiagram>
+</model:definitions>
