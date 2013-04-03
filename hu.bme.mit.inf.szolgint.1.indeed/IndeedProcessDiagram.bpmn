@@ -5,7 +5,7 @@
     <model:participant id="Initiator">
       <model:documentation>Person who takes the first action to start the process</model:documentation>
     </model:participant>
-    <model:participant id="_rCmWUJyLEeKzo6MhMO2Aug" name="Search Jobs on indeed.com" processRef="Search_Jobs_on_indeed_com"/>
+    <model:participant id="_vgBnEZyPEeKLmZGuZij9Jw" name="Search Jobs on indeed.com" processRef="Search_Jobs_on_indeed_com"/>
   </model:collaboration>
   <model:process id="Search_Jobs_on_indeed_com" name="Search Jobs on indeed.com">
     <model:documentation></model:documentation>
@@ -28,10 +28,13 @@
     <model:userTask id="Error_handling" name="Error handling">
       <model:documentation></model:documentation>
     </model:userTask>
+    <model:scriptTask id="Init_query_XML" name="Init query XML">
+      <model:documentation></model:documentation>
+    </model:scriptTask>
     <model:sequenceFlow id="_uFA-lZiSEeKvbLO0ZqGfVQ" sourceRef="Get_jobs_from_indeed_com" targetRef="Show_results">
       <model:documentation></model:documentation>
     </model:sequenceFlow>
-    <model:sequenceFlow id="_1qu9UJiTEeKvbLO0ZqGfVQ" sourceRef="Start" targetRef="Get_jobs_from_indeed_com">
+    <model:sequenceFlow id="_1qu9UJiTEeKvbLO0ZqGfVQ" sourceRef="Start" targetRef="Init_query_XML">
       <model:documentation></model:documentation>
     </model:sequenceFlow>
     <model:sequenceFlow id="_PqzM8JiUEeKvbLO0ZqGfVQ" sourceRef="Show_results" targetRef="End">
@@ -43,61 +46,72 @@
     <model:sequenceFlow id="_0fwDsJx_EeKxmd7-4cgd1Q" sourceRef="Error_handling" targetRef="End">
       <model:documentation></model:documentation>
     </model:sequenceFlow>
+    <model:sequenceFlow id="_NAjCgJyMEeKVuYNPLxwmiQ" sourceRef="Init_query_XML" targetRef="Get_jobs_from_indeed_com">
+      <model:documentation></model:documentation>
+    </model:sequenceFlow>
     <model:dataObject id="jobs" name="jobs" isCollection="true">
       <model:documentation></model:documentation>
     </model:dataObject>
     <model:dataObject id="jobs_xml" name="jobs_xml" isCollection="false">
       <model:documentation>Az indeed-t&#x151;l visszakapott v&#xe1;lasz XML.</model:documentation>
     </model:dataObject>
+    <model:dataObject id="query_xml" name="query_xml" isCollection="false">
+      <model:documentation></model:documentation>
+    </model:dataObject>
   </model:process>
   <di:BPMNDiagram name="IndeedProcessDiagram">
     <di:BPMNPlane id="plane_IndeedProcessDiagram" bpmnElement="IndeedProcessDiagram">
       <di:BPMNShape id="_uEcW0JiSEeKvbLO0ZqGfVQ" bpmnElement="Search_Jobs_on_indeed_com" isHorizontal="true">
-        <dc:Bounds height="258.0" width="1000.0" x="20.0" y="0.0"/>
+        <dc:Bounds height="258.0" width="1000.0" x="30.0" y="30.0"/>
       </di:BPMNShape>
       <di:BPMNShape id="_uEidcZiSEeKvbLO0ZqGfVQ" bpmnElement="Show_results">
-        <dc:Bounds height="50.0" width="100.0" x="346.0" y="57.0"/>
+        <dc:Bounds height="50.0" width="100.0" x="480.0" y="87.0"/>
       </di:BPMNShape>
       <di:BPMNShape id="_uEokEZiSEeKvbLO0ZqGfVQ" bpmnElement="Start">
-        <dc:Bounds height="34.0" width="30.0" x="60.0" y="65.0"/>
+        <dc:Bounds height="34.0" width="30.0" x="70.0" y="95.0"/>
       </di:BPMNShape>
       <di:BPMNShape id="_PqtGUZiUEeKvbLO0ZqGfVQ" bpmnElement="End">
-        <dc:Bounds height="34.0" width="30.0" x="505.0" y="128.0"/>
+        <dc:Bounds height="34.0" width="30.0" x="584.0" y="158.0"/>
       </di:BPMNShape>
       <di:BPMNShape id="_TfXzAJx_EeKxmd7-4cgd1Q" bpmnElement="Get_jobs_from_indeed_com">
-        <dc:Bounds height="60.0" width="120.0" x="139.0" y="52.0"/>
+        <dc:Bounds height="60.0" width="120.0" x="300.0" y="82.0"/>
       </di:BPMNShape>
       <di:BPMNShape id="_Z_G2kZx_EeKxmd7-4cgd1Q" bpmnElement="IndeedError">
-        <dc:Bounds height="25.0" width="25.0" x="145.0" y="104.0"/>
+        <dc:Bounds height="25.0" width="25.0" x="306.0" y="134.0"/>
       </di:BPMNShape>
       <di:BPMNShape id="_wTSDQJx_EeKxmd7-4cgd1Q" bpmnElement="Error_handling">
-        <dc:Bounds height="50.0" width="100.0" x="346.0" y="161.0"/>
+        <dc:Bounds height="50.0" width="100.0" x="400.0" y="196.0"/>
+      </di:BPMNShape>
+      <di:BPMNShape id="_Js6HgJyMEeKVuYNPLxwmiQ" bpmnElement="Init_query_XML">
+        <dc:Bounds height="50.0" width="100.0" x="140.0" y="87.0"/>
       </di:BPMNShape>
       <di:BPMNEdge id="_uFA-l5iSEeKvbLO0ZqGfVQ" bpmnElement="_uFA-lZiSEeKvbLO0ZqGfVQ">
-        <di_1:waypoint x="259.0" y="82.0"/>
-        <di_1:waypoint x="346.0" y="82.0"/>
+        <di_1:waypoint x="420.0" y="112.0"/>
+        <di_1:waypoint x="480.0" y="112.0"/>
       </di:BPMNEdge>
       <di:BPMNEdge id="_1qu9UpiTEeKvbLO0ZqGfVQ" bpmnElement="_1qu9UJiTEeKvbLO0ZqGfVQ">
-        <di_1:waypoint x="90.0" y="82.0"/>
-        <di_1:waypoint x="139.0" y="82.0"/>
+        <di_1:waypoint x="100.0" y="112.0"/>
+        <di_1:waypoint x="140.0" y="112.0"/>
       </di:BPMNEdge>
       <di:BPMNEdge id="_PqzM8piUEeKvbLO0ZqGfVQ" bpmnElement="_PqzM8JiUEeKvbLO0ZqGfVQ">
-        <di_1:waypoint x="446.0" y="107.0"/>
-        <di_1:waypoint x="446.0" y="113.0"/>
-        <di_1:waypoint x="458.0" y="113.0"/>
-        <di_1:waypoint x="458.0" y="137.0"/>
-        <di_1:waypoint x="505.0" y="137.0"/>
+        <di_1:waypoint x="564.0" y="137.0"/>
+        <di_1:waypoint x="564.0" y="161.0"/>
+        <di_1:waypoint x="584.0" y="161.0"/>
       </di:BPMNEdge>
       <di:BPMNEdge id="_yLzrIpx_EeKxmd7-4cgd1Q" bpmnElement="_yLzrIJx_EeKxmd7-4cgd1Q">
-        <di_1:waypoint x="170.0" y="129.0"/>
-        <di_1:waypoint x="170.0" y="189.0"/>
-        <di_1:waypoint x="346.0" y="189.0"/>
+        <di_1:waypoint x="306.0" y="159.0"/>
+        <di_1:waypoint x="306.0" y="221.0"/>
+        <di_1:waypoint x="400.0" y="221.0"/>
       </di:BPMNEdge>
       <di:BPMNEdge id="_0fwDspx_EeKxmd7-4cgd1Q" bpmnElement="_0fwDsJx_EeKxmd7-4cgd1Q">
-        <di_1:waypoint x="446.0" y="165.0"/>
-        <di_1:waypoint x="458.0" y="165.0"/>
-        <di_1:waypoint x="458.0" y="149.0"/>
-        <di_1:waypoint x="505.0" y="149.0"/>
+        <di_1:waypoint x="500.0" y="198.0"/>
+        <di_1:waypoint x="524.0" y="198.0"/>
+        <di_1:waypoint x="524.0" y="179.0"/>
+        <di_1:waypoint x="584.0" y="179.0"/>
+      </di:BPMNEdge>
+      <di:BPMNEdge id="_NApJIJyMEeKVuYNPLxwmiQ" bpmnElement="_NAjCgJyMEeKVuYNPLxwmiQ">
+        <di_1:waypoint x="240.0" y="113.0"/>
+        <di_1:waypoint x="300.0" y="113.0"/>
       </di:BPMNEdge>
     </di:BPMNPlane>
   </di:BPMNDiagram>
