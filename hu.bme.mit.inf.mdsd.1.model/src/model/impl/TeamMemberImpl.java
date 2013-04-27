@@ -3,18 +3,21 @@
 package model.impl;
 
 import model.ModelPackage;
+import model.Player;
+import model.StaffMember;
 import model.Team;
 import model.TeamMember;
 
 import org.eclipse.emf.common.notify.Notification;
+import org.eclipse.emf.common.notify.NotificationChain;
 
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
-import org.eclipse.viatra2.emf.incquery.runtime.derived.IncqueryDerivedFeature;
-import org.eclipse.viatra2.emf.incquery.runtime.derived.FeatureKind;
-import org.eclipse.viatra2.emf.incquery.runtime.derived.IncqueryFeatureHelper;
+import org.eclipse.incquery.querybasedfeatures.runtime.IQueryBasedFeatureHandler;
+import org.eclipse.incquery.querybasedfeatures.runtime.QueryBasedFeatureKind;
+import org.eclipse.incquery.querybasedfeatures.runtime.QueryBasedFeatureHelper;
 
 /**
  * <!-- begin-user-doc -->
@@ -27,12 +30,14 @@ import org.eclipse.viatra2.emf.incquery.runtime.derived.IncqueryFeatureHelper;
  *   <li>{@link model.impl.TeamMemberImpl#getId <em>Id</em>}</li>
  *   <li>{@link model.impl.TeamMemberImpl#isIsSentOff <em>Is Sent Off</em>}</li>
  *   <li>{@link model.impl.TeamMemberImpl#isHasYellowCard <em>Has Yellow Card</em>}</li>
+ *   <li>{@link model.impl.TeamMemberImpl#getStaffRole <em>Staff Role</em>}</li>
+ *   <li>{@link model.impl.TeamMemberImpl#getPlayerRole <em>Player Role</em>}</li>
  * </ul>
  * </p>
  *
  * @generated
  */
-public abstract class TeamMemberImpl extends PersonImpl implements TeamMember {
+public class TeamMemberImpl extends PersonImpl implements TeamMember {
 	/**
 	 * The cached value of the '{@link #getTeam() <em>Team</em>}' reference.
 	 * <!-- begin-user-doc -->
@@ -82,6 +87,26 @@ public abstract class TeamMemberImpl extends PersonImpl implements TeamMember {
 	 * @ordered
 	 */
 	protected static final boolean HAS_YELLOW_CARD_EDEFAULT = false;
+
+	/**
+	 * The cached value of the '{@link #getStaffRole() <em>Staff Role</em>}' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getStaffRole()
+	 * @generated
+	 * @ordered
+	 */
+	protected StaffMember staffRole;
+
+	/**
+	 * The cached value of the '{@link #getPlayerRole() <em>Player Role</em>}' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getPlayerRole()
+	 * @generated
+	 * @ordered
+	 */
+	protected Player playerRole;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -188,6 +213,108 @@ public abstract class TeamMemberImpl extends PersonImpl implements TeamMember {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public StaffMember getStaffRole() {
+		return staffRole;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public NotificationChain basicSetStaffRole(StaffMember newStaffRole, NotificationChain msgs) {
+		StaffMember oldStaffRole = staffRole;
+		staffRole = newStaffRole;
+		if (eNotificationRequired()) {
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, ModelPackage.TEAM_MEMBER__STAFF_ROLE, oldStaffRole, newStaffRole);
+			if (msgs == null) msgs = notification; else msgs.add(notification);
+		}
+		return msgs;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setStaffRole(StaffMember newStaffRole) {
+		if (newStaffRole != staffRole) {
+			NotificationChain msgs = null;
+			if (staffRole != null)
+				msgs = ((InternalEObject)staffRole).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - ModelPackage.TEAM_MEMBER__STAFF_ROLE, null, msgs);
+			if (newStaffRole != null)
+				msgs = ((InternalEObject)newStaffRole).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - ModelPackage.TEAM_MEMBER__STAFF_ROLE, null, msgs);
+			msgs = basicSetStaffRole(newStaffRole, msgs);
+			if (msgs != null) msgs.dispatch();
+		}
+		else if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, ModelPackage.TEAM_MEMBER__STAFF_ROLE, newStaffRole, newStaffRole));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public Player getPlayerRole() {
+		return playerRole;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public NotificationChain basicSetPlayerRole(Player newPlayerRole, NotificationChain msgs) {
+		Player oldPlayerRole = playerRole;
+		playerRole = newPlayerRole;
+		if (eNotificationRequired()) {
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, ModelPackage.TEAM_MEMBER__PLAYER_ROLE, oldPlayerRole, newPlayerRole);
+			if (msgs == null) msgs = notification; else msgs.add(notification);
+		}
+		return msgs;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setPlayerRole(Player newPlayerRole) {
+		if (newPlayerRole != playerRole) {
+			NotificationChain msgs = null;
+			if (playerRole != null)
+				msgs = ((InternalEObject)playerRole).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - ModelPackage.TEAM_MEMBER__PLAYER_ROLE, null, msgs);
+			if (newPlayerRole != null)
+				msgs = ((InternalEObject)newPlayerRole).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - ModelPackage.TEAM_MEMBER__PLAYER_ROLE, null, msgs);
+			msgs = basicSetPlayerRole(newPlayerRole, msgs);
+			if (msgs != null) msgs.dispatch();
+		}
+		else if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, ModelPackage.TEAM_MEMBER__PLAYER_ROLE, newPlayerRole, newPlayerRole));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
+		switch (featureID) {
+			case ModelPackage.TEAM_MEMBER__STAFF_ROLE:
+				return basicSetStaffRole(null, msgs);
+			case ModelPackage.TEAM_MEMBER__PLAYER_ROLE:
+				return basicSetPlayerRole(null, msgs);
+		}
+		return super.eInverseRemove(otherEnd, featureID, msgs);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
@@ -200,6 +327,10 @@ public abstract class TeamMemberImpl extends PersonImpl implements TeamMember {
 				return isIsSentOff();
 			case ModelPackage.TEAM_MEMBER__HAS_YELLOW_CARD:
 				return isHasYellowCard();
+			case ModelPackage.TEAM_MEMBER__STAFF_ROLE:
+				return getStaffRole();
+			case ModelPackage.TEAM_MEMBER__PLAYER_ROLE:
+				return getPlayerRole();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -218,6 +349,12 @@ public abstract class TeamMemberImpl extends PersonImpl implements TeamMember {
 			case ModelPackage.TEAM_MEMBER__ID:
 				setId((Integer)newValue);
 				return;
+			case ModelPackage.TEAM_MEMBER__STAFF_ROLE:
+				setStaffRole((StaffMember)newValue);
+				return;
+			case ModelPackage.TEAM_MEMBER__PLAYER_ROLE:
+				setPlayerRole((Player)newValue);
+				return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -235,6 +372,12 @@ public abstract class TeamMemberImpl extends PersonImpl implements TeamMember {
 				return;
 			case ModelPackage.TEAM_MEMBER__ID:
 				setId(ID_EDEFAULT);
+				return;
+			case ModelPackage.TEAM_MEMBER__STAFF_ROLE:
+				setStaffRole((StaffMember)null);
+				return;
+			case ModelPackage.TEAM_MEMBER__PLAYER_ROLE:
+				setPlayerRole((Player)null);
 				return;
 		}
 		super.eUnset(featureID);
@@ -256,6 +399,10 @@ public abstract class TeamMemberImpl extends PersonImpl implements TeamMember {
 				return isIsSentOff() != IS_SENT_OFF_EDEFAULT;
 			case ModelPackage.TEAM_MEMBER__HAS_YELLOW_CARD:
 				return isHasYellowCard() != HAS_YELLOW_CARD_EDEFAULT;
+			case ModelPackage.TEAM_MEMBER__STAFF_ROLE:
+				return staffRole != null;
+			case ModelPackage.TEAM_MEMBER__PLAYER_ROLE:
+				return playerRole != null;
 		}
 		return super.eIsSet(featureID);
 	}
@@ -277,41 +424,42 @@ public abstract class TeamMemberImpl extends PersonImpl implements TeamMember {
 	}
 
 	/**
-	 * EMF-IncQuery handler for derived feature isSentOff
+	 * EMF-IncQuery handler for query-based feature isSentOff
 	 */
-	private IncqueryDerivedFeature isSentOffHandler;
+	private IQueryBasedFeatureHandler isSentOffHandler;
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * @derived getter created by EMF-IncQuery for derived feature isSentOff
+	 * @query-based getter created by EMF-IncQuery for query-based feature isSentOff
 	 */
 	public boolean isIsSentOff() {
 		if (isSentOffHandler == null) {
-			isSentOffHandler = IncqueryFeatureHelper.getIncqueryDerivedFeature(
-					this, ModelPackageImpl.Literals.TEAM_MEMBER__IS_SENT_OFF,
-					"derived.isSentOff", "teamMember", "target",
-					FeatureKind.SINGLE_REFERENCE, true, false);
+			isSentOffHandler = QueryBasedFeatureHelper
+					.getQueryBasedFeatureHandler(this,
+							ModelPackageImpl.Literals.TEAM_MEMBER__IS_SENT_OFF,
+							"derived.isSentOff", "teamMember", "target",
+							QueryBasedFeatureKind.SINGLE_REFERENCE, true, false);
 		}
 		return (boolean) isSentOffHandler.getSingleReferenceValue(this);
 	}
 
 	/**
-	 * EMF-IncQuery handler for derived feature hasYellowCard
+	 * EMF-IncQuery handler for query-based feature hasYellowCard
 	 */
-	private IncqueryDerivedFeature hasYellowCardHandler;
+	private IQueryBasedFeatureHandler hasYellowCardHandler;
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * @derived getter created by EMF-IncQuery for derived feature hasYellowCard
+	 * @query-based getter created by EMF-IncQuery for query-based feature hasYellowCard
 	 */
 	public boolean isHasYellowCard() {
 		if (hasYellowCardHandler == null) {
-			hasYellowCardHandler = IncqueryFeatureHelper
-					.getIncqueryDerivedFeature(
+			hasYellowCardHandler = QueryBasedFeatureHelper
+					.getQueryBasedFeatureHandler(
 							this,
 							ModelPackageImpl.Literals.TEAM_MEMBER__HAS_YELLOW_CARD,
 							"derived.hasYellowCard", "teamMember", "target",
-							FeatureKind.SINGLE_REFERENCE, true, false);
+							QueryBasedFeatureKind.SINGLE_REFERENCE, true, false);
 		}
 		return (boolean) hasYellowCardHandler.getSingleReferenceValue(this);
 	}

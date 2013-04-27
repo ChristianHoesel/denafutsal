@@ -25,7 +25,6 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.EObjectImpl;
 
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
-import org.eclipse.emf.ecore.util.EObjectContainmentWithInverseEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 
 /**
@@ -44,7 +43,6 @@ import org.eclipse.emf.ecore.util.InternalEList;
  *   <li>{@link model.impl.MatchImpl#getAssistant <em>Assistant</em>}</li>
  *   <li>{@link model.impl.MatchImpl#getThirdReferee <em>Third Referee</em>}</li>
  *   <li>{@link model.impl.MatchImpl#getSupervisor <em>Supervisor</em>}</li>
- *   <li>{@link model.impl.MatchImpl#getTeams <em>Teams</em>}</li>
  *   <li>{@link model.impl.MatchImpl#getEvents <em>Events</em>}</li>
  *   <li>{@link model.impl.MatchImpl#getHome <em>Home</em>}</li>
  *   <li>{@link model.impl.MatchImpl#getVisitor <em>Visitor</em>}</li>
@@ -195,16 +193,6 @@ public class MatchImpl extends EObjectImpl implements Match {
 	protected Person supervisor;
 
 	/**
-	 * The cached value of the '{@link #getTeams() <em>Teams</em>}' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getTeams()
-	 * @generated
-	 * @ordered
-	 */
-	protected EList<Team> teams;
-
-	/**
 	 * The cached value of the '{@link #getEvents() <em>Events</em>}' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -213,6 +201,26 @@ public class MatchImpl extends EObjectImpl implements Match {
 	 * @ordered
 	 */
 	protected EList<Event> events;
+
+	/**
+	 * The cached value of the '{@link #getHome() <em>Home</em>}' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getHome()
+	 * @generated
+	 * @ordered
+	 */
+	protected Team home;
+
+	/**
+	 * The cached value of the '{@link #getVisitor() <em>Visitor</em>}' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getVisitor()
+	 * @generated
+	 * @ordered
+	 */
+	protected Team visitor;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -515,18 +523,6 @@ public class MatchImpl extends EObjectImpl implements Match {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EList<Team> getTeams() {
-		if (teams == null) {
-			teams = new EObjectContainmentWithInverseEList<Team>(Team.class, this, ModelPackage.MATCH__TEAMS, ModelPackage.TEAM__MATCH);
-		}
-		return teams;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public EList<Event> getEvents() {
 		if (events == null) {
 			events = new EObjectContainmentEList<Event>(Event.class, this, ModelPackage.MATCH__EVENTS);
@@ -540,17 +536,41 @@ public class MatchImpl extends EObjectImpl implements Match {
 	 * @generated
 	 */
 	public Team getHome() {
-		Team home = basicGetHome();
-		return home != null && home.eIsProxy() ? (Team)eResolveProxy((InternalEObject)home) : home;
+		return home;
 	}
 
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated NOT
+	 * @generated
 	 */
-	public Team basicGetHome() {
-		return getTeams().get(0);
+	public NotificationChain basicSetHome(Team newHome, NotificationChain msgs) {
+		Team oldHome = home;
+		home = newHome;
+		if (eNotificationRequired()) {
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, ModelPackage.MATCH__HOME, oldHome, newHome);
+			if (msgs == null) msgs = notification; else msgs.add(notification);
+		}
+		return msgs;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setHome(Team newHome) {
+		if (newHome != home) {
+			NotificationChain msgs = null;
+			if (home != null)
+				msgs = ((InternalEObject)home).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - ModelPackage.MATCH__HOME, null, msgs);
+			if (newHome != null)
+				msgs = ((InternalEObject)newHome).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - ModelPackage.MATCH__HOME, null, msgs);
+			msgs = basicSetHome(newHome, msgs);
+			if (msgs != null) msgs.dispatch();
+		}
+		else if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, ModelPackage.MATCH__HOME, newHome, newHome));
 	}
 
 	/**
@@ -559,17 +579,7 @@ public class MatchImpl extends EObjectImpl implements Match {
 	 * @generated
 	 */
 	public Team getVisitor() {
-		Team visitor = basicGetVisitor();
-		return visitor != null && visitor.eIsProxy() ? (Team)eResolveProxy((InternalEObject)visitor) : visitor;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated NOT
-	 */
-	public Team basicGetVisitor() {
-		return getTeams().get(1);
+		return visitor;
 	}
 
 	/**
@@ -577,14 +587,33 @@ public class MatchImpl extends EObjectImpl implements Match {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@SuppressWarnings("unchecked")
-	@Override
-	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
-		switch (featureID) {
-			case ModelPackage.MATCH__TEAMS:
-				return ((InternalEList<InternalEObject>)(InternalEList<?>)getTeams()).basicAdd(otherEnd, msgs);
+	public NotificationChain basicSetVisitor(Team newVisitor, NotificationChain msgs) {
+		Team oldVisitor = visitor;
+		visitor = newVisitor;
+		if (eNotificationRequired()) {
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, ModelPackage.MATCH__VISITOR, oldVisitor, newVisitor);
+			if (msgs == null) msgs = notification; else msgs.add(notification);
 		}
-		return super.eInverseAdd(otherEnd, featureID, msgs);
+		return msgs;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setVisitor(Team newVisitor) {
+		if (newVisitor != visitor) {
+			NotificationChain msgs = null;
+			if (visitor != null)
+				msgs = ((InternalEObject)visitor).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - ModelPackage.MATCH__VISITOR, null, msgs);
+			if (newVisitor != null)
+				msgs = ((InternalEObject)newVisitor).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - ModelPackage.MATCH__VISITOR, null, msgs);
+			msgs = basicSetVisitor(newVisitor, msgs);
+			if (msgs != null) msgs.dispatch();
+		}
+		else if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, ModelPackage.MATCH__VISITOR, newVisitor, newVisitor));
 	}
 
 	/**
@@ -603,10 +632,12 @@ public class MatchImpl extends EObjectImpl implements Match {
 				return basicSetThirdReferee(null, msgs);
 			case ModelPackage.MATCH__SUPERVISOR:
 				return basicSetSupervisor(null, msgs);
-			case ModelPackage.MATCH__TEAMS:
-				return ((InternalEList<?>)getTeams()).basicRemove(otherEnd, msgs);
 			case ModelPackage.MATCH__EVENTS:
 				return ((InternalEList<?>)getEvents()).basicRemove(otherEnd, msgs);
+			case ModelPackage.MATCH__HOME:
+				return basicSetHome(null, msgs);
+			case ModelPackage.MATCH__VISITOR:
+				return basicSetVisitor(null, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -637,16 +668,12 @@ public class MatchImpl extends EObjectImpl implements Match {
 				return getThirdReferee();
 			case ModelPackage.MATCH__SUPERVISOR:
 				return getSupervisor();
-			case ModelPackage.MATCH__TEAMS:
-				return getTeams();
 			case ModelPackage.MATCH__EVENTS:
 				return getEvents();
 			case ModelPackage.MATCH__HOME:
-				if (resolve) return getHome();
-				return basicGetHome();
+				return getHome();
 			case ModelPackage.MATCH__VISITOR:
-				if (resolve) return getVisitor();
-				return basicGetVisitor();
+				return getVisitor();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -687,13 +714,15 @@ public class MatchImpl extends EObjectImpl implements Match {
 			case ModelPackage.MATCH__SUPERVISOR:
 				setSupervisor((Person)newValue);
 				return;
-			case ModelPackage.MATCH__TEAMS:
-				getTeams().clear();
-				getTeams().addAll((Collection<? extends Team>)newValue);
-				return;
 			case ModelPackage.MATCH__EVENTS:
 				getEvents().clear();
 				getEvents().addAll((Collection<? extends Event>)newValue);
+				return;
+			case ModelPackage.MATCH__HOME:
+				setHome((Team)newValue);
+				return;
+			case ModelPackage.MATCH__VISITOR:
+				setVisitor((Team)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -734,11 +763,14 @@ public class MatchImpl extends EObjectImpl implements Match {
 			case ModelPackage.MATCH__SUPERVISOR:
 				setSupervisor((Person)null);
 				return;
-			case ModelPackage.MATCH__TEAMS:
-				getTeams().clear();
-				return;
 			case ModelPackage.MATCH__EVENTS:
 				getEvents().clear();
+				return;
+			case ModelPackage.MATCH__HOME:
+				setHome((Team)null);
+				return;
+			case ModelPackage.MATCH__VISITOR:
+				setVisitor((Team)null);
 				return;
 		}
 		super.eUnset(featureID);
@@ -770,14 +802,12 @@ public class MatchImpl extends EObjectImpl implements Match {
 				return thirdReferee != null;
 			case ModelPackage.MATCH__SUPERVISOR:
 				return supervisor != null;
-			case ModelPackage.MATCH__TEAMS:
-				return teams != null && !teams.isEmpty();
 			case ModelPackage.MATCH__EVENTS:
 				return events != null && !events.isEmpty();
 			case ModelPackage.MATCH__HOME:
-				return basicGetHome() != null;
+				return home != null;
 			case ModelPackage.MATCH__VISITOR:
-				return basicGetVisitor() != null;
+				return visitor != null;
 		}
 		return super.eIsSet(featureID);
 	}

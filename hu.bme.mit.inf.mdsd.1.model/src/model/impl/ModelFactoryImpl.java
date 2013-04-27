@@ -61,9 +61,9 @@ public class ModelFactoryImpl extends EFactoryImpl implements ModelFactory {
 			case ModelPackage.MATCH: return createMatch();
 			case ModelPackage.PERSON: return createPerson();
 			case ModelPackage.TEAM: return createTeam();
+			case ModelPackage.TEAM_MEMBER: return createTeamMember();
 			case ModelPackage.STAFF_MEMBER: return createStaffMember();
 			case ModelPackage.EVENT: return createEvent();
-			case ModelPackage.STAFF_PLAYER: return createStaffPlayer();
 			case ModelPackage.PENALTY: return createPenalty();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
@@ -82,8 +82,8 @@ public class ModelFactoryImpl extends EFactoryImpl implements ModelFactory {
 				return createTypeFromString(eDataType, initialValue);
 			case ModelPackage.AGE_GROUP:
 				return createAgeGroupFromString(eDataType, initialValue);
-			case ModelPackage.ROLE:
-				return createRoleFromString(eDataType, initialValue);
+			case ModelPackage.STAFF_ROLE:
+				return createStaffRoleFromString(eDataType, initialValue);
 			case ModelPackage.POSITION:
 				return createPositionFromString(eDataType, initialValue);
 			case ModelPackage.EVENT_TYPE:
@@ -105,8 +105,8 @@ public class ModelFactoryImpl extends EFactoryImpl implements ModelFactory {
 				return convertTypeToString(eDataType, instanceValue);
 			case ModelPackage.AGE_GROUP:
 				return convertAgeGroupToString(eDataType, instanceValue);
-			case ModelPackage.ROLE:
-				return convertRoleToString(eDataType, instanceValue);
+			case ModelPackage.STAFF_ROLE:
+				return convertStaffRoleToString(eDataType, instanceValue);
 			case ModelPackage.POSITION:
 				return convertPositionToString(eDataType, instanceValue);
 			case ModelPackage.EVENT_TYPE:
@@ -161,6 +161,16 @@ public class ModelFactoryImpl extends EFactoryImpl implements ModelFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public TeamMember createTeamMember() {
+		TeamMemberImpl teamMember = new TeamMemberImpl();
+		return teamMember;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public StaffMember createStaffMember() {
 		StaffMemberImpl staffMember = new StaffMemberImpl();
 		return staffMember;
@@ -174,16 +184,6 @@ public class ModelFactoryImpl extends EFactoryImpl implements ModelFactory {
 	public Event createEvent() {
 		EventImpl event = new EventImpl();
 		return event;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public StaffPlayer createStaffPlayer() {
-		StaffPlayerImpl staffPlayer = new StaffPlayerImpl();
-		return staffPlayer;
 	}
 
 	/**
@@ -241,8 +241,8 @@ public class ModelFactoryImpl extends EFactoryImpl implements ModelFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public Role createRoleFromString(EDataType eDataType, String initialValue) {
-		Role result = Role.get(initialValue);
+	public StaffRole createStaffRoleFromString(EDataType eDataType, String initialValue) {
+		StaffRole result = StaffRole.get(initialValue);
 		if (result == null) throw new IllegalArgumentException("The value '" + initialValue + "' is not a valid enumerator of '" + eDataType.getName() + "'");
 		return result;
 	}
@@ -252,7 +252,7 @@ public class ModelFactoryImpl extends EFactoryImpl implements ModelFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public String convertRoleToString(EDataType eDataType, Object instanceValue) {
+	public String convertStaffRoleToString(EDataType eDataType, Object instanceValue) {
 		return instanceValue == null ? null : instanceValue.toString();
 	}
 

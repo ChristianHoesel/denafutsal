@@ -15,11 +15,13 @@ package model;
  *   <li>{@link model.TeamMember#getId <em>Id</em>}</li>
  *   <li>{@link model.TeamMember#isIsSentOff <em>Is Sent Off</em>}</li>
  *   <li>{@link model.TeamMember#isHasYellowCard <em>Has Yellow Card</em>}</li>
+ *   <li>{@link model.TeamMember#getStaffRole <em>Staff Role</em>}</li>
+ *   <li>{@link model.TeamMember#getPlayerRole <em>Player Role</em>}</li>
  * </ul>
  * </p>
  *
  * @see model.ModelPackage#getTeamMember()
- * @model abstract="true"
+ * @model
  * @generated
  */
 public interface TeamMember extends Person {
@@ -106,5 +108,57 @@ public interface TeamMember extends Person {
 	 * @generated
 	 */
 	boolean isHasYellowCard();
+
+	/**
+	 * Returns the value of the '<em><b>Staff Role</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Staff Role</em>' containment reference isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Staff Role</em>' containment reference.
+	 * @see #setStaffRole(StaffMember)
+	 * @see model.ModelPackage#getTeamMember_StaffRole()
+	 * @model containment="true"
+	 * @generated
+	 */
+	StaffMember getStaffRole();
+
+	/**
+	 * Sets the value of the '{@link model.TeamMember#getStaffRole <em>Staff Role</em>}' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Staff Role</em>' containment reference.
+	 * @see #getStaffRole()
+	 * @generated
+	 */
+	void setStaffRole(StaffMember value);
+
+	/**
+	 * Returns the value of the '<em><b>Player Role</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Player Role</em>' containment reference isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Player Role</em>' containment reference.
+	 * @see #setPlayerRole(Player)
+	 * @see model.ModelPackage#getTeamMember_PlayerRole()
+	 * @model containment="true"
+	 * @generated
+	 */
+	Player getPlayerRole();
+
+	/**
+	 * Sets the value of the '{@link model.TeamMember#getPlayerRole <em>Player Role</em>}' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Player Role</em>' containment reference.
+	 * @see #getPlayerRole()
+	 * @generated
+	 */
+	void setPlayerRole(Player value);
 
 } // TeamMember

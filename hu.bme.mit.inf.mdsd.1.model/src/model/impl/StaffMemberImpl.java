@@ -3,8 +3,8 @@
 package model.impl;
 
 import model.ModelPackage;
-import model.Role;
 import model.StaffMember;
+import model.StaffRole;
 
 import org.eclipse.emf.common.notify.Notification;
 
@@ -25,7 +25,7 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
  *
  * @generated
  */
-public class StaffMemberImpl extends TeamMemberImpl implements StaffMember {
+public class StaffMemberImpl extends RoleImpl implements StaffMember {
 	/**
 	 * The default value of the '{@link #getRole() <em>Role</em>}' attribute.
 	 * <!-- begin-user-doc -->
@@ -34,7 +34,7 @@ public class StaffMemberImpl extends TeamMemberImpl implements StaffMember {
 	 * @generated
 	 * @ordered
 	 */
-	protected static final Role ROLE_EDEFAULT = Role.HEAD_COACH;
+	protected static final StaffRole ROLE_EDEFAULT = StaffRole.HEAD_COACH;
 
 	/**
 	 * The cached value of the '{@link #getRole() <em>Role</em>}' attribute.
@@ -44,7 +44,7 @@ public class StaffMemberImpl extends TeamMemberImpl implements StaffMember {
 	 * @generated
 	 * @ordered
 	 */
-	protected Role role = ROLE_EDEFAULT;
+	protected StaffRole role = ROLE_EDEFAULT;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -70,7 +70,7 @@ public class StaffMemberImpl extends TeamMemberImpl implements StaffMember {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public Role getRole() {
+	public StaffRole getRole() {
 		return role;
 	}
 
@@ -79,8 +79,8 @@ public class StaffMemberImpl extends TeamMemberImpl implements StaffMember {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setRole(Role newRole) {
-		Role oldRole = role;
+	public void setRole(StaffRole newRole) {
+		StaffRole oldRole = role;
 		role = newRole == null ? ROLE_EDEFAULT : newRole;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, ModelPackage.STAFF_MEMBER__ROLE, oldRole, role));
@@ -109,7 +109,7 @@ public class StaffMemberImpl extends TeamMemberImpl implements StaffMember {
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
 			case ModelPackage.STAFF_MEMBER__ROLE:
-				setRole((Role)newValue);
+				setRole((StaffRole)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);

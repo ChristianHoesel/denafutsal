@@ -11,6 +11,7 @@ import model.Penalty;
 import model.Player;
 import model.StaffMember;
 import model.Team;
+import model.TeamMember;
 
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
@@ -24,11 +25,11 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.EObjectImpl;
 
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
-import org.eclipse.emf.ecore.util.EcoreUtil;
+import org.eclipse.emf.ecore.util.EObjectResolvingEList;
 import org.eclipse.emf.ecore.util.InternalEList;
-import org.eclipse.viatra2.emf.incquery.runtime.derived.IncqueryDerivedFeature;
-import org.eclipse.viatra2.emf.incquery.runtime.derived.FeatureKind;
-import org.eclipse.viatra2.emf.incquery.runtime.derived.IncqueryFeatureHelper;
+import org.eclipse.incquery.querybasedfeatures.runtime.IQueryBasedFeatureHandler;
+import org.eclipse.incquery.querybasedfeatures.runtime.QueryBasedFeatureKind;
+import org.eclipse.incquery.querybasedfeatures.runtime.QueryBasedFeatureHelper;
 
 /**
  * <!-- begin-user-doc -->
@@ -42,12 +43,13 @@ import org.eclipse.viatra2.emf.incquery.runtime.derived.IncqueryFeatureHelper;
  *   <li>{@link model.impl.TeamImpl#getStartingLine <em>Starting Line</em>}</li>
  *   <li>{@link model.impl.TeamImpl#getSubstitutes <em>Substitutes</em>}</li>
  *   <li>{@link model.impl.TeamImpl#getStaff <em>Staff</em>}</li>
- *   <li>{@link model.impl.TeamImpl#getMatch <em>Match</em>}</li>
  *   <li>{@link model.impl.TeamImpl#getGoals <em>Goals</em>}</li>
  *   <li>{@link model.impl.TeamImpl#getPenalties <em>Penalties</em>}</li>
  *   <li>{@link model.impl.TeamImpl#getCards <em>Cards</em>}</li>
  *   <li>{@link model.impl.TeamImpl#getRedBans <em>Red Bans</em>}</li>
  *   <li>{@link model.impl.TeamImpl#getGoalCount <em>Goal Count</em>}</li>
+ *   <li>{@link model.impl.TeamImpl#getMembers <em>Members</em>}</li>
+ *   <li>{@link model.impl.TeamImpl#getMatch <em>Match</em>}</li>
  * </ul>
  * </p>
  *
@@ -75,7 +77,7 @@ public class TeamImpl extends EObjectImpl implements Team {
 	protected String name = NAME_EDEFAULT;
 
 	/**
-	 * The cached value of the '{@link #getCaptain() <em>Captain</em>}' containment reference.
+	 * The cached value of the '{@link #getCaptain() <em>Captain</em>}' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @see #getCaptain()
@@ -85,7 +87,7 @@ public class TeamImpl extends EObjectImpl implements Team {
 	protected Player captain;
 
 	/**
-	 * The cached value of the '{@link #getStartingLine() <em>Starting Line</em>}' containment reference list.
+	 * The cached value of the '{@link #getStartingLine() <em>Starting Line</em>}' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @see #getStartingLine()
@@ -95,7 +97,7 @@ public class TeamImpl extends EObjectImpl implements Team {
 	protected EList<Player> startingLine;
 
 	/**
-	 * The cached value of the '{@link #getSubstitutes() <em>Substitutes</em>}' containment reference list.
+	 * The cached value of the '{@link #getSubstitutes() <em>Substitutes</em>}' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @see #getSubstitutes()
@@ -133,6 +135,16 @@ public class TeamImpl extends EObjectImpl implements Team {
 	 * @ordered
 	 */
 	protected static final int GOAL_COUNT_EDEFAULT = 0;
+
+	/**
+	 * The cached value of the '{@link #getMembers() <em>Members</em>}' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getMembers()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<TeamMember> members;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -180,6 +192,14 @@ public class TeamImpl extends EObjectImpl implements Team {
 	 * @generated
 	 */
 	public Player getCaptain() {
+		if (captain != null && captain.eIsProxy()) {
+			InternalEObject oldCaptain = (InternalEObject)captain;
+			captain = (Player)eResolveProxy(oldCaptain);
+			if (captain != oldCaptain) {
+				if (eNotificationRequired())
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, ModelPackage.TEAM__CAPTAIN, oldCaptain, captain));
+			}
+		}
 		return captain;
 	}
 
@@ -188,14 +208,8 @@ public class TeamImpl extends EObjectImpl implements Team {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public NotificationChain basicSetCaptain(Player newCaptain, NotificationChain msgs) {
-		Player oldCaptain = captain;
-		captain = newCaptain;
-		if (eNotificationRequired()) {
-			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, ModelPackage.TEAM__CAPTAIN, oldCaptain, newCaptain);
-			if (msgs == null) msgs = notification; else msgs.add(notification);
-		}
-		return msgs;
+	public Player basicGetCaptain() {
+		return captain;
 	}
 
 	/**
@@ -204,17 +218,10 @@ public class TeamImpl extends EObjectImpl implements Team {
 	 * @generated
 	 */
 	public void setCaptain(Player newCaptain) {
-		if (newCaptain != captain) {
-			NotificationChain msgs = null;
-			if (captain != null)
-				msgs = ((InternalEObject)captain).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - ModelPackage.TEAM__CAPTAIN, null, msgs);
-			if (newCaptain != null)
-				msgs = ((InternalEObject)newCaptain).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - ModelPackage.TEAM__CAPTAIN, null, msgs);
-			msgs = basicSetCaptain(newCaptain, msgs);
-			if (msgs != null) msgs.dispatch();
-		}
-		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, ModelPackage.TEAM__CAPTAIN, newCaptain, newCaptain));
+		Player oldCaptain = captain;
+		captain = newCaptain;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, ModelPackage.TEAM__CAPTAIN, oldCaptain, captain));
 	}
 
 	/**
@@ -224,7 +231,7 @@ public class TeamImpl extends EObjectImpl implements Team {
 	 */
 	public EList<Player> getStartingLine() {
 		if (startingLine == null) {
-			startingLine = new EObjectContainmentEList<Player>(Player.class, this, ModelPackage.TEAM__STARTING_LINE);
+			startingLine = new EObjectResolvingEList<Player>(Player.class, this, ModelPackage.TEAM__STARTING_LINE);
 		}
 		return startingLine;
 	}
@@ -236,7 +243,7 @@ public class TeamImpl extends EObjectImpl implements Team {
 	 */
 	public EList<Player> getSubstitutes() {
 		if (substitutes == null) {
-			substitutes = new EObjectContainmentEList<Player>(Player.class, this, ModelPackage.TEAM__SUBSTITUTES);
+			substitutes = new EObjectResolvingEList<Player>(Player.class, this, ModelPackage.TEAM__SUBSTITUTES);
 		}
 		return substitutes;
 	}
@@ -251,47 +258,6 @@ public class TeamImpl extends EObjectImpl implements Team {
 			staff = new EObjectContainmentEList<StaffMember>(StaffMember.class, this, ModelPackage.TEAM__STAFF);
 		}
 		return staff;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public Match getMatch() {
-		if (eContainerFeatureID() != ModelPackage.TEAM__MATCH) return null;
-		return (Match)eContainer();
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public NotificationChain basicSetMatch(Match newMatch, NotificationChain msgs) {
-		msgs = eBasicSetContainer((InternalEObject)newMatch, ModelPackage.TEAM__MATCH, msgs);
-		return msgs;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public void setMatch(Match newMatch) {
-		if (newMatch != eInternalContainer() || (eContainerFeatureID() != ModelPackage.TEAM__MATCH && newMatch != null)) {
-			if (EcoreUtil.isAncestor(this, newMatch))
-				throw new IllegalArgumentException("Recursive containment not allowed for " + toString());
-			NotificationChain msgs = null;
-			if (eInternalContainer() != null)
-				msgs = eBasicRemoveFromContainer(msgs);
-			if (newMatch != null)
-				msgs = ((InternalEObject)newMatch).eInverseAdd(this, ModelPackage.MATCH__TEAMS, Match.class, msgs);
-			msgs = basicSetMatch(newMatch, msgs);
-			if (msgs != null) msgs.dispatch();
-		}
-		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, ModelPackage.TEAM__MATCH, newMatch, newMatch));
 	}
 
 	/**
@@ -361,15 +327,33 @@ public class TeamImpl extends EObjectImpl implements Team {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
-	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
-		switch (featureID) {
-			case ModelPackage.TEAM__MATCH:
-				if (eInternalContainer() != null)
-					msgs = eBasicRemoveFromContainer(msgs);
-				return basicSetMatch((Match)otherEnd, msgs);
+	public EList<TeamMember> getMembers() {
+		if (members == null) {
+			members = new EObjectContainmentEList<TeamMember>(TeamMember.class, this, ModelPackage.TEAM__MEMBERS);
 		}
-		return super.eInverseAdd(otherEnd, featureID, msgs);
+		return members;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public Match getMatch() {
+		Match match = basicGetMatch();
+		return match != null && match.eIsProxy() ? (Match)eResolveProxy((InternalEObject)match) : match;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public Match basicGetMatchGen() {
+		// TODO: implement this method to return the 'Match' reference
+		// -> do not perform proxy resolution
+		// Ensure that you remove @generated or mark it @generated NOT
+		throw new UnsupportedOperationException();
 	}
 
 	/**
@@ -380,34 +364,14 @@ public class TeamImpl extends EObjectImpl implements Team {
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case ModelPackage.TEAM__CAPTAIN:
-				return basicSetCaptain(null, msgs);
-			case ModelPackage.TEAM__STARTING_LINE:
-				return ((InternalEList<?>)getStartingLine()).basicRemove(otherEnd, msgs);
-			case ModelPackage.TEAM__SUBSTITUTES:
-				return ((InternalEList<?>)getSubstitutes()).basicRemove(otherEnd, msgs);
 			case ModelPackage.TEAM__STAFF:
 				return ((InternalEList<?>)getStaff()).basicRemove(otherEnd, msgs);
-			case ModelPackage.TEAM__MATCH:
-				return basicSetMatch(null, msgs);
 			case ModelPackage.TEAM__PENALTIES:
 				return ((InternalEList<?>)getPenalties()).basicRemove(otherEnd, msgs);
+			case ModelPackage.TEAM__MEMBERS:
+				return ((InternalEList<?>)getMembers()).basicRemove(otherEnd, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public NotificationChain eBasicRemoveFromContainerFeature(NotificationChain msgs) {
-		switch (eContainerFeatureID()) {
-			case ModelPackage.TEAM__MATCH:
-				return eInternalContainer().eInverseRemove(this, ModelPackage.MATCH__TEAMS, Match.class, msgs);
-		}
-		return super.eBasicRemoveFromContainerFeature(msgs);
 	}
 
 	/**
@@ -421,15 +385,14 @@ public class TeamImpl extends EObjectImpl implements Team {
 			case ModelPackage.TEAM__NAME:
 				return getName();
 			case ModelPackage.TEAM__CAPTAIN:
-				return getCaptain();
+				if (resolve) return getCaptain();
+				return basicGetCaptain();
 			case ModelPackage.TEAM__STARTING_LINE:
 				return getStartingLine();
 			case ModelPackage.TEAM__SUBSTITUTES:
 				return getSubstitutes();
 			case ModelPackage.TEAM__STAFF:
 				return getStaff();
-			case ModelPackage.TEAM__MATCH:
-				return getMatch();
 			case ModelPackage.TEAM__GOALS:
 				return getGoals();
 			case ModelPackage.TEAM__PENALTIES:
@@ -440,6 +403,11 @@ public class TeamImpl extends EObjectImpl implements Team {
 				return getRedBans();
 			case ModelPackage.TEAM__GOAL_COUNT:
 				return getGoalCount();
+			case ModelPackage.TEAM__MEMBERS:
+				return getMembers();
+			case ModelPackage.TEAM__MATCH:
+				if (resolve) return getMatch();
+				return basicGetMatch();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -471,12 +439,13 @@ public class TeamImpl extends EObjectImpl implements Team {
 				getStaff().clear();
 				getStaff().addAll((Collection<? extends StaffMember>)newValue);
 				return;
-			case ModelPackage.TEAM__MATCH:
-				setMatch((Match)newValue);
-				return;
 			case ModelPackage.TEAM__PENALTIES:
 				getPenalties().clear();
 				getPenalties().addAll((Collection<? extends Penalty>)newValue);
+				return;
+			case ModelPackage.TEAM__MEMBERS:
+				getMembers().clear();
+				getMembers().addAll((Collection<? extends TeamMember>)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -505,11 +474,11 @@ public class TeamImpl extends EObjectImpl implements Team {
 			case ModelPackage.TEAM__STAFF:
 				getStaff().clear();
 				return;
-			case ModelPackage.TEAM__MATCH:
-				setMatch((Match)null);
-				return;
 			case ModelPackage.TEAM__PENALTIES:
 				getPenalties().clear();
+				return;
+			case ModelPackage.TEAM__MEMBERS:
+				getMembers().clear();
 				return;
 		}
 		super.eUnset(featureID);
@@ -533,8 +502,6 @@ public class TeamImpl extends EObjectImpl implements Team {
 				return substitutes != null && !substitutes.isEmpty();
 			case ModelPackage.TEAM__STAFF:
 				return staff != null && !staff.isEmpty();
-			case ModelPackage.TEAM__MATCH:
-				return getMatch() != null;
 			case ModelPackage.TEAM__GOALS:
 				return !getGoals().isEmpty();
 			case ModelPackage.TEAM__PENALTIES:
@@ -545,6 +512,10 @@ public class TeamImpl extends EObjectImpl implements Team {
 				return !getRedBans().isEmpty();
 			case ModelPackage.TEAM__GOAL_COUNT:
 				return getGoalCount() != GOAL_COUNT_EDEFAULT;
+			case ModelPackage.TEAM__MEMBERS:
+				return members != null && !members.isEmpty();
+			case ModelPackage.TEAM__MATCH:
+				return basicGetMatch() != null;
 		}
 		return super.eIsSet(featureID);
 	}
@@ -566,84 +537,100 @@ public class TeamImpl extends EObjectImpl implements Team {
 	}
 
 	/**
-	 * EMF-IncQuery handler for derived feature goals
+	 * EMF-IncQuery handler for query-based feature goals
 	 */
-	private IncqueryDerivedFeature goalsHandler;
+	private IQueryBasedFeatureHandler goalsHandler;
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * @derived getter created by EMF-IncQuery for derived feature goals
+	 * @query-based getter created by EMF-IncQuery for query-based feature goals
 	 */
 	public EList<Event> getGoals() {
 		if (goalsHandler == null) {
-			goalsHandler = IncqueryFeatureHelper.getIncqueryDerivedFeature(
+			goalsHandler = QueryBasedFeatureHelper.getQueryBasedFeatureHandler(
 					this, ModelPackageImpl.Literals.TEAM__GOALS,
 					"derived.goals", "team", "event",
-					FeatureKind.MANY_REFERENCE, true, false);
+					QueryBasedFeatureKind.MANY_REFERENCE, true, false);
 		}
 		return goalsHandler.getManyReferenceValueAsEList(this);
 	}
 
 	/**
-	 * EMF-IncQuery handler for derived feature cards
+	 * EMF-IncQuery handler for query-based feature cards
 	 */
-	private IncqueryDerivedFeature cardsHandler;
+	private IQueryBasedFeatureHandler cardsHandler;
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * @derived getter created by EMF-IncQuery for derived feature cards
+	 * @query-based getter created by EMF-IncQuery for query-based feature cards
 	 */
 	public EList<Event> getCards() {
 		if (cardsHandler == null) {
-			cardsHandler = IncqueryFeatureHelper.getIncqueryDerivedFeature(
+			cardsHandler = QueryBasedFeatureHelper.getQueryBasedFeatureHandler(
 					this, ModelPackageImpl.Literals.TEAM__CARDS,
 					"derived.cards", "team", "event",
-					FeatureKind.MANY_REFERENCE, true, false);
+					QueryBasedFeatureKind.MANY_REFERENCE, true, false);
 		}
 		return cardsHandler.getManyReferenceValueAsEList(this);
 	}
 
 	/**
-	 * EMF-IncQuery handler for derived feature redBans
+	 * EMF-IncQuery handler for query-based feature redBans
 	 */
-	private IncqueryDerivedFeature redBansHandler;
+	private IQueryBasedFeatureHandler redBansHandler;
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * @derived getter created by EMF-IncQuery for derived feature redBans
+	 * @query-based getter created by EMF-IncQuery for query-based feature redBans
 	 */
 	public EList<Event> getRedBans() {
 		if (redBansHandler == null) {
-			redBansHandler = IncqueryFeatureHelper.getIncqueryDerivedFeature(
-					this, ModelPackageImpl.Literals.TEAM__RED_BANS,
-					"derived.redBans", "team", "event",
-					FeatureKind.MANY_REFERENCE, true, false);
+			redBansHandler = QueryBasedFeatureHelper
+					.getQueryBasedFeatureHandler(this,
+							ModelPackageImpl.Literals.TEAM__RED_BANS,
+							"derived.redBans", "team", "event",
+							QueryBasedFeatureKind.MANY_REFERENCE, true, false);
 		}
 		return redBansHandler.getManyReferenceValueAsEList(this);
 	}
 
 	/**
-	 * EMF-IncQuery handler for derived feature goalCount
+	 * EMF-IncQuery handler for query-based feature goalCount
 	 */
-	private IncqueryDerivedFeature goalCountHandler;
+	private IQueryBasedFeatureHandler goalCountHandler;
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * @derived getter created by EMF-IncQuery for derived feature goalCount
+	 * @query-based getter created by EMF-IncQuery for query-based feature goalCount
 	 */
 	public int getGoalCount() {
 		if (goalCountHandler == null) {
-			goalCountHandler = IncqueryFeatureHelper.getIncqueryDerivedFeature(
-					this, ModelPackageImpl.Literals.TEAM__GOAL_COUNT,
-					"derived.goalCount", "team", "target",
-					FeatureKind.SINGLE_REFERENCE, true, false);
+			goalCountHandler = QueryBasedFeatureHelper
+					.getQueryBasedFeatureHandler(this,
+							ModelPackageImpl.Literals.TEAM__GOAL_COUNT,
+							"derived.goalCount", "team", "target",
+							QueryBasedFeatureKind.SINGLE_REFERENCE, true, false);
 		}
 		return (int) goalCountHandler.getSingleReferenceValue(this);
 	}
 
 	/**
-	 * EMF-IncQuery handler for derived feature match
+	 * EMF-IncQuery handler for query-based feature match
 	 */
-	private IncqueryDerivedFeature matchHandler;
+	private IQueryBasedFeatureHandler matchHandler;
+
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * @query-based getter created by EMF-IncQuery for query-based feature match
+	 */
+	public Match basicGetMatch() {
+		if (matchHandler == null) {
+			matchHandler = QueryBasedFeatureHelper.getQueryBasedFeatureHandler(
+					this, ModelPackageImpl.Literals.TEAM__MATCH,
+					"derived.match", "team", "match",
+					QueryBasedFeatureKind.SINGLE_REFERENCE, true, false);
+		}
+		return (model.Match) matchHandler.getSingleReferenceValue(this);
+	}
 
 } //TeamImpl

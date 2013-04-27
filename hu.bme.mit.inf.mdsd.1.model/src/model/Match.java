@@ -25,7 +25,6 @@ import org.eclipse.emf.ecore.EObject;
  *   <li>{@link model.Match#getAssistant <em>Assistant</em>}</li>
  *   <li>{@link model.Match#getThirdReferee <em>Third Referee</em>}</li>
  *   <li>{@link model.Match#getSupervisor <em>Supervisor</em>}</li>
- *   <li>{@link model.Match#getTeams <em>Teams</em>}</li>
  *   <li>{@link model.Match#getEvents <em>Events</em>}</li>
  *   <li>{@link model.Match#getHome <em>Home</em>}</li>
  *   <li>{@link model.Match#getVisitor <em>Visitor</em>}</li>
@@ -278,24 +277,6 @@ public interface Match extends EObject {
 	void setSupervisor(Person value);
 
 	/**
-	 * Returns the value of the '<em><b>Teams</b></em>' containment reference list.
-	 * The list contents are of type {@link model.Team}.
-	 * It is bidirectional and its opposite is '{@link model.Team#getMatch <em>Match</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Teams</em>' containment reference list isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Teams</em>' containment reference list.
-	 * @see model.ModelPackage#getMatch_Teams()
-	 * @see model.Team#getMatch
-	 * @model opposite="match" containment="true" lower="2" upper="2"
-	 * @generated
-	 */
-	EList<Team> getTeams();
-
-	/**
 	 * Returns the value of the '<em><b>Events</b></em>' containment reference list.
 	 * The list contents are of type {@link model.Event}.
 	 * <!-- begin-user-doc -->
@@ -312,33 +293,55 @@ public interface Match extends EObject {
 	EList<Event> getEvents();
 
 	/**
-	 * Returns the value of the '<em><b>Home</b></em>' reference.
+	 * Returns the value of the '<em><b>Home</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Home</em>' reference isn't clear,
+	 * If the meaning of the '<em>Home</em>' containment reference isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Home</em>' reference.
+	 * @return the value of the '<em>Home</em>' containment reference.
+	 * @see #setHome(Team)
 	 * @see model.ModelPackage#getMatch_Home()
-	 * @model required="true" transient="true" changeable="false" volatile="true" derived="true"
+	 * @model containment="true" required="true"
 	 * @generated
 	 */
 	Team getHome();
 
 	/**
-	 * Returns the value of the '<em><b>Visitor</b></em>' reference.
+	 * Sets the value of the '{@link model.Match#getHome <em>Home</em>}' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Home</em>' containment reference.
+	 * @see #getHome()
+	 * @generated
+	 */
+	void setHome(Team value);
+
+	/**
+	 * Returns the value of the '<em><b>Visitor</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Visitor</em>' reference isn't clear,
+	 * If the meaning of the '<em>Visitor</em>' containment reference isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Visitor</em>' reference.
+	 * @return the value of the '<em>Visitor</em>' containment reference.
+	 * @see #setVisitor(Team)
 	 * @see model.ModelPackage#getMatch_Visitor()
-	 * @model required="true" transient="true" changeable="false" volatile="true" derived="true"
+	 * @model containment="true" required="true"
 	 * @generated
 	 */
 	Team getVisitor();
+
+	/**
+	 * Sets the value of the '{@link model.Match#getVisitor <em>Visitor</em>}' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Visitor</em>' containment reference.
+	 * @see #getVisitor()
+	 * @generated
+	 */
+	void setVisitor(Team value);
 
 } // Match

@@ -69,8 +69,7 @@ public class ModelSwitch<T> extends Switch<T> {
 			case ModelPackage.PLAYER: {
 				Player player = (Player)theEObject;
 				T result = casePlayer(player);
-				if (result == null) result = caseTeamMember(player);
-				if (result == null) result = casePerson(player);
+				if (result == null) result = caseRole(player);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -102,8 +101,7 @@ public class ModelSwitch<T> extends Switch<T> {
 			case ModelPackage.STAFF_MEMBER: {
 				StaffMember staffMember = (StaffMember)theEObject;
 				T result = caseStaffMember(staffMember);
-				if (result == null) result = caseTeamMember(staffMember);
-				if (result == null) result = casePerson(staffMember);
+				if (result == null) result = caseRole(staffMember);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -113,19 +111,15 @@ public class ModelSwitch<T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case ModelPackage.STAFF_PLAYER: {
-				StaffPlayer staffPlayer = (StaffPlayer)theEObject;
-				T result = caseStaffPlayer(staffPlayer);
-				if (result == null) result = caseStaffMember(staffPlayer);
-				if (result == null) result = casePlayer(staffPlayer);
-				if (result == null) result = caseTeamMember(staffPlayer);
-				if (result == null) result = casePerson(staffPlayer);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
 			case ModelPackage.PENALTY: {
 				Penalty penalty = (Penalty)theEObject;
 				T result = casePenalty(penalty);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case ModelPackage.ROLE: {
+				Role role = (Role)theEObject;
+				T result = caseRole(role);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -239,21 +233,6 @@ public class ModelSwitch<T> extends Switch<T> {
 	}
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Staff Player</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Staff Player</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseStaffPlayer(StaffPlayer object) {
-		return null;
-	}
-
-	/**
 	 * Returns the result of interpreting the object as an instance of '<em>Penalty</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
@@ -265,6 +244,21 @@ public class ModelSwitch<T> extends Switch<T> {
 	 * @generated
 	 */
 	public T casePenalty(Penalty object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Role</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Role</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseRole(Role object) {
 		return null;
 	}
 

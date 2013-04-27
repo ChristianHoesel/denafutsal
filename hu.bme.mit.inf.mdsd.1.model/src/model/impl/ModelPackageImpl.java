@@ -14,7 +14,7 @@ import model.Player;
 import model.Position;
 import model.Role;
 import model.StaffMember;
-import model.StaffPlayer;
+import model.StaffRole;
 import model.Team;
 import model.TeamMember;
 import model.Type;
@@ -88,14 +88,14 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	private EClass staffPlayerEClass = null;
+	private EClass penaltyEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	private EClass penaltyEClass = null;
+	private EClass roleEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -116,7 +116,7 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	private EEnum roleEEnum = null;
+	private EEnum staffRoleEEnum = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -315,7 +315,7 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getMatch_Teams() {
+	public EReference getMatch_Events() {
 		return (EReference)matchEClass.getEStructuralFeatures().get(9);
 	}
 
@@ -324,7 +324,7 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getMatch_Events() {
+	public EReference getMatch_Home() {
 		return (EReference)matchEClass.getEStructuralFeatures().get(10);
 	}
 
@@ -333,17 +333,8 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getMatch_Home() {
-		return (EReference)matchEClass.getEStructuralFeatures().get(11);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public EReference getMatch_Visitor() {
-		return (EReference)matchEClass.getEStructuralFeatures().get(12);
+		return (EReference)matchEClass.getEStructuralFeatures().get(11);
 	}
 
 	/**
@@ -423,7 +414,7 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getTeam_Match() {
+	public EReference getTeam_Goals() {
 		return (EReference)teamEClass.getEStructuralFeatures().get(5);
 	}
 
@@ -432,7 +423,7 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getTeam_Goals() {
+	public EReference getTeam_Penalties() {
 		return (EReference)teamEClass.getEStructuralFeatures().get(6);
 	}
 
@@ -441,7 +432,7 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getTeam_Penalties() {
+	public EReference getTeam_Cards() {
 		return (EReference)teamEClass.getEStructuralFeatures().get(7);
 	}
 
@@ -450,7 +441,7 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getTeam_Cards() {
+	public EReference getTeam_RedBans() {
 		return (EReference)teamEClass.getEStructuralFeatures().get(8);
 	}
 
@@ -459,8 +450,8 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getTeam_RedBans() {
-		return (EReference)teamEClass.getEStructuralFeatures().get(9);
+	public EAttribute getTeam_GoalCount() {
+		return (EAttribute)teamEClass.getEStructuralFeatures().get(9);
 	}
 
 	/**
@@ -468,8 +459,17 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getTeam_GoalCount() {
-		return (EAttribute)teamEClass.getEStructuralFeatures().get(10);
+	public EReference getTeam_Members() {
+		return (EReference)teamEClass.getEStructuralFeatures().get(10);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getTeam_Match() {
+		return (EReference)teamEClass.getEStructuralFeatures().get(11);
 	}
 
 	/**
@@ -522,6 +522,24 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EReference getTeamMember_StaffRole() {
+		return (EReference)teamMemberEClass.getEStructuralFeatures().get(4);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getTeamMember_PlayerRole() {
+		return (EReference)teamMemberEClass.getEStructuralFeatures().get(5);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EClass getStaffMember() {
 		return staffMemberEClass;
 	}
@@ -567,17 +585,8 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getEvent_TeamMember() {
+	public EReference getEvent_Committer() {
 		return (EReference)eventEClass.getEStructuralFeatures().get(2);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EClass getStaffPlayer() {
-		return staffPlayerEClass;
 	}
 
 	/**
@@ -603,6 +612,24 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EClass getRole() {
+		return roleEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getRole_TeamMember() {
+		return (EReference)roleEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EEnum getType() {
 		return typeEEnum;
 	}
@@ -621,8 +648,8 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EEnum getRole() {
-		return roleEEnum;
+	public EEnum getStaffRole() {
+		return staffRoleEEnum;
 	}
 
 	/**
@@ -685,7 +712,6 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 		createEReference(matchEClass, MATCH__ASSISTANT);
 		createEReference(matchEClass, MATCH__THIRD_REFEREE);
 		createEReference(matchEClass, MATCH__SUPERVISOR);
-		createEReference(matchEClass, MATCH__TEAMS);
 		createEReference(matchEClass, MATCH__EVENTS);
 		createEReference(matchEClass, MATCH__HOME);
 		createEReference(matchEClass, MATCH__VISITOR);
@@ -699,18 +725,21 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 		createEReference(teamEClass, TEAM__STARTING_LINE);
 		createEReference(teamEClass, TEAM__SUBSTITUTES);
 		createEReference(teamEClass, TEAM__STAFF);
-		createEReference(teamEClass, TEAM__MATCH);
 		createEReference(teamEClass, TEAM__GOALS);
 		createEReference(teamEClass, TEAM__PENALTIES);
 		createEReference(teamEClass, TEAM__CARDS);
 		createEReference(teamEClass, TEAM__RED_BANS);
 		createEAttribute(teamEClass, TEAM__GOAL_COUNT);
+		createEReference(teamEClass, TEAM__MEMBERS);
+		createEReference(teamEClass, TEAM__MATCH);
 
 		teamMemberEClass = createEClass(TEAM_MEMBER);
 		createEReference(teamMemberEClass, TEAM_MEMBER__TEAM);
 		createEAttribute(teamMemberEClass, TEAM_MEMBER__ID);
 		createEAttribute(teamMemberEClass, TEAM_MEMBER__IS_SENT_OFF);
 		createEAttribute(teamMemberEClass, TEAM_MEMBER__HAS_YELLOW_CARD);
+		createEReference(teamMemberEClass, TEAM_MEMBER__STAFF_ROLE);
+		createEReference(teamMemberEClass, TEAM_MEMBER__PLAYER_ROLE);
 
 		staffMemberEClass = createEClass(STAFF_MEMBER);
 		createEAttribute(staffMemberEClass, STAFF_MEMBER__ROLE);
@@ -718,17 +747,18 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 		eventEClass = createEClass(EVENT);
 		createEAttribute(eventEClass, EVENT__TIME);
 		createEAttribute(eventEClass, EVENT__TYPE);
-		createEReference(eventEClass, EVENT__TEAM_MEMBER);
-
-		staffPlayerEClass = createEClass(STAFF_PLAYER);
+		createEReference(eventEClass, EVENT__COMMITTER);
 
 		penaltyEClass = createEClass(PENALTY);
 		createEAttribute(penaltyEClass, PENALTY__IS_SUCCESS);
 
+		roleEClass = createEClass(ROLE);
+		createEReference(roleEClass, ROLE__TEAM_MEMBER);
+
 		// Create enums
 		typeEEnum = createEEnum(TYPE);
 		ageGroupEEnum = createEEnum(AGE_GROUP);
-		roleEEnum = createEEnum(ROLE);
+		staffRoleEEnum = createEEnum(STAFF_ROLE);
 		positionEEnum = createEEnum(POSITION);
 		eventTypeEEnum = createEEnum(EVENT_TYPE);
 	}
@@ -761,11 +791,9 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 		// Set bounds for type parameters
 
 		// Add supertypes to classes
-		playerEClass.getESuperTypes().add(this.getTeamMember());
+		playerEClass.getESuperTypes().add(this.getRole());
 		teamMemberEClass.getESuperTypes().add(this.getPerson());
-		staffMemberEClass.getESuperTypes().add(this.getTeamMember());
-		staffPlayerEClass.getESuperTypes().add(this.getStaffMember());
-		staffPlayerEClass.getESuperTypes().add(this.getPlayer());
+		staffMemberEClass.getESuperTypes().add(this.getRole());
 
 		// Initialize classes and features; add operations and parameters
 		initEClass(playerEClass, Player.class, "Player", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
@@ -782,45 +810,48 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 		initEReference(getMatch_Assistant(), this.getPerson(), null, "Assistant", null, 1, 1, Match.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getMatch_ThirdReferee(), this.getPerson(), null, "ThirdReferee", null, 1, 1, Match.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getMatch_Supervisor(), this.getPerson(), null, "Supervisor", null, 1, 1, Match.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getMatch_Teams(), this.getTeam(), this.getTeam_Match(), "teams", null, 2, 2, Match.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getMatch_Events(), this.getEvent(), null, "events", null, 0, -1, Match.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getMatch_Home(), this.getTeam(), null, "home", null, 1, 1, Match.class, IS_TRANSIENT, IS_VOLATILE, !IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
-		initEReference(getMatch_Visitor(), this.getTeam(), null, "visitor", null, 1, 1, Match.class, IS_TRANSIENT, IS_VOLATILE, !IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
+		initEReference(getMatch_Home(), this.getTeam(), null, "home", null, 1, 1, Match.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getMatch_Visitor(), this.getTeam(), null, "visitor", null, 1, 1, Match.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(personEClass, Person.class, "Person", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getPerson_Name(), ecorePackage.getEString(), "name", null, 0, 1, Person.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(teamEClass, Team.class, "Team", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getTeam_Name(), ecorePackage.getEString(), "name", null, 0, 1, Team.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getTeam_Captain(), this.getPlayer(), null, "captain", null, 1, 1, Team.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getTeam_StartingLine(), this.getPlayer(), null, "startingLine", null, 5, 5, Team.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getTeam_Substitutes(), this.getPlayer(), null, "substitutes", null, 3, 7, Team.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getTeam_Staff(), this.getStaffMember(), null, "staff", null, 0, -1, Team.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getTeam_Match(), this.getMatch(), this.getMatch_Teams(), "match", null, 1, 1, Team.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getTeam_Captain(), this.getPlayer(), null, "captain", null, 1, 1, Team.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getTeam_StartingLine(), this.getPlayer(), null, "startingLine", null, 5, 5, Team.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getTeam_Substitutes(), this.getPlayer(), null, "substitutes", null, 3, 7, Team.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getTeam_Staff(), this.getStaffMember(), null, "staff", null, 0, 10, Team.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getTeam_Goals(), this.getEvent(), null, "goals", null, 0, -1, Team.class, IS_TRANSIENT, IS_VOLATILE, !IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
 		initEReference(getTeam_Penalties(), this.getPenalty(), null, "penalties", null, 0, -1, Team.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getTeam_Cards(), this.getEvent(), null, "cards", null, 0, -1, Team.class, IS_TRANSIENT, IS_VOLATILE, !IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
 		initEReference(getTeam_RedBans(), this.getEvent(), null, "redBans", null, 0, -1, Team.class, IS_TRANSIENT, IS_VOLATILE, !IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
 		initEAttribute(getTeam_GoalCount(), ecorePackage.getEInt(), "goalCount", null, 0, 1, Team.class, IS_TRANSIENT, IS_VOLATILE, !IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
+		initEReference(getTeam_Members(), this.getTeamMember(), null, "members", null, 8, 22, Team.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getTeam_Match(), this.getMatch(), null, "match", null, 1, 1, Team.class, IS_TRANSIENT, IS_VOLATILE, !IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
 
-		initEClass(teamMemberEClass, TeamMember.class, "TeamMember", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEClass(teamMemberEClass, TeamMember.class, "TeamMember", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getTeamMember_Team(), this.getTeam(), null, "team", null, 1, 1, TeamMember.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getTeamMember_Id(), ecorePackage.getEInt(), "id", null, 0, 1, TeamMember.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getTeamMember_IsSentOff(), ecorePackage.getEBoolean(), "isSentOff", null, 0, 1, TeamMember.class, IS_TRANSIENT, IS_VOLATILE, !IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
 		initEAttribute(getTeamMember_HasYellowCard(), ecorePackage.getEBoolean(), "hasYellowCard", null, 0, 1, TeamMember.class, IS_TRANSIENT, IS_VOLATILE, !IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
+		initEReference(getTeamMember_StaffRole(), this.getStaffMember(), null, "staffRole", null, 0, 1, TeamMember.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getTeamMember_PlayerRole(), this.getPlayer(), null, "playerRole", null, 0, 1, TeamMember.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(staffMemberEClass, StaffMember.class, "StaffMember", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEAttribute(getStaffMember_Role(), this.getRole(), "role", null, 0, 1, StaffMember.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getStaffMember_Role(), this.getStaffRole(), "role", null, 0, 1, StaffMember.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(eventEClass, Event.class, "Event", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getEvent_Time(), ecorePackage.getELong(), "time", null, 0, 1, Event.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getEvent_Type(), this.getEventType(), "type", null, 0, 1, Event.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getEvent_TeamMember(), this.getTeamMember(), null, "teamMember", null, 1, 1, Event.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-
-		initEClass(staffPlayerEClass, StaffPlayer.class, "StaffPlayer", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getEvent_Committer(), this.getTeamMember(), null, "committer", null, 1, 1, Event.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(penaltyEClass, Penalty.class, "Penalty", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getPenalty_IsSuccess(), ecorePackage.getEBoolean(), "isSuccess", null, 0, 1, Penalty.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(roleEClass, Role.class, "Role", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getRole_TeamMember(), this.getTeamMember(), null, "teamMember", null, 1, 1, Role.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		// Initialize enums and add enum literals
 		initEEnum(typeEEnum, Type.class, "Type");
@@ -835,14 +866,14 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 		addEEnumLiteral(ageGroupEEnum, AgeGroup.U15);
 		addEEnumLiteral(ageGroupEEnum, AgeGroup.U13);
 
-		initEEnum(roleEEnum, Role.class, "Role");
-		addEEnumLiteral(roleEEnum, Role.HEAD_COACH);
-		addEEnumLiteral(roleEEnum, Role.TECHNICAL_COACH);
-		addEEnumLiteral(roleEEnum, Role.GOALKEEPER_COACH);
-		addEEnumLiteral(roleEEnum, Role.COACH);
-		addEEnumLiteral(roleEEnum, Role.MEDICAL);
-		addEEnumLiteral(roleEEnum, Role.MASSEUR);
-		addEEnumLiteral(roleEEnum, Role.OTHER);
+		initEEnum(staffRoleEEnum, StaffRole.class, "StaffRole");
+		addEEnumLiteral(staffRoleEEnum, StaffRole.HEAD_COACH);
+		addEEnumLiteral(staffRoleEEnum, StaffRole.TECHNICAL_COACH);
+		addEEnumLiteral(staffRoleEEnum, StaffRole.GOALKEEPER_COACH);
+		addEEnumLiteral(staffRoleEEnum, StaffRole.COACH);
+		addEEnumLiteral(staffRoleEEnum, StaffRole.MEDICAL);
+		addEEnumLiteral(staffRoleEEnum, StaffRole.MASSEUR);
+		addEEnumLiteral(staffRoleEEnum, StaffRole.OTHER);
 
 		initEEnum(positionEEnum, Position.class, "Position");
 		addEEnumLiteral(positionEEnum, Position.GOALKEEPER);
@@ -893,6 +924,12 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 		   source, 
 		   new String[] {
 			 "patternFQN", "derived.goalCount"
+		   });		
+		addAnnotation
+		  (getTeam_Match(), 
+		   source, 
+		   new String[] {
+			 "patternFQN", "derived.match"
 		   });		
 		addAnnotation
 		  (getTeamMember_IsSentOff(), 

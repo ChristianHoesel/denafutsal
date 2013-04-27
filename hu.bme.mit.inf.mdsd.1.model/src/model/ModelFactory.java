@@ -58,6 +58,15 @@ public interface ModelFactory extends EFactory {
 	Team createTeam();
 
 	/**
+	 * Returns a new object of class '<em>Team Member</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Team Member</em>'.
+	 * @generated
+	 */
+	TeamMember createTeamMember();
+
+	/**
 	 * Returns a new object of class '<em>Staff Member</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -74,15 +83,6 @@ public interface ModelFactory extends EFactory {
 	 * @generated
 	 */
 	Event createEvent();
-
-	/**
-	 * Returns a new object of class '<em>Staff Player</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Staff Player</em>'.
-	 * @generated
-	 */
-	StaffPlayer createStaffPlayer();
 
 	/**
 	 * Returns a new object of class '<em>Penalty</em>'.

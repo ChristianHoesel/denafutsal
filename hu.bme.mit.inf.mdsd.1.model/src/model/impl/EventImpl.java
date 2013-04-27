@@ -24,7 +24,7 @@ import org.eclipse.emf.ecore.impl.EObjectImpl;
  * <ul>
  *   <li>{@link model.impl.EventImpl#getTime <em>Time</em>}</li>
  *   <li>{@link model.impl.EventImpl#getType <em>Type</em>}</li>
- *   <li>{@link model.impl.EventImpl#getTeamMember <em>Team Member</em>}</li>
+ *   <li>{@link model.impl.EventImpl#getCommitter <em>Committer</em>}</li>
  * </ul>
  * </p>
  *
@@ -72,14 +72,14 @@ public class EventImpl extends EObjectImpl implements Event {
 	protected EventType type = TYPE_EDEFAULT;
 
 	/**
-	 * The cached value of the '{@link #getTeamMember() <em>Team Member</em>}' reference.
+	 * The cached value of the '{@link #getCommitter() <em>Committer</em>}' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getTeamMember()
+	 * @see #getCommitter()
 	 * @generated
 	 * @ordered
 	 */
-	protected TeamMember teamMember;
+	protected TeamMember committer;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -147,16 +147,16 @@ public class EventImpl extends EObjectImpl implements Event {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public TeamMember getTeamMember() {
-		if (teamMember != null && teamMember.eIsProxy()) {
-			InternalEObject oldTeamMember = (InternalEObject)teamMember;
-			teamMember = (TeamMember)eResolveProxy(oldTeamMember);
-			if (teamMember != oldTeamMember) {
+	public TeamMember getCommitter() {
+		if (committer != null && committer.eIsProxy()) {
+			InternalEObject oldCommitter = (InternalEObject)committer;
+			committer = (TeamMember)eResolveProxy(oldCommitter);
+			if (committer != oldCommitter) {
 				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, ModelPackage.EVENT__TEAM_MEMBER, oldTeamMember, teamMember));
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, ModelPackage.EVENT__COMMITTER, oldCommitter, committer));
 			}
 		}
-		return teamMember;
+		return committer;
 	}
 
 	/**
@@ -164,8 +164,8 @@ public class EventImpl extends EObjectImpl implements Event {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public TeamMember basicGetTeamMember() {
-		return teamMember;
+	public TeamMember basicGetCommitter() {
+		return committer;
 	}
 
 	/**
@@ -173,11 +173,11 @@ public class EventImpl extends EObjectImpl implements Event {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setTeamMember(TeamMember newTeamMember) {
-		TeamMember oldTeamMember = teamMember;
-		teamMember = newTeamMember;
+	public void setCommitter(TeamMember newCommitter) {
+		TeamMember oldCommitter = committer;
+		committer = newCommitter;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, ModelPackage.EVENT__TEAM_MEMBER, oldTeamMember, teamMember));
+			eNotify(new ENotificationImpl(this, Notification.SET, ModelPackage.EVENT__COMMITTER, oldCommitter, committer));
 	}
 
 	/**
@@ -192,9 +192,9 @@ public class EventImpl extends EObjectImpl implements Event {
 				return getTime();
 			case ModelPackage.EVENT__TYPE:
 				return getType();
-			case ModelPackage.EVENT__TEAM_MEMBER:
-				if (resolve) return getTeamMember();
-				return basicGetTeamMember();
+			case ModelPackage.EVENT__COMMITTER:
+				if (resolve) return getCommitter();
+				return basicGetCommitter();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -213,8 +213,8 @@ public class EventImpl extends EObjectImpl implements Event {
 			case ModelPackage.EVENT__TYPE:
 				setType((EventType)newValue);
 				return;
-			case ModelPackage.EVENT__TEAM_MEMBER:
-				setTeamMember((TeamMember)newValue);
+			case ModelPackage.EVENT__COMMITTER:
+				setCommitter((TeamMember)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -234,8 +234,8 @@ public class EventImpl extends EObjectImpl implements Event {
 			case ModelPackage.EVENT__TYPE:
 				setType(TYPE_EDEFAULT);
 				return;
-			case ModelPackage.EVENT__TEAM_MEMBER:
-				setTeamMember((TeamMember)null);
+			case ModelPackage.EVENT__COMMITTER:
+				setCommitter((TeamMember)null);
 				return;
 		}
 		super.eUnset(featureID);
@@ -253,8 +253,8 @@ public class EventImpl extends EObjectImpl implements Event {
 				return time != TIME_EDEFAULT;
 			case ModelPackage.EVENT__TYPE:
 				return type != TYPE_EDEFAULT;
-			case ModelPackage.EVENT__TEAM_MEMBER:
-				return teamMember != null;
+			case ModelPackage.EVENT__COMMITTER:
+				return committer != null;
 		}
 		return super.eIsSet(featureID);
 	}

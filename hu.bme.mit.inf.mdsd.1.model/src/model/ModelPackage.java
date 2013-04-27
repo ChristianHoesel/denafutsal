@@ -57,96 +57,32 @@ public interface ModelPackage extends EPackage {
 	ModelPackage eINSTANCE = model.impl.ModelPackageImpl.init();
 
 	/**
-	 * The meta object id for the '{@link model.impl.PersonImpl <em>Person</em>}' class.
+	 * The meta object id for the '{@link model.impl.RoleImpl <em>Role</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see model.impl.PersonImpl
-	 * @see model.impl.ModelPackageImpl#getPerson()
+	 * @see model.impl.RoleImpl
+	 * @see model.impl.ModelPackageImpl#getRole()
 	 * @generated
 	 */
-	int PERSON = 2;
+	int ROLE = 8;
 
 	/**
-	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * The feature id for the '<em><b>Team Member</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int PERSON__NAME = 0;
+	int ROLE__TEAM_MEMBER = 0;
 
 	/**
-	 * The number of structural features of the '<em>Person</em>' class.
+	 * The number of structural features of the '<em>Role</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int PERSON_FEATURE_COUNT = 1;
-
-	/**
-	 * The meta object id for the '{@link model.impl.TeamMemberImpl <em>Team Member</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see model.impl.TeamMemberImpl
-	 * @see model.impl.ModelPackageImpl#getTeamMember()
-	 * @generated
-	 */
-	int TEAM_MEMBER = 4;
-
-	/**
-	 * The feature id for the '<em><b>Name</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int TEAM_MEMBER__NAME = PERSON__NAME;
-
-	/**
-	 * The feature id for the '<em><b>Team</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int TEAM_MEMBER__TEAM = PERSON_FEATURE_COUNT + 0;
-
-	/**
-	 * The feature id for the '<em><b>Id</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int TEAM_MEMBER__ID = PERSON_FEATURE_COUNT + 1;
-
-	/**
-	 * The feature id for the '<em><b>Is Sent Off</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int TEAM_MEMBER__IS_SENT_OFF = PERSON_FEATURE_COUNT + 2;
-
-	/**
-	 * The feature id for the '<em><b>Has Yellow Card</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int TEAM_MEMBER__HAS_YELLOW_CARD = PERSON_FEATURE_COUNT + 3;
-
-	/**
-	 * The number of structural features of the '<em>Team Member</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int TEAM_MEMBER_FEATURE_COUNT = PERSON_FEATURE_COUNT + 4;
+	int ROLE_FEATURE_COUNT = 1;
 
 	/**
 	 * The meta object id for the '{@link model.impl.PlayerImpl <em>Player</em>}' class.
@@ -159,49 +95,13 @@ public interface ModelPackage extends EPackage {
 	int PLAYER = 0;
 
 	/**
-	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * The feature id for the '<em><b>Team Member</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int PLAYER__NAME = TEAM_MEMBER__NAME;
-
-	/**
-	 * The feature id for the '<em><b>Team</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int PLAYER__TEAM = TEAM_MEMBER__TEAM;
-
-	/**
-	 * The feature id for the '<em><b>Id</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int PLAYER__ID = TEAM_MEMBER__ID;
-
-	/**
-	 * The feature id for the '<em><b>Is Sent Off</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int PLAYER__IS_SENT_OFF = TEAM_MEMBER__IS_SENT_OFF;
-
-	/**
-	 * The feature id for the '<em><b>Has Yellow Card</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int PLAYER__HAS_YELLOW_CARD = TEAM_MEMBER__HAS_YELLOW_CARD;
+	int PLAYER__TEAM_MEMBER = ROLE__TEAM_MEMBER;
 
 	/**
 	 * The feature id for the '<em><b>Position</b></em>' attribute.
@@ -210,7 +110,7 @@ public interface ModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int PLAYER__POSITION = TEAM_MEMBER_FEATURE_COUNT + 0;
+	int PLAYER__POSITION = ROLE_FEATURE_COUNT + 0;
 
 	/**
 	 * The feature id for the '<em><b>Shirt No</b></em>' attribute list.
@@ -219,7 +119,7 @@ public interface ModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int PLAYER__SHIRT_NO = TEAM_MEMBER_FEATURE_COUNT + 1;
+	int PLAYER__SHIRT_NO = ROLE_FEATURE_COUNT + 1;
 
 	/**
 	 * The number of structural features of the '<em>Player</em>' class.
@@ -228,7 +128,7 @@ public interface ModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int PLAYER_FEATURE_COUNT = TEAM_MEMBER_FEATURE_COUNT + 2;
+	int PLAYER_FEATURE_COUNT = ROLE_FEATURE_COUNT + 2;
 
 	/**
 	 * The meta object id for the '{@link model.impl.MatchImpl <em>Match</em>}' class.
@@ -322,40 +222,31 @@ public interface ModelPackage extends EPackage {
 	int MATCH__SUPERVISOR = 8;
 
 	/**
-	 * The feature id for the '<em><b>Teams</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int MATCH__TEAMS = 9;
-
-	/**
 	 * The feature id for the '<em><b>Events</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int MATCH__EVENTS = 10;
+	int MATCH__EVENTS = 9;
 
 	/**
-	 * The feature id for the '<em><b>Home</b></em>' reference.
+	 * The feature id for the '<em><b>Home</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int MATCH__HOME = 11;
+	int MATCH__HOME = 10;
 
 	/**
-	 * The feature id for the '<em><b>Visitor</b></em>' reference.
+	 * The feature id for the '<em><b>Visitor</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int MATCH__VISITOR = 12;
+	int MATCH__VISITOR = 11;
 
 	/**
 	 * The number of structural features of the '<em>Match</em>' class.
@@ -364,7 +255,35 @@ public interface ModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int MATCH_FEATURE_COUNT = 13;
+	int MATCH_FEATURE_COUNT = 12;
+
+	/**
+	 * The meta object id for the '{@link model.impl.PersonImpl <em>Person</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see model.impl.PersonImpl
+	 * @see model.impl.ModelPackageImpl#getPerson()
+	 * @generated
+	 */
+	int PERSON = 2;
+
+	/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PERSON__NAME = 0;
+
+	/**
+	 * The number of structural features of the '<em>Person</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PERSON_FEATURE_COUNT = 1;
 
 	/**
 	 * The meta object id for the '{@link model.impl.TeamImpl <em>Team</em>}' class.
@@ -386,7 +305,7 @@ public interface ModelPackage extends EPackage {
 	int TEAM__NAME = 0;
 
 	/**
-	 * The feature id for the '<em><b>Captain</b></em>' containment reference.
+	 * The feature id for the '<em><b>Captain</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -395,7 +314,7 @@ public interface ModelPackage extends EPackage {
 	int TEAM__CAPTAIN = 1;
 
 	/**
-	 * The feature id for the '<em><b>Starting Line</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Starting Line</b></em>' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -404,7 +323,7 @@ public interface ModelPackage extends EPackage {
 	int TEAM__STARTING_LINE = 2;
 
 	/**
-	 * The feature id for the '<em><b>Substitutes</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Substitutes</b></em>' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -422,22 +341,13 @@ public interface ModelPackage extends EPackage {
 	int TEAM__STAFF = 4;
 
 	/**
-	 * The feature id for the '<em><b>Match</b></em>' container reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int TEAM__MATCH = 5;
-
-	/**
 	 * The feature id for the '<em><b>Goals</b></em>' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int TEAM__GOALS = 6;
+	int TEAM__GOALS = 5;
 
 	/**
 	 * The feature id for the '<em><b>Penalties</b></em>' containment reference list.
@@ -446,7 +356,7 @@ public interface ModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TEAM__PENALTIES = 7;
+	int TEAM__PENALTIES = 6;
 
 	/**
 	 * The feature id for the '<em><b>Cards</b></em>' reference list.
@@ -455,7 +365,7 @@ public interface ModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TEAM__CARDS = 8;
+	int TEAM__CARDS = 7;
 
 	/**
 	 * The feature id for the '<em><b>Red Bans</b></em>' reference list.
@@ -464,7 +374,7 @@ public interface ModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TEAM__RED_BANS = 9;
+	int TEAM__RED_BANS = 8;
 
 	/**
 	 * The feature id for the '<em><b>Goal Count</b></em>' attribute.
@@ -473,7 +383,25 @@ public interface ModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TEAM__GOAL_COUNT = 10;
+	int TEAM__GOAL_COUNT = 9;
+
+	/**
+	 * The feature id for the '<em><b>Members</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TEAM__MEMBERS = 10;
+
+	/**
+	 * The feature id for the '<em><b>Match</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TEAM__MATCH = 11;
 
 	/**
 	 * The number of structural features of the '<em>Team</em>' class.
@@ -482,7 +410,89 @@ public interface ModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TEAM_FEATURE_COUNT = 11;
+	int TEAM_FEATURE_COUNT = 12;
+
+	/**
+	 * The meta object id for the '{@link model.impl.TeamMemberImpl <em>Team Member</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see model.impl.TeamMemberImpl
+	 * @see model.impl.ModelPackageImpl#getTeamMember()
+	 * @generated
+	 */
+	int TEAM_MEMBER = 4;
+
+	/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TEAM_MEMBER__NAME = PERSON__NAME;
+
+	/**
+	 * The feature id for the '<em><b>Team</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TEAM_MEMBER__TEAM = PERSON_FEATURE_COUNT + 0;
+
+	/**
+	 * The feature id for the '<em><b>Id</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TEAM_MEMBER__ID = PERSON_FEATURE_COUNT + 1;
+
+	/**
+	 * The feature id for the '<em><b>Is Sent Off</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TEAM_MEMBER__IS_SENT_OFF = PERSON_FEATURE_COUNT + 2;
+
+	/**
+	 * The feature id for the '<em><b>Has Yellow Card</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TEAM_MEMBER__HAS_YELLOW_CARD = PERSON_FEATURE_COUNT + 3;
+
+	/**
+	 * The feature id for the '<em><b>Staff Role</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TEAM_MEMBER__STAFF_ROLE = PERSON_FEATURE_COUNT + 4;
+
+	/**
+	 * The feature id for the '<em><b>Player Role</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TEAM_MEMBER__PLAYER_ROLE = PERSON_FEATURE_COUNT + 5;
+
+	/**
+	 * The number of structural features of the '<em>Team Member</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TEAM_MEMBER_FEATURE_COUNT = PERSON_FEATURE_COUNT + 6;
 
 	/**
 	 * The meta object id for the '{@link model.impl.StaffMemberImpl <em>Staff Member</em>}' class.
@@ -495,49 +505,13 @@ public interface ModelPackage extends EPackage {
 	int STAFF_MEMBER = 5;
 
 	/**
-	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * The feature id for the '<em><b>Team Member</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int STAFF_MEMBER__NAME = TEAM_MEMBER__NAME;
-
-	/**
-	 * The feature id for the '<em><b>Team</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int STAFF_MEMBER__TEAM = TEAM_MEMBER__TEAM;
-
-	/**
-	 * The feature id for the '<em><b>Id</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int STAFF_MEMBER__ID = TEAM_MEMBER__ID;
-
-	/**
-	 * The feature id for the '<em><b>Is Sent Off</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int STAFF_MEMBER__IS_SENT_OFF = TEAM_MEMBER__IS_SENT_OFF;
-
-	/**
-	 * The feature id for the '<em><b>Has Yellow Card</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int STAFF_MEMBER__HAS_YELLOW_CARD = TEAM_MEMBER__HAS_YELLOW_CARD;
+	int STAFF_MEMBER__TEAM_MEMBER = ROLE__TEAM_MEMBER;
 
 	/**
 	 * The feature id for the '<em><b>Role</b></em>' attribute.
@@ -546,7 +520,7 @@ public interface ModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int STAFF_MEMBER__ROLE = TEAM_MEMBER_FEATURE_COUNT + 0;
+	int STAFF_MEMBER__ROLE = ROLE_FEATURE_COUNT + 0;
 
 	/**
 	 * The number of structural features of the '<em>Staff Member</em>' class.
@@ -555,7 +529,7 @@ public interface ModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int STAFF_MEMBER_FEATURE_COUNT = TEAM_MEMBER_FEATURE_COUNT + 1;
+	int STAFF_MEMBER_FEATURE_COUNT = ROLE_FEATURE_COUNT + 1;
 
 	/**
 	 * The meta object id for the '{@link model.impl.EventImpl <em>Event</em>}' class.
@@ -586,13 +560,13 @@ public interface ModelPackage extends EPackage {
 	int EVENT__TYPE = 1;
 
 	/**
-	 * The feature id for the '<em><b>Team Member</b></em>' reference.
+	 * The feature id for the '<em><b>Committer</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int EVENT__TEAM_MEMBER = 2;
+	int EVENT__COMMITTER = 2;
 
 	/**
 	 * The number of structural features of the '<em>Event</em>' class.
@@ -604,97 +578,6 @@ public interface ModelPackage extends EPackage {
 	int EVENT_FEATURE_COUNT = 3;
 
 	/**
-	 * The meta object id for the '{@link model.impl.StaffPlayerImpl <em>Staff Player</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see model.impl.StaffPlayerImpl
-	 * @see model.impl.ModelPackageImpl#getStaffPlayer()
-	 * @generated
-	 */
-	int STAFF_PLAYER = 7;
-
-	/**
-	 * The feature id for the '<em><b>Name</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int STAFF_PLAYER__NAME = STAFF_MEMBER__NAME;
-
-	/**
-	 * The feature id for the '<em><b>Team</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int STAFF_PLAYER__TEAM = STAFF_MEMBER__TEAM;
-
-	/**
-	 * The feature id for the '<em><b>Id</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int STAFF_PLAYER__ID = STAFF_MEMBER__ID;
-
-	/**
-	 * The feature id for the '<em><b>Is Sent Off</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int STAFF_PLAYER__IS_SENT_OFF = STAFF_MEMBER__IS_SENT_OFF;
-
-	/**
-	 * The feature id for the '<em><b>Has Yellow Card</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int STAFF_PLAYER__HAS_YELLOW_CARD = STAFF_MEMBER__HAS_YELLOW_CARD;
-
-	/**
-	 * The feature id for the '<em><b>Role</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int STAFF_PLAYER__ROLE = STAFF_MEMBER__ROLE;
-
-	/**
-	 * The feature id for the '<em><b>Position</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int STAFF_PLAYER__POSITION = STAFF_MEMBER_FEATURE_COUNT + 0;
-
-	/**
-	 * The feature id for the '<em><b>Shirt No</b></em>' attribute list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int STAFF_PLAYER__SHIRT_NO = STAFF_MEMBER_FEATURE_COUNT + 1;
-
-	/**
-	 * The number of structural features of the '<em>Staff Player</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int STAFF_PLAYER_FEATURE_COUNT = STAFF_MEMBER_FEATURE_COUNT + 2;
-
-	/**
 	 * The meta object id for the '{@link model.impl.PenaltyImpl <em>Penalty</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -702,7 +585,7 @@ public interface ModelPackage extends EPackage {
 	 * @see model.impl.ModelPackageImpl#getPenalty()
 	 * @generated
 	 */
-	int PENALTY = 8;
+	int PENALTY = 7;
 
 	/**
 	 * The feature id for the '<em><b>Is Success</b></em>' attribute.
@@ -743,14 +626,14 @@ public interface ModelPackage extends EPackage {
 	int AGE_GROUP = 10;
 
 	/**
-	 * The meta object id for the '{@link model.Role <em>Role</em>}' enum.
+	 * The meta object id for the '{@link model.StaffRole <em>Staff Role</em>}' enum.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see model.Role
-	 * @see model.impl.ModelPackageImpl#getRole()
+	 * @see model.StaffRole
+	 * @see model.impl.ModelPackageImpl#getStaffRole()
 	 * @generated
 	 */
-	int ROLE = 11;
+	int STAFF_ROLE = 11;
 
 	/**
 	 * The meta object id for the '{@link model.Position <em>Position</em>}' enum.
@@ -915,17 +798,6 @@ public interface ModelPackage extends EPackage {
 	EReference getMatch_Supervisor();
 
 	/**
-	 * Returns the meta object for the containment reference list '{@link model.Match#getTeams <em>Teams</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference list '<em>Teams</em>'.
-	 * @see model.Match#getTeams()
-	 * @see #getMatch()
-	 * @generated
-	 */
-	EReference getMatch_Teams();
-
-	/**
 	 * Returns the meta object for the containment reference list '{@link model.Match#getEvents <em>Events</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -937,10 +809,10 @@ public interface ModelPackage extends EPackage {
 	EReference getMatch_Events();
 
 	/**
-	 * Returns the meta object for the reference '{@link model.Match#getHome <em>Home</em>}'.
+	 * Returns the meta object for the containment reference '{@link model.Match#getHome <em>Home</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference '<em>Home</em>'.
+	 * @return the meta object for the containment reference '<em>Home</em>'.
 	 * @see model.Match#getHome()
 	 * @see #getMatch()
 	 * @generated
@@ -948,10 +820,10 @@ public interface ModelPackage extends EPackage {
 	EReference getMatch_Home();
 
 	/**
-	 * Returns the meta object for the reference '{@link model.Match#getVisitor <em>Visitor</em>}'.
+	 * Returns the meta object for the containment reference '{@link model.Match#getVisitor <em>Visitor</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference '<em>Visitor</em>'.
+	 * @return the meta object for the containment reference '<em>Visitor</em>'.
 	 * @see model.Match#getVisitor()
 	 * @see #getMatch()
 	 * @generated
@@ -1001,10 +873,10 @@ public interface ModelPackage extends EPackage {
 	EAttribute getTeam_Name();
 
 	/**
-	 * Returns the meta object for the containment reference '{@link model.Team#getCaptain <em>Captain</em>}'.
+	 * Returns the meta object for the reference '{@link model.Team#getCaptain <em>Captain</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference '<em>Captain</em>'.
+	 * @return the meta object for the reference '<em>Captain</em>'.
 	 * @see model.Team#getCaptain()
 	 * @see #getTeam()
 	 * @generated
@@ -1012,10 +884,10 @@ public interface ModelPackage extends EPackage {
 	EReference getTeam_Captain();
 
 	/**
-	 * Returns the meta object for the containment reference list '{@link model.Team#getStartingLine <em>Starting Line</em>}'.
+	 * Returns the meta object for the reference list '{@link model.Team#getStartingLine <em>Starting Line</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference list '<em>Starting Line</em>'.
+	 * @return the meta object for the reference list '<em>Starting Line</em>'.
 	 * @see model.Team#getStartingLine()
 	 * @see #getTeam()
 	 * @generated
@@ -1023,10 +895,10 @@ public interface ModelPackage extends EPackage {
 	EReference getTeam_StartingLine();
 
 	/**
-	 * Returns the meta object for the containment reference list '{@link model.Team#getSubstitutes <em>Substitutes</em>}'.
+	 * Returns the meta object for the reference list '{@link model.Team#getSubstitutes <em>Substitutes</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference list '<em>Substitutes</em>'.
+	 * @return the meta object for the reference list '<em>Substitutes</em>'.
 	 * @see model.Team#getSubstitutes()
 	 * @see #getTeam()
 	 * @generated
@@ -1043,17 +915,6 @@ public interface ModelPackage extends EPackage {
 	 * @generated
 	 */
 	EReference getTeam_Staff();
-
-	/**
-	 * Returns the meta object for the container reference '{@link model.Team#getMatch <em>Match</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the container reference '<em>Match</em>'.
-	 * @see model.Team#getMatch()
-	 * @see #getTeam()
-	 * @generated
-	 */
-	EReference getTeam_Match();
 
 	/**
 	 * Returns the meta object for the reference list '{@link model.Team#getGoals <em>Goals</em>}'.
@@ -1111,6 +972,28 @@ public interface ModelPackage extends EPackage {
 	EAttribute getTeam_GoalCount();
 
 	/**
+	 * Returns the meta object for the containment reference list '{@link model.Team#getMembers <em>Members</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference list '<em>Members</em>'.
+	 * @see model.Team#getMembers()
+	 * @see #getTeam()
+	 * @generated
+	 */
+	EReference getTeam_Members();
+
+	/**
+	 * Returns the meta object for the reference '{@link model.Team#getMatch <em>Match</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference '<em>Match</em>'.
+	 * @see model.Team#getMatch()
+	 * @see #getTeam()
+	 * @generated
+	 */
+	EReference getTeam_Match();
+
+	/**
 	 * Returns the meta object for class '{@link model.TeamMember <em>Team Member</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1163,6 +1046,28 @@ public interface ModelPackage extends EPackage {
 	 * @generated
 	 */
 	EAttribute getTeamMember_HasYellowCard();
+
+	/**
+	 * Returns the meta object for the containment reference '{@link model.TeamMember#getStaffRole <em>Staff Role</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference '<em>Staff Role</em>'.
+	 * @see model.TeamMember#getStaffRole()
+	 * @see #getTeamMember()
+	 * @generated
+	 */
+	EReference getTeamMember_StaffRole();
+
+	/**
+	 * Returns the meta object for the containment reference '{@link model.TeamMember#getPlayerRole <em>Player Role</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference '<em>Player Role</em>'.
+	 * @see model.TeamMember#getPlayerRole()
+	 * @see #getTeamMember()
+	 * @generated
+	 */
+	EReference getTeamMember_PlayerRole();
 
 	/**
 	 * Returns the meta object for class '{@link model.StaffMember <em>Staff Member</em>}'.
@@ -1218,25 +1123,15 @@ public interface ModelPackage extends EPackage {
 	EAttribute getEvent_Type();
 
 	/**
-	 * Returns the meta object for the reference '{@link model.Event#getTeamMember <em>Team Member</em>}'.
+	 * Returns the meta object for the reference '{@link model.Event#getCommitter <em>Committer</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference '<em>Team Member</em>'.
-	 * @see model.Event#getTeamMember()
+	 * @return the meta object for the reference '<em>Committer</em>'.
+	 * @see model.Event#getCommitter()
 	 * @see #getEvent()
 	 * @generated
 	 */
-	EReference getEvent_TeamMember();
-
-	/**
-	 * Returns the meta object for class '{@link model.StaffPlayer <em>Staff Player</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Staff Player</em>'.
-	 * @see model.StaffPlayer
-	 * @generated
-	 */
-	EClass getStaffPlayer();
+	EReference getEvent_Committer();
 
 	/**
 	 * Returns the meta object for class '{@link model.Penalty <em>Penalty</em>}'.
@@ -1260,6 +1155,27 @@ public interface ModelPackage extends EPackage {
 	EAttribute getPenalty_IsSuccess();
 
 	/**
+	 * Returns the meta object for class '{@link model.Role <em>Role</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Role</em>'.
+	 * @see model.Role
+	 * @generated
+	 */
+	EClass getRole();
+
+	/**
+	 * Returns the meta object for the reference '{@link model.Role#getTeamMember <em>Team Member</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference '<em>Team Member</em>'.
+	 * @see model.Role#getTeamMember()
+	 * @see #getRole()
+	 * @generated
+	 */
+	EReference getRole_TeamMember();
+
+	/**
 	 * Returns the meta object for enum '{@link model.Type <em>Type</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1280,14 +1196,14 @@ public interface ModelPackage extends EPackage {
 	EEnum getAgeGroup();
 
 	/**
-	 * Returns the meta object for enum '{@link model.Role <em>Role</em>}'.
+	 * Returns the meta object for enum '{@link model.StaffRole <em>Staff Role</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for enum '<em>Role</em>'.
-	 * @see model.Role
+	 * @return the meta object for enum '<em>Staff Role</em>'.
+	 * @see model.StaffRole
 	 * @generated
 	 */
-	EEnum getRole();
+	EEnum getStaffRole();
 
 	/**
 	 * Returns the meta object for enum '{@link model.Position <em>Position</em>}'.
@@ -1440,14 +1356,6 @@ public interface ModelPackage extends EPackage {
 		EReference MATCH__SUPERVISOR = eINSTANCE.getMatch_Supervisor();
 
 		/**
-		 * The meta object literal for the '<em><b>Teams</b></em>' containment reference list feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference MATCH__TEAMS = eINSTANCE.getMatch_Teams();
-
-		/**
 		 * The meta object literal for the '<em><b>Events</b></em>' containment reference list feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -1456,7 +1364,7 @@ public interface ModelPackage extends EPackage {
 		EReference MATCH__EVENTS = eINSTANCE.getMatch_Events();
 
 		/**
-		 * The meta object literal for the '<em><b>Home</b></em>' reference feature.
+		 * The meta object literal for the '<em><b>Home</b></em>' containment reference feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
@@ -1464,7 +1372,7 @@ public interface ModelPackage extends EPackage {
 		EReference MATCH__HOME = eINSTANCE.getMatch_Home();
 
 		/**
-		 * The meta object literal for the '<em><b>Visitor</b></em>' reference feature.
+		 * The meta object literal for the '<em><b>Visitor</b></em>' containment reference feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
@@ -1508,7 +1416,7 @@ public interface ModelPackage extends EPackage {
 		EAttribute TEAM__NAME = eINSTANCE.getTeam_Name();
 
 		/**
-		 * The meta object literal for the '<em><b>Captain</b></em>' containment reference feature.
+		 * The meta object literal for the '<em><b>Captain</b></em>' reference feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
@@ -1516,7 +1424,7 @@ public interface ModelPackage extends EPackage {
 		EReference TEAM__CAPTAIN = eINSTANCE.getTeam_Captain();
 
 		/**
-		 * The meta object literal for the '<em><b>Starting Line</b></em>' containment reference list feature.
+		 * The meta object literal for the '<em><b>Starting Line</b></em>' reference list feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
@@ -1524,7 +1432,7 @@ public interface ModelPackage extends EPackage {
 		EReference TEAM__STARTING_LINE = eINSTANCE.getTeam_StartingLine();
 
 		/**
-		 * The meta object literal for the '<em><b>Substitutes</b></em>' containment reference list feature.
+		 * The meta object literal for the '<em><b>Substitutes</b></em>' reference list feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
@@ -1538,14 +1446,6 @@ public interface ModelPackage extends EPackage {
 		 * @generated
 		 */
 		EReference TEAM__STAFF = eINSTANCE.getTeam_Staff();
-
-		/**
-		 * The meta object literal for the '<em><b>Match</b></em>' container reference feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference TEAM__MATCH = eINSTANCE.getTeam_Match();
 
 		/**
 		 * The meta object literal for the '<em><b>Goals</b></em>' reference list feature.
@@ -1588,6 +1488,22 @@ public interface ModelPackage extends EPackage {
 		EAttribute TEAM__GOAL_COUNT = eINSTANCE.getTeam_GoalCount();
 
 		/**
+		 * The meta object literal for the '<em><b>Members</b></em>' containment reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference TEAM__MEMBERS = eINSTANCE.getTeam_Members();
+
+		/**
+		 * The meta object literal for the '<em><b>Match</b></em>' reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference TEAM__MATCH = eINSTANCE.getTeam_Match();
+
+		/**
 		 * The meta object literal for the '{@link model.impl.TeamMemberImpl <em>Team Member</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -1628,6 +1544,22 @@ public interface ModelPackage extends EPackage {
 		 * @generated
 		 */
 		EAttribute TEAM_MEMBER__HAS_YELLOW_CARD = eINSTANCE.getTeamMember_HasYellowCard();
+
+		/**
+		 * The meta object literal for the '<em><b>Staff Role</b></em>' containment reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference TEAM_MEMBER__STAFF_ROLE = eINSTANCE.getTeamMember_StaffRole();
+
+		/**
+		 * The meta object literal for the '<em><b>Player Role</b></em>' containment reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference TEAM_MEMBER__PLAYER_ROLE = eINSTANCE.getTeamMember_PlayerRole();
 
 		/**
 		 * The meta object literal for the '{@link model.impl.StaffMemberImpl <em>Staff Member</em>}' class.
@@ -1674,22 +1606,12 @@ public interface ModelPackage extends EPackage {
 		EAttribute EVENT__TYPE = eINSTANCE.getEvent_Type();
 
 		/**
-		 * The meta object literal for the '<em><b>Team Member</b></em>' reference feature.
+		 * The meta object literal for the '<em><b>Committer</b></em>' reference feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference EVENT__TEAM_MEMBER = eINSTANCE.getEvent_TeamMember();
-
-		/**
-		 * The meta object literal for the '{@link model.impl.StaffPlayerImpl <em>Staff Player</em>}' class.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @see model.impl.StaffPlayerImpl
-		 * @see model.impl.ModelPackageImpl#getStaffPlayer()
-		 * @generated
-		 */
-		EClass STAFF_PLAYER = eINSTANCE.getStaffPlayer();
+		EReference EVENT__COMMITTER = eINSTANCE.getEvent_Committer();
 
 		/**
 		 * The meta object literal for the '{@link model.impl.PenaltyImpl <em>Penalty</em>}' class.
@@ -1708,6 +1630,24 @@ public interface ModelPackage extends EPackage {
 		 * @generated
 		 */
 		EAttribute PENALTY__IS_SUCCESS = eINSTANCE.getPenalty_IsSuccess();
+
+		/**
+		 * The meta object literal for the '{@link model.impl.RoleImpl <em>Role</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see model.impl.RoleImpl
+		 * @see model.impl.ModelPackageImpl#getRole()
+		 * @generated
+		 */
+		EClass ROLE = eINSTANCE.getRole();
+
+		/**
+		 * The meta object literal for the '<em><b>Team Member</b></em>' reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference ROLE__TEAM_MEMBER = eINSTANCE.getRole_TeamMember();
 
 		/**
 		 * The meta object literal for the '{@link model.Type <em>Type</em>}' enum.
@@ -1730,14 +1670,14 @@ public interface ModelPackage extends EPackage {
 		EEnum AGE_GROUP = eINSTANCE.getAgeGroup();
 
 		/**
-		 * The meta object literal for the '{@link model.Role <em>Role</em>}' enum.
+		 * The meta object literal for the '{@link model.StaffRole <em>Staff Role</em>}' enum.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-		 * @see model.Role
-		 * @see model.impl.ModelPackageImpl#getRole()
+		 * @see model.StaffRole
+		 * @see model.impl.ModelPackageImpl#getStaffRole()
 		 * @generated
 		 */
-		EEnum ROLE = eINSTANCE.getRole();
+		EEnum STAFF_ROLE = eINSTANCE.getStaffRole();
 
 		/**
 		 * The meta object literal for the '{@link model.Position <em>Position</em>}' enum.

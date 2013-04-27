@@ -32,7 +32,7 @@ import org.eclipse.emf.ecore.util.EDataTypeUniqueEList;
  *
  * @generated
  */
-public class PlayerImpl extends TeamMemberImpl implements Player {
+public class PlayerImpl extends RoleImpl implements Player {
 	/**
 	 * The default value of the '{@link #getPosition() <em>Position</em>}' attribute.
 	 * <!-- begin-user-doc -->

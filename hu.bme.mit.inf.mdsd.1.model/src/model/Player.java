@@ -21,7 +21,7 @@ import org.eclipse.emf.common.util.EList;
  * @model
  * @generated
  */
-public interface Player extends TeamMember {
+public interface Player extends Role {
 	/**
 	 * Returns the value of the '<em><b>Position</b></em>' attribute.
 	 * The literals are from the enumeration {@link model.Position}.

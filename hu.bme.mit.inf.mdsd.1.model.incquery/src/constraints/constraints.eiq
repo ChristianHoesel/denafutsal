@@ -1,0 +1,239 @@
+package constraints
+
+import "http://model/1.0"
+
+//Based on model
+
+@Constraint(
+	location = Team,
+	severity = "error",
+	message = "$Team$'s captain plays in another team."
+)
+pattern captainIsNotInTheTeam(Team : Team) {
+	Team.captain.teamMember(Team, c);
+	TeamMember.team(c, Team2);
+	Team != Team2;
+}
+
+@Constraint(
+	location = Sub,
+	severity = "error",
+	message = "$Sub$ is a substitute in $Team$, but plays in another team."
+)
+pattern substitutesAreNotInTheTeam(Team : Team, Sub : TeamMember) {
+	Team.substitutes.teamMember(Team, Sub);
+	TeamMember.team(Sub, Team2);
+	Team != Team2;
+}
+
+@Constraint(
+	location = Starter,
+	severity = "error",
+	message = "$Starter$ is in the starting line of $Team$, but plays in another team."
+)
+pattern startingPlayersAreNotInTheTeam(Team : Team, Starter : TeamMember) {
+	Team.startingLine.teamMember(Team, Starter);
+	TeamMember.team(Starter, Team2);
+	Team != Team2;
+}
+
+@Constraint(
+	location = StaffMember,
+	severity = "error",
+	message = "$StaffMember$ is in the staff of $Team$, but plays in another team."
+)
+pattern staffsAreNotInTheTeam(Team : Team, StaffMember : TeamMember) {
+	Team.staff.teamMember(Team, StaffMember);
+	TeamMember.team(StaffMember, Team2);
+	Team != Team2;
+}
+
+@Constraint(
+	location = Starter,
+	severity = "error",
+	message = "$Starter$ is already in the starting line of $Team$."
+)
+pattern startersAreTwice(Team : Team, Starter : TeamMember) {
+	Team.startingLine.teamMember(Team, Starter);
+	Team.startingLine.teamMember(Team, other);
+	Starter == other;
+}
+
+@Constraint(
+	location = Sub,
+	severity = "error",
+	message = "$Sub$ is already in the substitutes of $Team$."
+)
+pattern subsAreTwice(Team : Team, Sub : TeamMember) {
+	Team.staff.teamMember(Team, Sub);
+	Team.staff.teamMember(Team, other);
+	Sub == other;
+}
+
+@Constraint(
+	location = StaffMember,
+	severity = "error",
+	message = "$StaffMember$ is already in the staff of $Team$."
+)
+pattern staffsAreTwice(Team : Team, StaffMember : TeamMember) {
+	Team.staff.teamMember(Team, StaffMember);
+	Team.staff.teamMember(Team, other);
+	StaffMember == other;
+}
+
+@Constraint(
+	location = TeamMember,
+	severity = "error",
+	message = "$TeamMember$ is in the $Team$, but doesn't have any role."
+)
+pattern teamMemberHasNoRoleInTeam(Team : Team, TeamMember : TeamMember) {
+	TeamMember.team(TeamMember, Team);
+	neg find teamMemberHasRoleInTeam(Team, TeamMember);
+}
+
+private pattern teamMemberHasRoleInTeam(Team : Team, TeamMember : TeamMember) {
+	Team.startingLine.teamMember(Team,TeamMember);
+} or {
+	Team.substitutes.teamMember(Team,TeamMember);
+} or {
+	Team.staff.teamMember(Team,TeamMember);
+}
+
+
+//Based on rules
+
+@Constraint(
+	location = Team,
+	severity = "error",
+	message = "$Team$ doesn't have a unique name."
+)
+pattern notUniqueTeamNames(Team : Team) {
+	Team.name(Team, name1);
+	Team.name(team2, name2);
+	Team != team2;
+	name1 == name2;
+}
+
+@Constraint(
+	location = Team,
+	severity = "error",
+	message = "$Team$'s starting line is not valid."
+)
+pattern startingLineCombination(Team : Team) {
+	M == count find constraints.goalkeepersInStartingLine(Team, _);
+	N == count find constraints.fieldplayersInStartingLine(Team, _);
+	check (	(M as Integer) == 1	);
+	check (	(N as Integer) == 4	);
+}
+
+private pattern goalkeepersInStartingLine(Team : Team, Gk : TeamMember) {
+	Team.startingLine.teamMember(Team, Gk);
+	Player.teamMember(player, Gk);
+	Player.position(player, ::Goalkeeper);
+}
+
+private pattern fieldplayersInStartingLine(Team : Team, Pl : TeamMember) {
+	Team.startingLine.teamMember(Team, Pl);
+	Player.teamMember(player, Pl);
+	Player.position(player, ::FieldPlayer);
+}
+
+@Constraint(
+	location = TeamMember,
+	severity = "error",
+	message = "$TeamMember$ doesn't have a unique id."
+)
+pattern notUniqueId(TeamMember : TeamMember) {
+	TeamMember.id(TeamMember, id1);
+	TeamMember.id(t2, id2);
+	
+	t2 != TeamMember;
+	id1 == id2;
+}
+
+@Constraint(
+	location = TeamMember,
+	severity = "error",
+	message = "$TeamMember$ has more than one red card."
+)
+pattern moreRedCards(TeamMember : TeamMember) {
+	M == count find redCards(TeamMember);
+	check((M as Integer) > 1);
+}
+
+private pattern redCards(TeamMember : TeamMember) {
+	Event.committer(e, TeamMember);
+	Event.type(e, ::RedCard);
+} or {
+	Event.committer(e, TeamMember);
+	Event.type(e, ::RedCardWithBan);
+}
+
+@Constraint(
+	location = TeamMember,
+	severity = "error",
+	message = "$TeamMember$ has more than one yellow card."
+)
+pattern moreYellowCards(TeamMember : TeamMember) {
+	M == count find yellowCards(TeamMember);
+	check((M as Integer) > 1);
+}
+
+private pattern yellowCards(TeamMember : TeamMember) {
+	Event.committer(e, TeamMember);
+	Event.type(e, ::YellowCard);
+}
+
+@Constraint(
+	location = TeamMember,
+	severity = "error",
+	message = "$TeamMember$ has not a unique shirt number in $Team$"
+)
+pattern notUniqueShirtNo(TeamMember : TeamMember, Team : Team) {
+	TeamMember.playerRole(TeamMember, pl1);
+	TeamMember.playerRole(_, pl2);
+	Player.teamMember.team(pl1, Team);
+	Player.teamMember.team(pl2, Team);
+	Player.shirtNo(pl1, s1);
+	Player.shirtNo(pl2, s2);
+	
+	pl1 != pl2;
+	s1 == s2;
+}
+
+@Constraint(
+	location = TeamMember,
+	severity = "error",
+	message = "$TeamMember$ has illegal event in $Team$"
+)
+pattern teamMemberHasIllegalEvent(TeamMember : TeamMember, Team : Team) {
+	TeamMember.team(TeamMember, Team);
+	neg find playerEvents(TeamMember, Team);
+}
+
+private pattern playerEvents(TeamMember : TeamMember, Team : Team) {
+	Player.teamMember(_, TeamMember);
+	TeamMember.team(TeamMember, Team);
+	Event.committer(e, TeamMember);
+	Event.type(e, ::Goal);
+} or {
+	Player.teamMember(_, TeamMember);
+	TeamMember.team(TeamMember, Team);
+	Event.committer(e, TeamMember);
+	Event.type(e, ::YellowCard);	
+} or {
+	Player.teamMember(_, TeamMember);
+	TeamMember.team(TeamMember, Team);
+	Event.committer(e, TeamMember);
+	Event.type(e, ::RedCardWithBan);
+}
+
+pattern tooMuchBan(Team : Team) {
+	Event.type(e1, ::RedCardWithBan);
+	Event.type(e2, ::RedCardWithBan);
+	Event.type(e3, ::RedCardWithBan);
+	
+	Event.committer.team(e1, Team);
+	Event.committer.team(e2, Team);
+	Event.committer.team(e3, Team);	
+} 

@@ -14,7 +14,7 @@ import org.eclipse.emf.ecore.EObject;
  * <ul>
  *   <li>{@link model.Event#getTime <em>Time</em>}</li>
  *   <li>{@link model.Event#getType <em>Type</em>}</li>
- *   <li>{@link model.Event#getTeamMember <em>Team Member</em>}</li>
+ *   <li>{@link model.Event#getCommitter <em>Committer</em>}</li>
  * </ul>
  * </p>
  *
@@ -79,29 +79,29 @@ public interface Event extends EObject {
 	void setType(EventType value);
 
 	/**
-	 * Returns the value of the '<em><b>Team Member</b></em>' reference.
+	 * Returns the value of the '<em><b>Committer</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Team Member</em>' reference isn't clear,
+	 * If the meaning of the '<em>Committer</em>' reference isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Team Member</em>' reference.
-	 * @see #setTeamMember(TeamMember)
-	 * @see model.ModelPackage#getEvent_TeamMember()
+	 * @return the value of the '<em>Committer</em>' reference.
+	 * @see #setCommitter(TeamMember)
+	 * @see model.ModelPackage#getEvent_Committer()
 	 * @model required="true"
 	 * @generated
 	 */
-	TeamMember getTeamMember();
+	TeamMember getCommitter();
 
 	/**
-	 * Sets the value of the '{@link model.Event#getTeamMember <em>Team Member</em>}' reference.
+	 * Sets the value of the '{@link model.Event#getCommitter <em>Committer</em>}' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Team Member</em>' reference.
-	 * @see #getTeamMember()
+	 * @param value the new value of the '<em>Committer</em>' reference.
+	 * @see #getCommitter()
 	 * @generated
 	 */
-	void setTeamMember(TeamMember value);
+	void setCommitter(TeamMember value);
 
 } // Event
