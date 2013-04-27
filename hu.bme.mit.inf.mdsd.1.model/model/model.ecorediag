@@ -614,7 +614,7 @@
     </children>
     <styles xmi:type="notation:ConnectorStyle" xmi:id="_IXdiQZB9EeKbzokLmglrpg" lineColor="0"/>
     <styles xmi:type="notation:FontStyle" xmi:id="_IXdiQpB9EeKbzokLmglrpg" fontColor="4210752" fontName="Segoe UI" fontHeight="10"/>
-    <element xmi:type="ecore:EReference" href="model.ecore#//Match/home"/>
+    <element xmi:type="ecore:EReference" href="model.ecore#//Match/Home"/>
     <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_IXdiQ5B9EeKbzokLmglrpg" points="[0, 11, -91, -242]$[0, 134, -91, -119]$[82, 242, -9, -11]"/>
     <sourceAnchor xmi:type="notation:IdentityAnchor" xmi:id="_Ic4NwJB9EeKbzokLmglrpg" id="(0.8385093167701864,0.907563025210084)"/>
     <targetAnchor xmi:type="notation:IdentityAnchor" xmi:id="_Ic4NwZB9EeKbzokLmglrpg" id="(0.24444444444444444,0.17647058823529413)"/>
@@ -628,7 +628,7 @@
     </children>
     <styles xmi:type="notation:ConnectorStyle" xmi:id="_Lch1wZB9EeKbzokLmglrpg" lineColor="0"/>
     <styles xmi:type="notation:FontStyle" xmi:id="_Lch1wpB9EeKbzokLmglrpg" fontColor="4210752" fontName="Segoe UI" fontHeight="10"/>
-    <element xmi:type="ecore:EReference" href="model.ecore#//Match/visitor"/>
+    <element xmi:type="ecore:EReference" href="model.ecore#//Match/Visitor"/>
     <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_Lch1w5B9EeKbzokLmglrpg" points="[9, 11, -77, -236]$[86, 98, 0, -149]$[86, 242, 0, -5]"/>
     <sourceAnchor xmi:type="notation:IdentityAnchor" xmi:id="_Lc3M8JB9EeKbzokLmglrpg" id="(0.84472049689441,0.907563025210084)"/>
     <targetAnchor xmi:type="notation:IdentityAnchor" xmi:id="_Lc30AJB9EeKbzokLmglrpg" id="(0.21481481481481482,0.08823529411764706)"/>
@@ -695,7 +695,7 @@
     </children>
     <styles xmi:type="notation:ConnectorStyle" xmi:id="_BKrTEZJMEeKTlPYOJOUnWg" lineColor="4210752"/>
     <styles xmi:type="notation:FontStyle" xmi:id="_BKrTEpJMEeKTlPYOJOUnWg" fontColor="4210752" fontName="Segoe UI" fontHeight="10"/>
-    <element xmi:type="ecore:EReference" href="model.ecore#//Team/members"/>
+    <element xmi:type="ecore:EReference" href="model.ecore#//Team/Members"/>
     <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_BKrTE5JMEeKTlPYOJOUnWg" points="[-1, -5, 118, 2]$[-117, 18, 2, 25]"/>
     <sourceAnchor xmi:type="notation:IdentityAnchor" xmi:id="_BKuWYJJMEeKTlPYOJOUnWg" id="(0.014814814814814815,0.8088235294117647)"/>
     <targetAnchor xmi:type="notation:IdentityAnchor" xmi:id="_BKuWYZJMEeKTlPYOJOUnWg" id="(0.945054945054945,0.7058823529411765)"/>

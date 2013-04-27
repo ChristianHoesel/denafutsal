@@ -30,7 +30,8 @@ import org.eclipse.incquery.runtime.rete.tuple.Tuple;
  * )
  * pattern teamMemberHasIllegalEvent(TeamMember : TeamMember, Team : Team) {
  * 	TeamMember.team(TeamMember, Team);
- * 	neg find playerEvents(TeamMember, Team);
+ * 	find playerEvents(TeamMember, Team);
+ * 	neg find checkPlayerMember(TeamMember);	
  * }
  * </pre></code>
  * 

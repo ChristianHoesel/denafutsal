@@ -305,7 +305,7 @@ public interface ModelPackage extends EPackage {
 	int TEAM__NAME = 0;
 
 	/**
-	 * The feature id for the '<em><b>Captain</b></em>' reference.
+	 * The feature id for the '<em><b>Captain</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -314,7 +314,7 @@ public interface ModelPackage extends EPackage {
 	int TEAM__CAPTAIN = 1;
 
 	/**
-	 * The feature id for the '<em><b>Starting Line</b></em>' reference list.
+	 * The feature id for the '<em><b>Starting Line</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -323,7 +323,7 @@ public interface ModelPackage extends EPackage {
 	int TEAM__STARTING_LINE = 2;
 
 	/**
-	 * The feature id for the '<em><b>Substitutes</b></em>' reference list.
+	 * The feature id for the '<em><b>Substitutes</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -873,10 +873,10 @@ public interface ModelPackage extends EPackage {
 	EAttribute getTeam_Name();
 
 	/**
-	 * Returns the meta object for the reference '{@link model.Team#getCaptain <em>Captain</em>}'.
+	 * Returns the meta object for the containment reference '{@link model.Team#getCaptain <em>Captain</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference '<em>Captain</em>'.
+	 * @return the meta object for the containment reference '<em>Captain</em>'.
 	 * @see model.Team#getCaptain()
 	 * @see #getTeam()
 	 * @generated
@@ -884,10 +884,10 @@ public interface ModelPackage extends EPackage {
 	EReference getTeam_Captain();
 
 	/**
-	 * Returns the meta object for the reference list '{@link model.Team#getStartingLine <em>Starting Line</em>}'.
+	 * Returns the meta object for the containment reference list '{@link model.Team#getStartingLine <em>Starting Line</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference list '<em>Starting Line</em>'.
+	 * @return the meta object for the containment reference list '<em>Starting Line</em>'.
 	 * @see model.Team#getStartingLine()
 	 * @see #getTeam()
 	 * @generated
@@ -895,10 +895,10 @@ public interface ModelPackage extends EPackage {
 	EReference getTeam_StartingLine();
 
 	/**
-	 * Returns the meta object for the reference list '{@link model.Team#getSubstitutes <em>Substitutes</em>}'.
+	 * Returns the meta object for the containment reference list '{@link model.Team#getSubstitutes <em>Substitutes</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference list '<em>Substitutes</em>'.
+	 * @return the meta object for the containment reference list '<em>Substitutes</em>'.
 	 * @see model.Team#getSubstitutes()
 	 * @see #getTeam()
 	 * @generated
@@ -1416,7 +1416,7 @@ public interface ModelPackage extends EPackage {
 		EAttribute TEAM__NAME = eINSTANCE.getTeam_Name();
 
 		/**
-		 * The meta object literal for the '<em><b>Captain</b></em>' reference feature.
+		 * The meta object literal for the '<em><b>Captain</b></em>' containment reference feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
@@ -1424,7 +1424,7 @@ public interface ModelPackage extends EPackage {
 		EReference TEAM__CAPTAIN = eINSTANCE.getTeam_Captain();
 
 		/**
-		 * The meta object literal for the '<em><b>Starting Line</b></em>' reference list feature.
+		 * The meta object literal for the '<em><b>Starting Line</b></em>' containment reference list feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
@@ -1432,7 +1432,7 @@ public interface ModelPackage extends EPackage {
 		EReference TEAM__STARTING_LINE = eINSTANCE.getTeam_StartingLine();
 
 		/**
-		 * The meta object literal for the '<em><b>Substitutes</b></em>' reference list feature.
+		 * The meta object literal for the '<em><b>Substitutes</b></em>' containment reference list feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated

@@ -47,9 +47,9 @@
         eType="#//Person" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="events" upperBound="-1"
         eType="#//Event" containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="home" lowerBound="1" eType="#//Team"
+    <eStructuralFeatures xsi:type="ecore:EReference" name="Home" lowerBound="1" eType="#//Team"
         containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="visitor" lowerBound="1"
+    <eStructuralFeatures xsi:type="ecore:EReference" name="Visitor" lowerBound="1"
         eType="#//Team" containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Person">
@@ -58,11 +58,11 @@
   <eClassifiers xsi:type="ecore:EClass" name="Team">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="captain" lowerBound="1"
-        eType="#//Player"/>
+        eType="#//Player" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="startingLine" lowerBound="5"
-        upperBound="5" eType="#//Player"/>
+        upperBound="5" eType="#//Player" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="substitutes" lowerBound="3"
-        upperBound="7" eType="#//Player"/>
+        upperBound="7" eType="#//Player" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="staff" upperBound="10"
         eType="#//StaffMember" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="goals" upperBound="-1"
@@ -103,10 +103,10 @@
         <details key="patternFQN" value="derived.goalCount"/>
       </eAnnotations>
     </eStructuralFeatures>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="members" lowerBound="8"
+    <eStructuralFeatures xsi:type="ecore:EReference" name="Members" lowerBound="8"
         upperBound="22" eType="#//TeamMember" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="match" lowerBound="1" eType="#//Match"
-        changeable="false" volatile="true" transient="true" derived="true">
+        changeable="false" volatile="true" transient="true" unsettable="true" derived="true">
       <eAnnotations source="org.eclipse.viatra2.emf.incquery.derived.feature">
         <details key="patternFQN" value="derived.match"/>
       </eAnnotations>

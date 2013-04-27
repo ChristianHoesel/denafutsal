@@ -61,33 +61,33 @@ public interface Team extends EObject {
 	void setName(String value);
 
 	/**
-	 * Returns the value of the '<em><b>Captain</b></em>' reference.
+	 * Returns the value of the '<em><b>Captain</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Captain</em>' reference isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Captain</em>' reference.
+	 * @return the value of the '<em>Captain</em>' containment reference.
 	 * @see #setCaptain(Player)
 	 * @see model.ModelPackage#getTeam_Captain()
-	 * @model required="true"
+	 * @model containment="true" required="true"
 	 * @generated
 	 */
 	Player getCaptain();
 
 	/**
-	 * Sets the value of the '{@link model.Team#getCaptain <em>Captain</em>}' reference.
+	 * Sets the value of the '{@link model.Team#getCaptain <em>Captain</em>}' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Captain</em>' reference.
+	 * @param value the new value of the '<em>Captain</em>' containment reference.
 	 * @see #getCaptain()
 	 * @generated
 	 */
 	void setCaptain(Player value);
 
 	/**
-	 * Returns the value of the '<em><b>Starting Line</b></em>' reference list.
+	 * Returns the value of the '<em><b>Starting Line</b></em>' containment reference list.
 	 * The list contents are of type {@link model.Player}.
 	 * <!-- begin-user-doc -->
 	 * <p>
@@ -95,15 +95,15 @@ public interface Team extends EObject {
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Starting Line</em>' reference list.
+	 * @return the value of the '<em>Starting Line</em>' containment reference list.
 	 * @see model.ModelPackage#getTeam_StartingLine()
-	 * @model lower="5" upper="5"
+	 * @model containment="true" lower="5" upper="5"
 	 * @generated
 	 */
 	EList<Player> getStartingLine();
 
 	/**
-	 * Returns the value of the '<em><b>Substitutes</b></em>' reference list.
+	 * Returns the value of the '<em><b>Substitutes</b></em>' containment reference list.
 	 * The list contents are of type {@link model.Player}.
 	 * <!-- begin-user-doc -->
 	 * <p>
@@ -111,9 +111,9 @@ public interface Team extends EObject {
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Substitutes</em>' reference list.
+	 * @return the value of the '<em>Substitutes</em>' containment reference list.
 	 * @see model.ModelPackage#getTeam_Substitutes()
-	 * @model lower="3" upper="7"
+	 * @model containment="true" lower="3" upper="7"
 	 * @generated
 	 */
 	EList<Player> getSubstitutes();
@@ -147,6 +147,7 @@ public interface Team extends EObject {
 	 * @see model.ModelPackage#getTeam_Goals()
 	 * @model transient="true" changeable="false" volatile="true" derived="true"
 	 *        annotation="org.eclipse.viatra2.emf.incquery.derived.feature patternFQN='derived.goals'"
+	 *        annotation="org.eclipse.incquery.querybasedfeature patternFQN='derived.goals'"
 	 * @generated
 	 */
 	EList<Event> getGoals();
@@ -180,6 +181,7 @@ public interface Team extends EObject {
 	 * @see model.ModelPackage#getTeam_Cards()
 	 * @model transient="true" changeable="false" volatile="true" derived="true"
 	 *        annotation="org.eclipse.viatra2.emf.incquery.derived.feature patternFQN='derived.cards'"
+	 *        annotation="org.eclipse.incquery.querybasedfeature patternFQN='derived.cards'"
 	 * @generated
 	 */
 	EList<Event> getCards();
@@ -197,6 +199,7 @@ public interface Team extends EObject {
 	 * @see model.ModelPackage#getTeam_RedBans()
 	 * @model transient="true" changeable="false" volatile="true" derived="true"
 	 *        annotation="org.eclipse.viatra2.emf.incquery.derived.feature patternFQN='derived.redBans'"
+	 *        annotation="org.eclipse.incquery.querybasedfeature patternFQN='derived.redBans'"
 	 * @generated
 	 */
 	EList<Event> getRedBans();
@@ -213,6 +216,7 @@ public interface Team extends EObject {
 	 * @see model.ModelPackage#getTeam_GoalCount()
 	 * @model transient="true" changeable="false" volatile="true" derived="true"
 	 *        annotation="org.eclipse.viatra2.emf.incquery.derived.feature patternFQN='derived.goalCount'"
+	 *        annotation="org.eclipse.incquery.querybasedfeature patternFQN='derived.goalCount'"
 	 * @generated
 	 */
 	int getGoalCount();
@@ -242,11 +246,23 @@ public interface Team extends EObject {
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Match</em>' reference.
+	 * @see #isSetMatch()
 	 * @see model.ModelPackage#getTeam_Match()
-	 * @model required="true" transient="true" changeable="false" volatile="true" derived="true"
+	 * @model unsettable="true" required="true" transient="true" changeable="false" volatile="true" derived="true"
 	 *        annotation="org.eclipse.viatra2.emf.incquery.derived.feature patternFQN='derived.match'"
+	 *        annotation="org.eclipse.incquery.querybasedfeature patternFQN='derived.match'"
 	 * @generated
 	 */
 	Match getMatch();
+
+	/**
+	 * Returns whether the value of the '{@link model.Team#getMatch <em>Match</em>}' reference is set.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return whether the value of the '<em>Match</em>' reference is set.
+	 * @see #getMatch()
+	 * @generated
+	 */
+	boolean isSetMatch();
 
 } // Team

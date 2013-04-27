@@ -77,7 +77,7 @@ public class TeamImpl extends EObjectImpl implements Team {
 	protected String name = NAME_EDEFAULT;
 
 	/**
-	 * The cached value of the '{@link #getCaptain() <em>Captain</em>}' reference.
+	 * The cached value of the '{@link #getCaptain() <em>Captain</em>}' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @see #getCaptain()
@@ -87,7 +87,7 @@ public class TeamImpl extends EObjectImpl implements Team {
 	protected Player captain;
 
 	/**
-	 * The cached value of the '{@link #getStartingLine() <em>Starting Line</em>}' reference list.
+	 * The cached value of the '{@link #getStartingLine() <em>Starting Line</em>}' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @see #getStartingLine()
@@ -97,7 +97,7 @@ public class TeamImpl extends EObjectImpl implements Team {
 	protected EList<Player> startingLine;
 
 	/**
-	 * The cached value of the '{@link #getSubstitutes() <em>Substitutes</em>}' reference list.
+	 * The cached value of the '{@link #getSubstitutes() <em>Substitutes</em>}' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @see #getSubstitutes()
@@ -192,14 +192,6 @@ public class TeamImpl extends EObjectImpl implements Team {
 	 * @generated
 	 */
 	public Player getCaptain() {
-		if (captain != null && captain.eIsProxy()) {
-			InternalEObject oldCaptain = (InternalEObject)captain;
-			captain = (Player)eResolveProxy(oldCaptain);
-			if (captain != oldCaptain) {
-				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, ModelPackage.TEAM__CAPTAIN, oldCaptain, captain));
-			}
-		}
 		return captain;
 	}
 
@@ -208,8 +200,14 @@ public class TeamImpl extends EObjectImpl implements Team {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public Player basicGetCaptain() {
-		return captain;
+	public NotificationChain basicSetCaptain(Player newCaptain, NotificationChain msgs) {
+		Player oldCaptain = captain;
+		captain = newCaptain;
+		if (eNotificationRequired()) {
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, ModelPackage.TEAM__CAPTAIN, oldCaptain, newCaptain);
+			if (msgs == null) msgs = notification; else msgs.add(notification);
+		}
+		return msgs;
 	}
 
 	/**
@@ -218,10 +216,17 @@ public class TeamImpl extends EObjectImpl implements Team {
 	 * @generated
 	 */
 	public void setCaptain(Player newCaptain) {
-		Player oldCaptain = captain;
-		captain = newCaptain;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, ModelPackage.TEAM__CAPTAIN, oldCaptain, captain));
+		if (newCaptain != captain) {
+			NotificationChain msgs = null;
+			if (captain != null)
+				msgs = ((InternalEObject)captain).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - ModelPackage.TEAM__CAPTAIN, null, msgs);
+			if (newCaptain != null)
+				msgs = ((InternalEObject)newCaptain).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - ModelPackage.TEAM__CAPTAIN, null, msgs);
+			msgs = basicSetCaptain(newCaptain, msgs);
+			if (msgs != null) msgs.dispatch();
+		}
+		else if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, ModelPackage.TEAM__CAPTAIN, newCaptain, newCaptain));
 	}
 
 	/**
@@ -231,7 +236,7 @@ public class TeamImpl extends EObjectImpl implements Team {
 	 */
 	public EList<Player> getStartingLine() {
 		if (startingLine == null) {
-			startingLine = new EObjectResolvingEList<Player>(Player.class, this, ModelPackage.TEAM__STARTING_LINE);
+			startingLine = new EObjectContainmentEList<Player>(Player.class, this, ModelPackage.TEAM__STARTING_LINE);
 		}
 		return startingLine;
 	}
@@ -243,7 +248,7 @@ public class TeamImpl extends EObjectImpl implements Team {
 	 */
 	public EList<Player> getSubstitutes() {
 		if (substitutes == null) {
-			substitutes = new EObjectResolvingEList<Player>(Player.class, this, ModelPackage.TEAM__SUBSTITUTES);
+			substitutes = new EObjectContainmentEList<Player>(Player.class, this, ModelPackage.TEAM__SUBSTITUTES);
 		}
 		return substitutes;
 	}
@@ -364,6 +369,12 @@ public class TeamImpl extends EObjectImpl implements Team {
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
+			case ModelPackage.TEAM__CAPTAIN:
+				return basicSetCaptain(null, msgs);
+			case ModelPackage.TEAM__STARTING_LINE:
+				return ((InternalEList<?>)getStartingLine()).basicRemove(otherEnd, msgs);
+			case ModelPackage.TEAM__SUBSTITUTES:
+				return ((InternalEList<?>)getSubstitutes()).basicRemove(otherEnd, msgs);
 			case ModelPackage.TEAM__STAFF:
 				return ((InternalEList<?>)getStaff()).basicRemove(otherEnd, msgs);
 			case ModelPackage.TEAM__PENALTIES:
@@ -385,8 +396,7 @@ public class TeamImpl extends EObjectImpl implements Team {
 			case ModelPackage.TEAM__NAME:
 				return getName();
 			case ModelPackage.TEAM__CAPTAIN:
-				if (resolve) return getCaptain();
-				return basicGetCaptain();
+				return getCaptain();
 			case ModelPackage.TEAM__STARTING_LINE:
 				return getStartingLine();
 			case ModelPackage.TEAM__SUBSTITUTES:
@@ -515,7 +525,7 @@ public class TeamImpl extends EObjectImpl implements Team {
 			case ModelPackage.TEAM__MEMBERS:
 				return members != null && !members.isEmpty();
 			case ModelPackage.TEAM__MATCH:
-				return basicGetMatch() != null;
+				return isSetMatch();
 		}
 		return super.eIsSet(featureID);
 	}
@@ -631,6 +641,17 @@ public class TeamImpl extends EObjectImpl implements Team {
 					QueryBasedFeatureKind.SINGLE_REFERENCE, true, false);
 		}
 		return (model.Match) matchHandler.getSingleReferenceValue(this);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public boolean isSetMatch() {
+		// TODO: implement this method to return whether the 'Match' reference is set
+		// Ensure that you remove @generated or mark it @generated NOT
+		throw new UnsupportedOperationException();
 	}
 
 } //TeamImpl

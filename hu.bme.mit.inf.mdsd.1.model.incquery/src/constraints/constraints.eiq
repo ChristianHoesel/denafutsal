@@ -4,6 +4,9 @@ import "http://model/1.0"
 
 //Based on model
 
+/**
+ * A kapitány a csapat tagja
+ */
 @Constraint(
 	location = Team,
 	severity = "error",
@@ -15,6 +18,9 @@ pattern captainIsNotInTheTeam(Team : Team) {
 	Team != Team2;
 }
 
+/**
+ * A cserék a csapat tagjai
+ */
 @Constraint(
 	location = Sub,
 	severity = "error",
@@ -26,6 +32,9 @@ pattern substitutesAreNotInTheTeam(Team : Team, Sub : TeamMember) {
 	Team != Team2;
 }
 
+/**
+ * A kezdõjátékosok a csapat tagjai
+ */
 @Constraint(
 	location = Starter,
 	severity = "error",
@@ -37,6 +46,9 @@ pattern startingPlayersAreNotInTheTeam(Team : Team, Starter : TeamMember) {
 	Team != Team2;
 }
 
+/**
+ * A személyzet tagjai ehhez a csapathoz tartoznak
+ */
 @Constraint(
 	location = StaffMember,
 	severity = "error",
@@ -48,6 +60,22 @@ pattern staffsAreNotInTheTeam(Team : Team, StaffMember : TeamMember) {
 	Team != Team2;
 }
 
+/**
+ * A cserejátékosok között nincs kezdõjátékos, és fordítva
+ */
+@Constraint(
+	location = TeamMember,
+	severity = "error",
+	message = "$TeamMember$ is  in the starting line and in the substitutes of $Team$ at the same time."
+)
+pattern startersAndSubstitutes(Team : Team, TeamMember : TeamMember) {
+	Team.startingLine.teamMember(Team, TeamMember);
+	Team.substitutes.teamMember(Team, TeamMember);
+}
+
+/**
+ * Senki se szerepel kétszer egy kapcsolaton belül a csapatnál
+ */
 @Constraint(
 	location = Starter,
 	severity = "error",
@@ -81,6 +109,9 @@ pattern staffsAreTwice(Team : Team, StaffMember : TeamMember) {
 	StaffMember == other;
 }
 
+/**
+ * Minden csapattag a csapatában cserejátékos vagy kezdõjátékos és/vagy személyzeti tag
+ */
 @Constraint(
 	location = TeamMember,
 	severity = "error",
@@ -102,6 +133,9 @@ private pattern teamMemberHasRoleInTeam(Team : Team, TeamMember : TeamMember) {
 
 //Based on rules
 
+/**
+ * A csapatok nevei egyediek
+ */
 @Constraint(
 	location = Team,
 	severity = "error",
@@ -114,6 +148,9 @@ pattern notUniqueTeamNames(Team : Team) {
 	name1 == name2;
 }
 
+/**
+ * A kezdõjátékosok között pontosan 1 kapus és 4 mezõnyjátékos van
+ */
 @Constraint(
 	location = Team,
 	severity = "error",
@@ -138,6 +175,9 @@ private pattern fieldplayersInStartingLine(Team : Team, Pl : TeamMember) {
 	Player.position(player, ::FieldPlayer);
 }
 
+/**
+ * Minden csapattagnak egyedi azonosítója van függetlenül a csapattól
+ */
 @Constraint(
 	location = TeamMember,
 	severity = "error",
@@ -151,6 +191,9 @@ pattern notUniqueId(TeamMember : TeamMember) {
 	id1 == id2;
 }
 
+/**
+ * Minden csapattagnak max 1 piroslapja lehet
+ */
 @Constraint(
 	location = TeamMember,
 	severity = "error",
@@ -169,6 +212,9 @@ private pattern redCards(TeamMember : TeamMember) {
 	Event.type(e, ::RedCardWithBan);
 }
 
+/**
+ * Minden játékosnak max 1 sárgalapja lehet
+ */
 @Constraint(
 	location = TeamMember,
 	severity = "error",
@@ -184,6 +230,9 @@ private pattern yellowCards(TeamMember : TeamMember) {
 	Event.type(e, ::YellowCard);
 }
 
+/**
+ * Minden játékosnak egyedi mezszáma van a csapaton belül
+ */
 @Constraint(
 	location = TeamMember,
 	severity = "error",
@@ -201,6 +250,9 @@ pattern notUniqueShirtNo(TeamMember : TeamMember, Team : Team) {
 	s1 == s2;
 }
 
+/**
+ * Csak játékosnak lehet gólja, sárgalapja és RedCardWithBan (piroslapja mindenkinek lehet)
+ */
 @Constraint(
 	location = TeamMember,
 	severity = "error",
@@ -208,26 +260,36 @@ pattern notUniqueShirtNo(TeamMember : TeamMember, Team : Team) {
 )
 pattern teamMemberHasIllegalEvent(TeamMember : TeamMember, Team : Team) {
 	TeamMember.team(TeamMember, Team);
-	neg find playerEvents(TeamMember, Team);
+	find playerEvents(TeamMember, Team);
+	neg find checkPlayerMember(TeamMember);	
+}
+
+private pattern checkPlayerMember(TeamMember : TeamMember) {
+	Player.teamMember(_, TeamMember);
 }
 
 private pattern playerEvents(TeamMember : TeamMember, Team : Team) {
-	Player.teamMember(_, TeamMember);
 	TeamMember.team(TeamMember, Team);
 	Event.committer(e, TeamMember);
 	Event.type(e, ::Goal);
 } or {
-	Player.teamMember(_, TeamMember);
 	TeamMember.team(TeamMember, Team);
 	Event.committer(e, TeamMember);
 	Event.type(e, ::YellowCard);	
 } or {
-	Player.teamMember(_, TeamMember);
 	TeamMember.team(TeamMember, Team);
 	Event.committer(e, TeamMember);
 	Event.type(e, ::RedCardWithBan);
 }
 
+/**
+ * Egy csapatnál bármely 3 RedCardWithBan típusú esemény sem lehet 2 percen belül (nem lehetnek a pályán 2+1-nél kevesebben)
+ */
+@Constraint(
+	location = Team,
+	severity = "error",
+	message = "$Team$ has two much 2 minutes ban in short period"
+)
 pattern tooMuchBan(Team : Team) {
 	Event.type(e1, ::RedCardWithBan);
 	Event.type(e2, ::RedCardWithBan);
@@ -236,4 +298,192 @@ pattern tooMuchBan(Team : Team) {
 	Event.committer.team(e1, Team);
 	Event.committer.team(e2, Team);
 	Event.committer.team(e3, Team);	
+	
+	Event.time(e1, t1);
+	Event.time(e2, t2);
+	Event.time(e3, t3);
+	
+	check(t1 > t2);
+	check(t2 > t3);
+	check((t1 - t3) < 120);
 } 
+
+/**
+ * A két csapat bünetõinek a száma csak eggyel térhet el
+ */
+@Constraint(
+	location = Match,
+	severity = "error",
+	message = "There is too big difference between the shot penalties."
+)
+pattern tooMuchDiffAnyPenalties(Match : Match) {	
+	Match.Home(Match, team1);
+	Match.Visitor(Match, team2);
+	
+	M == count find teamPenalties(team1);
+	N == count find teamPenalties(team2);
+	
+	check((N - M) > 1);
+}
+
+private pattern teamPenalties(Team : Team) {
+	Team.penalties(Team, _);
+}
+
+/**
+ * Ezekben az esetekben már korábben vége kellett volna térjen a párharc.
+ */
+@Constraint(
+	location = Match,
+	severity = "error",
+	message = "asd"
+)
+pattern tooMuchDiffSuccessPenalties(Match : Match) {
+	Team.match(team1, Match);
+	Team.match(team2, Match);
+	
+	S1 == count find successPenalties(team1);
+	S2 == count find successPenalties(team2);
+	
+	T1 == count find teamPenalties(team1);
+	T2 == count find teamPenalties(team2);
+	
+	check(T1 == 3);
+	check(T2 == 3);
+	check(S1 == 3);
+	check(S2 == 0); 
+	
+} or {
+	Match.Home(Match, team1);
+	Match.Visitor(Match, team2);
+	
+	S1 == count find successPenalties(team1);
+	S2 == count find successPenalties(team2);
+	
+	T1 == count find teamPenalties(team1);
+	T2 == count find teamPenalties(team2);
+	
+	check(T1 == 4);
+	check(T2 == 4);
+	check(S1 == 3);
+	check(S2 <= 1); 
+
+} or {
+	Match.Home(Match, team1);
+	Match.Visitor(Match, team2);
+	
+	S1 == count find successPenalties(team1);
+	S2 == count find successPenalties(team2);
+	
+	T1 == count find teamPenalties(team1);
+	T2 == count find teamPenalties(team2);
+	
+	check(T1 == 5);
+	check(T2 == 5);
+	check(S1 == 3);
+	check(S2 <= 2); 
+
+} or {
+	Match.Home(Match, team1);
+	Match.Visitor(Match, team2);
+	
+	S1 == count find successPenalties(team1);
+	S2 == count find successPenalties(team2);
+	
+	T1 == count find teamPenalties(team1);
+	T2 == count find teamPenalties(team2);
+	
+	check(T1 == 4);
+	check(T2 == 4);
+	check(S1 == 4);
+	check(S2 <= 1); 
+} or {
+	Match.Home(Match, team1);
+	Match.Visitor(Match, team2);
+	
+	S1 == count find successPenalties(team1);
+	S2 == count find successPenalties(team2);
+	
+	T1 == count find teamPenalties(team1);
+	T2 == count find teamPenalties(team2);
+	
+	check(T1 == 5);
+	check(T2 == 5);
+	check(S1 == 4);
+	check(S2 <= 2); 
+
+}  or {
+	Match.Home(Match, team1);
+	Match.Visitor(Match, team2);
+	
+	S1 == count find successPenalties(team1);
+	S2 == count find successPenalties(team2);
+	
+	T1 == count find teamPenalties(team1);
+	T2 == count find teamPenalties(team2);
+	
+	check(T1 == 5);
+	check(T2 == 5);
+	check(S1 == 5);
+	check(S2 <= 3); 
+
+}  or {
+	Match.Home(Match, team1);
+	Match.Visitor(Match, team2);
+	
+	S1 == count find successPenalties(team1);
+	S2 == count find successPenalties(team2);
+	
+	T1 == count find teamPenalties(team1);
+	T2 == count find teamPenalties(team2);
+	
+	check(T1 == T2);
+	check(T1 > 5);
+	check(T2 > 5);
+	check(S1-S2 > 1);
+}
+
+private pattern successPenalties(Team : Team) {
+	Team.penalties(Team, p);
+	Penalty.isSuccess(p, true);
+}
+
+@Constraint(
+	location = Person,
+	severity = "error",
+	message = "$Person$ cannot be TeamMember, because he/she is the referee"
+)
+pattern refereeNotPerson(Person : Person) {
+	TeamMember(Person);
+	Match.Referee(_,Person);
+}
+
+@Constraint(
+	location = Person,
+	severity = "error",
+	message = "$Person$ cannot be TeamMember, because he/she is the assistant"
+)
+pattern assistantNotPerson(Person : Person) {
+	TeamMember(Person);
+	Match.Assistant(_,Person);
+}
+
+@Constraint(
+	location = Person,
+	severity = "error",
+	message = "$Person$ cannot be TeamMember, because he/she is the third referee"
+)
+pattern thirdRefereeNotPerson(Person : Person) {
+	TeamMember(Person);
+	Match.ThirdReferee(_,Person);
+}
+
+@Constraint(
+	location = Person,
+	severity = "error",
+	message = "$Person$ cannot be TeamMember, because he/she is the supervisor"
+)
+pattern supervisorNotPerson(Person : Person) {
+	TeamMember(Person);
+	Match.Supervisor(_,Person);
+}

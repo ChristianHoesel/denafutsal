@@ -22,6 +22,11 @@ import org.eclipse.incquery.runtime.rete.tuple.Tuple;
  * 
  * <p>Original source:
  * <code><pre>
+ * {@literal @}Constraint(
+ * 	location = Team,
+ * 	severity = "error",
+ * 	message = "$Team$ has two much 2 minutes ban in short period"
+ * )
  * pattern tooMuchBan(Team : Team) {
  * 	Event.type(e1, ::RedCardWithBan);
  * 	Event.type(e2, ::RedCardWithBan);
@@ -30,6 +35,14 @@ import org.eclipse.incquery.runtime.rete.tuple.Tuple;
  * 	Event.committer.team(e1, Team);
  * 	Event.committer.team(e2, Team);
  * 	Event.committer.team(e3, Team);	
+ * 	
+ * 	Event.time(e1, t1);
+ * 	Event.time(e2, t2);
+ * 	Event.time(e3, t3);
+ * 	
+ * 	check(t1 {@literal >} t2);
+ * 	check(t2 {@literal >} t3);
+ * 	check((t1 - t3) {@literal <} 120);
  * }
  * </pre></code>
  * 

@@ -25,9 +25,9 @@ import org.eclipse.incquery.runtime.rete.tuple.Tuple;
  * <code><pre>
  * {@literal @}QueryBasedFeature
  * pattern match(team : Team, match : Match) {
- * 	Match.home(match, team);
+ * 	Match.Home(match, team);
  * } or {
- * 	Match.visitor(match, team);
+ * 	Match.Visitor(match, team);
  * }
  * </pre></code>
  * 

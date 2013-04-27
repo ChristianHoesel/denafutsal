@@ -283,6 +283,75 @@
       </constraints>
     </bodies>
   </patterns>
+  <patterns name="constraints.startersAndSubstitutes" fileName="platform:/resource/hu.bme.mit.inf.mdsd.1.model.incquery/src/constraints/constraints.eiq">
+    <annotations name="Constraint">
+      <parameters name="location">
+        <value xsi:type="patternLanguage:VariableValue">
+          <value var="TeamMember"/>
+        </value>
+      </parameters>
+      <parameters name="severity">
+        <value xsi:type="patternLanguage:StringValue" value="error"/>
+      </parameters>
+      <parameters name="message">
+        <value xsi:type="patternLanguage:StringValue" value="$TeamMember$ is  in the starting line and in the substitutes of $Team$ at the same time."/>
+      </parameters>
+    </annotations>
+    <parameters name="Team">
+      <type xsi:type="eMFPatternLanguage:ClassType">
+        <classname xsi:type="ecore:EClass" href="http://model/1.0#//Team"/>
+      </type>
+    </parameters>
+    <parameters name="TeamMember">
+      <type xsi:type="eMFPatternLanguage:ClassType">
+        <classname xsi:type="ecore:EClass" href="http://model/1.0#//TeamMember"/>
+      </type>
+    </parameters>
+    <bodies>
+      <constraints xsi:type="patternLanguage:PathExpressionConstraint">
+        <head>
+          <type xsi:type="eMFPatternLanguage:ClassType">
+            <classname xsi:type="ecore:EClass" href="http://model/1.0#//Team"/>
+          </type>
+          <tail>
+            <type xsi:type="eMFPatternLanguage:ReferenceType">
+              <refname xsi:type="ecore:EReference" href="http://model/1.0#//Team/startingLine"/>
+            </type>
+            <tail>
+              <type xsi:type="eMFPatternLanguage:ReferenceType">
+                <refname xsi:type="ecore:EReference" href="http://model/1.0#//Role/teamMember"/>
+              </type>
+            </tail>
+          </tail>
+          <src var="Team"/>
+          <dst xsi:type="patternLanguage:VariableValue">
+            <value var="TeamMember"/>
+          </dst>
+        </head>
+      </constraints>
+      <constraints xsi:type="patternLanguage:PathExpressionConstraint">
+        <head>
+          <type xsi:type="eMFPatternLanguage:ClassType">
+            <classname xsi:type="ecore:EClass" href="http://model/1.0#//Team"/>
+          </type>
+          <tail>
+            <type xsi:type="eMFPatternLanguage:ReferenceType">
+              <refname xsi:type="ecore:EReference" href="http://model/1.0#//Team/substitutes"/>
+            </type>
+            <tail>
+              <type xsi:type="eMFPatternLanguage:ReferenceType">
+                <refname xsi:type="ecore:EReference" href="http://model/1.0#//Role/teamMember"/>
+              </type>
+            </tail>
+          </tail>
+          <src var="Team"/>
+          <dst xsi:type="patternLanguage:VariableValue">
+            <value var="TeamMember"/>
+          </dst>
+        </head>
+      </constraints>
+    </bodies>
+  </patterns>
   <patterns name="constraints.startersAreTwice" fileName="platform:/resource/hu.bme.mit.inf.mdsd.1.model.incquery/src/constraints/constraints.eiq">
     <annotations name="Constraint">
       <parameters name="location">
@@ -556,7 +625,7 @@
         </head>
       </constraints>
       <constraints xsi:type="patternLanguage:PatternCompositionConstraint" negative="true">
-        <call patternRef="//@patterns.8">
+        <call patternRef="//@patterns.9">
           <parameters xsi:type="patternLanguage:VariableValue">
             <value var="Team"/>
           </parameters>
@@ -745,7 +814,7 @@
         </leftOperand>
         <rightOperand xsi:type="patternLanguage:AggregatedValue">
           <aggregator xsi:type="patternLanguage:CountAggregator"/>
-          <call patternRef="//@patterns.11">
+          <call patternRef="//@patterns.12">
             <parameters xsi:type="patternLanguage:VariableValue">
               <value var="Team"/>
             </parameters>
@@ -761,7 +830,7 @@
         </leftOperand>
         <rightOperand xsi:type="patternLanguage:AggregatedValue">
           <aggregator xsi:type="patternLanguage:CountAggregator"/>
-          <call patternRef="//@patterns.12">
+          <call patternRef="//@patterns.13">
             <parameters xsi:type="patternLanguage:VariableValue">
               <value var="Team"/>
             </parameters>
@@ -778,7 +847,7 @@
             <type xsi:type="types:JvmParameterizedTypeReference">
               <type xsi:type="types:JvmGenericType" href="java:/Objects/java.lang.Integer#java.lang.Integer"/>
             </type>
-            <target xsi:type="xbase:XFeatureCall" feature="//@patterns.10/@bodies.0/@variables.1"/>
+            <target xsi:type="xbase:XFeatureCall" feature="//@patterns.11/@bodies.0/@variables.1"/>
           </leftOperand>
           <rightOperand xsi:type="xbase:XNumberLiteral" value="1"/>
         </expression>
@@ -790,7 +859,7 @@
             <type xsi:type="types:JvmParameterizedTypeReference">
               <type xsi:type="types:JvmGenericType" href="java:/Objects/java.lang.Integer#java.lang.Integer"/>
             </type>
-            <target xsi:type="xbase:XFeatureCall" feature="//@patterns.10/@bodies.0/@variables.3"/>
+            <target xsi:type="xbase:XFeatureCall" feature="//@patterns.11/@bodies.0/@variables.3"/>
           </leftOperand>
           <rightOperand xsi:type="xbase:XNumberLiteral" value="4"/>
         </expression>
@@ -1029,7 +1098,7 @@
         </leftOperand>
         <rightOperand xsi:type="patternLanguage:AggregatedValue">
           <aggregator xsi:type="patternLanguage:CountAggregator"/>
-          <call patternRef="//@patterns.15">
+          <call patternRef="//@patterns.16">
             <parameters xsi:type="patternLanguage:VariableValue">
               <value var="TeamMember"/>
             </parameters>
@@ -1043,7 +1112,7 @@
             <type xsi:type="types:JvmParameterizedTypeReference">
               <type xsi:type="types:JvmGenericType" href="java:/Objects/java.lang.Integer#java.lang.Integer"/>
             </type>
-            <target xsi:type="xbase:XFeatureCall" feature="//@patterns.14/@bodies.0/@variables.1"/>
+            <target xsi:type="xbase:XFeatureCall" feature="//@patterns.15/@bodies.0/@variables.1"/>
           </leftOperand>
           <rightOperand xsi:type="xbase:XNumberLiteral" value="1"/>
         </expression>
@@ -1152,7 +1221,7 @@
         </leftOperand>
         <rightOperand xsi:type="patternLanguage:AggregatedValue">
           <aggregator xsi:type="patternLanguage:CountAggregator"/>
-          <call patternRef="//@patterns.17">
+          <call patternRef="//@patterns.18">
             <parameters xsi:type="patternLanguage:VariableValue">
               <value var="TeamMember"/>
             </parameters>
@@ -1166,7 +1235,7 @@
             <type xsi:type="types:JvmParameterizedTypeReference">
               <type xsi:type="types:JvmGenericType" href="java:/Objects/java.lang.Integer#java.lang.Integer"/>
             </type>
-            <target xsi:type="xbase:XFeatureCall" feature="//@patterns.16/@bodies.0/@variables.1"/>
+            <target xsi:type="xbase:XFeatureCall" feature="//@patterns.17/@bodies.0/@variables.1"/>
           </leftOperand>
           <rightOperand xsi:type="xbase:XNumberLiteral" value="1"/>
         </expression>
@@ -1405,8 +1474,8 @@
           </dst>
         </head>
       </constraints>
-      <constraints xsi:type="patternLanguage:PatternCompositionConstraint" negative="true">
-        <call patternRef="//@patterns.20">
+      <constraints xsi:type="patternLanguage:PatternCompositionConstraint">
+        <call patternRef="//@patterns.22">
           <parameters xsi:type="patternLanguage:VariableValue">
             <value var="TeamMember"/>
           </parameters>
@@ -1415,18 +1484,20 @@
           </parameters>
         </call>
       </constraints>
+      <constraints xsi:type="patternLanguage:PatternCompositionConstraint" negative="true">
+        <call patternRef="//@patterns.21">
+          <parameters xsi:type="patternLanguage:VariableValue">
+            <value var="TeamMember"/>
+          </parameters>
+        </call>
+      </constraints>
     </bodies>
   </patterns>
-  <patterns name="constraints.playerEvents" fileName="platform:/resource/hu.bme.mit.inf.mdsd.1.model.incquery/src/constraints/constraints.eiq">
+  <patterns name="constraints.checkPlayerMember" fileName="platform:/resource/hu.bme.mit.inf.mdsd.1.model.incquery/src/constraints/constraints.eiq">
     <modifiers private="true"/>
     <parameters name="TeamMember">
       <type xsi:type="eMFPatternLanguage:ClassType">
         <classname xsi:type="ecore:EClass" href="http://model/1.0#//TeamMember"/>
-      </type>
-    </parameters>
-    <parameters name="Team">
-      <type xsi:type="eMFPatternLanguage:ClassType">
-        <classname xsi:type="ecore:EClass" href="http://model/1.0#//Team"/>
       </type>
     </parameters>
     <bodies>
@@ -1446,6 +1517,21 @@
           </dst>
         </head>
       </constraints>
+    </bodies>
+  </patterns>
+  <patterns name="constraints.playerEvents" fileName="platform:/resource/hu.bme.mit.inf.mdsd.1.model.incquery/src/constraints/constraints.eiq">
+    <modifiers private="true"/>
+    <parameters name="TeamMember">
+      <type xsi:type="eMFPatternLanguage:ClassType">
+        <classname xsi:type="ecore:EClass" href="http://model/1.0#//TeamMember"/>
+      </type>
+    </parameters>
+    <parameters name="Team">
+      <type xsi:type="eMFPatternLanguage:ClassType">
+        <classname xsi:type="ecore:EClass" href="http://model/1.0#//Team"/>
+      </type>
+    </parameters>
+    <bodies>
       <constraints xsi:type="patternLanguage:PathExpressionConstraint">
         <head>
           <type xsi:type="eMFPatternLanguage:ClassType">
@@ -1499,22 +1585,6 @@
       <constraints xsi:type="patternLanguage:PathExpressionConstraint">
         <head>
           <type xsi:type="eMFPatternLanguage:ClassType">
-            <classname xsi:type="ecore:EClass" href="http://model/1.0#//Player"/>
-          </type>
-          <tail>
-            <type xsi:type="eMFPatternLanguage:ReferenceType">
-              <refname xsi:type="ecore:EReference" href="http://model/1.0#//Role/teamMember"/>
-            </type>
-          </tail>
-          <src var="_"/>
-          <dst xsi:type="patternLanguage:VariableValue">
-            <value var="TeamMember"/>
-          </dst>
-        </head>
-      </constraints>
-      <constraints xsi:type="patternLanguage:PathExpressionConstraint">
-        <head>
-          <type xsi:type="eMFPatternLanguage:ClassType">
             <classname xsi:type="ecore:EClass" href="http://model/1.0#//TeamMember"/>
           </type>
           <tail>
@@ -1562,22 +1632,6 @@
       </constraints>
     </bodies>
     <bodies>
-      <constraints xsi:type="patternLanguage:PathExpressionConstraint">
-        <head>
-          <type xsi:type="eMFPatternLanguage:ClassType">
-            <classname xsi:type="ecore:EClass" href="http://model/1.0#//Player"/>
-          </type>
-          <tail>
-            <type xsi:type="eMFPatternLanguage:ReferenceType">
-              <refname xsi:type="ecore:EReference" href="http://model/1.0#//Role/teamMember"/>
-            </type>
-          </tail>
-          <src var="_"/>
-          <dst xsi:type="patternLanguage:VariableValue">
-            <value var="TeamMember"/>
-          </dst>
-        </head>
-      </constraints>
       <constraints xsi:type="patternLanguage:PathExpressionConstraint">
         <head>
           <type xsi:type="eMFPatternLanguage:ClassType">
@@ -1629,6 +1683,19 @@
     </bodies>
   </patterns>
   <patterns name="constraints.tooMuchBan" fileName="platform:/resource/hu.bme.mit.inf.mdsd.1.model.incquery/src/constraints/constraints.eiq">
+    <annotations name="Constraint">
+      <parameters name="location">
+        <value xsi:type="patternLanguage:VariableValue">
+          <value var="Team"/>
+        </value>
+      </parameters>
+      <parameters name="severity">
+        <value xsi:type="patternLanguage:StringValue" value="error"/>
+      </parameters>
+      <parameters name="message">
+        <value xsi:type="patternLanguage:StringValue" value="$Team$ has two much 2 minutes ban in short period"/>
+      </parameters>
+    </annotations>
     <parameters name="Team">
       <type xsi:type="eMFPatternLanguage:ClassType">
         <classname xsi:type="ecore:EClass" href="http://model/1.0#//Team"/>
@@ -1743,6 +1810,1234 @@
           <src var="e3"/>
           <dst xsi:type="patternLanguage:VariableValue">
             <value var="Team"/>
+          </dst>
+        </head>
+      </constraints>
+      <constraints xsi:type="patternLanguage:PathExpressionConstraint">
+        <head>
+          <type xsi:type="eMFPatternLanguage:ClassType">
+            <classname xsi:type="ecore:EClass" href="http://model/1.0#//Event"/>
+          </type>
+          <tail>
+            <type xsi:type="eMFPatternLanguage:ReferenceType">
+              <refname xsi:type="ecore:EAttribute" href="http://model/1.0#//Event/time"/>
+            </type>
+          </tail>
+          <src var="e1"/>
+          <dst xsi:type="patternLanguage:VariableValue">
+            <value var="t1"/>
+          </dst>
+        </head>
+      </constraints>
+      <constraints xsi:type="patternLanguage:PathExpressionConstraint">
+        <head>
+          <type xsi:type="eMFPatternLanguage:ClassType">
+            <classname xsi:type="ecore:EClass" href="http://model/1.0#//Event"/>
+          </type>
+          <tail>
+            <type xsi:type="eMFPatternLanguage:ReferenceType">
+              <refname xsi:type="ecore:EAttribute" href="http://model/1.0#//Event/time"/>
+            </type>
+          </tail>
+          <src var="e2"/>
+          <dst xsi:type="patternLanguage:VariableValue">
+            <value var="t2"/>
+          </dst>
+        </head>
+      </constraints>
+      <constraints xsi:type="patternLanguage:PathExpressionConstraint">
+        <head>
+          <type xsi:type="eMFPatternLanguage:ClassType">
+            <classname xsi:type="ecore:EClass" href="http://model/1.0#//Event"/>
+          </type>
+          <tail>
+            <type xsi:type="eMFPatternLanguage:ReferenceType">
+              <refname xsi:type="ecore:EAttribute" href="http://model/1.0#//Event/time"/>
+            </type>
+          </tail>
+          <src var="e3"/>
+          <dst xsi:type="patternLanguage:VariableValue">
+            <value var="t3"/>
+          </dst>
+        </head>
+      </constraints>
+      <constraints xsi:type="patternLanguage:CheckConstraint">
+        <expression xsi:type="xbase:XBinaryOperation">
+          <feature xsi:type="types:JvmOperation" href="java:/Objects/org.eclipse.xtext.xbase.lib.ComparableExtensions#org.eclipse.xtext.xbase.lib.ComparableExtensions.operator_greaterThan(java.lang.Comparable,C)"/>
+          <leftOperand xsi:type="xbase:XFeatureCall" feature="//@patterns.23/@bodies.0/@variables.4"/>
+          <rightOperand xsi:type="xbase:XFeatureCall" feature="//@patterns.23/@bodies.0/@variables.5"/>
+        </expression>
+      </constraints>
+      <constraints xsi:type="patternLanguage:CheckConstraint">
+        <expression xsi:type="xbase:XBinaryOperation">
+          <feature xsi:type="types:JvmOperation" href="java:/Objects/org.eclipse.xtext.xbase.lib.ComparableExtensions#org.eclipse.xtext.xbase.lib.ComparableExtensions.operator_greaterThan(java.lang.Comparable,C)"/>
+          <leftOperand xsi:type="xbase:XFeatureCall" feature="//@patterns.23/@bodies.0/@variables.5"/>
+          <rightOperand xsi:type="xbase:XFeatureCall" feature="//@patterns.23/@bodies.0/@variables.6"/>
+        </expression>
+      </constraints>
+      <constraints xsi:type="patternLanguage:CheckConstraint">
+        <expression xsi:type="xbase:XBinaryOperation">
+          <feature xsi:type="types:JvmOperation" href="java:/Objects/org.eclipse.xtext.xbase.lib.LongExtensions#org.eclipse.xtext.xbase.lib.LongExtensions.operator_lessThan(long,int)"/>
+          <leftOperand xsi:type="xbase:XBinaryOperation">
+            <feature xsi:type="types:JvmOperation" href="java:/Objects/org.eclipse.xtext.xbase.lib.LongExtensions#org.eclipse.xtext.xbase.lib.LongExtensions.operator_minus(long,long)"/>
+            <leftOperand xsi:type="xbase:XFeatureCall" feature="//@patterns.23/@bodies.0/@variables.4"/>
+            <rightOperand xsi:type="xbase:XFeatureCall" feature="//@patterns.23/@bodies.0/@variables.6"/>
+          </leftOperand>
+          <rightOperand xsi:type="xbase:XNumberLiteral" value="120"/>
+        </expression>
+      </constraints>
+    </bodies>
+  </patterns>
+  <patterns name="constraints.tooMuchDiffAnyPenalties" fileName="platform:/resource/hu.bme.mit.inf.mdsd.1.model.incquery/src/constraints/constraints.eiq">
+    <annotations name="Constraint">
+      <parameters name="location">
+        <value xsi:type="patternLanguage:VariableValue">
+          <value var="Match"/>
+        </value>
+      </parameters>
+      <parameters name="severity">
+        <value xsi:type="patternLanguage:StringValue" value="error"/>
+      </parameters>
+      <parameters name="message">
+        <value xsi:type="patternLanguage:StringValue" value="There is too big difference between the shot penalties."/>
+      </parameters>
+    </annotations>
+    <parameters name="Match">
+      <type xsi:type="eMFPatternLanguage:ClassType">
+        <classname xsi:type="ecore:EClass" href="http://model/1.0#//Match"/>
+      </type>
+    </parameters>
+    <bodies>
+      <constraints xsi:type="patternLanguage:PathExpressionConstraint">
+        <head>
+          <type xsi:type="eMFPatternLanguage:ClassType">
+            <classname xsi:type="ecore:EClass" href="http://model/1.0#//Match"/>
+          </type>
+          <tail>
+            <type xsi:type="eMFPatternLanguage:ReferenceType">
+              <refname xsi:type="ecore:EReference" href="http://model/1.0#//Match/Home"/>
+            </type>
+          </tail>
+          <src var="Match"/>
+          <dst xsi:type="patternLanguage:VariableValue">
+            <value var="team1"/>
+          </dst>
+        </head>
+      </constraints>
+      <constraints xsi:type="patternLanguage:PathExpressionConstraint">
+        <head>
+          <type xsi:type="eMFPatternLanguage:ClassType">
+            <classname xsi:type="ecore:EClass" href="http://model/1.0#//Match"/>
+          </type>
+          <tail>
+            <type xsi:type="eMFPatternLanguage:ReferenceType">
+              <refname xsi:type="ecore:EReference" href="http://model/1.0#//Match/Visitor"/>
+            </type>
+          </tail>
+          <src var="Match"/>
+          <dst xsi:type="patternLanguage:VariableValue">
+            <value var="team2"/>
+          </dst>
+        </head>
+      </constraints>
+      <constraints xsi:type="patternLanguage:CompareConstraint">
+        <leftOperand xsi:type="patternLanguage:VariableValue">
+          <value var="M"/>
+        </leftOperand>
+        <rightOperand xsi:type="patternLanguage:AggregatedValue">
+          <aggregator xsi:type="patternLanguage:CountAggregator"/>
+          <call patternRef="//@patterns.25">
+            <parameters xsi:type="patternLanguage:VariableValue">
+              <value var="team1"/>
+            </parameters>
+          </call>
+        </rightOperand>
+      </constraints>
+      <constraints xsi:type="patternLanguage:CompareConstraint">
+        <leftOperand xsi:type="patternLanguage:VariableValue">
+          <value var="N"/>
+        </leftOperand>
+        <rightOperand xsi:type="patternLanguage:AggregatedValue">
+          <aggregator xsi:type="patternLanguage:CountAggregator"/>
+          <call patternRef="//@patterns.25">
+            <parameters xsi:type="patternLanguage:VariableValue">
+              <value var="team2"/>
+            </parameters>
+          </call>
+        </rightOperand>
+      </constraints>
+      <constraints xsi:type="patternLanguage:CheckConstraint">
+        <expression xsi:type="xbase:XBinaryOperation">
+          <feature xsi:type="types:JvmOperation" href="java:/Objects/org.eclipse.xtext.xbase.lib.IntegerExtensions#org.eclipse.xtext.xbase.lib.IntegerExtensions.operator_greaterThan(int,int)"/>
+          <leftOperand xsi:type="xbase:XBinaryOperation">
+            <feature xsi:type="types:JvmOperation" href="java:/Objects/org.eclipse.xtext.xbase.lib.IntegerExtensions#org.eclipse.xtext.xbase.lib.IntegerExtensions.operator_minus(int,int)"/>
+            <leftOperand xsi:type="xbase:XFeatureCall" feature="//@patterns.24/@bodies.0/@variables.4"/>
+            <rightOperand xsi:type="xbase:XFeatureCall" feature="//@patterns.24/@bodies.0/@variables.3"/>
+          </leftOperand>
+          <rightOperand xsi:type="xbase:XNumberLiteral" value="1"/>
+        </expression>
+      </constraints>
+    </bodies>
+  </patterns>
+  <patterns name="constraints.teamPenalties" fileName="platform:/resource/hu.bme.mit.inf.mdsd.1.model.incquery/src/constraints/constraints.eiq">
+    <modifiers private="true"/>
+    <parameters name="Team">
+      <type xsi:type="eMFPatternLanguage:ClassType">
+        <classname xsi:type="ecore:EClass" href="http://model/1.0#//Team"/>
+      </type>
+    </parameters>
+    <bodies>
+      <constraints xsi:type="patternLanguage:PathExpressionConstraint">
+        <head>
+          <type xsi:type="eMFPatternLanguage:ClassType">
+            <classname xsi:type="ecore:EClass" href="http://model/1.0#//Team"/>
+          </type>
+          <tail>
+            <type xsi:type="eMFPatternLanguage:ReferenceType">
+              <refname xsi:type="ecore:EReference" href="http://model/1.0#//Team/penalties"/>
+            </type>
+          </tail>
+          <src var="Team"/>
+          <dst xsi:type="patternLanguage:VariableValue">
+            <value var="_"/>
+          </dst>
+        </head>
+      </constraints>
+    </bodies>
+  </patterns>
+  <patterns name="constraints.tooMuchDiffSuccessPenalties" fileName="platform:/resource/hu.bme.mit.inf.mdsd.1.model.incquery/src/constraints/constraints.eiq">
+    <annotations name="Constraint">
+      <parameters name="location">
+        <value xsi:type="patternLanguage:VariableValue">
+          <value var="Match"/>
+        </value>
+      </parameters>
+      <parameters name="severity">
+        <value xsi:type="patternLanguage:StringValue" value="error"/>
+      </parameters>
+      <parameters name="message">
+        <value xsi:type="patternLanguage:StringValue" value="asd"/>
+      </parameters>
+    </annotations>
+    <parameters name="Match">
+      <type xsi:type="eMFPatternLanguage:ClassType">
+        <classname xsi:type="ecore:EClass" href="http://model/1.0#//Match"/>
+      </type>
+    </parameters>
+    <bodies>
+      <constraints xsi:type="patternLanguage:PathExpressionConstraint">
+        <head>
+          <type xsi:type="eMFPatternLanguage:ClassType">
+            <classname xsi:type="ecore:EClass" href="http://model/1.0#//Team"/>
+          </type>
+          <tail>
+            <type xsi:type="eMFPatternLanguage:ReferenceType">
+              <refname xsi:type="ecore:EReference" href="http://model/1.0#//Team/match"/>
+            </type>
+          </tail>
+          <src var="team1"/>
+          <dst xsi:type="patternLanguage:VariableValue">
+            <value var="Match"/>
+          </dst>
+        </head>
+      </constraints>
+      <constraints xsi:type="patternLanguage:PathExpressionConstraint">
+        <head>
+          <type xsi:type="eMFPatternLanguage:ClassType">
+            <classname xsi:type="ecore:EClass" href="http://model/1.0#//Team"/>
+          </type>
+          <tail>
+            <type xsi:type="eMFPatternLanguage:ReferenceType">
+              <refname xsi:type="ecore:EReference" href="http://model/1.0#//Team/match"/>
+            </type>
+          </tail>
+          <src var="team2"/>
+          <dst xsi:type="patternLanguage:VariableValue">
+            <value var="Match"/>
+          </dst>
+        </head>
+      </constraints>
+      <constraints xsi:type="patternLanguage:CompareConstraint">
+        <leftOperand xsi:type="patternLanguage:VariableValue">
+          <value var="S1"/>
+        </leftOperand>
+        <rightOperand xsi:type="patternLanguage:AggregatedValue">
+          <aggregator xsi:type="patternLanguage:CountAggregator"/>
+          <call patternRef="//@patterns.27">
+            <parameters xsi:type="patternLanguage:VariableValue">
+              <value var="team1"/>
+            </parameters>
+          </call>
+        </rightOperand>
+      </constraints>
+      <constraints xsi:type="patternLanguage:CompareConstraint">
+        <leftOperand xsi:type="patternLanguage:VariableValue">
+          <value var="S2"/>
+        </leftOperand>
+        <rightOperand xsi:type="patternLanguage:AggregatedValue">
+          <aggregator xsi:type="patternLanguage:CountAggregator"/>
+          <call patternRef="//@patterns.27">
+            <parameters xsi:type="patternLanguage:VariableValue">
+              <value var="team2"/>
+            </parameters>
+          </call>
+        </rightOperand>
+      </constraints>
+      <constraints xsi:type="patternLanguage:CompareConstraint">
+        <leftOperand xsi:type="patternLanguage:VariableValue">
+          <value var="T1"/>
+        </leftOperand>
+        <rightOperand xsi:type="patternLanguage:AggregatedValue">
+          <aggregator xsi:type="patternLanguage:CountAggregator"/>
+          <call patternRef="//@patterns.25">
+            <parameters xsi:type="patternLanguage:VariableValue">
+              <value var="team1"/>
+            </parameters>
+          </call>
+        </rightOperand>
+      </constraints>
+      <constraints xsi:type="patternLanguage:CompareConstraint">
+        <leftOperand xsi:type="patternLanguage:VariableValue">
+          <value var="T2"/>
+        </leftOperand>
+        <rightOperand xsi:type="patternLanguage:AggregatedValue">
+          <aggregator xsi:type="patternLanguage:CountAggregator"/>
+          <call patternRef="//@patterns.25">
+            <parameters xsi:type="patternLanguage:VariableValue">
+              <value var="team2"/>
+            </parameters>
+          </call>
+        </rightOperand>
+      </constraints>
+      <constraints xsi:type="patternLanguage:CheckConstraint">
+        <expression xsi:type="xbase:XBinaryOperation">
+          <feature xsi:type="types:JvmOperation" href="java:/Objects/org.eclipse.xtext.xbase.lib.IntegerExtensions#org.eclipse.xtext.xbase.lib.IntegerExtensions.operator_equals(int,int)"/>
+          <leftOperand xsi:type="xbase:XFeatureCall" feature="//@patterns.26/@bodies.0/@variables.5"/>
+          <rightOperand xsi:type="xbase:XNumberLiteral" value="3"/>
+        </expression>
+      </constraints>
+      <constraints xsi:type="patternLanguage:CheckConstraint">
+        <expression xsi:type="xbase:XBinaryOperation">
+          <feature xsi:type="types:JvmOperation" href="java:/Objects/org.eclipse.xtext.xbase.lib.IntegerExtensions#org.eclipse.xtext.xbase.lib.IntegerExtensions.operator_equals(int,int)"/>
+          <leftOperand xsi:type="xbase:XFeatureCall" feature="//@patterns.26/@bodies.0/@variables.6"/>
+          <rightOperand xsi:type="xbase:XNumberLiteral" value="3"/>
+        </expression>
+      </constraints>
+      <constraints xsi:type="patternLanguage:CheckConstraint">
+        <expression xsi:type="xbase:XBinaryOperation">
+          <feature xsi:type="types:JvmOperation" href="java:/Objects/org.eclipse.xtext.xbase.lib.IntegerExtensions#org.eclipse.xtext.xbase.lib.IntegerExtensions.operator_equals(int,int)"/>
+          <leftOperand xsi:type="xbase:XFeatureCall" feature="//@patterns.26/@bodies.0/@variables.3"/>
+          <rightOperand xsi:type="xbase:XNumberLiteral" value="3"/>
+        </expression>
+      </constraints>
+      <constraints xsi:type="patternLanguage:CheckConstraint">
+        <expression xsi:type="xbase:XBinaryOperation">
+          <feature xsi:type="types:JvmOperation" href="java:/Objects/org.eclipse.xtext.xbase.lib.IntegerExtensions#org.eclipse.xtext.xbase.lib.IntegerExtensions.operator_equals(int,int)"/>
+          <leftOperand xsi:type="xbase:XFeatureCall" feature="//@patterns.26/@bodies.0/@variables.4"/>
+          <rightOperand xsi:type="xbase:XNumberLiteral" value="0"/>
+        </expression>
+      </constraints>
+    </bodies>
+    <bodies>
+      <constraints xsi:type="patternLanguage:PathExpressionConstraint">
+        <head>
+          <type xsi:type="eMFPatternLanguage:ClassType">
+            <classname xsi:type="ecore:EClass" href="http://model/1.0#//Match"/>
+          </type>
+          <tail>
+            <type xsi:type="eMFPatternLanguage:ReferenceType">
+              <refname xsi:type="ecore:EReference" href="http://model/1.0#//Match/Home"/>
+            </type>
+          </tail>
+          <src var="Match"/>
+          <dst xsi:type="patternLanguage:VariableValue">
+            <value var="team1"/>
+          </dst>
+        </head>
+      </constraints>
+      <constraints xsi:type="patternLanguage:PathExpressionConstraint">
+        <head>
+          <type xsi:type="eMFPatternLanguage:ClassType">
+            <classname xsi:type="ecore:EClass" href="http://model/1.0#//Match"/>
+          </type>
+          <tail>
+            <type xsi:type="eMFPatternLanguage:ReferenceType">
+              <refname xsi:type="ecore:EReference" href="http://model/1.0#//Match/Visitor"/>
+            </type>
+          </tail>
+          <src var="Match"/>
+          <dst xsi:type="patternLanguage:VariableValue">
+            <value var="team2"/>
+          </dst>
+        </head>
+      </constraints>
+      <constraints xsi:type="patternLanguage:CompareConstraint">
+        <leftOperand xsi:type="patternLanguage:VariableValue">
+          <value var="S1"/>
+        </leftOperand>
+        <rightOperand xsi:type="patternLanguage:AggregatedValue">
+          <aggregator xsi:type="patternLanguage:CountAggregator"/>
+          <call patternRef="//@patterns.27">
+            <parameters xsi:type="patternLanguage:VariableValue">
+              <value var="team1"/>
+            </parameters>
+          </call>
+        </rightOperand>
+      </constraints>
+      <constraints xsi:type="patternLanguage:CompareConstraint">
+        <leftOperand xsi:type="patternLanguage:VariableValue">
+          <value var="S2"/>
+        </leftOperand>
+        <rightOperand xsi:type="patternLanguage:AggregatedValue">
+          <aggregator xsi:type="patternLanguage:CountAggregator"/>
+          <call patternRef="//@patterns.27">
+            <parameters xsi:type="patternLanguage:VariableValue">
+              <value var="team2"/>
+            </parameters>
+          </call>
+        </rightOperand>
+      </constraints>
+      <constraints xsi:type="patternLanguage:CompareConstraint">
+        <leftOperand xsi:type="patternLanguage:VariableValue">
+          <value var="T1"/>
+        </leftOperand>
+        <rightOperand xsi:type="patternLanguage:AggregatedValue">
+          <aggregator xsi:type="patternLanguage:CountAggregator"/>
+          <call patternRef="//@patterns.25">
+            <parameters xsi:type="patternLanguage:VariableValue">
+              <value var="team1"/>
+            </parameters>
+          </call>
+        </rightOperand>
+      </constraints>
+      <constraints xsi:type="patternLanguage:CompareConstraint">
+        <leftOperand xsi:type="patternLanguage:VariableValue">
+          <value var="T2"/>
+        </leftOperand>
+        <rightOperand xsi:type="patternLanguage:AggregatedValue">
+          <aggregator xsi:type="patternLanguage:CountAggregator"/>
+          <call patternRef="//@patterns.25">
+            <parameters xsi:type="patternLanguage:VariableValue">
+              <value var="team2"/>
+            </parameters>
+          </call>
+        </rightOperand>
+      </constraints>
+      <constraints xsi:type="patternLanguage:CheckConstraint">
+        <expression xsi:type="xbase:XBinaryOperation">
+          <feature xsi:type="types:JvmOperation" href="java:/Objects/org.eclipse.xtext.xbase.lib.IntegerExtensions#org.eclipse.xtext.xbase.lib.IntegerExtensions.operator_equals(int,int)"/>
+          <leftOperand xsi:type="xbase:XFeatureCall" feature="//@patterns.26/@bodies.1/@variables.5"/>
+          <rightOperand xsi:type="xbase:XNumberLiteral" value="4"/>
+        </expression>
+      </constraints>
+      <constraints xsi:type="patternLanguage:CheckConstraint">
+        <expression xsi:type="xbase:XBinaryOperation">
+          <feature xsi:type="types:JvmOperation" href="java:/Objects/org.eclipse.xtext.xbase.lib.IntegerExtensions#org.eclipse.xtext.xbase.lib.IntegerExtensions.operator_equals(int,int)"/>
+          <leftOperand xsi:type="xbase:XFeatureCall" feature="//@patterns.26/@bodies.1/@variables.6"/>
+          <rightOperand xsi:type="xbase:XNumberLiteral" value="4"/>
+        </expression>
+      </constraints>
+      <constraints xsi:type="patternLanguage:CheckConstraint">
+        <expression xsi:type="xbase:XBinaryOperation">
+          <feature xsi:type="types:JvmOperation" href="java:/Objects/org.eclipse.xtext.xbase.lib.IntegerExtensions#org.eclipse.xtext.xbase.lib.IntegerExtensions.operator_equals(int,int)"/>
+          <leftOperand xsi:type="xbase:XFeatureCall" feature="//@patterns.26/@bodies.1/@variables.3"/>
+          <rightOperand xsi:type="xbase:XNumberLiteral" value="3"/>
+        </expression>
+      </constraints>
+      <constraints xsi:type="patternLanguage:CheckConstraint">
+        <expression xsi:type="xbase:XBinaryOperation">
+          <feature xsi:type="types:JvmOperation" href="java:/Objects/org.eclipse.xtext.xbase.lib.IntegerExtensions#org.eclipse.xtext.xbase.lib.IntegerExtensions.operator_lessEqualsThan(int,int)"/>
+          <leftOperand xsi:type="xbase:XFeatureCall" feature="//@patterns.26/@bodies.1/@variables.4"/>
+          <rightOperand xsi:type="xbase:XNumberLiteral" value="1"/>
+        </expression>
+      </constraints>
+    </bodies>
+    <bodies>
+      <constraints xsi:type="patternLanguage:PathExpressionConstraint">
+        <head>
+          <type xsi:type="eMFPatternLanguage:ClassType">
+            <classname xsi:type="ecore:EClass" href="http://model/1.0#//Match"/>
+          </type>
+          <tail>
+            <type xsi:type="eMFPatternLanguage:ReferenceType">
+              <refname xsi:type="ecore:EReference" href="http://model/1.0#//Match/Home"/>
+            </type>
+          </tail>
+          <src var="Match"/>
+          <dst xsi:type="patternLanguage:VariableValue">
+            <value var="team1"/>
+          </dst>
+        </head>
+      </constraints>
+      <constraints xsi:type="patternLanguage:PathExpressionConstraint">
+        <head>
+          <type xsi:type="eMFPatternLanguage:ClassType">
+            <classname xsi:type="ecore:EClass" href="http://model/1.0#//Match"/>
+          </type>
+          <tail>
+            <type xsi:type="eMFPatternLanguage:ReferenceType">
+              <refname xsi:type="ecore:EReference" href="http://model/1.0#//Match/Visitor"/>
+            </type>
+          </tail>
+          <src var="Match"/>
+          <dst xsi:type="patternLanguage:VariableValue">
+            <value var="team2"/>
+          </dst>
+        </head>
+      </constraints>
+      <constraints xsi:type="patternLanguage:CompareConstraint">
+        <leftOperand xsi:type="patternLanguage:VariableValue">
+          <value var="S1"/>
+        </leftOperand>
+        <rightOperand xsi:type="patternLanguage:AggregatedValue">
+          <aggregator xsi:type="patternLanguage:CountAggregator"/>
+          <call patternRef="//@patterns.27">
+            <parameters xsi:type="patternLanguage:VariableValue">
+              <value var="team1"/>
+            </parameters>
+          </call>
+        </rightOperand>
+      </constraints>
+      <constraints xsi:type="patternLanguage:CompareConstraint">
+        <leftOperand xsi:type="patternLanguage:VariableValue">
+          <value var="S2"/>
+        </leftOperand>
+        <rightOperand xsi:type="patternLanguage:AggregatedValue">
+          <aggregator xsi:type="patternLanguage:CountAggregator"/>
+          <call patternRef="//@patterns.27">
+            <parameters xsi:type="patternLanguage:VariableValue">
+              <value var="team2"/>
+            </parameters>
+          </call>
+        </rightOperand>
+      </constraints>
+      <constraints xsi:type="patternLanguage:CompareConstraint">
+        <leftOperand xsi:type="patternLanguage:VariableValue">
+          <value var="T1"/>
+        </leftOperand>
+        <rightOperand xsi:type="patternLanguage:AggregatedValue">
+          <aggregator xsi:type="patternLanguage:CountAggregator"/>
+          <call patternRef="//@patterns.25">
+            <parameters xsi:type="patternLanguage:VariableValue">
+              <value var="team1"/>
+            </parameters>
+          </call>
+        </rightOperand>
+      </constraints>
+      <constraints xsi:type="patternLanguage:CompareConstraint">
+        <leftOperand xsi:type="patternLanguage:VariableValue">
+          <value var="T2"/>
+        </leftOperand>
+        <rightOperand xsi:type="patternLanguage:AggregatedValue">
+          <aggregator xsi:type="patternLanguage:CountAggregator"/>
+          <call patternRef="//@patterns.25">
+            <parameters xsi:type="patternLanguage:VariableValue">
+              <value var="team2"/>
+            </parameters>
+          </call>
+        </rightOperand>
+      </constraints>
+      <constraints xsi:type="patternLanguage:CheckConstraint">
+        <expression xsi:type="xbase:XBinaryOperation">
+          <feature xsi:type="types:JvmOperation" href="java:/Objects/org.eclipse.xtext.xbase.lib.IntegerExtensions#org.eclipse.xtext.xbase.lib.IntegerExtensions.operator_equals(int,int)"/>
+          <leftOperand xsi:type="xbase:XFeatureCall" feature="//@patterns.26/@bodies.2/@variables.5"/>
+          <rightOperand xsi:type="xbase:XNumberLiteral" value="5"/>
+        </expression>
+      </constraints>
+      <constraints xsi:type="patternLanguage:CheckConstraint">
+        <expression xsi:type="xbase:XBinaryOperation">
+          <feature xsi:type="types:JvmOperation" href="java:/Objects/org.eclipse.xtext.xbase.lib.IntegerExtensions#org.eclipse.xtext.xbase.lib.IntegerExtensions.operator_equals(int,int)"/>
+          <leftOperand xsi:type="xbase:XFeatureCall" feature="//@patterns.26/@bodies.2/@variables.6"/>
+          <rightOperand xsi:type="xbase:XNumberLiteral" value="5"/>
+        </expression>
+      </constraints>
+      <constraints xsi:type="patternLanguage:CheckConstraint">
+        <expression xsi:type="xbase:XBinaryOperation">
+          <feature xsi:type="types:JvmOperation" href="java:/Objects/org.eclipse.xtext.xbase.lib.IntegerExtensions#org.eclipse.xtext.xbase.lib.IntegerExtensions.operator_equals(int,int)"/>
+          <leftOperand xsi:type="xbase:XFeatureCall" feature="//@patterns.26/@bodies.2/@variables.3"/>
+          <rightOperand xsi:type="xbase:XNumberLiteral" value="3"/>
+        </expression>
+      </constraints>
+      <constraints xsi:type="patternLanguage:CheckConstraint">
+        <expression xsi:type="xbase:XBinaryOperation">
+          <feature xsi:type="types:JvmOperation" href="java:/Objects/org.eclipse.xtext.xbase.lib.IntegerExtensions#org.eclipse.xtext.xbase.lib.IntegerExtensions.operator_lessEqualsThan(int,int)"/>
+          <leftOperand xsi:type="xbase:XFeatureCall" feature="//@patterns.26/@bodies.2/@variables.4"/>
+          <rightOperand xsi:type="xbase:XNumberLiteral" value="2"/>
+        </expression>
+      </constraints>
+    </bodies>
+    <bodies>
+      <constraints xsi:type="patternLanguage:PathExpressionConstraint">
+        <head>
+          <type xsi:type="eMFPatternLanguage:ClassType">
+            <classname xsi:type="ecore:EClass" href="http://model/1.0#//Match"/>
+          </type>
+          <tail>
+            <type xsi:type="eMFPatternLanguage:ReferenceType">
+              <refname xsi:type="ecore:EReference" href="http://model/1.0#//Match/Home"/>
+            </type>
+          </tail>
+          <src var="Match"/>
+          <dst xsi:type="patternLanguage:VariableValue">
+            <value var="team1"/>
+          </dst>
+        </head>
+      </constraints>
+      <constraints xsi:type="patternLanguage:PathExpressionConstraint">
+        <head>
+          <type xsi:type="eMFPatternLanguage:ClassType">
+            <classname xsi:type="ecore:EClass" href="http://model/1.0#//Match"/>
+          </type>
+          <tail>
+            <type xsi:type="eMFPatternLanguage:ReferenceType">
+              <refname xsi:type="ecore:EReference" href="http://model/1.0#//Match/Visitor"/>
+            </type>
+          </tail>
+          <src var="Match"/>
+          <dst xsi:type="patternLanguage:VariableValue">
+            <value var="team2"/>
+          </dst>
+        </head>
+      </constraints>
+      <constraints xsi:type="patternLanguage:CompareConstraint">
+        <leftOperand xsi:type="patternLanguage:VariableValue">
+          <value var="S1"/>
+        </leftOperand>
+        <rightOperand xsi:type="patternLanguage:AggregatedValue">
+          <aggregator xsi:type="patternLanguage:CountAggregator"/>
+          <call patternRef="//@patterns.27">
+            <parameters xsi:type="patternLanguage:VariableValue">
+              <value var="team1"/>
+            </parameters>
+          </call>
+        </rightOperand>
+      </constraints>
+      <constraints xsi:type="patternLanguage:CompareConstraint">
+        <leftOperand xsi:type="patternLanguage:VariableValue">
+          <value var="S2"/>
+        </leftOperand>
+        <rightOperand xsi:type="patternLanguage:AggregatedValue">
+          <aggregator xsi:type="patternLanguage:CountAggregator"/>
+          <call patternRef="//@patterns.27">
+            <parameters xsi:type="patternLanguage:VariableValue">
+              <value var="team2"/>
+            </parameters>
+          </call>
+        </rightOperand>
+      </constraints>
+      <constraints xsi:type="patternLanguage:CompareConstraint">
+        <leftOperand xsi:type="patternLanguage:VariableValue">
+          <value var="T1"/>
+        </leftOperand>
+        <rightOperand xsi:type="patternLanguage:AggregatedValue">
+          <aggregator xsi:type="patternLanguage:CountAggregator"/>
+          <call patternRef="//@patterns.25">
+            <parameters xsi:type="patternLanguage:VariableValue">
+              <value var="team1"/>
+            </parameters>
+          </call>
+        </rightOperand>
+      </constraints>
+      <constraints xsi:type="patternLanguage:CompareConstraint">
+        <leftOperand xsi:type="patternLanguage:VariableValue">
+          <value var="T2"/>
+        </leftOperand>
+        <rightOperand xsi:type="patternLanguage:AggregatedValue">
+          <aggregator xsi:type="patternLanguage:CountAggregator"/>
+          <call patternRef="//@patterns.25">
+            <parameters xsi:type="patternLanguage:VariableValue">
+              <value var="team2"/>
+            </parameters>
+          </call>
+        </rightOperand>
+      </constraints>
+      <constraints xsi:type="patternLanguage:CheckConstraint">
+        <expression xsi:type="xbase:XBinaryOperation">
+          <feature xsi:type="types:JvmOperation" href="java:/Objects/org.eclipse.xtext.xbase.lib.IntegerExtensions#org.eclipse.xtext.xbase.lib.IntegerExtensions.operator_equals(int,int)"/>
+          <leftOperand xsi:type="xbase:XFeatureCall" feature="//@patterns.26/@bodies.3/@variables.5"/>
+          <rightOperand xsi:type="xbase:XNumberLiteral" value="4"/>
+        </expression>
+      </constraints>
+      <constraints xsi:type="patternLanguage:CheckConstraint">
+        <expression xsi:type="xbase:XBinaryOperation">
+          <feature xsi:type="types:JvmOperation" href="java:/Objects/org.eclipse.xtext.xbase.lib.IntegerExtensions#org.eclipse.xtext.xbase.lib.IntegerExtensions.operator_equals(int,int)"/>
+          <leftOperand xsi:type="xbase:XFeatureCall" feature="//@patterns.26/@bodies.3/@variables.6"/>
+          <rightOperand xsi:type="xbase:XNumberLiteral" value="4"/>
+        </expression>
+      </constraints>
+      <constraints xsi:type="patternLanguage:CheckConstraint">
+        <expression xsi:type="xbase:XBinaryOperation">
+          <feature xsi:type="types:JvmOperation" href="java:/Objects/org.eclipse.xtext.xbase.lib.IntegerExtensions#org.eclipse.xtext.xbase.lib.IntegerExtensions.operator_equals(int,int)"/>
+          <leftOperand xsi:type="xbase:XFeatureCall" feature="//@patterns.26/@bodies.3/@variables.3"/>
+          <rightOperand xsi:type="xbase:XNumberLiteral" value="4"/>
+        </expression>
+      </constraints>
+      <constraints xsi:type="patternLanguage:CheckConstraint">
+        <expression xsi:type="xbase:XBinaryOperation">
+          <feature xsi:type="types:JvmOperation" href="java:/Objects/org.eclipse.xtext.xbase.lib.IntegerExtensions#org.eclipse.xtext.xbase.lib.IntegerExtensions.operator_lessEqualsThan(int,int)"/>
+          <leftOperand xsi:type="xbase:XFeatureCall" feature="//@patterns.26/@bodies.3/@variables.4"/>
+          <rightOperand xsi:type="xbase:XNumberLiteral" value="1"/>
+        </expression>
+      </constraints>
+    </bodies>
+    <bodies>
+      <constraints xsi:type="patternLanguage:PathExpressionConstraint">
+        <head>
+          <type xsi:type="eMFPatternLanguage:ClassType">
+            <classname xsi:type="ecore:EClass" href="http://model/1.0#//Match"/>
+          </type>
+          <tail>
+            <type xsi:type="eMFPatternLanguage:ReferenceType">
+              <refname xsi:type="ecore:EReference" href="http://model/1.0#//Match/Home"/>
+            </type>
+          </tail>
+          <src var="Match"/>
+          <dst xsi:type="patternLanguage:VariableValue">
+            <value var="team1"/>
+          </dst>
+        </head>
+      </constraints>
+      <constraints xsi:type="patternLanguage:PathExpressionConstraint">
+        <head>
+          <type xsi:type="eMFPatternLanguage:ClassType">
+            <classname xsi:type="ecore:EClass" href="http://model/1.0#//Match"/>
+          </type>
+          <tail>
+            <type xsi:type="eMFPatternLanguage:ReferenceType">
+              <refname xsi:type="ecore:EReference" href="http://model/1.0#//Match/Visitor"/>
+            </type>
+          </tail>
+          <src var="Match"/>
+          <dst xsi:type="patternLanguage:VariableValue">
+            <value var="team2"/>
+          </dst>
+        </head>
+      </constraints>
+      <constraints xsi:type="patternLanguage:CompareConstraint">
+        <leftOperand xsi:type="patternLanguage:VariableValue">
+          <value var="S1"/>
+        </leftOperand>
+        <rightOperand xsi:type="patternLanguage:AggregatedValue">
+          <aggregator xsi:type="patternLanguage:CountAggregator"/>
+          <call patternRef="//@patterns.27">
+            <parameters xsi:type="patternLanguage:VariableValue">
+              <value var="team1"/>
+            </parameters>
+          </call>
+        </rightOperand>
+      </constraints>
+      <constraints xsi:type="patternLanguage:CompareConstraint">
+        <leftOperand xsi:type="patternLanguage:VariableValue">
+          <value var="S2"/>
+        </leftOperand>
+        <rightOperand xsi:type="patternLanguage:AggregatedValue">
+          <aggregator xsi:type="patternLanguage:CountAggregator"/>
+          <call patternRef="//@patterns.27">
+            <parameters xsi:type="patternLanguage:VariableValue">
+              <value var="team2"/>
+            </parameters>
+          </call>
+        </rightOperand>
+      </constraints>
+      <constraints xsi:type="patternLanguage:CompareConstraint">
+        <leftOperand xsi:type="patternLanguage:VariableValue">
+          <value var="T1"/>
+        </leftOperand>
+        <rightOperand xsi:type="patternLanguage:AggregatedValue">
+          <aggregator xsi:type="patternLanguage:CountAggregator"/>
+          <call patternRef="//@patterns.25">
+            <parameters xsi:type="patternLanguage:VariableValue">
+              <value var="team1"/>
+            </parameters>
+          </call>
+        </rightOperand>
+      </constraints>
+      <constraints xsi:type="patternLanguage:CompareConstraint">
+        <leftOperand xsi:type="patternLanguage:VariableValue">
+          <value var="T2"/>
+        </leftOperand>
+        <rightOperand xsi:type="patternLanguage:AggregatedValue">
+          <aggregator xsi:type="patternLanguage:CountAggregator"/>
+          <call patternRef="//@patterns.25">
+            <parameters xsi:type="patternLanguage:VariableValue">
+              <value var="team2"/>
+            </parameters>
+          </call>
+        </rightOperand>
+      </constraints>
+      <constraints xsi:type="patternLanguage:CheckConstraint">
+        <expression xsi:type="xbase:XBinaryOperation">
+          <feature xsi:type="types:JvmOperation" href="java:/Objects/org.eclipse.xtext.xbase.lib.IntegerExtensions#org.eclipse.xtext.xbase.lib.IntegerExtensions.operator_equals(int,int)"/>
+          <leftOperand xsi:type="xbase:XFeatureCall" feature="//@patterns.26/@bodies.4/@variables.5"/>
+          <rightOperand xsi:type="xbase:XNumberLiteral" value="5"/>
+        </expression>
+      </constraints>
+      <constraints xsi:type="patternLanguage:CheckConstraint">
+        <expression xsi:type="xbase:XBinaryOperation">
+          <feature xsi:type="types:JvmOperation" href="java:/Objects/org.eclipse.xtext.xbase.lib.IntegerExtensions#org.eclipse.xtext.xbase.lib.IntegerExtensions.operator_equals(int,int)"/>
+          <leftOperand xsi:type="xbase:XFeatureCall" feature="//@patterns.26/@bodies.4/@variables.6"/>
+          <rightOperand xsi:type="xbase:XNumberLiteral" value="5"/>
+        </expression>
+      </constraints>
+      <constraints xsi:type="patternLanguage:CheckConstraint">
+        <expression xsi:type="xbase:XBinaryOperation">
+          <feature xsi:type="types:JvmOperation" href="java:/Objects/org.eclipse.xtext.xbase.lib.IntegerExtensions#org.eclipse.xtext.xbase.lib.IntegerExtensions.operator_equals(int,int)"/>
+          <leftOperand xsi:type="xbase:XFeatureCall" feature="//@patterns.26/@bodies.4/@variables.3"/>
+          <rightOperand xsi:type="xbase:XNumberLiteral" value="4"/>
+        </expression>
+      </constraints>
+      <constraints xsi:type="patternLanguage:CheckConstraint">
+        <expression xsi:type="xbase:XBinaryOperation">
+          <feature xsi:type="types:JvmOperation" href="java:/Objects/org.eclipse.xtext.xbase.lib.IntegerExtensions#org.eclipse.xtext.xbase.lib.IntegerExtensions.operator_lessEqualsThan(int,int)"/>
+          <leftOperand xsi:type="xbase:XFeatureCall" feature="//@patterns.26/@bodies.4/@variables.4"/>
+          <rightOperand xsi:type="xbase:XNumberLiteral" value="2"/>
+        </expression>
+      </constraints>
+    </bodies>
+    <bodies>
+      <constraints xsi:type="patternLanguage:PathExpressionConstraint">
+        <head>
+          <type xsi:type="eMFPatternLanguage:ClassType">
+            <classname xsi:type="ecore:EClass" href="http://model/1.0#//Match"/>
+          </type>
+          <tail>
+            <type xsi:type="eMFPatternLanguage:ReferenceType">
+              <refname xsi:type="ecore:EReference" href="http://model/1.0#//Match/Home"/>
+            </type>
+          </tail>
+          <src var="Match"/>
+          <dst xsi:type="patternLanguage:VariableValue">
+            <value var="team1"/>
+          </dst>
+        </head>
+      </constraints>
+      <constraints xsi:type="patternLanguage:PathExpressionConstraint">
+        <head>
+          <type xsi:type="eMFPatternLanguage:ClassType">
+            <classname xsi:type="ecore:EClass" href="http://model/1.0#//Match"/>
+          </type>
+          <tail>
+            <type xsi:type="eMFPatternLanguage:ReferenceType">
+              <refname xsi:type="ecore:EReference" href="http://model/1.0#//Match/Visitor"/>
+            </type>
+          </tail>
+          <src var="Match"/>
+          <dst xsi:type="patternLanguage:VariableValue">
+            <value var="team2"/>
+          </dst>
+        </head>
+      </constraints>
+      <constraints xsi:type="patternLanguage:CompareConstraint">
+        <leftOperand xsi:type="patternLanguage:VariableValue">
+          <value var="S1"/>
+        </leftOperand>
+        <rightOperand xsi:type="patternLanguage:AggregatedValue">
+          <aggregator xsi:type="patternLanguage:CountAggregator"/>
+          <call patternRef="//@patterns.27">
+            <parameters xsi:type="patternLanguage:VariableValue">
+              <value var="team1"/>
+            </parameters>
+          </call>
+        </rightOperand>
+      </constraints>
+      <constraints xsi:type="patternLanguage:CompareConstraint">
+        <leftOperand xsi:type="patternLanguage:VariableValue">
+          <value var="S2"/>
+        </leftOperand>
+        <rightOperand xsi:type="patternLanguage:AggregatedValue">
+          <aggregator xsi:type="patternLanguage:CountAggregator"/>
+          <call patternRef="//@patterns.27">
+            <parameters xsi:type="patternLanguage:VariableValue">
+              <value var="team2"/>
+            </parameters>
+          </call>
+        </rightOperand>
+      </constraints>
+      <constraints xsi:type="patternLanguage:CompareConstraint">
+        <leftOperand xsi:type="patternLanguage:VariableValue">
+          <value var="T1"/>
+        </leftOperand>
+        <rightOperand xsi:type="patternLanguage:AggregatedValue">
+          <aggregator xsi:type="patternLanguage:CountAggregator"/>
+          <call patternRef="//@patterns.25">
+            <parameters xsi:type="patternLanguage:VariableValue">
+              <value var="team1"/>
+            </parameters>
+          </call>
+        </rightOperand>
+      </constraints>
+      <constraints xsi:type="patternLanguage:CompareConstraint">
+        <leftOperand xsi:type="patternLanguage:VariableValue">
+          <value var="T2"/>
+        </leftOperand>
+        <rightOperand xsi:type="patternLanguage:AggregatedValue">
+          <aggregator xsi:type="patternLanguage:CountAggregator"/>
+          <call patternRef="//@patterns.25">
+            <parameters xsi:type="patternLanguage:VariableValue">
+              <value var="team2"/>
+            </parameters>
+          </call>
+        </rightOperand>
+      </constraints>
+      <constraints xsi:type="patternLanguage:CheckConstraint">
+        <expression xsi:type="xbase:XBinaryOperation">
+          <feature xsi:type="types:JvmOperation" href="java:/Objects/org.eclipse.xtext.xbase.lib.IntegerExtensions#org.eclipse.xtext.xbase.lib.IntegerExtensions.operator_equals(int,int)"/>
+          <leftOperand xsi:type="xbase:XFeatureCall" feature="//@patterns.26/@bodies.5/@variables.5"/>
+          <rightOperand xsi:type="xbase:XNumberLiteral" value="5"/>
+        </expression>
+      </constraints>
+      <constraints xsi:type="patternLanguage:CheckConstraint">
+        <expression xsi:type="xbase:XBinaryOperation">
+          <feature xsi:type="types:JvmOperation" href="java:/Objects/org.eclipse.xtext.xbase.lib.IntegerExtensions#org.eclipse.xtext.xbase.lib.IntegerExtensions.operator_equals(int,int)"/>
+          <leftOperand xsi:type="xbase:XFeatureCall" feature="//@patterns.26/@bodies.5/@variables.6"/>
+          <rightOperand xsi:type="xbase:XNumberLiteral" value="5"/>
+        </expression>
+      </constraints>
+      <constraints xsi:type="patternLanguage:CheckConstraint">
+        <expression xsi:type="xbase:XBinaryOperation">
+          <feature xsi:type="types:JvmOperation" href="java:/Objects/org.eclipse.xtext.xbase.lib.IntegerExtensions#org.eclipse.xtext.xbase.lib.IntegerExtensions.operator_equals(int,int)"/>
+          <leftOperand xsi:type="xbase:XFeatureCall" feature="//@patterns.26/@bodies.5/@variables.3"/>
+          <rightOperand xsi:type="xbase:XNumberLiteral" value="5"/>
+        </expression>
+      </constraints>
+      <constraints xsi:type="patternLanguage:CheckConstraint">
+        <expression xsi:type="xbase:XBinaryOperation">
+          <feature xsi:type="types:JvmOperation" href="java:/Objects/org.eclipse.xtext.xbase.lib.IntegerExtensions#org.eclipse.xtext.xbase.lib.IntegerExtensions.operator_lessEqualsThan(int,int)"/>
+          <leftOperand xsi:type="xbase:XFeatureCall" feature="//@patterns.26/@bodies.5/@variables.4"/>
+          <rightOperand xsi:type="xbase:XNumberLiteral" value="3"/>
+        </expression>
+      </constraints>
+    </bodies>
+    <bodies>
+      <constraints xsi:type="patternLanguage:PathExpressionConstraint">
+        <head>
+          <type xsi:type="eMFPatternLanguage:ClassType">
+            <classname xsi:type="ecore:EClass" href="http://model/1.0#//Match"/>
+          </type>
+          <tail>
+            <type xsi:type="eMFPatternLanguage:ReferenceType">
+              <refname xsi:type="ecore:EReference" href="http://model/1.0#//Match/Home"/>
+            </type>
+          </tail>
+          <src var="Match"/>
+          <dst xsi:type="patternLanguage:VariableValue">
+            <value var="team1"/>
+          </dst>
+        </head>
+      </constraints>
+      <constraints xsi:type="patternLanguage:PathExpressionConstraint">
+        <head>
+          <type xsi:type="eMFPatternLanguage:ClassType">
+            <classname xsi:type="ecore:EClass" href="http://model/1.0#//Match"/>
+          </type>
+          <tail>
+            <type xsi:type="eMFPatternLanguage:ReferenceType">
+              <refname xsi:type="ecore:EReference" href="http://model/1.0#//Match/Visitor"/>
+            </type>
+          </tail>
+          <src var="Match"/>
+          <dst xsi:type="patternLanguage:VariableValue">
+            <value var="team2"/>
+          </dst>
+        </head>
+      </constraints>
+      <constraints xsi:type="patternLanguage:CompareConstraint">
+        <leftOperand xsi:type="patternLanguage:VariableValue">
+          <value var="S1"/>
+        </leftOperand>
+        <rightOperand xsi:type="patternLanguage:AggregatedValue">
+          <aggregator xsi:type="patternLanguage:CountAggregator"/>
+          <call patternRef="//@patterns.27">
+            <parameters xsi:type="patternLanguage:VariableValue">
+              <value var="team1"/>
+            </parameters>
+          </call>
+        </rightOperand>
+      </constraints>
+      <constraints xsi:type="patternLanguage:CompareConstraint">
+        <leftOperand xsi:type="patternLanguage:VariableValue">
+          <value var="S2"/>
+        </leftOperand>
+        <rightOperand xsi:type="patternLanguage:AggregatedValue">
+          <aggregator xsi:type="patternLanguage:CountAggregator"/>
+          <call patternRef="//@patterns.27">
+            <parameters xsi:type="patternLanguage:VariableValue">
+              <value var="team2"/>
+            </parameters>
+          </call>
+        </rightOperand>
+      </constraints>
+      <constraints xsi:type="patternLanguage:CompareConstraint">
+        <leftOperand xsi:type="patternLanguage:VariableValue">
+          <value var="T1"/>
+        </leftOperand>
+        <rightOperand xsi:type="patternLanguage:AggregatedValue">
+          <aggregator xsi:type="patternLanguage:CountAggregator"/>
+          <call patternRef="//@patterns.25">
+            <parameters xsi:type="patternLanguage:VariableValue">
+              <value var="team1"/>
+            </parameters>
+          </call>
+        </rightOperand>
+      </constraints>
+      <constraints xsi:type="patternLanguage:CompareConstraint">
+        <leftOperand xsi:type="patternLanguage:VariableValue">
+          <value var="T2"/>
+        </leftOperand>
+        <rightOperand xsi:type="patternLanguage:AggregatedValue">
+          <aggregator xsi:type="patternLanguage:CountAggregator"/>
+          <call patternRef="//@patterns.25">
+            <parameters xsi:type="patternLanguage:VariableValue">
+              <value var="team2"/>
+            </parameters>
+          </call>
+        </rightOperand>
+      </constraints>
+      <constraints xsi:type="patternLanguage:CheckConstraint">
+        <expression xsi:type="xbase:XBinaryOperation">
+          <feature xsi:type="types:JvmOperation" href="java:/Objects/org.eclipse.xtext.xbase.lib.ObjectExtensions#org.eclipse.xtext.xbase.lib.ObjectExtensions.operator_equals(java.lang.Object,java.lang.Object)"/>
+          <leftOperand xsi:type="xbase:XFeatureCall" feature="//@patterns.26/@bodies.6/@variables.5"/>
+          <rightOperand xsi:type="xbase:XFeatureCall" feature="//@patterns.26/@bodies.6/@variables.6"/>
+        </expression>
+      </constraints>
+      <constraints xsi:type="patternLanguage:CheckConstraint">
+        <expression xsi:type="xbase:XBinaryOperation">
+          <feature xsi:type="types:JvmOperation" href="java:/Objects/org.eclipse.xtext.xbase.lib.IntegerExtensions#org.eclipse.xtext.xbase.lib.IntegerExtensions.operator_greaterThan(int,int)"/>
+          <leftOperand xsi:type="xbase:XFeatureCall" feature="//@patterns.26/@bodies.6/@variables.5"/>
+          <rightOperand xsi:type="xbase:XNumberLiteral" value="5"/>
+        </expression>
+      </constraints>
+      <constraints xsi:type="patternLanguage:CheckConstraint">
+        <expression xsi:type="xbase:XBinaryOperation">
+          <feature xsi:type="types:JvmOperation" href="java:/Objects/org.eclipse.xtext.xbase.lib.IntegerExtensions#org.eclipse.xtext.xbase.lib.IntegerExtensions.operator_greaterThan(int,int)"/>
+          <leftOperand xsi:type="xbase:XFeatureCall" feature="//@patterns.26/@bodies.6/@variables.6"/>
+          <rightOperand xsi:type="xbase:XNumberLiteral" value="5"/>
+        </expression>
+      </constraints>
+      <constraints xsi:type="patternLanguage:CheckConstraint">
+        <expression xsi:type="xbase:XBinaryOperation">
+          <feature xsi:type="types:JvmOperation" href="java:/Objects/org.eclipse.xtext.xbase.lib.IntegerExtensions#org.eclipse.xtext.xbase.lib.IntegerExtensions.operator_greaterThan(int,int)"/>
+          <leftOperand xsi:type="xbase:XBinaryOperation">
+            <feature xsi:type="types:JvmOperation" href="java:/Objects/org.eclipse.xtext.xbase.lib.IntegerExtensions#org.eclipse.xtext.xbase.lib.IntegerExtensions.operator_minus(int,int)"/>
+            <leftOperand xsi:type="xbase:XFeatureCall" feature="//@patterns.26/@bodies.6/@variables.3"/>
+            <rightOperand xsi:type="xbase:XFeatureCall" feature="//@patterns.26/@bodies.6/@variables.4"/>
+          </leftOperand>
+          <rightOperand xsi:type="xbase:XNumberLiteral" value="1"/>
+        </expression>
+      </constraints>
+    </bodies>
+  </patterns>
+  <patterns name="constraints.successPenalties" fileName="platform:/resource/hu.bme.mit.inf.mdsd.1.model.incquery/src/constraints/constraints.eiq">
+    <modifiers private="true"/>
+    <parameters name="Team">
+      <type xsi:type="eMFPatternLanguage:ClassType">
+        <classname xsi:type="ecore:EClass" href="http://model/1.0#//Team"/>
+      </type>
+    </parameters>
+    <bodies>
+      <constraints xsi:type="patternLanguage:PathExpressionConstraint">
+        <head>
+          <type xsi:type="eMFPatternLanguage:ClassType">
+            <classname xsi:type="ecore:EClass" href="http://model/1.0#//Team"/>
+          </type>
+          <tail>
+            <type xsi:type="eMFPatternLanguage:ReferenceType">
+              <refname xsi:type="ecore:EReference" href="http://model/1.0#//Team/penalties"/>
+            </type>
+          </tail>
+          <src var="Team"/>
+          <dst xsi:type="patternLanguage:VariableValue">
+            <value var="p"/>
+          </dst>
+        </head>
+      </constraints>
+      <constraints xsi:type="patternLanguage:PathExpressionConstraint">
+        <head>
+          <type xsi:type="eMFPatternLanguage:ClassType">
+            <classname xsi:type="ecore:EClass" href="http://model/1.0#//Penalty"/>
+          </type>
+          <tail>
+            <type xsi:type="eMFPatternLanguage:ReferenceType">
+              <refname xsi:type="ecore:EAttribute" href="http://model/1.0#//Penalty/isSuccess"/>
+            </type>
+          </tail>
+          <src var="p"/>
+          <dst xsi:type="patternLanguage:BoolValue" value="true"/>
+        </head>
+      </constraints>
+    </bodies>
+  </patterns>
+  <patterns name="constraints.refereeNotPerson" fileName="platform:/resource/hu.bme.mit.inf.mdsd.1.model.incquery/src/constraints/constraints.eiq">
+    <annotations name="Constraint">
+      <parameters name="location">
+        <value xsi:type="patternLanguage:VariableValue">
+          <value var="Person"/>
+        </value>
+      </parameters>
+      <parameters name="severity">
+        <value xsi:type="patternLanguage:StringValue" value="error"/>
+      </parameters>
+      <parameters name="message">
+        <value xsi:type="patternLanguage:StringValue" value="$Person$ cannot be TeamMember, because he/she is the referee"/>
+      </parameters>
+    </annotations>
+    <parameters name="Person">
+      <type xsi:type="eMFPatternLanguage:ClassType">
+        <classname xsi:type="ecore:EClass" href="http://model/1.0#//Person"/>
+      </type>
+    </parameters>
+    <bodies>
+      <constraints xsi:type="eMFPatternLanguage:EClassifierConstraint">
+        <type xsi:type="eMFPatternLanguage:ClassType">
+          <classname xsi:type="ecore:EClass" href="http://model/1.0#//TeamMember"/>
+        </type>
+        <var var="Person"/>
+      </constraints>
+      <constraints xsi:type="patternLanguage:PathExpressionConstraint">
+        <head>
+          <type xsi:type="eMFPatternLanguage:ClassType">
+            <classname xsi:type="ecore:EClass" href="http://model/1.0#//Match"/>
+          </type>
+          <tail>
+            <type xsi:type="eMFPatternLanguage:ReferenceType">
+              <refname xsi:type="ecore:EReference" href="http://model/1.0#//Match/Referee"/>
+            </type>
+          </tail>
+          <src var="_"/>
+          <dst xsi:type="patternLanguage:VariableValue">
+            <value var="Person"/>
+          </dst>
+        </head>
+      </constraints>
+    </bodies>
+  </patterns>
+  <patterns name="constraints.assistantNotPerson" fileName="platform:/resource/hu.bme.mit.inf.mdsd.1.model.incquery/src/constraints/constraints.eiq">
+    <annotations name="Constraint">
+      <parameters name="location">
+        <value xsi:type="patternLanguage:VariableValue">
+          <value var="Person"/>
+        </value>
+      </parameters>
+      <parameters name="severity">
+        <value xsi:type="patternLanguage:StringValue" value="error"/>
+      </parameters>
+      <parameters name="message">
+        <value xsi:type="patternLanguage:StringValue" value="$Person$ cannot be TeamMember, because he/she is the assistant"/>
+      </parameters>
+    </annotations>
+    <parameters name="Person">
+      <type xsi:type="eMFPatternLanguage:ClassType">
+        <classname xsi:type="ecore:EClass" href="http://model/1.0#//Person"/>
+      </type>
+    </parameters>
+    <bodies>
+      <constraints xsi:type="eMFPatternLanguage:EClassifierConstraint">
+        <type xsi:type="eMFPatternLanguage:ClassType">
+          <classname xsi:type="ecore:EClass" href="http://model/1.0#//TeamMember"/>
+        </type>
+        <var var="Person"/>
+      </constraints>
+      <constraints xsi:type="patternLanguage:PathExpressionConstraint">
+        <head>
+          <type xsi:type="eMFPatternLanguage:ClassType">
+            <classname xsi:type="ecore:EClass" href="http://model/1.0#//Match"/>
+          </type>
+          <tail>
+            <type xsi:type="eMFPatternLanguage:ReferenceType">
+              <refname xsi:type="ecore:EReference" href="http://model/1.0#//Match/Assistant"/>
+            </type>
+          </tail>
+          <src var="_"/>
+          <dst xsi:type="patternLanguage:VariableValue">
+            <value var="Person"/>
+          </dst>
+        </head>
+      </constraints>
+    </bodies>
+  </patterns>
+  <patterns name="constraints.thirdRefereeNotPerson" fileName="platform:/resource/hu.bme.mit.inf.mdsd.1.model.incquery/src/constraints/constraints.eiq">
+    <annotations name="Constraint">
+      <parameters name="location">
+        <value xsi:type="patternLanguage:VariableValue">
+          <value var="Person"/>
+        </value>
+      </parameters>
+      <parameters name="severity">
+        <value xsi:type="patternLanguage:StringValue" value="error"/>
+      </parameters>
+      <parameters name="message">
+        <value xsi:type="patternLanguage:StringValue" value="$Person$ cannot be TeamMember, because he/she is the third referee"/>
+      </parameters>
+    </annotations>
+    <parameters name="Person">
+      <type xsi:type="eMFPatternLanguage:ClassType">
+        <classname xsi:type="ecore:EClass" href="http://model/1.0#//Person"/>
+      </type>
+    </parameters>
+    <bodies>
+      <constraints xsi:type="eMFPatternLanguage:EClassifierConstraint">
+        <type xsi:type="eMFPatternLanguage:ClassType">
+          <classname xsi:type="ecore:EClass" href="http://model/1.0#//TeamMember"/>
+        </type>
+        <var var="Person"/>
+      </constraints>
+      <constraints xsi:type="patternLanguage:PathExpressionConstraint">
+        <head>
+          <type xsi:type="eMFPatternLanguage:ClassType">
+            <classname xsi:type="ecore:EClass" href="http://model/1.0#//Match"/>
+          </type>
+          <tail>
+            <type xsi:type="eMFPatternLanguage:ReferenceType">
+              <refname xsi:type="ecore:EReference" href="http://model/1.0#//Match/ThirdReferee"/>
+            </type>
+          </tail>
+          <src var="_"/>
+          <dst xsi:type="patternLanguage:VariableValue">
+            <value var="Person"/>
+          </dst>
+        </head>
+      </constraints>
+    </bodies>
+  </patterns>
+  <patterns name="constraints.supervisorNotPerson" fileName="platform:/resource/hu.bme.mit.inf.mdsd.1.model.incquery/src/constraints/constraints.eiq">
+    <annotations name="Constraint">
+      <parameters name="location">
+        <value xsi:type="patternLanguage:VariableValue">
+          <value var="Person"/>
+        </value>
+      </parameters>
+      <parameters name="severity">
+        <value xsi:type="patternLanguage:StringValue" value="error"/>
+      </parameters>
+      <parameters name="message">
+        <value xsi:type="patternLanguage:StringValue" value="$Person$ cannot be TeamMember, because he/she is the supervisor"/>
+      </parameters>
+    </annotations>
+    <parameters name="Person">
+      <type xsi:type="eMFPatternLanguage:ClassType">
+        <classname xsi:type="ecore:EClass" href="http://model/1.0#//Person"/>
+      </type>
+    </parameters>
+    <bodies>
+      <constraints xsi:type="eMFPatternLanguage:EClassifierConstraint">
+        <type xsi:type="eMFPatternLanguage:ClassType">
+          <classname xsi:type="ecore:EClass" href="http://model/1.0#//TeamMember"/>
+        </type>
+        <var var="Person"/>
+      </constraints>
+      <constraints xsi:type="patternLanguage:PathExpressionConstraint">
+        <head>
+          <type xsi:type="eMFPatternLanguage:ClassType">
+            <classname xsi:type="ecore:EClass" href="http://model/1.0#//Match"/>
+          </type>
+          <tail>
+            <type xsi:type="eMFPatternLanguage:ReferenceType">
+              <refname xsi:type="ecore:EReference" href="http://model/1.0#//Match/Supervisor"/>
+            </type>
+          </tail>
+          <src var="_"/>
+          <dst xsi:type="patternLanguage:VariableValue">
+            <value var="Person"/>
           </dst>
         </head>
       </constraints>
@@ -2001,7 +3296,7 @@
         </leftOperand>
         <rightOperand xsi:type="patternLanguage:AggregatedValue">
           <aggregator xsi:type="patternLanguage:CountAggregator"/>
-          <call patternRef="//@patterns.22">
+          <call patternRef="//@patterns.32">
             <parameters xsi:type="patternLanguage:VariableValue">
               <value var="team"/>
             </parameters>
@@ -2027,7 +3322,7 @@
     </parameters>
     <bodies>
       <constraints xsi:type="patternLanguage:PatternCompositionConstraint">
-        <call patternRef="//@patterns.27">
+        <call patternRef="//@patterns.37">
           <parameters xsi:type="patternLanguage:VariableValue">
             <value var="teamMember"/>
           </parameters>
@@ -2045,7 +3340,7 @@
     </bodies>
     <bodies>
       <constraints xsi:type="patternLanguage:PatternCompositionConstraint" negative="true">
-        <call patternRef="//@patterns.27">
+        <call patternRef="//@patterns.37">
           <parameters xsi:type="patternLanguage:VariableValue">
             <value var="teamMember"/>
           </parameters>
@@ -2177,7 +3472,7 @@
     </parameters>
     <bodies>
       <constraints xsi:type="patternLanguage:PatternCompositionConstraint">
-        <call patternRef="//@patterns.29">
+        <call patternRef="//@patterns.39">
           <parameters xsi:type="patternLanguage:VariableValue">
             <value var="teamMember"/>
           </parameters>
@@ -2195,7 +3490,7 @@
     </bodies>
     <bodies>
       <constraints xsi:type="patternLanguage:PatternCompositionConstraint" negative="true">
-        <call patternRef="//@patterns.29">
+        <call patternRef="//@patterns.39">
           <parameters xsi:type="patternLanguage:VariableValue">
             <value var="teamMember"/>
           </parameters>
@@ -2289,7 +3584,7 @@
           </type>
           <tail>
             <type xsi:type="eMFPatternLanguage:ReferenceType">
-              <refname xsi:type="ecore:EReference" href="http://model/1.0#//Match/home"/>
+              <refname xsi:type="ecore:EReference" href="http://model/1.0#//Match/Home"/>
             </type>
           </tail>
           <src var="match"/>
@@ -2307,7 +3602,7 @@
           </type>
           <tail>
             <type xsi:type="eMFPatternLanguage:ReferenceType">
-              <refname xsi:type="ecore:EReference" href="http://model/1.0#//Match/visitor"/>
+              <refname xsi:type="ecore:EReference" href="http://model/1.0#//Match/Visitor"/>
             </type>
           </tail>
           <src var="match"/>
@@ -2319,9 +3614,9 @@
     </bodies>
   </patterns>
   <importPackages xsi:type="eMFPatternLanguage:PackageImport">
-    <ePackage href="http://model/1.0#/"/>
+    <ePackage href="http://www.eclipse.org/emf/2002/Ecore#/"/>
   </importPackages>
   <importPackages xsi:type="eMFPatternLanguage:PackageImport">
-    <ePackage href="http://www.eclipse.org/emf/2002/Ecore#/"/>
+    <ePackage href="http://model/1.0#/"/>
   </importPackages>
 </eMFPatternLanguage:PatternModel>

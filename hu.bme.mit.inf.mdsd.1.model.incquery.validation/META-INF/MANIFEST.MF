@@ -6,5 +6,6 @@ Bundle-Version: 0.0.1.qualifier
 Require-Bundle: hu.bme.mit.inf.mdsd.1.model.incquery,
  hu.bme.mit.inf.mdsd.1.model,
  org.eclipse.incquery.runtime,
- org.eclipse.incquery.validation.runtime
+ org.eclipse.incquery.validation.runtime,
+ org.eclipse.emf.ecore
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6

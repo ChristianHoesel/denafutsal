@@ -811,25 +811,25 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 		initEReference(getMatch_ThirdReferee(), this.getPerson(), null, "ThirdReferee", null, 1, 1, Match.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getMatch_Supervisor(), this.getPerson(), null, "Supervisor", null, 1, 1, Match.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getMatch_Events(), this.getEvent(), null, "events", null, 0, -1, Match.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getMatch_Home(), this.getTeam(), null, "home", null, 1, 1, Match.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getMatch_Visitor(), this.getTeam(), null, "visitor", null, 1, 1, Match.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getMatch_Home(), this.getTeam(), null, "Home", null, 1, 1, Match.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getMatch_Visitor(), this.getTeam(), null, "Visitor", null, 1, 1, Match.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(personEClass, Person.class, "Person", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getPerson_Name(), ecorePackage.getEString(), "name", null, 0, 1, Person.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(teamEClass, Team.class, "Team", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getTeam_Name(), ecorePackage.getEString(), "name", null, 0, 1, Team.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getTeam_Captain(), this.getPlayer(), null, "captain", null, 1, 1, Team.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getTeam_StartingLine(), this.getPlayer(), null, "startingLine", null, 5, 5, Team.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getTeam_Substitutes(), this.getPlayer(), null, "substitutes", null, 3, 7, Team.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getTeam_Captain(), this.getPlayer(), null, "captain", null, 1, 1, Team.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getTeam_StartingLine(), this.getPlayer(), null, "startingLine", null, 5, 5, Team.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getTeam_Substitutes(), this.getPlayer(), null, "substitutes", null, 3, 7, Team.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getTeam_Staff(), this.getStaffMember(), null, "staff", null, 0, 10, Team.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getTeam_Goals(), this.getEvent(), null, "goals", null, 0, -1, Team.class, IS_TRANSIENT, IS_VOLATILE, !IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
 		initEReference(getTeam_Penalties(), this.getPenalty(), null, "penalties", null, 0, -1, Team.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getTeam_Cards(), this.getEvent(), null, "cards", null, 0, -1, Team.class, IS_TRANSIENT, IS_VOLATILE, !IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
 		initEReference(getTeam_RedBans(), this.getEvent(), null, "redBans", null, 0, -1, Team.class, IS_TRANSIENT, IS_VOLATILE, !IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
 		initEAttribute(getTeam_GoalCount(), ecorePackage.getEInt(), "goalCount", null, 0, 1, Team.class, IS_TRANSIENT, IS_VOLATILE, !IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
-		initEReference(getTeam_Members(), this.getTeamMember(), null, "members", null, 8, 22, Team.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getTeam_Match(), this.getMatch(), null, "match", null, 1, 1, Team.class, IS_TRANSIENT, IS_VOLATILE, !IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
+		initEReference(getTeam_Members(), this.getTeamMember(), null, "Members", null, 8, 22, Team.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getTeam_Match(), this.getMatch(), null, "match", null, 1, 1, Team.class, IS_TRANSIENT, IS_VOLATILE, !IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, IS_UNSETTABLE, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
 
 		initEClass(teamMemberEClass, TeamMember.class, "TeamMember", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getTeamMember_Team(), this.getTeam(), null, "team", null, 1, 1, TeamMember.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -891,6 +891,8 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 		// Create annotations
 		// org.eclipse.viatra2.emf.incquery.derived.feature
 		createOrgAnnotations();
+		// org.eclipse.incquery.querybasedfeature
+		createOrg_1Annotations();
 	}
 
 	/**
@@ -906,37 +908,89 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 		   source, 
 		   new String[] {
 			 "patternFQN", "derived.goals"
-		   });		
+		   });			
 		addAnnotation
 		  (getTeam_Cards(), 
 		   source, 
 		   new String[] {
 			 "patternFQN", "derived.cards"
-		   });		
+		   });			
 		addAnnotation
 		  (getTeam_RedBans(), 
 		   source, 
 		   new String[] {
 			 "patternFQN", "derived.redBans"
-		   });		
+		   });			
 		addAnnotation
 		  (getTeam_GoalCount(), 
 		   source, 
 		   new String[] {
 			 "patternFQN", "derived.goalCount"
-		   });		
+		   });			
 		addAnnotation
 		  (getTeam_Match(), 
 		   source, 
 		   new String[] {
 			 "patternFQN", "derived.match"
-		   });		
+		   });			
 		addAnnotation
 		  (getTeamMember_IsSentOff(), 
 		   source, 
 		   new String[] {
 			 "patternFQN", "derived.isSentOff"
-		   });		
+		   });			
+		addAnnotation
+		  (getTeamMember_HasYellowCard(), 
+		   source, 
+		   new String[] {
+			 "patternFQN", "derived.hasYellowCard"
+		   });	
+	}
+
+	/**
+	 * Initializes the annotations for <b>org.eclipse.incquery.querybasedfeature</b>.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void createOrg_1Annotations() {
+		String source = "org.eclipse.incquery.querybasedfeature";			
+		addAnnotation
+		  (getTeam_Goals(), 
+		   source, 
+		   new String[] {
+			 "patternFQN", "derived.goals"
+		   });			
+		addAnnotation
+		  (getTeam_Cards(), 
+		   source, 
+		   new String[] {
+			 "patternFQN", "derived.cards"
+		   });			
+		addAnnotation
+		  (getTeam_RedBans(), 
+		   source, 
+		   new String[] {
+			 "patternFQN", "derived.redBans"
+		   });			
+		addAnnotation
+		  (getTeam_GoalCount(), 
+		   source, 
+		   new String[] {
+			 "patternFQN", "derived.goalCount"
+		   });			
+		addAnnotation
+		  (getTeam_Match(), 
+		   source, 
+		   new String[] {
+			 "patternFQN", "derived.match"
+		   });			
+		addAnnotation
+		  (getTeamMember_IsSentOff(), 
+		   source, 
+		   new String[] {
+			 "patternFQN", "derived.isSentOff"
+		   });			
 		addAnnotation
 		  (getTeamMember_HasYellowCard(), 
 		   source, 
