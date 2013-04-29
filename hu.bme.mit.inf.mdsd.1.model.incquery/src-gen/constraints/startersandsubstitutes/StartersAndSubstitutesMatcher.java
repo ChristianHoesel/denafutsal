@@ -23,6 +23,9 @@ import org.eclipse.incquery.runtime.rete.tuple.Tuple;
  * 
  * <p>Original source:
  * <code><pre>
+ * //Based on model
+ * 
+ *  
  * {@literal @}Constraint(
  * 	location = TeamMember,
  * 	severity = "error",

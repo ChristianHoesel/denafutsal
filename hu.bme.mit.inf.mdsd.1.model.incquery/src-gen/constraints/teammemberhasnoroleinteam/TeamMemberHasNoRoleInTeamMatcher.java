@@ -29,8 +29,9 @@ import org.eclipse.incquery.runtime.rete.tuple.Tuple;
  * 	message = "$TeamMember$ is in the $Team$, but doesn't have any role."
  * )
  * pattern teamMemberHasNoRoleInTeam(Team : Team, TeamMember : TeamMember) {
- * 	TeamMember.team(TeamMember, Team);
- * 	neg find teamMemberHasRoleInTeam(Team, TeamMember);
+ * 	Team.members(Team, TeamMember);
+ * 	M == count find teamMemberHasRole(TeamMember);
+ * 	check(M == 0);
  * }
  * </pre></code>
  * 

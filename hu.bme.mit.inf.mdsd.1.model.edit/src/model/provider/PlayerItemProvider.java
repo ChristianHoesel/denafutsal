@@ -8,7 +8,6 @@ import java.util.List;
 
 import model.ModelPackage;
 import model.Player;
-import model.Position;
 
 import org.eclipse.emf.common.notify.AdapterFactory;
 import org.eclipse.emf.common.notify.Notification;

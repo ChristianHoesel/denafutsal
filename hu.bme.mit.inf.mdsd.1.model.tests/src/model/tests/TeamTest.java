@@ -16,6 +16,8 @@ import model.Team;
  * <p>
  * The following features are tested:
  * <ul>
+ *   <li>{@link model.Team#getSubstitutes() <em>Substitutes</em>}</li>
+ *   <li>{@link model.Team#getStaff() <em>Staff</em>}</li>
  *   <li>{@link model.Team#getGoals() <em>Goals</em>}</li>
  *   <li>{@link model.Team#getCards() <em>Cards</em>}</li>
  *   <li>{@link model.Team#getRedBans() <em>Red Bans</em>}</li>
@@ -95,6 +97,32 @@ public class TeamTest extends TestCase {
 	@Override
 	protected void tearDown() throws Exception {
 		setFixture(null);
+	}
+
+	/**
+	 * Tests the '{@link model.Team#getSubstitutes() <em>Substitutes</em>}' feature getter.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see model.Team#getSubstitutes()
+	 * @generated
+	 */
+	public void testGetSubstitutes() {
+		// TODO: implement this feature getter test method
+		// Ensure that you remove @generated or mark it @generated NOT
+		fail();
+	}
+
+	/**
+	 * Tests the '{@link model.Team#getStaff() <em>Staff</em>}' feature getter.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see model.Team#getStaff()
+	 * @generated
+	 */
+	public void testGetStaff() {
+		// TODO: implement this feature getter test method
+		// Ensure that you remove @generated or mark it @generated NOT
+		fail();
 	}
 
 	/**

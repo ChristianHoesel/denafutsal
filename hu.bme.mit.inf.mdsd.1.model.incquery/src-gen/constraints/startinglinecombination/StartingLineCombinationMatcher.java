@@ -28,10 +28,10 @@ import org.eclipse.incquery.runtime.rete.tuple.Tuple;
  * 	message = "$Team$'s starting line is not valid."
  * )
  * pattern startingLineCombination(Team : Team) {
- * 	M == count find constraints.goalkeepersInStartingLine(Team, _);
- * 	N == count find constraints.fieldplayersInStartingLine(Team, _);
- * 	check (	(M as Integer) == 1	);
- * 	check (	(N as Integer) == 4	);
+ * 	M == count find goalkeepersInStartingLine(Team);
+ * 	N == count find fieldplayersInStartingLine(Team);
+ * 	check (	(M as Integer) != 1	);
+ * 	check (	(N as Integer) != 4	);
  * }
  * </pre></code>
  * 

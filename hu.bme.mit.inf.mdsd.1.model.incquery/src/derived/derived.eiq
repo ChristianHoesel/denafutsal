@@ -124,3 +124,20 @@ pattern name(role : Role, name) {
 	TeamMember.staffRole(teamMember, role);
 	TeamMember.name(teamMember, name);
 }
+
+@QueryBasedFeature
+pattern staff(team : Team, staffMember : StaffMember) {
+	Team.members(team, tm);
+	StaffMember.teamMember(staffMember, tm);
+}
+
+@QueryBasedFeature
+pattern substitutes(team : Team, player : Player) {
+	Team.members(team, tm);
+	Player.teamMember(player, tm);
+	neg find inStartingLine(team, player);
+}
+
+private pattern inStartingLine(team : Team, player : Player) {
+	Team.startingLine(team, player);
+}

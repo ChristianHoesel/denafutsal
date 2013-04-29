@@ -65,7 +65,7 @@ public interface Team extends EObject {
 	 * Returns the value of the '<em><b>Captain</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Captain</em>' containment reference isn't clear,
+	 * If the meaning of the '<em>Captain</em>' reference isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
@@ -92,7 +92,7 @@ public interface Team extends EObject {
 	 * The list contents are of type {@link model.Player}.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Starting Line</em>' containment reference list isn't clear,
+	 * If the meaning of the '<em>Starting Line</em>' reference list isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
@@ -108,13 +108,14 @@ public interface Team extends EObject {
 	 * The list contents are of type {@link model.Player}.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Substitutes</em>' containment reference list isn't clear,
+	 * If the meaning of the '<em>Substitutes</em>' reference list isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Substitutes</em>' reference list.
 	 * @see model.ModelPackage#getTeam_Substitutes()
-	 * @model lower="3" upper="7"
+	 * @model lower="3" upper="7" transient="true" changeable="false" volatile="true" derived="true"
+	 *        annotation="org.eclipse.incquery.querybasedfeature patternFQN='derived.substitutes'"
 	 * @generated
 	 */
 	EList<Player> getSubstitutes();
@@ -130,7 +131,8 @@ public interface Team extends EObject {
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Staff</em>' reference list.
 	 * @see model.ModelPackage#getTeam_Staff()
-	 * @model upper="10"
+	 * @model upper="8" transient="true" changeable="false" volatile="true" derived="true"
+	 *        annotation="org.eclipse.incquery.querybasedfeature patternFQN='derived.staff'"
 	 * @generated
 	 */
 	EList<StaffMember> getStaff();

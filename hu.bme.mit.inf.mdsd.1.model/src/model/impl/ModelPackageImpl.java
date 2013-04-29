@@ -841,8 +841,8 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 		initEAttribute(getTeam_Name(), ecorePackage.getEString(), "name", null, 0, 1, Team.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getTeam_Captain(), this.getPlayer(), null, "captain", null, 1, 1, Team.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getTeam_StartingLine(), this.getPlayer(), null, "startingLine", null, 5, 5, Team.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getTeam_Substitutes(), this.getPlayer(), null, "substitutes", null, 3, 7, Team.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getTeam_Staff(), this.getStaffMember(), null, "staff", null, 0, 10, Team.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getTeam_Substitutes(), this.getPlayer(), null, "substitutes", null, 3, 7, Team.class, IS_TRANSIENT, IS_VOLATILE, !IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
+		initEReference(getTeam_Staff(), this.getStaffMember(), null, "staff", null, 0, 8, Team.class, IS_TRANSIENT, IS_VOLATILE, !IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
 		initEReference(getTeam_Goals(), this.getEvent(), null, "goals", null, 0, -1, Team.class, IS_TRANSIENT, IS_VOLATILE, !IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
 		initEReference(getTeam_Penalties(), this.getPenalty(), null, "penalties", null, 0, -1, Team.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getTeam_Cards(), this.getEvent(), null, "cards", null, 0, -1, Team.class, IS_TRANSIENT, IS_VOLATILE, !IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
@@ -911,62 +911,10 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 		createResource(eNS_URI);
 
 		// Create annotations
-		// org.eclipse.viatra2.emf.incquery.derived.feature
-		createOrgAnnotations();
 		// org.eclipse.incquery.querybasedfeature
+		createOrgAnnotations();
+		// org.eclipse.viatra2.emf.incquery.derived.feature
 		createOrg_1Annotations();
-	}
-
-	/**
-	 * Initializes the annotations for <b>org.eclipse.viatra2.emf.incquery.derived.feature</b>.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected void createOrgAnnotations() {
-		String source = "org.eclipse.viatra2.emf.incquery.derived.feature";		
-		addAnnotation
-		  (getTeam_Goals(), 
-		   source, 
-		   new String[] {
-			 "patternFQN", "derived.goals"
-		   });			
-		addAnnotation
-		  (getTeam_Cards(), 
-		   source, 
-		   new String[] {
-			 "patternFQN", "derived.cards"
-		   });			
-		addAnnotation
-		  (getTeam_RedBans(), 
-		   source, 
-		   new String[] {
-			 "patternFQN", "derived.redBans"
-		   });			
-		addAnnotation
-		  (getTeam_GoalCount(), 
-		   source, 
-		   new String[] {
-			 "patternFQN", "derived.goalCount"
-		   });			
-		addAnnotation
-		  (getTeam_Match(), 
-		   source, 
-		   new String[] {
-			 "patternFQN", "derived.match"
-		   });					
-		addAnnotation
-		  (getTeamMember_IsSentOff(), 
-		   source, 
-		   new String[] {
-			 "patternFQN", "derived.isSentOff"
-		   });			
-		addAnnotation
-		  (getTeamMember_HasYellowCard(), 
-		   source, 
-		   new String[] {
-			 "patternFQN", "derived.hasYellowCard"
-		   });			
 	}
 
 	/**
@@ -975,8 +923,20 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected void createOrg_1Annotations() {
-		String source = "org.eclipse.incquery.querybasedfeature";			
+	protected void createOrgAnnotations() {
+		String source = "org.eclipse.incquery.querybasedfeature";		
+		addAnnotation
+		  (getTeam_Substitutes(), 
+		   source, 
+		   new String[] {
+			 "patternFQN", "derived.substitutes"
+		   });		
+		addAnnotation
+		  (getTeam_Staff(), 
+		   source, 
+		   new String[] {
+			 "patternFQN", "derived.staff"
+		   });			
 		addAnnotation
 		  (getTeam_Goals(), 
 		   source, 
@@ -1043,6 +1003,58 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 		   new String[] {
 			 "patternFQN", "derived.name"
 		   });
+	}
+
+	/**
+	 * Initializes the annotations for <b>org.eclipse.viatra2.emf.incquery.derived.feature</b>.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void createOrg_1Annotations() {
+		String source = "org.eclipse.viatra2.emf.incquery.derived.feature";				
+		addAnnotation
+		  (getTeam_Goals(), 
+		   source, 
+		   new String[] {
+			 "patternFQN", "derived.goals"
+		   });			
+		addAnnotation
+		  (getTeam_Cards(), 
+		   source, 
+		   new String[] {
+			 "patternFQN", "derived.cards"
+		   });			
+		addAnnotation
+		  (getTeam_RedBans(), 
+		   source, 
+		   new String[] {
+			 "patternFQN", "derived.redBans"
+		   });			
+		addAnnotation
+		  (getTeam_GoalCount(), 
+		   source, 
+		   new String[] {
+			 "patternFQN", "derived.goalCount"
+		   });			
+		addAnnotation
+		  (getTeam_Match(), 
+		   source, 
+		   new String[] {
+			 "patternFQN", "derived.match"
+		   });					
+		addAnnotation
+		  (getTeamMember_IsSentOff(), 
+		   source, 
+		   new String[] {
+			 "patternFQN", "derived.isSentOff"
+		   });			
+		addAnnotation
+		  (getTeamMember_HasYellowCard(), 
+		   source, 
+		   new String[] {
+			 "patternFQN", "derived.hasYellowCard"
+		   });			
 	}
 
 } //ModelPackageImpl

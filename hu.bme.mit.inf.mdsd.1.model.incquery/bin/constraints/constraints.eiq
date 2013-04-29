@@ -5,62 +5,6 @@ import "http://model/1.0"
 //Based on model
 
 /**
- * A kapitány a csapat tagja
- */
-@Constraint(
-	location = Team,
-	severity = "error",
-	message = "$Team$'s captain plays in another team."
-)
-pattern captainIsNotInTheTeam(Team : Team) {
-	Team.captain.teamMember(Team, c);
-	TeamMember.team(c, Team2);
-	Team != Team2;
-}
-
-/**
- * A cserék a csapat tagjai
- */
-@Constraint(
-	location = Sub,
-	severity = "error",
-	message = "$Sub$ is a substitute in $Team$, but plays in another team."
-)
-pattern substitutesAreNotInTheTeam(Team : Team, Sub : TeamMember) {
-	Team.substitutes.teamMember(Team, Sub);
-	TeamMember.team(Sub, Team2);
-	Team != Team2;
-}
-
-/**
- * A kezdõjátékosok a csapat tagjai
- */
-@Constraint(
-	location = Starter,
-	severity = "error",
-	message = "$Starter$ is in the starting line of $Team$, but plays in another team."
-)
-pattern startingPlayersAreNotInTheTeam(Team : Team, Starter : TeamMember) {
-	Team.startingLine.teamMember(Team, Starter);
-	TeamMember.team(Starter, Team2);
-	Team != Team2;
-}
-
-/**
- * A személyzet tagjai ehhez a csapathoz tartoznak
- */
-@Constraint(
-	location = StaffMember,
-	severity = "error",
-	message = "$StaffMember$ is in the staff of $Team$, but plays in another team."
-)
-pattern staffsAreNotInTheTeam(Team : Team, StaffMember : TeamMember) {
-	Team.staff.teamMember(Team, StaffMember);
-	TeamMember.team(StaffMember, Team2);
-	Team != Team2;
-}
-
-/**
  * A cserejátékosok között nincs kezdõjátékos, és fordítva
  */
 @Constraint(
@@ -74,42 +18,6 @@ pattern startersAndSubstitutes(Team : Team, TeamMember : TeamMember) {
 }
 
 /**
- * Senki se szerepel kétszer egy kapcsolaton belül a csapatnál
- */
-@Constraint(
-	location = Starter,
-	severity = "error",
-	message = "$Starter$ is already in the starting line of $Team$."
-)
-pattern startersAreTwice(Team : Team, Starter : TeamMember) {
-	Team.startingLine.teamMember(Team, Starter);
-	Team.startingLine.teamMember(Team, other);
-	Starter == other;
-}
-
-@Constraint(
-	location = Sub,
-	severity = "error",
-	message = "$Sub$ is already in the substitutes of $Team$."
-)
-pattern subsAreTwice(Team : Team, Sub : TeamMember) {
-	Team.staff.teamMember(Team, Sub);
-	Team.staff.teamMember(Team, other);
-	Sub == other;
-}
-
-@Constraint(
-	location = StaffMember,
-	severity = "error",
-	message = "$StaffMember$ is already in the staff of $Team$."
-)
-pattern staffsAreTwice(Team : Team, StaffMember : TeamMember) {
-	Team.staff.teamMember(Team, StaffMember);
-	Team.staff.teamMember(Team, other);
-	StaffMember == other;
-}
-
-/**
  * Minden csapattag a csapatában cserejátékos vagy kezdõjátékos és/vagy személyzeti tag
  */
 @Constraint(
@@ -118,18 +26,14 @@ pattern staffsAreTwice(Team : Team, StaffMember : TeamMember) {
 	message = "$TeamMember$ is in the $Team$, but doesn't have any role."
 )
 pattern teamMemberHasNoRoleInTeam(Team : Team, TeamMember : TeamMember) {
-	TeamMember.team(TeamMember, Team);
-	neg find teamMemberHasRoleInTeam(Team, TeamMember);
+	Team.members(Team, TeamMember);
+	M == count find teamMemberHasRole(TeamMember);
+	check(M == 0);
 }
 
-private pattern teamMemberHasRoleInTeam(Team : Team, TeamMember : TeamMember) {
-	Team.startingLine.teamMember(Team,TeamMember);
-} or {
-	Team.substitutes.teamMember(Team,TeamMember);
-} or {
-	Team.staff.teamMember(Team,TeamMember);
+private pattern teamMemberHasRole(TeamMember : TeamMember) {
+	Role.teamMember(_, TeamMember);
 }
-
 
 //Based on rules
 
@@ -157,22 +61,18 @@ pattern notUniqueTeamNames(Team : Team) {
 	message = "$Team$'s starting line is not valid."
 )
 pattern startingLineCombination(Team : Team) {
-	M == count find constraints.goalkeepersInStartingLine(Team, _);
-	N == count find constraints.fieldplayersInStartingLine(Team, _);
-	check (	(M as Integer) == 1	);
-	check (	(N as Integer) == 4	);
+	M == count find goalkeepersInStartingLine(Team);
+	N == count find fieldplayersInStartingLine(Team);
+	check (	(M as Integer) != 1	);
+	check (	(N as Integer) != 4	);
 }
 
-private pattern goalkeepersInStartingLine(Team : Team, Gk : TeamMember) {
-	Team.startingLine.teamMember(Team, Gk);
-	Player.teamMember(player, Gk);
-	Player.position(player, ::Goalkeeper);
+private pattern goalkeepersInStartingLine(Team : Team) {
+	Team.startingLine.position(Team, ::Goalkeeper);
 }
 
-private pattern fieldplayersInStartingLine(Team : Team, Pl : TeamMember) {
-	Team.startingLine.teamMember(Team, Pl);
-	Player.teamMember(player, Pl);
-	Player.position(player, ::FieldPlayer);
+private pattern fieldplayersInStartingLine(Team : Team) {
+	Team.startingLine.position(Team, ::FieldPlayer);
 }
 
 /**
@@ -261,7 +161,8 @@ pattern notUniqueShirtNo(TeamMember : TeamMember, Team : Team) {
 pattern teamMemberHasIllegalEvent(TeamMember : TeamMember, Team : Team) {
 	TeamMember.team(TeamMember, Team);
 	find playerEvents(TeamMember, Team);
-	neg find checkPlayerMember(TeamMember);	
+	M == count find checkPlayerMember(TeamMember);	
+	check(M == 0);
 }
 
 private pattern checkPlayerMember(TeamMember : TeamMember) {
@@ -453,8 +354,7 @@ private pattern successPenalties(Team : Team) {
 	severity = "error",
 	message = "$Person$ cannot be TeamMember, because he/she is the referee"
 )
-pattern refereeNotPerson(Person : Person) {
-	TeamMember(Person);
+pattern refereeNotPerson(Person : TeamMember) {
 	Match.Referee(_,Person);
 }
 
@@ -463,8 +363,7 @@ pattern refereeNotPerson(Person : Person) {
 	severity = "error",
 	message = "$Person$ cannot be TeamMember, because he/she is the assistant"
 )
-pattern assistantNotPerson(Person : Person) {
-	TeamMember(Person);
+pattern assistantNotPerson(Person : TeamMember) {
 	Match.Assistant(_,Person);
 }
 
@@ -473,8 +372,7 @@ pattern assistantNotPerson(Person : Person) {
 	severity = "error",
 	message = "$Person$ cannot be TeamMember, because he/she is the third referee"
 )
-pattern thirdRefereeNotPerson(Person : Person) {
-	TeamMember(Person);
+pattern thirdRefereeNotPerson(Person : TeamMember) {
 	Match.ThirdReferee(_,Person);
 }
 
@@ -483,7 +381,17 @@ pattern thirdRefereeNotPerson(Person : Person) {
 	severity = "error",
 	message = "$Person$ cannot be TeamMember, because he/she is the supervisor"
 )
-pattern supervisorNotPerson(Person : Person) {
-	TeamMember(Person);
+pattern supervisorNotPerson(Person : TeamMember) {
 	Match.Supervisor(_,Person);
 }
+
+@Constraint(
+	location = Event,
+	severity = "error",
+	message = "Event cannot be after the match"
+)
+pattern illegalEventAfterMatch(Event : Event) {
+	Event.time(Event, time);
+	check(time > 2400);
+}
+

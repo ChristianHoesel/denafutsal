@@ -13,8 +13,8 @@ public class StartingLineCombinationEvaluator1_1 implements IMatchChecker {
    */
   private Boolean evaluateXExpressionGenerated(final Integer M) {
     Integer _M = M;
-    boolean _equals = ((((Integer) _M)).intValue() == 1);
-    return Boolean.valueOf(_equals);
+    boolean _notEquals = ((((Integer) _M)).intValue() != 1);
+    return Boolean.valueOf(_notEquals);
   }
   
   /**

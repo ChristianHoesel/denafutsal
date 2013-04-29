@@ -27,8 +27,7 @@ import org.eclipse.incquery.runtime.rete.tuple.Tuple;
  * 	severity = "error",
  * 	message = "$Person$ cannot be TeamMember, because he/she is the assistant"
  * )
- * pattern assistantNotPerson(Person : Person) {
- * 	TeamMember(Person);
+ * pattern assistantNotPerson(Person : TeamMember) {
  * 	Match.Assistant(_,Person);
  * }
  * </pre></code>

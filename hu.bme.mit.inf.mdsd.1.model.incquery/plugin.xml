@@ -197,36 +197,38 @@
       </wellbehaving-derived-feature>
    </extension>
    <extension
-         id="constraints.captainIsNotInTheTeam"
+         id="derived.staff"
          point="org.eclipse.incquery.runtime.matcherfactory">
       <matcher
-            factoryProvider="constraints.captainisnotintheteam.CaptainIsNotInTheTeamMatcherFactory$Provider"
-            id="constraints.captainIsNotInTheTeam">
+            factoryProvider="derived.staff.StaffMatcherFactory$Provider"
+            id="derived.staff">
       </matcher>
    </extension>
    <extension
-         id="constraints.substitutesAreNotInTheTeam"
+         id="extension.derived.derived.staff"
+         point="org.eclipse.incquery.runtime.base.wellbehaving.derived.features">
+      <wellbehaving-derived-feature
+            classifier-name="Team"
+            feature-name="staff"
+            package-nsUri="http://model/1.0">
+      </wellbehaving-derived-feature>
+   </extension>
+   <extension
+         id="derived.substitutes"
          point="org.eclipse.incquery.runtime.matcherfactory">
       <matcher
-            factoryProvider="constraints.substitutesarenotintheteam.SubstitutesAreNotInTheTeamMatcherFactory$Provider"
-            id="constraints.substitutesAreNotInTheTeam">
+            factoryProvider="derived.substitutes.SubstitutesMatcherFactory$Provider"
+            id="derived.substitutes">
       </matcher>
    </extension>
    <extension
-         id="constraints.startingPlayersAreNotInTheTeam"
-         point="org.eclipse.incquery.runtime.matcherfactory">
-      <matcher
-            factoryProvider="constraints.startingplayersarenotintheteam.StartingPlayersAreNotInTheTeamMatcherFactory$Provider"
-            id="constraints.startingPlayersAreNotInTheTeam">
-      </matcher>
-   </extension>
-   <extension
-         id="constraints.staffsAreNotInTheTeam"
-         point="org.eclipse.incquery.runtime.matcherfactory">
-      <matcher
-            factoryProvider="constraints.staffsarenotintheteam.StaffsAreNotInTheTeamMatcherFactory$Provider"
-            id="constraints.staffsAreNotInTheTeam">
-      </matcher>
+         id="extension.derived.derived.substitutes"
+         point="org.eclipse.incquery.runtime.base.wellbehaving.derived.features">
+      <wellbehaving-derived-feature
+            classifier-name="Team"
+            feature-name="substitutes"
+            package-nsUri="http://model/1.0">
+      </wellbehaving-derived-feature>
    </extension>
    <extension
          id="constraints.startersAndSubstitutes"
@@ -237,36 +239,20 @@
       </matcher>
    </extension>
    <extension
-         id="constraints.startersAreTwice"
-         point="org.eclipse.incquery.runtime.matcherfactory">
-      <matcher
-            factoryProvider="constraints.startersaretwice.StartersAreTwiceMatcherFactory$Provider"
-            id="constraints.startersAreTwice">
-      </matcher>
-   </extension>
-   <extension
-         id="constraints.subsAreTwice"
-         point="org.eclipse.incquery.runtime.matcherfactory">
-      <matcher
-            factoryProvider="constraints.subsaretwice.SubsAreTwiceMatcherFactory$Provider"
-            id="constraints.subsAreTwice">
-      </matcher>
-   </extension>
-   <extension
-         id="constraints.staffsAreTwice"
-         point="org.eclipse.incquery.runtime.matcherfactory">
-      <matcher
-            factoryProvider="constraints.staffsaretwice.StaffsAreTwiceMatcherFactory$Provider"
-            id="constraints.staffsAreTwice">
-      </matcher>
-   </extension>
-   <extension
          id="constraints.teamMemberHasNoRoleInTeam"
          point="org.eclipse.incquery.runtime.matcherfactory">
       <matcher
             factoryProvider="constraints.teammemberhasnoroleinteam.TeamMemberHasNoRoleInTeamMatcherFactory$Provider"
             id="constraints.teamMemberHasNoRoleInTeam">
       </matcher>
+   </extension>
+   <extension
+         id="constraints.teamMemberHasNoRoleInTeam"
+         point="org.eclipse.incquery.runtime.xexpressionevaluator">
+      <evaluator
+            evaluatorClass="constraints.teammemberhasnoroleinteam.TeamMemberHasNoRoleInTeamEvaluator1_1"
+            id="constraints.teamMemberHasNoRoleInTeam_1_1">
+      </evaluator>
    </extension>
    <extension
          id="constraints.notUniqueTeamNames"
@@ -355,6 +341,14 @@
             factoryProvider="constraints.teammemberhasillegalevent.TeamMemberHasIllegalEventMatcherFactory$Provider"
             id="constraints.teamMemberHasIllegalEvent">
       </matcher>
+   </extension>
+   <extension
+         id="constraints.teamMemberHasIllegalEvent"
+         point="org.eclipse.incquery.runtime.xexpressionevaluator">
+      <evaluator
+            evaluatorClass="constraints.teammemberhasillegalevent.TeamMemberHasIllegalEventEvaluator1_1"
+            id="constraints.teamMemberHasIllegalEvent_1_1">
+      </evaluator>
    </extension>
    <extension
          id="constraints.tooMuchBan"
@@ -667,6 +661,22 @@
             factoryProvider="constraints.supervisornotperson.SupervisorNotPersonMatcherFactory$Provider"
             id="constraints.supervisorNotPerson">
       </matcher>
+   </extension>
+   <extension
+         id="constraints.illegalEventAfterMatch"
+         point="org.eclipse.incquery.runtime.matcherfactory">
+      <matcher
+            factoryProvider="constraints.illegaleventaftermatch.IllegalEventAfterMatchMatcherFactory$Provider"
+            id="constraints.illegalEventAfterMatch">
+      </matcher>
+   </extension>
+   <extension
+         id="constraints.illegalEventAfterMatch"
+         point="org.eclipse.incquery.runtime.xexpressionevaluator">
+      <evaluator
+            evaluatorClass="constraints.illegaleventaftermatch.IllegalEventAfterMatchEvaluator1_1"
+            id="constraints.illegalEventAfterMatch_1_1">
+      </evaluator>
    </extension>
 
 </plugin>

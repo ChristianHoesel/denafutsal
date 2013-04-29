@@ -2,88 +2,11 @@
 <plugin>
 
    <extension
-         id="validation.constraint.constraints.captainIsNotInTheTeam"
-         point="org.eclipse.incquery.validation.runtime.constraint">
-      <constraint
-            name="constraints.captainIsNotInTheTeam"
-            class="constraints.captainisnotintheteam.CaptainIsNotInTheTeamConstraint0">
-         <enabledForEditor
-               editorId="model.presentation.ModelEditorID">
-         </enabledForEditor>
-      </constraint>
-   </extension>
-   <extension
-         id="validation.constraint.constraints.substitutesAreNotInTheTeam"
-         point="org.eclipse.incquery.validation.runtime.constraint">
-      <constraint
-            name="constraints.substitutesAreNotInTheTeam"
-            class="constraints.substitutesarenotintheteam.SubstitutesAreNotInTheTeamConstraint0">
-         <enabledForEditor
-               editorId="model.presentation.ModelEditorID">
-         </enabledForEditor>
-      </constraint>
-   </extension>
-   <extension
-         id="validation.constraint.constraints.startingPlayersAreNotInTheTeam"
-         point="org.eclipse.incquery.validation.runtime.constraint">
-      <constraint
-            name="constraints.startingPlayersAreNotInTheTeam"
-            class="constraints.startingplayersarenotintheteam.StartingPlayersAreNotInTheTeamConstraint0">
-         <enabledForEditor
-               editorId="model.presentation.ModelEditorID">
-         </enabledForEditor>
-      </constraint>
-   </extension>
-   <extension
-         id="validation.constraint.constraints.staffsAreNotInTheTeam"
-         point="org.eclipse.incquery.validation.runtime.constraint">
-      <constraint
-            name="constraints.staffsAreNotInTheTeam"
-            class="constraints.staffsarenotintheteam.StaffsAreNotInTheTeamConstraint0">
-         <enabledForEditor
-               editorId="model.presentation.ModelEditorID">
-         </enabledForEditor>
-      </constraint>
-   </extension>
-   <extension
          id="validation.constraint.constraints.startersAndSubstitutes"
          point="org.eclipse.incquery.validation.runtime.constraint">
       <constraint
             name="constraints.startersAndSubstitutes"
             class="constraints.startersandsubstitutes.StartersAndSubstitutesConstraint0">
-         <enabledForEditor
-               editorId="model.presentation.ModelEditorID">
-         </enabledForEditor>
-      </constraint>
-   </extension>
-   <extension
-         id="validation.constraint.constraints.startersAreTwice"
-         point="org.eclipse.incquery.validation.runtime.constraint">
-      <constraint
-            name="constraints.startersAreTwice"
-            class="constraints.startersaretwice.StartersAreTwiceConstraint0">
-         <enabledForEditor
-               editorId="model.presentation.ModelEditorID">
-         </enabledForEditor>
-      </constraint>
-   </extension>
-   <extension
-         id="validation.constraint.constraints.subsAreTwice"
-         point="org.eclipse.incquery.validation.runtime.constraint">
-      <constraint
-            name="constraints.subsAreTwice"
-            class="constraints.subsaretwice.SubsAreTwiceConstraint0">
-         <enabledForEditor
-               editorId="model.presentation.ModelEditorID">
-         </enabledForEditor>
-      </constraint>
-   </extension>
-   <extension
-         id="validation.constraint.constraints.staffsAreTwice"
-         point="org.eclipse.incquery.validation.runtime.constraint">
-      <constraint
-            name="constraints.staffsAreTwice"
-            class="constraints.staffsaretwice.StaffsAreTwiceConstraint0">
          <enabledForEditor
                editorId="model.presentation.ModelEditorID">
          </enabledForEditor>
@@ -249,6 +172,17 @@
       <constraint
             name="constraints.supervisorNotPerson"
             class="constraints.supervisornotperson.SupervisorNotPersonConstraint0">
+         <enabledForEditor
+               editorId="model.presentation.ModelEditorID">
+         </enabledForEditor>
+      </constraint>
+   </extension>
+   <extension
+         id="validation.constraint.constraints.illegalEventAfterMatch"
+         point="org.eclipse.incquery.validation.runtime.constraint">
+      <constraint
+            name="constraints.illegalEventAfterMatch"
+            class="constraints.illegaleventaftermatch.IllegalEventAfterMatchConstraint0">
          <enabledForEditor
                editorId="model.presentation.ModelEditorID">
          </enabledForEditor>

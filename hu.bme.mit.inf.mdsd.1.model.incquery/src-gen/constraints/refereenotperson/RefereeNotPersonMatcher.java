@@ -27,8 +27,7 @@ import org.eclipse.incquery.runtime.rete.tuple.Tuple;
  * 	severity = "error",
  * 	message = "$Person$ cannot be TeamMember, because he/she is the referee"
  * )
- * pattern refereeNotPerson(Person : Person) {
- * 	TeamMember(Person);
+ * pattern refereeNotPerson(Person : TeamMember) {
  * 	Match.Referee(_,Person);
  * }
  * </pre></code>

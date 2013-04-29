@@ -27,8 +27,7 @@ import org.eclipse.incquery.runtime.rete.tuple.Tuple;
  * 	severity = "error",
  * 	message = "$Person$ cannot be TeamMember, because he/she is the supervisor"
  * )
- * pattern supervisorNotPerson(Person : Person) {
- * 	TeamMember(Person);
+ * pattern supervisorNotPerson(Person : TeamMember) {
  * 	Match.Supervisor(_,Person);
  * }
  * </pre></code>

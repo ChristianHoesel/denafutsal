@@ -98,26 +98,6 @@ public class TeamImpl extends EObjectImpl implements Team {
 	protected EList<Player> startingLine;
 
 	/**
-	 * The cached value of the '{@link #getSubstitutes() <em>Substitutes</em>}' reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getSubstitutes()
-	 * @generated
-	 * @ordered
-	 */
-	protected EList<Player> substitutes;
-
-	/**
-	 * The cached value of the '{@link #getStaff() <em>Staff</em>}' reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getStaff()
-	 * @generated
-	 * @ordered
-	 */
-	protected EList<StaffMember> staff;
-
-	/**
 	 * The cached value of the '{@link #getPenalties() <em>Penalties</em>}' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -252,11 +232,12 @@ public class TeamImpl extends EObjectImpl implements Team {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EList<Player> getSubstitutes() {
-		if (substitutes == null) {
-			substitutes = new EObjectResolvingEList<Player>(Player.class, this, ModelPackage.TEAM__SUBSTITUTES);
-		}
-		return substitutes;
+	public EList<Player> getSubstitutesGen() {
+		// TODO: implement this method to return the 'Substitutes' reference list
+		// Ensure that you remove @generated or mark it @generated NOT
+		// The list is expected to implement org.eclipse.emf.ecore.util.InternalEList and org.eclipse.emf.ecore.EStructuralFeature.Setting
+		// so it's likely that an appropriate subclass of org.eclipse.emf.ecore.util.EcoreEList should be used.
+		throw new UnsupportedOperationException();
 	}
 
 	/**
@@ -264,11 +245,12 @@ public class TeamImpl extends EObjectImpl implements Team {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EList<StaffMember> getStaff() {
-		if (staff == null) {
-			staff = new EObjectResolvingEList<StaffMember>(StaffMember.class, this, ModelPackage.TEAM__STAFF);
-		}
-		return staff;
+	public EList<StaffMember> getStaffGen() {
+		// TODO: implement this method to return the 'Staff' reference list
+		// Ensure that you remove @generated or mark it @generated NOT
+		// The list is expected to implement org.eclipse.emf.ecore.util.InternalEList and org.eclipse.emf.ecore.EStructuralFeature.Setting
+		// so it's likely that an appropriate subclass of org.eclipse.emf.ecore.util.EcoreEList should be used.
+		throw new UnsupportedOperationException();
 	}
 
 	/**
@@ -453,14 +435,6 @@ public class TeamImpl extends EObjectImpl implements Team {
 				getStartingLine().clear();
 				getStartingLine().addAll((Collection<? extends Player>)newValue);
 				return;
-			case ModelPackage.TEAM__SUBSTITUTES:
-				getSubstitutes().clear();
-				getSubstitutes().addAll((Collection<? extends Player>)newValue);
-				return;
-			case ModelPackage.TEAM__STAFF:
-				getStaff().clear();
-				getStaff().addAll((Collection<? extends StaffMember>)newValue);
-				return;
 			case ModelPackage.TEAM__PENALTIES:
 				getPenalties().clear();
 				getPenalties().addAll((Collection<? extends Penalty>)newValue);
@@ -490,12 +464,6 @@ public class TeamImpl extends EObjectImpl implements Team {
 			case ModelPackage.TEAM__STARTING_LINE:
 				getStartingLine().clear();
 				return;
-			case ModelPackage.TEAM__SUBSTITUTES:
-				getSubstitutes().clear();
-				return;
-			case ModelPackage.TEAM__STAFF:
-				getStaff().clear();
-				return;
 			case ModelPackage.TEAM__PENALTIES:
 				getPenalties().clear();
 				return;
@@ -521,9 +489,9 @@ public class TeamImpl extends EObjectImpl implements Team {
 			case ModelPackage.TEAM__STARTING_LINE:
 				return startingLine != null && !startingLine.isEmpty();
 			case ModelPackage.TEAM__SUBSTITUTES:
-				return substitutes != null && !substitutes.isEmpty();
+				return !getSubstitutes().isEmpty();
 			case ModelPackage.TEAM__STAFF:
-				return staff != null && !staff.isEmpty();
+				return !getStaff().isEmpty();
 			case ModelPackage.TEAM__GOALS:
 				return !getGoals().isEmpty();
 			case ModelPackage.TEAM__PENALTIES:
@@ -675,6 +643,45 @@ public class TeamImpl extends EObjectImpl implements Team {
 					QueryBasedFeatureKind.SINGLE_REFERENCE, true, false);
 		}
 		return (model.Match) matchHandler.getSingleReferenceValue(this);
+	}
+
+	/**
+	 * EMF-IncQuery handler for query-based feature staff
+	 */
+	private IQueryBasedFeatureHandler staffHandler;
+
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * @query-based getter created by EMF-IncQuery for query-based feature staff
+	 */
+	public EList<StaffMember> getStaff() {
+		if (staffHandler == null) {
+			staffHandler = QueryBasedFeatureHelper.getQueryBasedFeatureHandler(
+					this, ModelPackageImpl.Literals.TEAM__STAFF,
+					"derived.staff", "team", "staffMember",
+					QueryBasedFeatureKind.MANY_REFERENCE, true, false);
+		}
+		return staffHandler.getManyReferenceValueAsEList(this);
+	}
+
+	/**
+	 * EMF-IncQuery handler for query-based feature substitutes
+	 */
+	private IQueryBasedFeatureHandler substitutesHandler;
+
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * @query-based getter created by EMF-IncQuery for query-based feature substitutes
+	 */
+	public EList<Player> getSubstitutes() {
+		if (substitutesHandler == null) {
+			substitutesHandler = QueryBasedFeatureHelper
+					.getQueryBasedFeatureHandler(this,
+							ModelPackageImpl.Literals.TEAM__SUBSTITUTES,
+							"derived.substitutes", "team", "player",
+							QueryBasedFeatureKind.MANY_REFERENCE, true, false);
+		}
+		return substitutesHandler.getManyReferenceValueAsEList(this);
 	}
 
 } //TeamImpl

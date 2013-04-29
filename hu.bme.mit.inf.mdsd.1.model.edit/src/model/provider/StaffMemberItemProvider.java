@@ -8,7 +8,6 @@ import java.util.List;
 
 import model.ModelPackage;
 import model.StaffMember;
-import model.StaffRole;
 
 import org.eclipse.emf.common.notify.AdapterFactory;
 import org.eclipse.emf.common.notify.Notification;
