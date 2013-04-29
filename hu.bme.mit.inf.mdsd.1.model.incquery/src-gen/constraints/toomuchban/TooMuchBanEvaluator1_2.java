@@ -11,7 +11,7 @@ public class TooMuchBanEvaluator1_2 implements IMatchChecker {
   /**
    * The raw java code generated from the xbase xexpression by xtext.
    */
-  private Boolean evaluateXExpressionGenerated(final Long t3, final Long t2) {
+  private Boolean evaluateXExpressionGenerated(final Long t2, final Long t3) {
     Long _t2 = t2;
     Long _t3 = t3;
     boolean _greaterThan = (_t2.compareTo(_t3) > 0);
@@ -23,10 +23,10 @@ public class TooMuchBanEvaluator1_2 implements IMatchChecker {
    */
   @Override
   public Boolean evaluateXExpression(final Tuple tuple, final Map<String,Integer> tupleNameMap) {
-    int t3Position = tupleNameMap.get("t3");
-    java.lang.Long t3 = (java.lang.Long) tuple.get(t3Position);
     int t2Position = tupleNameMap.get("t2");
     java.lang.Long t2 = (java.lang.Long) tuple.get(t2Position);
-    return evaluateXExpressionGenerated(t3, t2);
+    int t3Position = tupleNameMap.get("t3");
+    java.lang.Long t3 = (java.lang.Long) tuple.get(t3Position);
+    return evaluateXExpressionGenerated(t2, t3);
   }
 }

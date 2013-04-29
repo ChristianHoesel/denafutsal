@@ -11,7 +11,7 @@ public class TooMuchDiffSuccessPenaltiesEvaluator7_4 implements IMatchChecker {
   /**
    * The raw java code generated from the xbase xexpression by xtext.
    */
-  private Boolean evaluateXExpressionGenerated(final Integer S2, final Integer S1) {
+  private Boolean evaluateXExpressionGenerated(final Integer S1, final Integer S2) {
     Integer _S1 = S1;
     Integer _S2 = S2;
     int _minus = ((_S1).intValue() - (_S2).intValue());
@@ -24,10 +24,10 @@ public class TooMuchDiffSuccessPenaltiesEvaluator7_4 implements IMatchChecker {
    */
   @Override
   public Boolean evaluateXExpression(final Tuple tuple, final Map<String,Integer> tupleNameMap) {
-    int S2Position = tupleNameMap.get("S2");
-    java.lang.Integer S2 = (java.lang.Integer) tuple.get(S2Position);
     int S1Position = tupleNameMap.get("S1");
     java.lang.Integer S1 = (java.lang.Integer) tuple.get(S1Position);
-    return evaluateXExpressionGenerated(S2, S1);
+    int S2Position = tupleNameMap.get("S2");
+    java.lang.Integer S2 = (java.lang.Integer) tuple.get(S2Position);
+    return evaluateXExpressionGenerated(S1, S2);
   }
 }
