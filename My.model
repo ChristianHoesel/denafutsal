@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<model:Match xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:model="http://model/1.0" date="2012-12-03T18:30:00.000+0100" location="Veszprém, Veszprém Március 15. úti Sportcsarnok" id="643017">
+  <Referee name="CSIRKE RUDOLF"/>
+  <Assistant name="CZINDER IMRE"/>
+  <ThirdReferee name="HORVÁTH ZOLTÁN (A)"/>
+  <Supervisor name="NAGY LAJOS"/>
+  <events time="960" committer="//@Home/@members.7"/>
+  <events time="2100" committer="//@Home/@members.6"/>
+  <events time="180" committer="//@Visitor/@members.2"/>
+  <events time="720" committer="//@Visitor/@members.2"/>
+  <events time="1520" type="YellowCard" committer="//@Visitor/@members.2"/>
+  <Home name="1. FC VESZPRÉM" captain="//@Home/@members.3/@playerRole" startingLine="//@Home/@members.1/@playerRole //@Home/@members.3/@playerRole //@Home/@members.0/@playerRole //@Home/@members.4/@playerRole //@Home/@members.2/@playerRole" substitutes="//@Home/@members.8/@playerRole //@Home/@members.7/@playerRole //@Home/@members.10/@playerRole //@Home/@members.6/@playerRole //@Home/@members.5/@playerRole //@Home/@members.9/@playerRole //@Home/@members.11/@playerRole" staff="//@Home/@members.14/@staffRole //@Home/@members.12/@staffRole //@Home/@members.15/@staffRole //@Home/@members.13/@staffRole">
+    <members name="KASZA VIKTOR" id="122398">
+      <playerRole shirtNo="1"/>
+    </members>
+    <members name="BÉNYI KÁLMÁN" id="121564">
+      <playerRole position="FieldPlayer" shirtNo="10"/>
+    </members>
+    <members name="TAR TAMÁS" id="237310">
+      <playerRole position="FieldPlayer" shirtNo="9"/>
+    </members>
+    <members name="HAZUGA SOMA" id="136774">
+      <playerRole position="FieldPlayer" shirtNo="7"/>
+    </members>
+    <members name="SZABADFI PÉTER" id="121510">
+      <playerRole position="FieldPlayer" shirtNo="6"/>
+    </members>
+    <members name="SÁRDI MÁTÉ" id="207670">
+      <playerRole shirtNo="12"/>
+    </members>
+    <members name="PÁLFI RÓBERT" id="129254">
+      <playerRole position="FieldPlayer" shirtNo="3"/>
+    </members>
+    <members name="FINTA PÉTER" id="121596">
+      <playerRole position="FieldPlayer" shirtNo="16"/>
+    </members>
+    <members name="BAKAY FERENC" id="249626">
+      <playerRole position="FieldPlayer" shirtNo="8"/>
+    </members>
+    <members name="VAS FERENC" id="110456">
+      <playerRole position="FieldPlayer" shirtNo="14"/>
+    </members>
+    <members name="MAROSVÖLGYI TAMÁS" id="130374">
+      <playerRole shirtNo="15"/>
+    </members>
+    <members name="WEISZ ZOLTÁN">
+      <playerRole position="FieldPlayer" shirtNo="13"/>
+    </members>
+    <members name="NÉMETH GÁBOR" id="142095">
+      <staffRole/>
+    </members>
+    <members name="TÓTH GÁBOR" id="396165">
+      <staffRole role="Coach"/>
+    </members>
+    <members name="GÖRGICS KÁLMÁN" id="113395">
+      <staffRole role="Masseur"/>
+    </members>
+    <members name="RAJKI TAMÁS" id="322932">
+      <staffRole role="Other"/>
+    </members>
+  </Home>
+  <Visitor name="MAFC" captain="//@Visitor/@members.0/@playerRole" startingLine="//@Visitor/@members.1/@playerRole //@Visitor/@members.0/@playerRole //@Visitor/@members.2/@playerRole //@Visitor/@members.3/@playerRole //@Visitor/@members.4/@playerRole" substitutes="//@Visitor/@members.5/@playerRole //@Visitor/@members.9/@playerRole //@Visitor/@members.7/@playerRole //@Visitor/@members.8/@playerRole //@Visitor/@members.10/@playerRole //@Visitor/@members.6/@playerRole" staff="//@Visitor/@members.11/@staffRole //@Visitor/@members.12/@staffRole">
+    <members name="DR.VARRÓ DÁNIEL" id="440245">
+      <playerRole shirtNo="1"/>
+    </members>
+    <members name="CSERNAI GÁBOR LÁSZLÓ" id="193384">
+      <playerRole position="FieldPlayer" shirtNo="19"/>
+    </members>
+    <members name="ÖREGLAKI NORBERT" id="138119">
+      <playerRole position="FieldPlayer" shirtNo="2"/>
+    </members>
+    <members name="SIVÁK PÉTER" id="134877">
+      <playerRole position="FieldPlayer" shirtNo="5"/>
+    </members>
+    <members name="SZABÓ ZOLTÁN" id="154010">
+      <playerRole position="FieldPlayer" shirtNo="3"/>
+    </members>
+    <members name="ANDORKA KRISTÓF" id="186443">
+      <playerRole shirtNo="4"/>
+    </members>
+    <members name="RAJNAY GÁBOR" id="201975">
+      <playerRole position="FieldPlayer" shirtNo="18"/>
+    </members>
+    <members name="KERTÉSZ GERGŐ" id="130991">
+      <playerRole position="FieldPlayer" shirtNo="9"/>
+    </members>
+    <members name="MUNKÁCSI RICHÁRD" id="286244">
+      <playerRole position="FieldPlayer" shirtNo="10"/>
+    </members>
+    <members name="FRITZ BALÁZS" id="120916">
+      <playerRole position="FieldPlayer" shirtNo="8"/>
+    </members>
+    <members name="PAPP ENDRE LEVENTE" id="469799">
+      <playerRole position="FieldPlayer" shirtNo="66"/>
+    </members>
+    <members name="KŐRÖSI ZOLTÁN" id="170267">
+      <staffRole/>
+    </members>
+    <members name="TIHANYI MIKLÓS">
+      <staffRole role="Masseur"/>
+    </members>
+  </Visitor>
+</model:Match>
