@@ -1,65 +1,99 @@
 package derived
 
 import "http://model/1.0"
-import "http://www.eclipse.org/emf/2002/Ecore"
 
 @QueryBasedFeature
 pattern goals(team : Team, event : Event) {
-	Team.match.events(team, event);
 	Event.type(event, ::Goal);
+	Event.committer(event, committer);
+	Team.members(team, committer);
+}
+
+private pattern goalsHT(team : Team, event : Event) {
+	Event.type(event, ::Goal);
+	Event.committer(event, committer);
+	Event.time(event, time);
+	Team.members(team, committer);
+	
+	check(time < 1200);
 }
 
 @QueryBasedFeature
 pattern cards(team : Team, event : Event) {
-	Team.match.events(team, event);
+	Match.events(match, event);
+	Match.Home(match, team);
 	Event.type(event, ::RedCard);
 } or {
-	Team.match.events(team, event);
+	Match.events(match, event);
+	Match.Home(match, team);
 	Event.type(event, ::RedCardWithBan);	
 } or {
-	Team.match.events(team, event);
+	Match.events(match, event);
+	Match.Home(match, team);
+	Event.type(event, ::YellowCard);	
+} or {
+	Match.events(match, event);
+	Match.Visitor(match, team);
+	Event.type(event, ::RedCard);
+} or {
+	Match.events(match, event);
+	Match.Visitor(match, team);
+	Event.type(event, ::RedCardWithBan);	
+} or {
+	Match.events(match, event);
+	Match.Visitor(match, team);
 	Event.type(event, ::YellowCard);	
 }
 
 @QueryBasedFeature
 pattern redBans(team : Team, event : Event) {
-	Team.match.events(team, event);
+	Team.match(team, match);
+	Match.events(match, event);
 	Event.type(event, ::RedCardWithBan);
+} or {
+	Team.match(team, match);
+	Match.events(match, event);
+	Event.type(event, ::RedCardWithBan);	
 }
 
 @QueryBasedFeature
-pattern goalCount(team : Team, target : EInt) {
+pattern goalCount(team : Team, target) {
 	target == count find goals(team, _);
 }
 
 @QueryBasedFeature
-pattern isSentOff(teamMember : TeamMember, target : EBoolean) {
+pattern goalCountHT(team : Team, target) {
+	target == count find goalsHT(team, _);
+}
+
+@QueryBasedFeature
+pattern isSentOff(teamMember : TeamMember, target) {
 	find redCardsOfPlayer(teamMember, _);
-	target == false;
+	target == true;
 } or {
 	neg find redCardsOfPlayer(teamMember, _);
-	target == true;	
+	target == false;	
 }
 
 private pattern redCardsOfPlayer(teamMember : TeamMember, event : Event) {
-	TeamMember.team.match.events(teamMember, event);
+	Event.committer(event, teamMember);
 	Event.type(event, ::RedCard);
 } or {
-	TeamMember.team.match.events(teamMember, event);
+	Event.committer(event, teamMember);
 	Event.type(event, ::RedCardWithBan);
 }	
 
 @QueryBasedFeature
-pattern hasYellowCard(teamMember : TeamMember, target : EBoolean) {
+pattern hasYellowCard(teamMember : TeamMember, target) {
 	find yellowCardsOfPlayer(teamMember, _);
-	target == false;
+	target == true;
 } or {
 	neg find yellowCardsOfPlayer(teamMember, _);
-	target == true;	
+	target == false;	
 }
 
 private pattern yellowCardsOfPlayer(teamMember : TeamMember, event : Event) {
-	TeamMember.team.match.events(teamMember, event);
+	Event.committer(event, teamMember);
 	Event.type(event, ::YellowCard);
 }
 
@@ -68,4 +102,25 @@ pattern match(team : Team, match : Match) {
 	Match.Home(match, team);
 } or {
 	Match.Visitor(match, team);
+}
+
+@QueryBasedFeature
+pattern team(teamMember : TeamMember, team : Team) {
+	Team.members(team, teamMember);
+}
+
+@QueryBasedFeature
+pattern teamMember(role : Role, teamMember : TeamMember) {
+	TeamMember.playerRole(teamMember, role);
+} or {
+	TeamMember.staffRole(teamMember, role);
+}
+
+@QueryBasedFeature
+pattern name(role : Role, name) {
+	TeamMember.playerRole(teamMember, role);
+	TeamMember.name(teamMember, name);
+} or {
+	TeamMember.staffRole(teamMember, role);
+	TeamMember.name(teamMember, name);
 }

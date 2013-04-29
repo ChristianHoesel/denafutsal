@@ -26,6 +26,7 @@ import org.eclipse.emf.ecore.EObject;
  *   <li>{@link model.Team#getGoalCount <em>Goal Count</em>}</li>
  *   <li>{@link model.Team#getMembers <em>Members</em>}</li>
  *   <li>{@link model.Team#getMatch <em>Match</em>}</li>
+ *   <li>{@link model.Team#getGoalCountHT <em>Goal Count HT</em>}</li>
  * </ul>
  * </p>
  *
@@ -61,75 +62,75 @@ public interface Team extends EObject {
 	void setName(String value);
 
 	/**
-	 * Returns the value of the '<em><b>Captain</b></em>' containment reference.
+	 * Returns the value of the '<em><b>Captain</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Captain</em>' reference isn't clear,
+	 * If the meaning of the '<em>Captain</em>' containment reference isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Captain</em>' containment reference.
+	 * @return the value of the '<em>Captain</em>' reference.
 	 * @see #setCaptain(Player)
 	 * @see model.ModelPackage#getTeam_Captain()
-	 * @model containment="true" required="true"
+	 * @model required="true"
 	 * @generated
 	 */
 	Player getCaptain();
 
 	/**
-	 * Sets the value of the '{@link model.Team#getCaptain <em>Captain</em>}' containment reference.
+	 * Sets the value of the '{@link model.Team#getCaptain <em>Captain</em>}' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Captain</em>' containment reference.
+	 * @param value the new value of the '<em>Captain</em>' reference.
 	 * @see #getCaptain()
 	 * @generated
 	 */
 	void setCaptain(Player value);
 
 	/**
-	 * Returns the value of the '<em><b>Starting Line</b></em>' containment reference list.
+	 * Returns the value of the '<em><b>Starting Line</b></em>' reference list.
 	 * The list contents are of type {@link model.Player}.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Starting Line</em>' reference list isn't clear,
+	 * If the meaning of the '<em>Starting Line</em>' containment reference list isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Starting Line</em>' containment reference list.
+	 * @return the value of the '<em>Starting Line</em>' reference list.
 	 * @see model.ModelPackage#getTeam_StartingLine()
-	 * @model containment="true" lower="5" upper="5"
+	 * @model lower="5" upper="5"
 	 * @generated
 	 */
 	EList<Player> getStartingLine();
 
 	/**
-	 * Returns the value of the '<em><b>Substitutes</b></em>' containment reference list.
+	 * Returns the value of the '<em><b>Substitutes</b></em>' reference list.
 	 * The list contents are of type {@link model.Player}.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Substitutes</em>' reference list isn't clear,
+	 * If the meaning of the '<em>Substitutes</em>' containment reference list isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Substitutes</em>' containment reference list.
+	 * @return the value of the '<em>Substitutes</em>' reference list.
 	 * @see model.ModelPackage#getTeam_Substitutes()
-	 * @model containment="true" lower="3" upper="7"
+	 * @model lower="3" upper="7"
 	 * @generated
 	 */
 	EList<Player> getSubstitutes();
 
 	/**
-	 * Returns the value of the '<em><b>Staff</b></em>' containment reference list.
+	 * Returns the value of the '<em><b>Staff</b></em>' reference list.
 	 * The list contents are of type {@link model.StaffMember}.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Staff</em>' containment reference list isn't clear,
+	 * If the meaning of the '<em>Staff</em>' reference list isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Staff</em>' containment reference list.
+	 * @return the value of the '<em>Staff</em>' reference list.
 	 * @see model.ModelPackage#getTeam_Staff()
-	 * @model containment="true" upper="10"
+	 * @model upper="10"
 	 * @generated
 	 */
 	EList<StaffMember> getStaff();
@@ -246,9 +247,8 @@ public interface Team extends EObject {
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Match</em>' reference.
-	 * @see #isSetMatch()
 	 * @see model.ModelPackage#getTeam_Match()
-	 * @model unsettable="true" required="true" transient="true" changeable="false" volatile="true" derived="true"
+	 * @model required="true" transient="true" changeable="false" volatile="true" derived="true"
 	 *        annotation="org.eclipse.viatra2.emf.incquery.derived.feature patternFQN='derived.match'"
 	 *        annotation="org.eclipse.incquery.querybasedfeature patternFQN='derived.match'"
 	 * @generated
@@ -256,13 +256,19 @@ public interface Team extends EObject {
 	Match getMatch();
 
 	/**
-	 * Returns whether the value of the '{@link model.Team#getMatch <em>Match</em>}' reference is set.
+	 * Returns the value of the '<em><b>Goal Count HT</b></em>' attribute.
 	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Goal Count HT</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return whether the value of the '<em>Match</em>' reference is set.
-	 * @see #getMatch()
+	 * @return the value of the '<em>Goal Count HT</em>' attribute.
+	 * @see model.ModelPackage#getTeam_GoalCountHT()
+	 * @model transient="true" changeable="false" volatile="true" derived="true"
+	 *        annotation="org.eclipse.incquery.querybasedfeature patternFQN='derived.goalCountHT'"
 	 * @generated
 	 */
-	boolean isSetMatch();
+	int getGoalCountHT();
 
 } // Team

@@ -76,13 +76,22 @@ public interface ModelPackage extends EPackage {
 	int ROLE__TEAM_MEMBER = 0;
 
 	/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ROLE__NAME = 1;
+
+	/**
 	 * The number of structural features of the '<em>Role</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int ROLE_FEATURE_COUNT = 1;
+	int ROLE_FEATURE_COUNT = 2;
 
 	/**
 	 * The meta object id for the '{@link model.impl.PlayerImpl <em>Player</em>}' class.
@@ -104,6 +113,15 @@ public interface ModelPackage extends EPackage {
 	int PLAYER__TEAM_MEMBER = ROLE__TEAM_MEMBER;
 
 	/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PLAYER__NAME = ROLE__NAME;
+
+	/**
 	 * The feature id for the '<em><b>Position</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -113,7 +131,7 @@ public interface ModelPackage extends EPackage {
 	int PLAYER__POSITION = ROLE_FEATURE_COUNT + 0;
 
 	/**
-	 * The feature id for the '<em><b>Shirt No</b></em>' attribute list.
+	 * The feature id for the '<em><b>Shirt No</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -305,7 +323,7 @@ public interface ModelPackage extends EPackage {
 	int TEAM__NAME = 0;
 
 	/**
-	 * The feature id for the '<em><b>Captain</b></em>' containment reference.
+	 * The feature id for the '<em><b>Captain</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -314,7 +332,7 @@ public interface ModelPackage extends EPackage {
 	int TEAM__CAPTAIN = 1;
 
 	/**
-	 * The feature id for the '<em><b>Starting Line</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Starting Line</b></em>' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -323,7 +341,7 @@ public interface ModelPackage extends EPackage {
 	int TEAM__STARTING_LINE = 2;
 
 	/**
-	 * The feature id for the '<em><b>Substitutes</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Substitutes</b></em>' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -332,7 +350,7 @@ public interface ModelPackage extends EPackage {
 	int TEAM__SUBSTITUTES = 3;
 
 	/**
-	 * The feature id for the '<em><b>Staff</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Staff</b></em>' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -404,13 +422,22 @@ public interface ModelPackage extends EPackage {
 	int TEAM__MATCH = 11;
 
 	/**
+	 * The feature id for the '<em><b>Goal Count HT</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TEAM__GOAL_COUNT_HT = 12;
+
+	/**
 	 * The number of structural features of the '<em>Team</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int TEAM_FEATURE_COUNT = 12;
+	int TEAM_FEATURE_COUNT = 13;
 
 	/**
 	 * The meta object id for the '{@link model.impl.TeamMemberImpl <em>Team Member</em>}' class.
@@ -512,6 +539,15 @@ public interface ModelPackage extends EPackage {
 	 * @ordered
 	 */
 	int STAFF_MEMBER__TEAM_MEMBER = ROLE__TEAM_MEMBER;
+
+	/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int STAFF_MEMBER__NAME = ROLE__NAME;
 
 	/**
 	 * The feature id for the '<em><b>Role</b></em>' attribute.
@@ -678,10 +714,10 @@ public interface ModelPackage extends EPackage {
 	EAttribute getPlayer_Position();
 
 	/**
-	 * Returns the meta object for the attribute list '{@link model.Player#getShirtNo <em>Shirt No</em>}'.
+	 * Returns the meta object for the attribute '{@link model.Player#getShirtNo <em>Shirt No</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute list '<em>Shirt No</em>'.
+	 * @return the meta object for the attribute '<em>Shirt No</em>'.
 	 * @see model.Player#getShirtNo()
 	 * @see #getPlayer()
 	 * @generated
@@ -873,10 +909,10 @@ public interface ModelPackage extends EPackage {
 	EAttribute getTeam_Name();
 
 	/**
-	 * Returns the meta object for the containment reference '{@link model.Team#getCaptain <em>Captain</em>}'.
+	 * Returns the meta object for the reference '{@link model.Team#getCaptain <em>Captain</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference '<em>Captain</em>'.
+	 * @return the meta object for the reference '<em>Captain</em>'.
 	 * @see model.Team#getCaptain()
 	 * @see #getTeam()
 	 * @generated
@@ -884,10 +920,10 @@ public interface ModelPackage extends EPackage {
 	EReference getTeam_Captain();
 
 	/**
-	 * Returns the meta object for the containment reference list '{@link model.Team#getStartingLine <em>Starting Line</em>}'.
+	 * Returns the meta object for the reference list '{@link model.Team#getStartingLine <em>Starting Line</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference list '<em>Starting Line</em>'.
+	 * @return the meta object for the reference list '<em>Starting Line</em>'.
 	 * @see model.Team#getStartingLine()
 	 * @see #getTeam()
 	 * @generated
@@ -895,10 +931,10 @@ public interface ModelPackage extends EPackage {
 	EReference getTeam_StartingLine();
 
 	/**
-	 * Returns the meta object for the containment reference list '{@link model.Team#getSubstitutes <em>Substitutes</em>}'.
+	 * Returns the meta object for the reference list '{@link model.Team#getSubstitutes <em>Substitutes</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference list '<em>Substitutes</em>'.
+	 * @return the meta object for the reference list '<em>Substitutes</em>'.
 	 * @see model.Team#getSubstitutes()
 	 * @see #getTeam()
 	 * @generated
@@ -906,10 +942,10 @@ public interface ModelPackage extends EPackage {
 	EReference getTeam_Substitutes();
 
 	/**
-	 * Returns the meta object for the containment reference list '{@link model.Team#getStaff <em>Staff</em>}'.
+	 * Returns the meta object for the reference list '{@link model.Team#getStaff <em>Staff</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference list '<em>Staff</em>'.
+	 * @return the meta object for the reference list '<em>Staff</em>'.
 	 * @see model.Team#getStaff()
 	 * @see #getTeam()
 	 * @generated
@@ -992,6 +1028,17 @@ public interface ModelPackage extends EPackage {
 	 * @generated
 	 */
 	EReference getTeam_Match();
+
+	/**
+	 * Returns the meta object for the attribute '{@link model.Team#getGoalCountHT <em>Goal Count HT</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Goal Count HT</em>'.
+	 * @see model.Team#getGoalCountHT()
+	 * @see #getTeam()
+	 * @generated
+	 */
+	EAttribute getTeam_GoalCountHT();
 
 	/**
 	 * Returns the meta object for class '{@link model.TeamMember <em>Team Member</em>}'.
@@ -1176,6 +1223,17 @@ public interface ModelPackage extends EPackage {
 	EReference getRole_TeamMember();
 
 	/**
+	 * Returns the meta object for the attribute '{@link model.Role#getName <em>Name</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Name</em>'.
+	 * @see model.Role#getName()
+	 * @see #getRole()
+	 * @generated
+	 */
+	EAttribute getRole_Name();
+
+	/**
 	 * Returns the meta object for enum '{@link model.Type <em>Type</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1266,7 +1324,7 @@ public interface ModelPackage extends EPackage {
 		EAttribute PLAYER__POSITION = eINSTANCE.getPlayer_Position();
 
 		/**
-		 * The meta object literal for the '<em><b>Shirt No</b></em>' attribute list feature.
+		 * The meta object literal for the '<em><b>Shirt No</b></em>' attribute feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
@@ -1416,7 +1474,7 @@ public interface ModelPackage extends EPackage {
 		EAttribute TEAM__NAME = eINSTANCE.getTeam_Name();
 
 		/**
-		 * The meta object literal for the '<em><b>Captain</b></em>' containment reference feature.
+		 * The meta object literal for the '<em><b>Captain</b></em>' reference feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
@@ -1424,7 +1482,7 @@ public interface ModelPackage extends EPackage {
 		EReference TEAM__CAPTAIN = eINSTANCE.getTeam_Captain();
 
 		/**
-		 * The meta object literal for the '<em><b>Starting Line</b></em>' containment reference list feature.
+		 * The meta object literal for the '<em><b>Starting Line</b></em>' reference list feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
@@ -1432,7 +1490,7 @@ public interface ModelPackage extends EPackage {
 		EReference TEAM__STARTING_LINE = eINSTANCE.getTeam_StartingLine();
 
 		/**
-		 * The meta object literal for the '<em><b>Substitutes</b></em>' containment reference list feature.
+		 * The meta object literal for the '<em><b>Substitutes</b></em>' reference list feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
@@ -1440,7 +1498,7 @@ public interface ModelPackage extends EPackage {
 		EReference TEAM__SUBSTITUTES = eINSTANCE.getTeam_Substitutes();
 
 		/**
-		 * The meta object literal for the '<em><b>Staff</b></em>' containment reference list feature.
+		 * The meta object literal for the '<em><b>Staff</b></em>' reference list feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
@@ -1502,6 +1560,14 @@ public interface ModelPackage extends EPackage {
 		 * @generated
 		 */
 		EReference TEAM__MATCH = eINSTANCE.getTeam_Match();
+
+		/**
+		 * The meta object literal for the '<em><b>Goal Count HT</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute TEAM__GOAL_COUNT_HT = eINSTANCE.getTeam_GoalCountHT();
 
 		/**
 		 * The meta object literal for the '{@link model.impl.TeamMemberImpl <em>Team Member</em>}' class.
@@ -1648,6 +1714,14 @@ public interface ModelPackage extends EPackage {
 		 * @generated
 		 */
 		EReference ROLE__TEAM_MEMBER = eINSTANCE.getRole_TeamMember();
+
+		/**
+		 * The meta object literal for the '<em><b>Name</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute ROLE__NAME = eINSTANCE.getRole_Name();
 
 		/**
 		 * The meta object literal for the '{@link model.Type <em>Type</em>}' enum.

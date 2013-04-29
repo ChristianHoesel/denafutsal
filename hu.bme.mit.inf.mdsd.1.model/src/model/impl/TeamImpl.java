@@ -50,6 +50,7 @@ import org.eclipse.incquery.querybasedfeatures.runtime.QueryBasedFeatureHelper;
  *   <li>{@link model.impl.TeamImpl#getGoalCount <em>Goal Count</em>}</li>
  *   <li>{@link model.impl.TeamImpl#getMembers <em>Members</em>}</li>
  *   <li>{@link model.impl.TeamImpl#getMatch <em>Match</em>}</li>
+ *   <li>{@link model.impl.TeamImpl#getGoalCountHT <em>Goal Count HT</em>}</li>
  * </ul>
  * </p>
  *
@@ -77,7 +78,7 @@ public class TeamImpl extends EObjectImpl implements Team {
 	protected String name = NAME_EDEFAULT;
 
 	/**
-	 * The cached value of the '{@link #getCaptain() <em>Captain</em>}' containment reference.
+	 * The cached value of the '{@link #getCaptain() <em>Captain</em>}' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @see #getCaptain()
@@ -87,7 +88,7 @@ public class TeamImpl extends EObjectImpl implements Team {
 	protected Player captain;
 
 	/**
-	 * The cached value of the '{@link #getStartingLine() <em>Starting Line</em>}' containment reference list.
+	 * The cached value of the '{@link #getStartingLine() <em>Starting Line</em>}' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @see #getStartingLine()
@@ -97,7 +98,7 @@ public class TeamImpl extends EObjectImpl implements Team {
 	protected EList<Player> startingLine;
 
 	/**
-	 * The cached value of the '{@link #getSubstitutes() <em>Substitutes</em>}' containment reference list.
+	 * The cached value of the '{@link #getSubstitutes() <em>Substitutes</em>}' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @see #getSubstitutes()
@@ -107,7 +108,7 @@ public class TeamImpl extends EObjectImpl implements Team {
 	protected EList<Player> substitutes;
 
 	/**
-	 * The cached value of the '{@link #getStaff() <em>Staff</em>}' containment reference list.
+	 * The cached value of the '{@link #getStaff() <em>Staff</em>}' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @see #getStaff()
@@ -145,6 +146,16 @@ public class TeamImpl extends EObjectImpl implements Team {
 	 * @ordered
 	 */
 	protected EList<TeamMember> members;
+
+	/**
+	 * The default value of the '{@link #getGoalCountHT() <em>Goal Count HT</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getGoalCountHT()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final int GOAL_COUNT_HT_EDEFAULT = 0;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -192,6 +203,14 @@ public class TeamImpl extends EObjectImpl implements Team {
 	 * @generated
 	 */
 	public Player getCaptain() {
+		if (captain != null && captain.eIsProxy()) {
+			InternalEObject oldCaptain = (InternalEObject)captain;
+			captain = (Player)eResolveProxy(oldCaptain);
+			if (captain != oldCaptain) {
+				if (eNotificationRequired())
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, ModelPackage.TEAM__CAPTAIN, oldCaptain, captain));
+			}
+		}
 		return captain;
 	}
 
@@ -200,14 +219,8 @@ public class TeamImpl extends EObjectImpl implements Team {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public NotificationChain basicSetCaptain(Player newCaptain, NotificationChain msgs) {
-		Player oldCaptain = captain;
-		captain = newCaptain;
-		if (eNotificationRequired()) {
-			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, ModelPackage.TEAM__CAPTAIN, oldCaptain, newCaptain);
-			if (msgs == null) msgs = notification; else msgs.add(notification);
-		}
-		return msgs;
+	public Player basicGetCaptain() {
+		return captain;
 	}
 
 	/**
@@ -216,17 +229,10 @@ public class TeamImpl extends EObjectImpl implements Team {
 	 * @generated
 	 */
 	public void setCaptain(Player newCaptain) {
-		if (newCaptain != captain) {
-			NotificationChain msgs = null;
-			if (captain != null)
-				msgs = ((InternalEObject)captain).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - ModelPackage.TEAM__CAPTAIN, null, msgs);
-			if (newCaptain != null)
-				msgs = ((InternalEObject)newCaptain).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - ModelPackage.TEAM__CAPTAIN, null, msgs);
-			msgs = basicSetCaptain(newCaptain, msgs);
-			if (msgs != null) msgs.dispatch();
-		}
-		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, ModelPackage.TEAM__CAPTAIN, newCaptain, newCaptain));
+		Player oldCaptain = captain;
+		captain = newCaptain;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, ModelPackage.TEAM__CAPTAIN, oldCaptain, captain));
 	}
 
 	/**
@@ -236,7 +242,7 @@ public class TeamImpl extends EObjectImpl implements Team {
 	 */
 	public EList<Player> getStartingLine() {
 		if (startingLine == null) {
-			startingLine = new EObjectContainmentEList<Player>(Player.class, this, ModelPackage.TEAM__STARTING_LINE);
+			startingLine = new EObjectResolvingEList<Player>(Player.class, this, ModelPackage.TEAM__STARTING_LINE);
 		}
 		return startingLine;
 	}
@@ -248,7 +254,7 @@ public class TeamImpl extends EObjectImpl implements Team {
 	 */
 	public EList<Player> getSubstitutes() {
 		if (substitutes == null) {
-			substitutes = new EObjectContainmentEList<Player>(Player.class, this, ModelPackage.TEAM__SUBSTITUTES);
+			substitutes = new EObjectResolvingEList<Player>(Player.class, this, ModelPackage.TEAM__SUBSTITUTES);
 		}
 		return substitutes;
 	}
@@ -260,7 +266,7 @@ public class TeamImpl extends EObjectImpl implements Team {
 	 */
 	public EList<StaffMember> getStaff() {
 		if (staff == null) {
-			staff = new EObjectContainmentEList<StaffMember>(StaffMember.class, this, ModelPackage.TEAM__STAFF);
+			staff = new EObjectResolvingEList<StaffMember>(StaffMember.class, this, ModelPackage.TEAM__STAFF);
 		}
 		return staff;
 	}
@@ -366,17 +372,20 @@ public class TeamImpl extends EObjectImpl implements Team {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public int getGoalCountHTGen() {
+		// TODO: implement this method to return the 'Goal Count HT' attribute
+		// Ensure that you remove @generated or mark it @generated NOT
+		throw new UnsupportedOperationException();
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case ModelPackage.TEAM__CAPTAIN:
-				return basicSetCaptain(null, msgs);
-			case ModelPackage.TEAM__STARTING_LINE:
-				return ((InternalEList<?>)getStartingLine()).basicRemove(otherEnd, msgs);
-			case ModelPackage.TEAM__SUBSTITUTES:
-				return ((InternalEList<?>)getSubstitutes()).basicRemove(otherEnd, msgs);
-			case ModelPackage.TEAM__STAFF:
-				return ((InternalEList<?>)getStaff()).basicRemove(otherEnd, msgs);
 			case ModelPackage.TEAM__PENALTIES:
 				return ((InternalEList<?>)getPenalties()).basicRemove(otherEnd, msgs);
 			case ModelPackage.TEAM__MEMBERS:
@@ -396,7 +405,8 @@ public class TeamImpl extends EObjectImpl implements Team {
 			case ModelPackage.TEAM__NAME:
 				return getName();
 			case ModelPackage.TEAM__CAPTAIN:
-				return getCaptain();
+				if (resolve) return getCaptain();
+				return basicGetCaptain();
 			case ModelPackage.TEAM__STARTING_LINE:
 				return getStartingLine();
 			case ModelPackage.TEAM__SUBSTITUTES:
@@ -418,6 +428,8 @@ public class TeamImpl extends EObjectImpl implements Team {
 			case ModelPackage.TEAM__MATCH:
 				if (resolve) return getMatch();
 				return basicGetMatch();
+			case ModelPackage.TEAM__GOAL_COUNT_HT:
+				return getGoalCountHT();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -525,7 +537,9 @@ public class TeamImpl extends EObjectImpl implements Team {
 			case ModelPackage.TEAM__MEMBERS:
 				return members != null && !members.isEmpty();
 			case ModelPackage.TEAM__MATCH:
-				return isSetMatch();
+				return basicGetMatch() != null;
+			case ModelPackage.TEAM__GOAL_COUNT_HT:
+				return getGoalCountHT() != GOAL_COUNT_HT_EDEFAULT;
 		}
 		return super.eIsSet(featureID);
 	}
@@ -625,6 +639,26 @@ public class TeamImpl extends EObjectImpl implements Team {
 	}
 
 	/**
+	 * EMF-IncQuery handler for query-based feature goalCountHT
+	 */
+	private IQueryBasedFeatureHandler goalCountHTHandler;
+
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * @query-based getter created by EMF-IncQuery for query-based feature goalCountHT
+	 */
+	public int getGoalCountHT() {
+		if (goalCountHTHandler == null) {
+			goalCountHTHandler = QueryBasedFeatureHelper
+					.getQueryBasedFeatureHandler(this,
+							ModelPackageImpl.Literals.TEAM__GOAL_COUNT_HT,
+							"derived.goalCountHT", "team", "target",
+							QueryBasedFeatureKind.SINGLE_REFERENCE, true, false);
+		}
+		return (int) goalCountHTHandler.getSingleReferenceValue(this);
+	}
+
+	/**
 	 * EMF-IncQuery handler for query-based feature match
 	 */
 	private IQueryBasedFeatureHandler matchHandler;
@@ -641,17 +675,6 @@ public class TeamImpl extends EObjectImpl implements Team {
 					QueryBasedFeatureKind.SINGLE_REFERENCE, true, false);
 		}
 		return (model.Match) matchHandler.getSingleReferenceValue(this);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public boolean isSetMatch() {
-		// TODO: implement this method to return whether the 'Match' reference is set
-		// Ensure that you remove @generated or mark it @generated NOT
-		throw new UnsupportedOperationException();
 	}
 
 } //TeamImpl

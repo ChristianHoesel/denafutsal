@@ -6,13 +6,13 @@ import model.ModelPackage;
 import model.Role;
 import model.TeamMember;
 
-import org.eclipse.emf.common.notify.Notification;
-
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 
-import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.EObjectImpl;
+import org.eclipse.incquery.querybasedfeatures.runtime.IQueryBasedFeatureHandler;
+import org.eclipse.incquery.querybasedfeatures.runtime.QueryBasedFeatureKind;
+import org.eclipse.incquery.querybasedfeatures.runtime.QueryBasedFeatureHelper;
 
 /**
  * <!-- begin-user-doc -->
@@ -22,6 +22,7 @@ import org.eclipse.emf.ecore.impl.EObjectImpl;
  * The following features are implemented:
  * <ul>
  *   <li>{@link model.impl.RoleImpl#getTeamMember <em>Team Member</em>}</li>
+ *   <li>{@link model.impl.RoleImpl#getName <em>Name</em>}</li>
  * </ul>
  * </p>
  *
@@ -29,14 +30,14 @@ import org.eclipse.emf.ecore.impl.EObjectImpl;
  */
 public abstract class RoleImpl extends EObjectImpl implements Role {
 	/**
-	 * The cached value of the '{@link #getTeamMember() <em>Team Member</em>}' reference.
+	 * The default value of the '{@link #getName() <em>Name</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getTeamMember()
+	 * @see #getName()
 	 * @generated
 	 * @ordered
 	 */
-	protected TeamMember teamMember;
+	protected static final String NAME_EDEFAULT = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -63,15 +64,8 @@ public abstract class RoleImpl extends EObjectImpl implements Role {
 	 * @generated
 	 */
 	public TeamMember getTeamMember() {
-		if (teamMember != null && teamMember.eIsProxy()) {
-			InternalEObject oldTeamMember = (InternalEObject)teamMember;
-			teamMember = (TeamMember)eResolveProxy(oldTeamMember);
-			if (teamMember != oldTeamMember) {
-				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, ModelPackage.ROLE__TEAM_MEMBER, oldTeamMember, teamMember));
-			}
-		}
-		return teamMember;
+		TeamMember teamMember = basicGetTeamMember();
+		return teamMember != null && teamMember.eIsProxy() ? (TeamMember)eResolveProxy((InternalEObject)teamMember) : teamMember;
 	}
 
 	/**
@@ -79,8 +73,11 @@ public abstract class RoleImpl extends EObjectImpl implements Role {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public TeamMember basicGetTeamMember() {
-		return teamMember;
+	public TeamMember basicGetTeamMemberGen() {
+		// TODO: implement this method to return the 'Team Member' reference
+		// -> do not perform proxy resolution
+		// Ensure that you remove @generated or mark it @generated NOT
+		throw new UnsupportedOperationException();
 	}
 
 	/**
@@ -88,11 +85,10 @@ public abstract class RoleImpl extends EObjectImpl implements Role {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setTeamMember(TeamMember newTeamMember) {
-		TeamMember oldTeamMember = teamMember;
-		teamMember = newTeamMember;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, ModelPackage.ROLE__TEAM_MEMBER, oldTeamMember, teamMember));
+	public String getNameGen() {
+		// TODO: implement this method to return the 'Name' attribute
+		// Ensure that you remove @generated or mark it @generated NOT
+		throw new UnsupportedOperationException();
 	}
 
 	/**
@@ -106,38 +102,10 @@ public abstract class RoleImpl extends EObjectImpl implements Role {
 			case ModelPackage.ROLE__TEAM_MEMBER:
 				if (resolve) return getTeamMember();
 				return basicGetTeamMember();
+			case ModelPackage.ROLE__NAME:
+				return getName();
 		}
 		return super.eGet(featureID, resolve, coreType);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public void eSet(int featureID, Object newValue) {
-		switch (featureID) {
-			case ModelPackage.ROLE__TEAM_MEMBER:
-				setTeamMember((TeamMember)newValue);
-				return;
-		}
-		super.eSet(featureID, newValue);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public void eUnset(int featureID) {
-		switch (featureID) {
-			case ModelPackage.ROLE__TEAM_MEMBER:
-				setTeamMember((TeamMember)null);
-				return;
-		}
-		super.eUnset(featureID);
 	}
 
 	/**
@@ -149,9 +117,51 @@ public abstract class RoleImpl extends EObjectImpl implements Role {
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
 			case ModelPackage.ROLE__TEAM_MEMBER:
-				return teamMember != null;
+				return basicGetTeamMember() != null;
+			case ModelPackage.ROLE__NAME:
+				return NAME_EDEFAULT == null ? getName() != null : !NAME_EDEFAULT.equals(getName());
 		}
 		return super.eIsSet(featureID);
+	}
+
+	/**
+	 * EMF-IncQuery handler for query-based feature teamMember
+	 */
+	private IQueryBasedFeatureHandler teamMemberHandler;
+
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * @query-based getter created by EMF-IncQuery for query-based feature teamMember
+	 */
+	public TeamMember basicGetTeamMember() {
+		if (teamMemberHandler == null) {
+			teamMemberHandler = QueryBasedFeatureHelper
+					.getQueryBasedFeatureHandler(this,
+							ModelPackageImpl.Literals.ROLE__TEAM_MEMBER,
+							"derived.teamMember", "role", "teamMember",
+							QueryBasedFeatureKind.SINGLE_REFERENCE, true, false);
+		}
+		return (model.TeamMember) teamMemberHandler
+				.getSingleReferenceValue(this);
+	}
+
+	/**
+	 * EMF-IncQuery handler for query-based feature name
+	 */
+	private IQueryBasedFeatureHandler nameHandler;
+
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * @query-based getter created by EMF-IncQuery for query-based feature name
+	 */
+	public String getName() {
+		if (nameHandler == null) {
+			nameHandler = QueryBasedFeatureHelper.getQueryBasedFeatureHandler(
+					this, ModelPackageImpl.Literals.ROLE__NAME, "derived.name",
+					"role", "name", QueryBasedFeatureKind.SINGLE_REFERENCE,
+					true, false);
+		}
+		return (java.lang.String) nameHandler.getSingleReferenceValue(this);
 	}
 
 } //RoleImpl

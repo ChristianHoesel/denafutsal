@@ -39,16 +39,6 @@ import org.eclipse.incquery.querybasedfeatures.runtime.QueryBasedFeatureHelper;
  */
 public class TeamMemberImpl extends PersonImpl implements TeamMember {
 	/**
-	 * The cached value of the '{@link #getTeam() <em>Team</em>}' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getTeam()
-	 * @generated
-	 * @ordered
-	 */
-	protected Team team;
-
-	/**
 	 * The default value of the '{@link #getId() <em>Id</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -133,15 +123,8 @@ public class TeamMemberImpl extends PersonImpl implements TeamMember {
 	 * @generated
 	 */
 	public Team getTeam() {
-		if (team != null && team.eIsProxy()) {
-			InternalEObject oldTeam = (InternalEObject)team;
-			team = (Team)eResolveProxy(oldTeam);
-			if (team != oldTeam) {
-				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, ModelPackage.TEAM_MEMBER__TEAM, oldTeam, team));
-			}
-		}
-		return team;
+		Team team = basicGetTeam();
+		return team != null && team.eIsProxy() ? (Team)eResolveProxy((InternalEObject)team) : team;
 	}
 
 	/**
@@ -149,20 +132,11 @@ public class TeamMemberImpl extends PersonImpl implements TeamMember {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public Team basicGetTeam() {
-		return team;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public void setTeam(Team newTeam) {
-		Team oldTeam = team;
-		team = newTeam;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, ModelPackage.TEAM_MEMBER__TEAM, oldTeam, team));
+	public Team basicGetTeamGen() {
+		// TODO: implement this method to return the 'Team' reference
+		// -> do not perform proxy resolution
+		// Ensure that you remove @generated or mark it @generated NOT
+		throw new UnsupportedOperationException();
 	}
 
 	/**
@@ -343,9 +317,6 @@ public class TeamMemberImpl extends PersonImpl implements TeamMember {
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case ModelPackage.TEAM_MEMBER__TEAM:
-				setTeam((Team)newValue);
-				return;
 			case ModelPackage.TEAM_MEMBER__ID:
 				setId((Integer)newValue);
 				return;
@@ -367,9 +338,6 @@ public class TeamMemberImpl extends PersonImpl implements TeamMember {
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case ModelPackage.TEAM_MEMBER__TEAM:
-				setTeam((Team)null);
-				return;
 			case ModelPackage.TEAM_MEMBER__ID:
 				setId(ID_EDEFAULT);
 				return;
@@ -392,7 +360,7 @@ public class TeamMemberImpl extends PersonImpl implements TeamMember {
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
 			case ModelPackage.TEAM_MEMBER__TEAM:
-				return team != null;
+				return basicGetTeam() != null;
 			case ModelPackage.TEAM_MEMBER__ID:
 				return id != ID_EDEFAULT;
 			case ModelPackage.TEAM_MEMBER__IS_SENT_OFF:
@@ -462,6 +430,25 @@ public class TeamMemberImpl extends PersonImpl implements TeamMember {
 							QueryBasedFeatureKind.SINGLE_REFERENCE, true, false);
 		}
 		return (boolean) hasYellowCardHandler.getSingleReferenceValue(this);
+	}
+
+	/**
+	 * EMF-IncQuery handler for query-based feature team
+	 */
+	private IQueryBasedFeatureHandler teamHandler;
+
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * @query-based getter created by EMF-IncQuery for query-based feature team
+	 */
+	public Team basicGetTeam() {
+		if (teamHandler == null) {
+			teamHandler = QueryBasedFeatureHelper.getQueryBasedFeatureHandler(
+					this, ModelPackageImpl.Literals.TEAM_MEMBER__TEAM,
+					"derived.team", "teamMember", "team",
+					QueryBasedFeatureKind.SINGLE_REFERENCE, true, false);
+		}
+		return (model.Team) teamHandler.getSingleReferenceValue(this);
 	}
 
 } //TeamMemberImpl

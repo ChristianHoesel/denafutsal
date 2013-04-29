@@ -2,21 +2,15 @@
  */
 package model.impl;
 
-import java.util.Collection;
-
 import model.ModelPackage;
 import model.Player;
 import model.Position;
 
 import org.eclipse.emf.common.notify.Notification;
 
-import org.eclipse.emf.common.util.EList;
-
 import org.eclipse.emf.ecore.EClass;
 
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
-
-import org.eclipse.emf.ecore.util.EDataTypeUniqueEList;
 
 /**
  * <!-- begin-user-doc -->
@@ -54,14 +48,24 @@ public class PlayerImpl extends RoleImpl implements Player {
 	protected Position position = POSITION_EDEFAULT;
 
 	/**
-	 * The cached value of the '{@link #getShirtNo() <em>Shirt No</em>}' attribute list.
+	 * The default value of the '{@link #getShirtNo() <em>Shirt No</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @see #getShirtNo()
 	 * @generated
 	 * @ordered
 	 */
-	protected EList<Short> shirtNo;
+	protected static final int SHIRT_NO_EDEFAULT = 0;
+
+	/**
+	 * The cached value of the '{@link #getShirtNo() <em>Shirt No</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getShirtNo()
+	 * @generated
+	 * @ordered
+	 */
+	protected int shirtNo = SHIRT_NO_EDEFAULT;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -108,11 +112,20 @@ public class PlayerImpl extends RoleImpl implements Player {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EList<Short> getShirtNo() {
-		if (shirtNo == null) {
-			shirtNo = new EDataTypeUniqueEList<Short>(Short.class, this, ModelPackage.PLAYER__SHIRT_NO);
-		}
+	public int getShirtNo() {
 		return shirtNo;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setShirtNo(int newShirtNo) {
+		int oldShirtNo = shirtNo;
+		shirtNo = newShirtNo;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, ModelPackage.PLAYER__SHIRT_NO, oldShirtNo, shirtNo));
 	}
 
 	/**
@@ -136,7 +149,6 @@ public class PlayerImpl extends RoleImpl implements Player {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@SuppressWarnings("unchecked")
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
@@ -144,8 +156,7 @@ public class PlayerImpl extends RoleImpl implements Player {
 				setPosition((Position)newValue);
 				return;
 			case ModelPackage.PLAYER__SHIRT_NO:
-				getShirtNo().clear();
-				getShirtNo().addAll((Collection<? extends Short>)newValue);
+				setShirtNo((Integer)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -163,7 +174,7 @@ public class PlayerImpl extends RoleImpl implements Player {
 				setPosition(POSITION_EDEFAULT);
 				return;
 			case ModelPackage.PLAYER__SHIRT_NO:
-				getShirtNo().clear();
+				setShirtNo(SHIRT_NO_EDEFAULT);
 				return;
 		}
 		super.eUnset(featureID);
@@ -180,7 +191,7 @@ public class PlayerImpl extends RoleImpl implements Player {
 			case ModelPackage.PLAYER__POSITION:
 				return position != POSITION_EDEFAULT;
 			case ModelPackage.PLAYER__SHIRT_NO:
-				return shirtNo != null && !shirtNo.isEmpty();
+				return shirtNo != SHIRT_NO_EDEFAULT;
 		}
 		return super.eIsSet(featureID);
 	}

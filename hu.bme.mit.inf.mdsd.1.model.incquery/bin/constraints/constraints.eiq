@@ -339,8 +339,8 @@ private pattern teamPenalties(Team : Team) {
 	message = "asd"
 )
 pattern tooMuchDiffSuccessPenalties(Match : Match) {
-	Team.match(team1, Match);
-	Team.match(team2, Match);
+	Match.Home(Match, team1);
+	Match.Visitor(Match, team2);
 	
 	S1 == count find successPenalties(team1);
 	S2 == count find successPenalties(team2);
@@ -356,7 +356,7 @@ pattern tooMuchDiffSuccessPenalties(Match : Match) {
 } or {
 	Match.Home(Match, team1);
 	Match.Visitor(Match, team2);
-	
+		
 	S1 == count find successPenalties(team1);
 	S2 == count find successPenalties(team2);
 	
@@ -371,7 +371,7 @@ pattern tooMuchDiffSuccessPenalties(Match : Match) {
 } or {
 	Match.Home(Match, team1);
 	Match.Visitor(Match, team2);
-	
+		
 	S1 == count find successPenalties(team1);
 	S2 == count find successPenalties(team2);
 	

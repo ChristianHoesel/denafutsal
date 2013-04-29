@@ -13,6 +13,7 @@ import org.eclipse.emf.ecore.EObject;
  * The following features are supported:
  * <ul>
  *   <li>{@link model.Role#getTeamMember <em>Team Member</em>}</li>
+ *   <li>{@link model.Role#getName <em>Name</em>}</li>
  * </ul>
  * </p>
  *
@@ -30,21 +31,27 @@ public interface Role extends EObject {
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Team Member</em>' reference.
-	 * @see #setTeamMember(TeamMember)
 	 * @see model.ModelPackage#getRole_TeamMember()
-	 * @model required="true"
+	 * @model required="true" transient="true" changeable="false" volatile="true" derived="true"
+	 *        annotation="org.eclipse.incquery.querybasedfeature patternFQN='derived.teamMember'"
 	 * @generated
 	 */
 	TeamMember getTeamMember();
 
 	/**
-	 * Sets the value of the '{@link model.Role#getTeamMember <em>Team Member</em>}' reference.
+	 * Returns the value of the '<em><b>Name</b></em>' attribute.
 	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Name</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
 	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Team Member</em>' reference.
-	 * @see #getTeamMember()
+	 * @return the value of the '<em>Name</em>' attribute.
+	 * @see model.ModelPackage#getRole_Name()
+	 * @model transient="true" changeable="false" volatile="true" derived="true"
+	 *        annotation="org.eclipse.incquery.querybasedfeature patternFQN='derived.name'"
 	 * @generated
 	 */
-	void setTeamMember(TeamMember value);
+	String getName();
 
 } // Role

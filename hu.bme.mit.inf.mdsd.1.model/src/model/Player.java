@@ -2,7 +2,6 @@
  */
 package model;
 
-import org.eclipse.emf.common.util.EList;
 
 /**
  * <!-- begin-user-doc -->
@@ -52,19 +51,29 @@ public interface Player extends Role {
 	void setPosition(Position value);
 
 	/**
-	 * Returns the value of the '<em><b>Shirt No</b></em>' attribute list.
-	 * The list contents are of type {@link java.lang.Short}.
+	 * Returns the value of the '<em><b>Shirt No</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Shirt No</em>' attribute list isn't clear,
+	 * If the meaning of the '<em>Shirt No</em>' attribute isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Shirt No</em>' attribute list.
+	 * @return the value of the '<em>Shirt No</em>' attribute.
+	 * @see #setShirtNo(int)
 	 * @see model.ModelPackage#getPlayer_ShirtNo()
-	 * @model required="true" upper="99"
+	 * @model
 	 * @generated
 	 */
-	EList<Short> getShirtNo();
+	int getShirtNo();
+
+	/**
+	 * Sets the value of the '{@link model.Player#getShirtNo <em>Shirt No</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Shirt No</em>' attribute.
+	 * @see #getShirtNo()
+	 * @generated
+	 */
+	void setShirtNo(int value);
 
 } // Player

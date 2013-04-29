@@ -34,22 +34,12 @@ public interface TeamMember extends Person {
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Team</em>' reference.
-	 * @see #setTeam(Team)
 	 * @see model.ModelPackage#getTeamMember_Team()
-	 * @model required="true"
+	 * @model required="true" transient="true" changeable="false" volatile="true" derived="true"
+	 *        annotation="org.eclipse.incquery.querybasedfeature patternFQN='derived.team'"
 	 * @generated
 	 */
 	Team getTeam();
-
-	/**
-	 * Sets the value of the '{@link model.TeamMember#getTeam <em>Team</em>}' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Team</em>' reference.
-	 * @see #getTeam()
-	 * @generated
-	 */
-	void setTeam(Team value);
 
 	/**
 	 * Returns the value of the '<em><b>Id</b></em>' attribute.
