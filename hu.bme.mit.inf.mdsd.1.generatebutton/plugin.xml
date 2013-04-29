@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.4"?>
+<plugin>
+   <extension
+         point="org.eclipse.ui.commands">
+      <command
+            id="hu.bme.mit.inf.mdsd.MatchGeneratorButton.GenerateCommand"
+            name="Generate the selected Match">
+      </command>
+   </extension>
+   <extension
+         point="org.eclipse.ui.menus">
+      <menuContribution
+            allPopups="false"
+            locationURI="toolbar:org.eclipse.ui.main.toolbar?after=additions">
+         <toolbar
+               id="hu.bme.mit.inf.mdsd.MatchGeneratorButton.toolbar1">
+            <command
+                  commandId="hu.bme.mit.inf.mdsd.MatchGeneratorButton.GenerateCommand"
+                  label="Match -&gt; Code"
+                  style="push">
+            </command>
+         </toolbar>
+      </menuContribution>
+   </extension>
+   <!-- This is an extension of "org.eclipse.ui.handlers". -->
+   <extension
+         point="org.eclipse.ui.handlers">
+      <!-- If a command named "hu.bme.mit.inf.mdsd.MatchGeneratorButton.GenerateCommand"
+           fires then call the execute method of the class named
+           "hu.bme.mit.inf.mdsd.MatchGeneratorButton.GenerateCommand".-->
+      <handler
+            class="hu.bme.mit.inf.mdsd.compilecommandhandler.ModelDataGenerateCommandHandler"
+            commandId="hu.bme.mit.inf.mdsd.MatchGeneratorButton.GenerateCommand">
+      </handler>
+   </extension>
+
+</plugin>

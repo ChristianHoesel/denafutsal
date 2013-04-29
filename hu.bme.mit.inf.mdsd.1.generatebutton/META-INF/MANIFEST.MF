@@ -1,0 +1,11 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: MatchGeneratorButton
+Bundle-SymbolicName: hu.bme.mit.inf.mdsd.1.generatebutton;singleton:=true
+Bundle-Version: 1.0.0.qualifier
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6
+Require-Bundle: org.eclipse.ui,
+ hu.bme.mit.inf.mdsd.1.codegenerator;bundle-version="1.0.0",
+ hu.bme.mit.inf.mdsd.1.model;bundle-version="1.0.0",
+ org.eclipse.core.runtime;bundle-version="3.8.0"
+ 
