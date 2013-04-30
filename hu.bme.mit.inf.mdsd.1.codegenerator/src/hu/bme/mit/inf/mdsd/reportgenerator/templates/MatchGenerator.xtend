@@ -2,70 +2,16 @@ package hu.bme.mit.inf.mdsd.reportgenerator.templates
 
 import hu.bme.mit.inf.mdsd.reportgenerator.helper.GeneratorHelper;
 import model.Match;
-import model.Team;
 import model.Player;
-import model.StaffMember
-import model.Event
+import model.StaffMember;
+import model.Event;
+import model.EventType;
 
 class MatchGenerator {
-	
-	val Integer HALFTIME = 1200;
-	
+		
 	def generateDataModel(Match dataModel) {
 		System::out.println("code generation for " + dataModel.eResource.URI)
-//		for(clazz : dataModel.events) {
-//			System::out.println(clazz.toString + " " + clazz.committer.name)
-//			GeneratorHelper::createHTMLFile(
-//				dataModel.eResource,
-//				clazz.committer.name,
-//				true,
-//				clazz.compile)
-//		}
-		
-		//System::out.println(compile(dataModel));
-		get_players(dataModel)
 		GeneratorHelper::createHTMLFile(dataModel.eResource, dataModel.id.toString, true, dataModel.compile);
-		
-	}
-	
-	def get_results(Match match) {
-		var Team home = match.home;
-		var Team visitor = match.visitor;
-		var Integer home_goal = 0;
-		var Integer visitor_goal = 0;
-		
-		for(e : match.events) {
-			if (e.type.toString.equals("Goal")) {
-				if (e.committer.team.equals(home)) {
-					home_goal = home_goal + 1;
-				}
-				if (e.committer.team.equals(visitor)) {
-					visitor_goal = visitor_goal + 1;
-				}
-			}
-		}
-		return '''«home_goal» - «visitor_goal»'''
-	}
-	
-	def get_results_of_first_half(Match match) {
-		var Team home = match.home;
-		var Team visitor = match.visitor;
-		var Integer home_goal = 0;
-		var Integer visitor_goal = 0;
-		
-		for(e : match.events) {
-			if (e.type.toString.equals("Goal")) {
-				if (e.time < HALFTIME) {
-					if (e.committer.team.equals(home)) {
-						home_goal = home_goal + 1;
-					}
-					if (e.committer.team.equals(visitor)) {
-						visitor_goal = visitor_goal + 1;
-					}
-				}
-			}
-		}
-		return '''«home_goal» - «visitor_goal»'''
 	}
 	
 	def get_goals(Event e) '''
@@ -88,29 +34,32 @@ class MatchGenerator {
 	</table>
 	'''
 	
+	def get_cards(Event e) '''
+	<div class="MOff" style="cursor: pointer; width: 350;" onMouseOut="this.className='MOff';" onmouseover="this.className='MOn_1';" OnClick="jatekos_nez_p01_jegyzokonyv_nez_2('«e.committer.id»');">
+		<table border="0" cellpadding="0" cellspacing="0" style="border-collapse: collapse">
+			<tr>
+				<td class="FEKETE_TRANSPARENT_CR10" width="20" height="15">«e.time/60»'</td>
+				<td width="4"></td>
+				<td class="URES_SZURKE" width="1"></td>
+				<td width="5"></td>
+				<td class="FEKETE_TRANSPARENT_CL11" width="215">«e.committer.name.toUpperCase»</td>
+				<td class="URES_SZURKE" width="1"></td>
+				<td width="4"></td>
+				«IF (e.type == EventType::RED_CARD)»<td class=GACC09 width="49">piros lap</td>«ENDIF»
+				«IF (e.type == EventType::YELLOW_CARD)»<td class=HACC09 width="49">sárga lap</td>«ENDIF»
+				«IF (e.type == EventType::RED_CARD_WITH_BAN)»<td class=GACC09 width="49">piros lap kiállítással</td>«ENDIF»
+				<td class="URES_SZURKE" width="1"></td>
+				<td class="FEKETE_TRANSPARENT_CR11" width="50">«e.committer.id»</td>
+			</tr>
+		</table>
+	</div>
+	<table border="0" cellpadding="0" cellspacing="0" style="border-collapse: collapse">
+		<tr><td class="URES_SZURKE" width="350" height="1"></td></tr>
+	</table>
+	'''
+	
 	def get_evad(Match match) {
 		return('''IDE JÖN AZ ÉVAD''')
-	}
-	
-	def get_players(Match match) {	
-		for(m : match.home.members) {
-			println(m)
-			//println(m.playerRole)
-			//println(match.home.startingLine)
-			
-		}
-		for(s : match.home.substitutes) {
-			//print("------")
-			//println(s)
-		}
-		
-		for(s : match.home.staff) {
-			println(s)
-			println(s.name)
-			println(s.teamMember.staffRole)
-		}
-		
-		match.home.staff
 	}
 	
 	def get_players(Player p) '''
@@ -121,7 +70,7 @@ class MatchGenerator {
 				<td width="4"></td>
 				<td class="URES_SZURKE" width="1"></td>
 				<td width="5"></td>
-				<td class="FEKETE_TRANSPARENT_CL11" width="269">«p.name»</td>
+				<td class="FEKETE_TRANSPARENT_CL11" width="269">«p.name.toUpperCase»</td>
 				<td class="URES_SZURKE" width="1"></td>
 				<td class="FEKETE_TRANSPARENT_CR11" width="50">«p.teamMember.id»</td>
 			</tr>
@@ -213,7 +162,7 @@ End function
    <tr>            
       <td class="FEKETE_TRANSPARENT_CC14" width="314" height="36">
          <b>
-         «match.home»
+         «match.home.name»
          </b>
       </td>            
       <td>
@@ -230,7 +179,7 @@ End function
       </td>
       <td class="FEKETE_TRANSPARENT_CC14" width="314">
          <b>
-         «match.visitor»
+         «match.visitor.name»
          </b>
       </td>
    </tr>            
@@ -250,7 +199,7 @@ End function
                   
                   <div class="MOff" style="cursor: pointer;" onMouseOut="this.className='MOff';" onmouseover="this.className='MOn_1';" OnClick="jatekvezeto_nez_p01_jegyzokonyv_nez_1('2692');">         
                   <table border="0" cellpadding="0" cellspacing="0" style="border-collapse: collapse">
-                     <tr><td class="FEKETE_TRANSPARENT_CL10" width="165"><b>«match.referee»</b></td></tr>
+                     <tr><td class="FEKETE_TRANSPARENT_CL10" width="165"><b>«match.referee.name.toUpperCase»</b></td></tr>
                   </table>
                   </div>
                   
@@ -262,7 +211,7 @@ End function
                   
                   <div class="MOff" style="cursor: pointer;" onMouseOut="this.className='MOff';" onmouseover="this.className='MOn_1';" OnClick="jatekvezeto_nez_p01_jegyzokonyv_nez_1('349602');">         
                   <table border="0" cellpadding="0" cellspacing="0" style="border-collapse: collapse">
-                     <tr><td class="FEKETE_TRANSPARENT_CL10" width="165"><b>«match.assistant»</b></td></tr>
+                     <tr><td class="FEKETE_TRANSPARENT_CL10" width="165"><b>«match.assistant.name.toUpperCase»</b></td></tr>
                   </table>
                   </div>
                   
@@ -274,7 +223,7 @@ End function
                   
                   <div class="MOff" style="cursor: pointer;" onMouseOut="this.className='MOff';" onmouseover="this.className='MOn_1';">         
                   <table border="0" cellpadding="0" cellspacing="0" style="border-collapse: collapse">
-                     <tr><td class="FEKETE_TRANSPARENT_CL10" width="165">«match.supervisor»</td></tr>
+                     <tr><td class="FEKETE_TRANSPARENT_CL10" width="165">«match.supervisor.name.toUpperCase»</td></tr>
                   </table>
                   </div>
                   
@@ -294,7 +243,7 @@ End function
                   
                   <div class="MOff" style="cursor: pointer;" onMouseOut="this.className='MOff';" onmouseover="this.className='MOn_1';" OnClick="jatekvezeto_nez_p01_jegyzokonyv_nez_1('464018');">         
                   <table border="0" cellpadding="0" cellspacing="0" style="border-collapse: collapse">
-                     <tr><td class="FEKETE_TRANSPARENT_CL10" width="165"><b>«match.thirdReferee»</b></td></tr>
+                     <tr><td class="FEKETE_TRANSPARENT_CL10" width="165"><b>«match.thirdReferee.name.toUpperCase»</b></td></tr>
                   </table>
                   </div>
                   
@@ -302,9 +251,7 @@ End function
                <td class="URES_SZURKE" width="1"></td>
                <td width="4"></td>
                <td class="FEKETE_TRANSPARENT_CL10" width="65">szöv.ell.:</td>
-               <td width="165">
-                  IDE MI JÖN?
-               </td>
+               <td width="165"></td>
                <td width="10"></td> 
             </tr>
          </table>     
@@ -586,12 +533,20 @@ function jatekvezeto_nez_p01_jegyzokonyv_nez_1(be_01)
    <tr>
       <td width="350" valign="top">                  
 
+«FOR card : match.home.cards»
+«get_cards(card)»
+«ENDFOR»
+
       </td>
       <td width="9"></td>
       <td class="URES_BARNA" width="1"></td>
       <td width="10"></td>
       <td width="350" valign="top">
-            
+
+«FOR card : match.visitor.cards»
+«get_cards(card)»
+«ENDFOR»
+
       </td>
    </tr>            
 </table>
