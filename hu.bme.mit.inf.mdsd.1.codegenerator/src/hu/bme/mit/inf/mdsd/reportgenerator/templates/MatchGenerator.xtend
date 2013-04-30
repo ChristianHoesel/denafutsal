@@ -1,5 +1,8 @@
 package hu.bme.mit.inf.mdsd.reportgenerator.templates
 
+import java.util.Date;
+import java.text.SimpleDateFormat;
+
 import hu.bme.mit.inf.mdsd.reportgenerator.helper.GeneratorHelper;
 import model.Match;
 import model.Player;
@@ -59,7 +62,30 @@ class MatchGenerator {
 	'''
 	
 	def get_evad(Match match) {
-		return('''IDE JÖN AZ ÉVAD''')
+		
+		// I hate Java
+		
+		if (match.date.after(new Date(match.date.year, 7, 31, 23, 59, 59))) {
+			return('''«match.date.year+1900»/«match.date.year+1900+1»''')	
+		}
+		else {
+			return('''«match.date.year+1900-1»/«match.date.year+1900»''')
+		}
+	}
+	
+	def get_date(Match match) {
+		
+		var SimpleDateFormat date_format = new SimpleDateFormat("yyyy.MM.dd");
+		var String str_date = date_format.format(match.date);
+		
+		var SimpleDateFormat weekday_format = new SimpleDateFormat("EEE");
+		var String str_weekday = weekday_format.format(match.date);
+		
+		var SimpleDateFormat time_format = new SimpleDateFormat("HH:mm");
+		var String str_time = time_format.format(match.date);
+				
+		return('''«str_date» «str_weekday» «str_time»''')
+		
 	}
 	
 	def get_players(Player p) '''
@@ -103,18 +129,12 @@ class MatchGenerator {
 <!DOCTYPE html>
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=windows-1250" />
-	<meta http-equiv="Content-Language" content="hu" />
-	<meta name="title" content="Magyar Labdarúgó Szövetség Adatbank" />
+	<meta name="content-language" content="hu" />
 	<meta name="description" content="Magyar Labdarúgó Szövetség Adatbank" />
 	<meta name="keywords" content="mlsz foci labdarúgás football adatbank" />
-	<meta name="language" content="magyar" />
-	<meta name="copyright" content="BME MIT FTSRG MDSD Team 1" />
 	<meta name="robots" content="index, follow, all" />
-	<meta name="distribution" content="Global" />
 	<meta name="revisit-after" content="1 Week" />
 	<meta name="rating" content="General" />
-	<meta name="doc-type" content="Web Page" />
-	<meta http-equiv="imagetoolbar" content="no" />
 	<title>Magyar Labdarúgó Szövetség adatbankja</title>
 	<link rel="stylesheet" href="http://adatbank.mlsz.hu/_include/include.css" type="text/css">
 	<script type="text/javascript" src="http://adatbank.mlsz.hu/_include/util.js"></script>
@@ -150,7 +170,7 @@ End function
 <table border="0" cellpadding="0" cellspacing="0" style="border-collapse: collapse">
    <tr>
       <td class="URES_HATTER_1" width="10"></td>
-      <td class="BARNA_HATTER_1_CL13" width="220" height="25">«match.date.toString»<b></b></td>
+      <td class="BARNA_HATTER_1_CL13" width="220" height="25">«get_date(match)»<b></b></td>
       <td class="BARNA_HATTER_1_CR13" width="500"><b>«match.location»</b></td>
       <td class="URES_HATTER_1" width="10"></td>
    </tr>
