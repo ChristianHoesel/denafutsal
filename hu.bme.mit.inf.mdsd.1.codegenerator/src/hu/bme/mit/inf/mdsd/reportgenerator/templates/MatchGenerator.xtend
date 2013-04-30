@@ -4,6 +4,8 @@ import hu.bme.mit.inf.mdsd.reportgenerator.helper.GeneratorHelper;
 import model.Match;
 import model.Team;
 import model.Player;
+import model.StaffMember
+import model.Event
 
 class MatchGenerator {
 	
@@ -66,6 +68,26 @@ class MatchGenerator {
 		return '''«home_goal» - «visitor_goal»'''
 	}
 	
+	def get_goals(Event e) '''
+	<div class="MOff" style="cursor: pointer; width: 350;" onMouseOut="this.className='MOff';" onmouseover="this.className='MOn_1';" OnClick="jatekos_nez_p01_jegyzokonyv_nez_2('«e.committer.id»');">
+	<table border="0" cellpadding="0" cellspacing="0" style="border-collapse: collapse">
+		<tr>
+			<td class="ASCR10" width="20" height="15">«e.time/60»'</td>
+			<td width="4"></td>
+			<td class="URES_SZURKE" width="1"></td>
+			<td width="5"></td>
+			<td class="FEKETE_TRANSPARENT_CL11" width="265">«e.committer.name.toUpperCase»</td>
+			<td class="FEKETE_TRANSPARENT_CL10" width="4"></td>
+			<td class="URES_SZURKE" width="1"></td>
+			<td class="FEKETE_TRANSPARENT_CR11" width="50">«e.committer.id»</td>
+		</tr>
+	</table>
+	</div>
+	<table border="0" cellpadding="0" cellspacing="0" style="border-collapse: collapse">
+		<tr><td class="URES_SZURKE" width="350" height="1"></td></tr>
+	</table>
+	'''
+	
 	def get_evad(Match match) {
 		return('''IDE JÖN AZ ÉVAD''')
 	}
@@ -78,13 +100,17 @@ class MatchGenerator {
 			
 		}
 		for(s : match.home.substitutes) {
-			print("------")
-			println(s)
+			//print("------")
+			//println(s)
 		}
 		
 		for(s : match.home.staff) {
 			println(s)
+			println(s.name)
+			println(s.teamMember.staffRole)
 		}
+		
+		match.home.staff
 	}
 	
 	def get_players(Player p) '''
@@ -106,6 +132,21 @@ class MatchGenerator {
 	</table>
 	'''
 	
+	def get_staffs(StaffMember s) '''
+	<div class="MOff" style="cursor: pointer; width: 350;" onMouseOut="this.className='MOff';" onmouseover="this.className='MOn_1';">
+		<table border="0" cellpadding="0" cellspacing="0" style="border-collapse: collapse">
+			<tr>
+				<td class="FEKETE_TRANSPARENT_CL11" width="215" height="15">«s.name.toUpperCase»</td>
+				<td class="FEKETE_TRANSPARENT_CL09" width="84">«s.role»</td>
+				<td class="URES_SZURKE" width="1"></td>
+				<td class="FEKETE_TRANSPARENT_CR11" width="50">«s.teamMember.id»</td>
+			</tr>
+		</table>
+	</div>
+	<table border="0" cellpadding="0" cellspacing="0" style="border-collapse: collapse">
+		<tr><td class="URES_SZURKE" width="350" height="1"></td></tr>
+	</table>
+	''' 
 	
 		
 
@@ -415,6 +456,161 @@ function jatekvezeto_nez_p01_jegyzokonyv_nez_1(be_01)
 «FOR player : match.visitor.substitutes»
 «get_players(player)»
 «ENDFOR»
+
+      </td>
+   </tr>            
+</table>
+<table border="0" cellpadding="0" cellspacing="0" style="border-collapse: collapse">
+   <tr><td class="URES_BARNA" width="720" height="1"></td></tr>
+</table>
+<table border="0" cellpadding="0" cellspacing="0" style="border-collapse: collapse">
+   <tr>
+      <td class="FEKETE_TRANSPARENT_CL10" width="100">név</td>
+      <td class="BARNA_TRANSPARENT_CL11" width="199"><b>Kispad</b></td>
+      <td class="URES_SZURKE" width="1"></td>
+      <td class="FEKETE_TRANSPARENT_CR10" width="50">igazolás</td>
+      <td width="9"></td>
+      <td class="URES_BARNA" width="1"></td>
+      <td width="10"></td>
+      <td class="FEKETE_TRANSPARENT_CL10" width="100">név</td>
+      <td class="BARNA_TRANSPARENT_CL11" width="199"><b>Kispad</b></td>
+      <td class="URES_SZURKE" width="1"></td>
+      <td class="FEKETE_TRANSPARENT_CR10" width="50">igazolás</td>
+   </tr>         
+</table>
+<table border="0" cellpadding="0" cellspacing="0" style="border-collapse: collapse">
+   <tr>
+      <td width="350" valign="top">                  
+
+«FOR stuffmember : match.home.staff»
+«get_staffs(stuffmember)»
+«ENDFOR»
+
+      </td>
+      <td width="9"></td>
+      <td class="URES_BARNA" width="1"></td>
+      <td width="10"></td>
+      <td width="350" valign="top">
+
+«FOR stuffmember : match.visitor.staff»
+«get_staffs(stuffmember)»
+«ENDFOR»
+
+               
+      </td>
+   </tr>            
+</table>
+<table border="0" cellpadding="0" cellspacing="0" style="border-collapse: collapse">
+   <tr><td class="URES_BARNA" width="720" height="1"></td></tr>
+</table>
+<table border="0" cellpadding="0" cellspacing="0" style="border-collapse: collapse">
+   <tr>
+      <td class="FEKETE_TRANSPARENT_CR10" width="20" height="15">idõ</td>
+      <td width="4"></td>
+      <td class="URES_SZURKE" width="1"></td>
+      <td width="5"></td>
+      <td class="FEKETE_TRANSPARENT_CL10" width="100">név</td>
+      <td class="BARNA_TRANSPARENT_CL11" width="165"><b>Góllövõ</b></td>
+      <td width="4"></td>
+      <td class="URES_SZURKE" width="1"></td>
+      <td class="FEKETE_TRANSPARENT_CR10" width="50">igazolás</td>
+      <td width="9"></td>
+      <td class="URES_BARNA" width="1"></td>
+      <td width="10"></td>
+      <td class="FEKETE_TRANSPARENT_CR10" width="20">idõ</td>
+      <td width="4"></td>
+      <td class="URES_SZURKE" width="1"></td>
+      <td width="5"></td>
+      <td class="FEKETE_TRANSPARENT_CL10" width="100">név</td>
+      <td class="BARNA_TRANSPARENT_CL11" width="165"><b>Góllövõ</b></td>
+      <td width="4"></td>
+      <td class="URES_SZURKE" width="1"></td>
+      <td class="FEKETE_TRANSPARENT_CR10" width="50">igazolás</td>
+   </tr>         
+</table>   
+<table border="0" cellpadding="0" cellspacing="0" style="border-collapse: collapse">
+   <tr>
+      <td width="350" valign="top">                  
+
+
+«FOR goal : match.home.goals»
+«get_goals(goal)»
+«ENDFOR»
+   
+      </td>
+      <td width="9"></td>
+      <td class="URES_BARNA" width="1"></td>
+      <td width="10"></td>
+      <td width="350" valign="top">
+
+«FOR goal : match.visitor.goals»
+«get_goals(goal)»
+«ENDFOR»
+               
+      </td>
+   </tr>            
+</table>
+<table border="0" cellpadding="0" cellspacing="0" style="border-collapse: collapse">
+   <tr><td class="URES_BARNA" width="720" height="1"></td></tr>
+</table>
+<table border="0" cellpadding="0" cellspacing="0" style="border-collapse: collapse">
+   <tr>
+      <td class="FEKETE_TRANSPARENT_CR10" width="20" height="15">idõ</td>
+      <td width="4"></td>
+      <td class="URES_SZURKE" width="1"></td>
+      <td width="5"></td>
+      <td class="FEKETE_TRANSPARENT_CL10" width="100">név</td>
+      <td class="BARNA_TRANSPARENT_CL11" width="115"><b>Sárga-Piros lap</b></td>
+      <td class="URES_SZURKE" width="1"></td>
+      <td width="4"></td>
+      <td class="FEKETE_TRANSPARENT_CL10" width="49">lap</td>
+      <td class="URES_SZURKE" width="1"></td>
+      <td class="FEKETE_TRANSPARENT_CR10" width="50">igazolás</td>
+      <td width="9"></td>
+      <td class="URES_BARNA" width="1"></td>
+      <td width="10"></td>
+      <td class="FEKETE_TRANSPARENT_CR10" width="20">idõ</td>
+      <td width="4"></td>
+      <td class="URES_SZURKE" width="1"></td>
+      <td width="5"></td>
+      <td class="FEKETE_TRANSPARENT_CL10" width="100">név</td>
+      <td class="BARNA_TRANSPARENT_CL11" width="115"><b>Sárga-Piros lap</b></td>
+      <td class="URES_SZURKE" width="1"></td>
+      <td width="4"></td>
+      <td class="FEKETE_TRANSPARENT_CL10" width="49">lap</td>
+      <td class="URES_SZURKE" width="1"></td>
+      <td class="FEKETE_TRANSPARENT_CR11" width="50">igazolás</td>
+   </tr>         
+</table>
+<table border="0" cellpadding="0" cellspacing="0" style="border-collapse: collapse">
+   <tr>
+      <td width="350" valign="top">                  
+
+      </td>
+      <td width="9"></td>
+      <td class="URES_BARNA" width="1"></td>
+      <td width="10"></td>
+      <td width="350" valign="top">
+            
+      </td>
+   </tr>            
+</table>
+<script language="JavaScript"><!--
+function jatekos_nez_p01_jegyzokonyv_nez_2(be_01)
+   {window.open('/pr01/p01_jatekos_nez.asp?p_foverseny=1&p_verseny_id=9787&p_jnkod='+be_01,'JátékosAdataitMegtekint','toolbar=0,location=0,directories=0,hotkeys=0,status=1,menubar=0,scrollbars=1,resizable=1,copyhistory=0,top=0,left=0,width='+String(screen.availWidth-20)+',height='+String(screen.availHeight-60)); }
+--></script>
+         <table border="0" cellpadding="0" cellspacing="0" style="border-collapse: collapse">
+            <tr><td class="URES_BARNA" width="700" height="1"></td></tr>
+         </table>             
+         
+      </td>   
+      <td width="10"></td>
+   </tr>
+</table>
+
+<table border="0" cellpadding="0" cellspacing="0" style="border-collapse: collapse">
+<tr><td class="AACC10" width="720">0,7265625 seconds</td></tr>
+</table>
 
    
       </td>
