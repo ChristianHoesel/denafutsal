@@ -2,8 +2,13 @@ package hu.bme.mit.inf.mdsd.reportgenerator.templates
 
 import hu.bme.mit.inf.mdsd.reportgenerator.helper.GeneratorHelper;
 import model.Match;
+import model.Team;
+import model.Player;
 
 class MatchGenerator {
+	
+	val Integer HALFTIME = 1200;
+	
 	def generateDataModel(Match dataModel) {
 		System::out.println("code generation for " + dataModel.eResource.URI)
 //		for(clazz : dataModel.events) {
@@ -15,44 +20,115 @@ class MatchGenerator {
 //				clazz.compile)
 //		}
 		
-		System::out.println(compile(dataModel));
-		get_results_of_first_half(dataModel);
+		//System::out.println(compile(dataModel));
+		get_players(dataModel)
 		GeneratorHelper::createHTMLFile(dataModel.eResource, dataModel.id.toString, true, dataModel.compile);
 		
 	}
 	
-	def get_results_of_first_half(Match match) {
+	def get_results(Match match) {
+		var Team home = match.home;
+		var Team visitor = match.visitor;
+		var Integer home_goal = 0;
+		var Integer visitor_goal = 0;
+		
 		for(e : match.events) {
 			if (e.type.toString.equals("Goal")) {
-				System::out.println(e.time)
-				System::out.println(e.type)
+				if (e.committer.team.equals(home)) {
+					home_goal = home_goal + 1;
+				}
+				if (e.committer.team.equals(visitor)) {
+					visitor_goal = visitor_goal + 1;
+				}
 			}
 		}
+		return '''«home_goal» - «visitor_goal»'''
 	}
-		
 	
+	def get_results_of_first_half(Match match) {
+		var Team home = match.home;
+		var Team visitor = match.visitor;
+		var Integer home_goal = 0;
+		var Integer visitor_goal = 0;
+		
+		for(e : match.events) {
+			if (e.type.toString.equals("Goal")) {
+				if (e.time < HALFTIME) {
+					if (e.committer.team.equals(home)) {
+						home_goal = home_goal + 1;
+					}
+					if (e.committer.team.equals(visitor)) {
+						visitor_goal = visitor_goal + 1;
+					}
+				}
+			}
+		}
+		return '''«home_goal» - «visitor_goal»'''
+	}
+	
+	def get_evad(Match match) {
+		return('''IDE JÖN AZ ÉVAD''')
+	}
+	
+	def get_players(Match match) {	
+		for(m : match.home.members) {
+			println(m)
+			//println(m.playerRole)
+			//println(match.home.startingLine)
+			
+		}
+		for(s : match.home.substitutes) {
+			print("------")
+			println(s)
+		}
+		
+		for(s : match.home.staff) {
+			println(s)
+		}
+	}
+	
+	def get_players(Player p) '''
+	<div class="MOff" style="cursor: pointer; width: 350;" onMouseOut="this.className='MOff';" onmouseover="this.className='MOn_1';" OnClick="jatekos_nez_p01_jegyzokonyv_nez_2('«p.teamMember.id»');">
+		<table border="0" cellpadding="0" cellspacing="0" style="border-collapse: collapse">
+			<tr>
+				<td class="FEKETE_TRANSPARENT_CR11" width="20" height="15">«p.shirtNo»</td>
+				<td width="4"></td>
+				<td class="URES_SZURKE" width="1"></td>
+				<td width="5"></td>
+				<td class="FEKETE_TRANSPARENT_CL11" width="269">«p.name»</td>
+				<td class="URES_SZURKE" width="1"></td>
+				<td class="FEKETE_TRANSPARENT_CR11" width="50">«p.teamMember.id»</td>
+			</tr>
+		</table>
+	</div>
+	<table border="0" cellpadding="0" cellspacing="0" style="border-collapse: collapse">
+		<tr><td class="URES_SZURKE" width="350" height="1"></td></tr>
+	</table>
+	'''
+	
+	
+		
+
 	def compile(Match match) '''
-<html>
+<!DOCTYPE html>
 <head>
-<meta http-equiv="cache-control" content="no-cache" />
-<meta http-equiv="Content-Type" content="text/html; charset=windows-1250" />
-<meta http-equiv="Content-Language" content="hu" />
-<meta name="title" content="Magyar Labdarúgó Szövetség Adatbank" />
-<meta name="description" content="Magyar Labdarúgó Szövetség Adatbank" />
-<meta name="keywords" content="mlsz foci labdarúgás football adatbank" />
-<meta name="language" content="magyar" />
-<meta name="copyright" content="BME MIT FTSRG MDSD Team 1" />
-<meta name="robots" content="index, follow, all" />
-<meta name="distribution" content="Global" />
-<meta name="revisit-after" content="1 Week" />
-<meta name="rating" content="General" />
-<meta name="doc-type" content="Web Page" />
-<meta http-equiv="imagetoolbar" content="no" />
-<meta name="verify-v1" content="NbcFoFDQeCFhmcD57l4QmYh9w3z0nCGSetVfJgIUDnI=" />
-<title>Magyar Labdarúgó Szövetség adatbankja</title>
-<link rel="stylesheet" href="http://adatbank.mlsz.hu/_include/include.css" type="text/css">
-<script type="text/javascript" src="http://adatbank.mlsz.hu/_include/util.js"></script>
-<script type="text/VBScript" src="http://adatbank.mlsz.hu/_include/utilvb.js"></script>
+	<meta http-equiv="Content-Type" content="text/html; charset=windows-1250" />
+	<meta http-equiv="Content-Language" content="hu" />
+	<meta name="title" content="Magyar Labdarúgó Szövetség Adatbank" />
+	<meta name="description" content="Magyar Labdarúgó Szövetség Adatbank" />
+	<meta name="keywords" content="mlsz foci labdarúgás football adatbank" />
+	<meta name="language" content="magyar" />
+	<meta name="copyright" content="BME MIT FTSRG MDSD Team 1" />
+	<meta name="robots" content="index, follow, all" />
+	<meta name="distribution" content="Global" />
+	<meta name="revisit-after" content="1 Week" />
+	<meta name="rating" content="General" />
+	<meta name="doc-type" content="Web Page" />
+	<meta http-equiv="imagetoolbar" content="no" />
+	<title>Magyar Labdarúgó Szövetség adatbankja</title>
+	<link rel="stylesheet" href="http://adatbank.mlsz.hu/_include/include.css" type="text/css">
+	<script type="text/javascript" src="http://adatbank.mlsz.hu/_include/util.js"></script>
+	<script type="text/VBScript" src="http://adatbank.mlsz.hu/_include/utilvb.js"></script>
 </head>
 <body topmargin="0" leftmargin="0" link="#000080" vlink="#000080" alink="#000080" OnKeyDown="ProcessKeyDown();">
 <DIV id=overDiv style="Z-INDEX: 1000; VISIBILITY: hidden; POSITION: absolute"></DIV>
@@ -96,19 +172,16 @@ End function
    <tr>            
       <td class="FEKETE_TRANSPARENT_CC14" width="314" height="36">
          <b>
-         «match.home.name»
+         «match.home»
          </b>
       </td>            
       <td>
-         <table border="0" cellpadding="0" cellspacing="0" style="border-collapse: collapse" background="/images/hatter/eredmeny_72x36.jpg">
+         <table border="0" cellpadding="0" cellspacing="0" style="border-collapse: collapse" background="http://adatbank.mlsz.hu/images/hatter/eredmeny_72x36.jpg">
             <tr>
                <td>
                   <table border="0" cellpadding="0" cellspacing="0" style="border-collapse: collapse">
-                  
-                     <tr><td class="FEKETE_TRANSPARENT_CC18" width="72" height="21"><b>2 - 2</b></td></tr>
-                     <tr><td class="FEKETE_TRANSPARENT_CC11" width="72" height="14"><b>1 - 2</b></td></tr>
- 
-
+                     <tr><td class="FEHER_TRANSPARENT_CC18" width="72" height="21"><b>«match.home.goalCount» - «match.visitor.goalCount»</b></td></tr>
+                     <tr><td class="FEHER_TRANSPARENT_CC11" width="72" height="14"><b>«match.home.goalCountHT» - «match.visitor.goalCountHT»</b></td></tr>
                   </table>
                </td>
             </tr>
@@ -116,7 +189,7 @@ End function
       </td>
       <td class="FEKETE_TRANSPARENT_CC14" width="314">
          <b>
-         MAFC
+         «match.visitor»
          </b>
       </td>
    </tr>            
@@ -136,7 +209,7 @@ End function
                   
                   <div class="MOff" style="cursor: pointer;" onMouseOut="this.className='MOff';" onmouseover="this.className='MOn_1';" OnClick="jatekvezeto_nez_p01_jegyzokonyv_nez_1('2692');">         
                   <table border="0" cellpadding="0" cellspacing="0" style="border-collapse: collapse">
-                     <tr><td class="FEKETE_TRANSPARENT_CL10" width="165"><b>CSIRKE RUDOLF </b></td></tr>
+                     <tr><td class="FEKETE_TRANSPARENT_CL10" width="165"><b>«match.referee»</b></td></tr>
                   </table>
                   </div>
                   
@@ -148,7 +221,7 @@ End function
                   
                   <div class="MOff" style="cursor: pointer;" onMouseOut="this.className='MOff';" onmouseover="this.className='MOn_1';" OnClick="jatekvezeto_nez_p01_jegyzokonyv_nez_1('349602');">         
                   <table border="0" cellpadding="0" cellspacing="0" style="border-collapse: collapse">
-                     <tr><td class="FEKETE_TRANSPARENT_CL10" width="165"><b>CZINDER IMRE </b></td></tr>
+                     <tr><td class="FEKETE_TRANSPARENT_CL10" width="165"><b>«match.assistant»</b></td></tr>
                   </table>
                   </div>
                   
@@ -160,7 +233,7 @@ End function
                   
                   <div class="MOff" style="cursor: pointer;" onMouseOut="this.className='MOff';" onmouseover="this.className='MOn_1';">         
                   <table border="0" cellpadding="0" cellspacing="0" style="border-collapse: collapse">
-                     <tr><td class="FEKETE_TRANSPARENT_CL10" width="165"></td></tr>
+                     <tr><td class="FEKETE_TRANSPARENT_CL10" width="165">«match.supervisor»</td></tr>
                   </table>
                   </div>
                   
@@ -180,7 +253,7 @@ End function
                   
                   <div class="MOff" style="cursor: pointer;" onMouseOut="this.className='MOff';" onmouseover="this.className='MOn_1';" OnClick="jatekvezeto_nez_p01_jegyzokonyv_nez_1('464018');">         
                   <table border="0" cellpadding="0" cellspacing="0" style="border-collapse: collapse">
-                     <tr><td class="FEKETE_TRANSPARENT_CL10" width="165"><b>HORVÁTH ZOLTÁN (A) </b></td></tr>
+                     <tr><td class="FEKETE_TRANSPARENT_CL10" width="165"><b>«match.thirdReferee»</b></td></tr>
                   </table>
                   </div>
                   
@@ -189,7 +262,7 @@ End function
                <td width="4"></td>
                <td class="FEKETE_TRANSPARENT_CL10" width="65">szöv.ell.:</td>
                <td width="165">
-                  
+                  IDE MI JÖN?
                </td>
                <td width="10"></td> 
             </tr>
@@ -230,15 +303,15 @@ End function
                <td class="FEHER_TRANSPARENT_CL12" width="120"><b>férfi futsal</b></td>                 
                <td class="URES_SZURKE" width="1"></td>  
                <td width="4"></td>    
-               <td class="FEHER_TRANSPARENT_CL12" width="157"><b>felnõtt</b></td>                 
+               <td class="FEHER_TRANSPARENT_CL12" width="157"><b>«match.ageGroup.name»</b></td>                 
                <td class="URES_SZURKE" width="1"></td>  
                <td width="4"></td>    
-               <td class="FEHER_TRANSPARENT_CL12" width="95"><b>bajnoki</b></td> 
+               <td class="FEHER_TRANSPARENT_CL12" width="95"><b>«match.type»</b></td> 
                <td class="URES_SZURKE" width="1"></td>  
                <td width="4"></td>    
-               <td class="FEHER_TRANSPARENT_CL12" width="95"><b>2012/2013</b></td> 
+               <td class="FEHER_TRANSPARENT_CL12" width="95"><b>«get_evad(match)»</b></td> 
                <td class="URES_SZURKE" width="1"></td>  
-               <td class="FEHER_TRANSPARENT_CR12" width="178"><b>643017</b></td>
+               <td class="FEHER_TRANSPARENT_CR12" width="178"><b>«match.id»</b></td>
                <td width="10"></td>
             </tr>
          </table>  
@@ -250,7 +323,9 @@ End function
 function jatekvezeto_nez_p01_jegyzokonyv_nez_1(be_01)
    { window.open('/pr01/p01_jatekvezeto_nez.asp?p_jvkod='+be_01,'JátékvezetõAdataitMegtekint','toolbar=0,location=0,directories=0,hotkeys=0,status=1,menubar=0,scrollbars=1,resizable=0,copyhistory=0,top=0,left=0,width=760,height=620'); }
 -->
-</script><table border="0" cellpadding="0" cellspacing="0" style="border-collapse: collapse">
+</script>
+
+<table border="0" cellpadding="0" cellspacing="0" style="border-collapse: collapse">
    <tr>
       <td class="FEKETE_TRANSPARENT_CR09" width="20" height="15">mez</td>
       <td width="4"></td>
@@ -273,185 +348,25 @@ function jatekvezeto_nez_p01_jegyzokonyv_nez_1(be_01)
       <td class="FEKETE_TRANSPARENT_CR10" width="50">igazolás</td>
    </tr>         
 </table>
+
 <table border="0" cellpadding="0" cellspacing="0" style="border-collapse: collapse">
    <tr>
       <td width="350" valign="top">                  
 
-         <div class="MOff" style="cursor: pointer; width: 350;" onMouseOut="this.className='MOff';" onmouseover="this.className='MOn_1';" OnClick="jatekos_nez_p01_jegyzokonyv_nez_2('122398');">          
-         <table border="0" cellpadding="0" cellspacing="0" style="border-collapse: collapse">
-            <tr>                        
-               <td class="FEKETE_TRANSPARENT_CR11" width="20" height="15">1</td>
-               <td width="4"></td>
-               <td class="URES_SZURKE" width="1"></td>
-               <td width="5"></td>
-               <td class="FEKETE_TRANSPARENT_CL11" width="269">KASZA VIKTOR</td>
-               <td class="URES_SZURKE" width="1"></td>
-               <td class="FEKETE_TRANSPARENT_CR11" width="50">122398</td>
-            </tr>
-         </table>
-         </div>
-         <table border="0" cellpadding="0" cellspacing="0" style="border-collapse: collapse">
-            <tr><td class="URES_SZURKE" width="350" height="1"></td></tr>
-         </table>
-   
-         <div class="MOff" style="cursor: pointer; width: 350;" onMouseOut="this.className='MOff';" onmouseover="this.className='MOn_1';" OnClick="jatekos_nez_p01_jegyzokonyv_nez_2('121564');">          
-         <table border="0" cellpadding="0" cellspacing="0" style="border-collapse: collapse">
-            <tr>                        
-               <td class="FEKETE_TRANSPARENT_CR11" width="20" height="15">10</td>
-               <td width="4"></td>
-               <td class="URES_SZURKE" width="1"></td>
-               <td width="5"></td>
-               <td class="FEKETE_TRANSPARENT_CL11" width="269">BÉNYI KÁLMÁN</td>
-               <td class="URES_SZURKE" width="1"></td>
-               <td class="FEKETE_TRANSPARENT_CR11" width="50">121564</td>
-            </tr>
-         </table>
-         </div>
-         <table border="0" cellpadding="0" cellspacing="0" style="border-collapse: collapse">
-            <tr><td class="URES_SZURKE" width="350" height="1"></td></tr>
-         </table>
-   
-         <div class="MOff" style="cursor: pointer; width: 350;" onMouseOut="this.className='MOff';" onmouseover="this.className='MOn_1';" OnClick="jatekos_nez_p01_jegyzokonyv_nez_2('237310');">          
-         <table border="0" cellpadding="0" cellspacing="0" style="border-collapse: collapse">
-            <tr>                        
-               <td class="FEKETE_TRANSPARENT_CR11" width="20" height="15">9</td>
-               <td width="4"></td>
-               <td class="URES_SZURKE" width="1"></td>
-               <td width="5"></td>
-               <td class="FEKETE_TRANSPARENT_CL11" width="269">TAR TAMÁS</td>
-               <td class="URES_SZURKE" width="1"></td>
-               <td class="FEKETE_TRANSPARENT_CR11" width="50">237310</td>
-            </tr>
-         </table>
-         </div>
-         <table border="0" cellpadding="0" cellspacing="0" style="border-collapse: collapse">
-            <tr><td class="URES_SZURKE" width="350" height="1"></td></tr>
-         </table>
-   
-         <div class="MOff" style="cursor: pointer; width: 350;" onMouseOut="this.className='MOff';" onmouseover="this.className='MOn_1';" OnClick="jatekos_nez_p01_jegyzokonyv_nez_2('136774');">          
-         <table border="0" cellpadding="0" cellspacing="0" style="border-collapse: collapse">
-            <tr>                        
-               <td class="FEKETE_TRANSPARENT_CR11" width="20" height="15">7</td>
-               <td width="4"></td>
-               <td class="URES_SZURKE" width="1"></td>
-               <td width="5"></td>
-               <td class="FEKETE_TRANSPARENT_CL11" width="269">HAZUGA SOMA</td>
-               <td class="URES_SZURKE" width="1"></td>
-               <td class="FEKETE_TRANSPARENT_CR11" width="50">136774</td>
-            </tr>
-         </table>
-         </div>
-         <table border="0" cellpadding="0" cellspacing="0" style="border-collapse: collapse">
-            <tr><td class="URES_SZURKE" width="350" height="1"></td></tr>
-         </table>
-   
-         <div class="MOff" style="cursor: pointer; width: 350;" onMouseOut="this.className='MOff';" onmouseover="this.className='MOn_1';" OnClick="jatekos_nez_p01_jegyzokonyv_nez_2('121510');">          
-         <table border="0" cellpadding="0" cellspacing="0" style="border-collapse: collapse">
-            <tr>                        
-               <td class="FEKETE_TRANSPARENT_CR11" width="20" height="15">6</td>
-               <td width="4"></td>
-               <td class="URES_SZURKE" width="1"></td>
-               <td width="5"></td>
-               <td class="FEKETE_TRANSPARENT_CL11" width="269">SZABADFI PÉTER</td>
-               <td class="URES_SZURKE" width="1"></td>
-               <td class="FEKETE_TRANSPARENT_CR11" width="50">121510</td>
-            </tr>
-         </table>
-         </div>
-         <table border="0" cellpadding="0" cellspacing="0" style="border-collapse: collapse">
-            <tr><td class="URES_SZURKE" width="350" height="1"></td></tr>
-         </table>
-   
+«FOR player : match.home.startingLine»
+«get_players(player)»
+«ENDFOR»
+
+
       </td>
       <td width="9"></td>
       <td class="URES_BARNA" width="1"></td>
       <td width="10"></td>
       <td width="350" valign="top">
 
-         <div class="MOff" style="cursor: pointer; width: 350;" onMouseOut="this.className='MOff';" onmouseover="this.className='MOn_1';" OnClick="jatekos_nez_p01_jegyzokonyv_nez_2('440245');">          
-         <table border="0" cellpadding="0" cellspacing="0" style="border-collapse: collapse">
-            <tr>
-               <td class="FEKETE_TRANSPARENT_CR11" width="20" height="15">1</td>
-               <td width="4"></td>
-               <td class="URES_SZURKE" width="1"></td>
-               <td width="5"></td>
-               <td class="FEKETE_TRANSPARENT_CL11" width="269">DR.VARRÓ DÁNIEL</td>
-               <td class="URES_SZURKE" width="1"></td>
-               <td class="FEKETE_TRANSPARENT_CR11" width="50">440245</td>
-            </tr>
-         </table>
-         </div>
-         <table border="0" cellpadding="0" cellspacing="0" style="border-collapse: collapse">
-            <tr><td class="URES_SZURKE" width="350" height="1"></td></tr>
-         </table>
-   
-         <div class="MOff" style="cursor: pointer; width: 350;" onMouseOut="this.className='MOff';" onmouseover="this.className='MOn_1';" OnClick="jatekos_nez_p01_jegyzokonyv_nez_2('193384');">          
-         <table border="0" cellpadding="0" cellspacing="0" style="border-collapse: collapse">
-            <tr>
-               <td class="FEKETE_TRANSPARENT_CR11" width="20" height="15">19</td>
-               <td width="4"></td>
-               <td class="URES_SZURKE" width="1"></td>
-               <td width="5"></td>
-               <td class="FEKETE_TRANSPARENT_CL11" width="269">CSERNAI GÁBOR LÁSZLÓ</td>
-               <td class="URES_SZURKE" width="1"></td>
-               <td class="FEKETE_TRANSPARENT_CR11" width="50">193384</td>
-            </tr>
-         </table>
-         </div>
-         <table border="0" cellpadding="0" cellspacing="0" style="border-collapse: collapse">
-            <tr><td class="URES_SZURKE" width="350" height="1"></td></tr>
-         </table>
-   
-         <div class="MOff" style="cursor: pointer; width: 350;" onMouseOut="this.className='MOff';" onmouseover="this.className='MOn_1';" OnClick="jatekos_nez_p01_jegyzokonyv_nez_2('138119');">          
-         <table border="0" cellpadding="0" cellspacing="0" style="border-collapse: collapse">
-            <tr>
-               <td class="FEKETE_TRANSPARENT_CR11" width="20" height="15">2</td>
-               <td width="4"></td>
-               <td class="URES_SZURKE" width="1"></td>
-               <td width="5"></td>
-               <td class="FEKETE_TRANSPARENT_CL11" width="269">ÖREGLAKI NORBERT</td>
-               <td class="URES_SZURKE" width="1"></td>
-               <td class="FEKETE_TRANSPARENT_CR11" width="50">138119</td>
-            </tr>
-         </table>
-         </div>
-         <table border="0" cellpadding="0" cellspacing="0" style="border-collapse: collapse">
-            <tr><td class="URES_SZURKE" width="350" height="1"></td></tr>
-         </table>
-   
-         <div class="MOff" style="cursor: pointer; width: 350;" onMouseOut="this.className='MOff';" onmouseover="this.className='MOn_1';" OnClick="jatekos_nez_p01_jegyzokonyv_nez_2('134877');">          
-         <table border="0" cellpadding="0" cellspacing="0" style="border-collapse: collapse">
-            <tr>
-               <td class="FEKETE_TRANSPARENT_CR11" width="20" height="15">5</td>
-               <td width="4"></td>
-               <td class="URES_SZURKE" width="1"></td>
-               <td width="5"></td>
-               <td class="FEKETE_TRANSPARENT_CL11" width="269">SIVÁK PÉTER</td>
-               <td class="URES_SZURKE" width="1"></td>
-               <td class="FEKETE_TRANSPARENT_CR11" width="50">134877</td>
-            </tr>
-         </table>
-         </div>
-         <table border="0" cellpadding="0" cellspacing="0" style="border-collapse: collapse">
-            <tr><td class="URES_SZURKE" width="350" height="1"></td></tr>
-         </table>
-   
-         <div class="MOff" style="cursor: pointer; width: 350;" onMouseOut="this.className='MOff';" onmouseover="this.className='MOn_1';" OnClick="jatekos_nez_p01_jegyzokonyv_nez_2('154010');">          
-         <table border="0" cellpadding="0" cellspacing="0" style="border-collapse: collapse">
-            <tr>
-               <td class="FEKETE_TRANSPARENT_CR11" width="20" height="15">3</td>
-               <td width="4"></td>
-               <td class="URES_SZURKE" width="1"></td>
-               <td width="5"></td>
-               <td class="FEKETE_TRANSPARENT_CL11" width="269">SZABÓ ZOLTÁN</td>
-               <td class="URES_SZURKE" width="1"></td>
-               <td class="FEKETE_TRANSPARENT_CR11" width="50">154010</td>
-            </tr>
-         </table>
-         </div>
-         <table border="0" cellpadding="0" cellspacing="0" style="border-collapse: collapse">
-            <tr><td class="URES_SZURKE" width="350" height="1"></td></tr>
-         </table>
+«FOR player : match.visitor.startingLine»
+«get_players(player)»
+«ENDFOR»
                
       </td>
    </tr>            
@@ -486,124 +401,10 @@ function jatekvezeto_nez_p01_jegyzokonyv_nez_1(be_01)
    <tr>
       <td width="350" valign="top">                  
 
-         <div class="MOff" style="cursor: pointer; width: 350;" onMouseOut="this.className='MOff';" onmouseover="this.className='MOn_1';" OnClick="jatekos_nez_p01_jegyzokonyv_nez_2('207670');">          
-         <table border="0" cellpadding="0" cellspacing="0" style="border-collapse: collapse">
-            <tr>
-               <td class="FEKETE_TRANSPARENT_CR11" width="20" height="15">12</td>
-               <td width="4"></td>
-               <td class="URES_SZURKE" width="1"></td>
-               <td width="5"></td>
-               <td class="FEKETE_TRANSPARENT_CL11" width="269">SÁRDI MÁTÉ</td>
-               <td class="URES_SZURKE" width="1"></td>
-               <td class="FEKETE_TRANSPARENT_CR11" width="50">207670</td>
-            </tr>
-         </table>
-         </div>
-         <table border="0" cellpadding="0" cellspacing="0" style="border-collapse: collapse">
-            <tr><td class="URES_SZURKE" width="350" height="1"></td></tr>
-         </table>
-   
-         <div class="MOff" style="cursor: pointer; width: 350;" onMouseOut="this.className='MOff';" onmouseover="this.className='MOn_1';" OnClick="jatekos_nez_p01_jegyzokonyv_nez_2('129254');">          
-         <table border="0" cellpadding="0" cellspacing="0" style="border-collapse: collapse">
-            <tr>
-               <td class="FEKETE_TRANSPARENT_CR11" width="20" height="15">3</td>
-               <td width="4"></td>
-               <td class="URES_SZURKE" width="1"></td>
-               <td width="5"></td>
-               <td class="FEKETE_TRANSPARENT_CL11" width="269">PÁLFI RÓBERT</td>
-               <td class="URES_SZURKE" width="1"></td>
-               <td class="FEKETE_TRANSPARENT_CR11" width="50">129254</td>
-            </tr>
-         </table>
-         </div>
-         <table border="0" cellpadding="0" cellspacing="0" style="border-collapse: collapse">
-            <tr><td class="URES_SZURKE" width="350" height="1"></td></tr>
-         </table>
-   
-         <div class="MOff" style="cursor: pointer; width: 350;" onMouseOut="this.className='MOff';" onmouseover="this.className='MOn_1';" OnClick="jatekos_nez_p01_jegyzokonyv_nez_2('121596');">          
-         <table border="0" cellpadding="0" cellspacing="0" style="border-collapse: collapse">
-            <tr>
-               <td class="FEKETE_TRANSPARENT_CR11" width="20" height="15">16</td>
-               <td width="4"></td>
-               <td class="URES_SZURKE" width="1"></td>
-               <td width="5"></td>
-               <td class="FEKETE_TRANSPARENT_CL11" width="269">FINTA PÉTER</td>
-               <td class="URES_SZURKE" width="1"></td>
-               <td class="FEKETE_TRANSPARENT_CR11" width="50">121596</td>
-            </tr>
-         </table>
-         </div>
-         <table border="0" cellpadding="0" cellspacing="0" style="border-collapse: collapse">
-            <tr><td class="URES_SZURKE" width="350" height="1"></td></tr>
-         </table>
-   
-         <div class="MOff" style="cursor: pointer; width: 350;" onMouseOut="this.className='MOff';" onmouseover="this.className='MOn_1';" OnClick="jatekos_nez_p01_jegyzokonyv_nez_2('249626');">          
-         <table border="0" cellpadding="0" cellspacing="0" style="border-collapse: collapse">
-            <tr>
-               <td class="FEKETE_TRANSPARENT_CR11" width="20" height="15">8</td>
-               <td width="4"></td>
-               <td class="URES_SZURKE" width="1"></td>
-               <td width="5"></td>
-               <td class="FEKETE_TRANSPARENT_CL11" width="269">BAKAY FERENC</td>
-               <td class="URES_SZURKE" width="1"></td>
-               <td class="FEKETE_TRANSPARENT_CR11" width="50">249626</td>
-            </tr>
-         </table>
-         </div>
-         <table border="0" cellpadding="0" cellspacing="0" style="border-collapse: collapse">
-            <tr><td class="URES_SZURKE" width="350" height="1"></td></tr>
-         </table>
-   
-         <div class="MOff" style="cursor: pointer; width: 350;" onMouseOut="this.className='MOff';" onmouseover="this.className='MOn_1';" OnClick="jatekos_nez_p01_jegyzokonyv_nez_2('110456');">          
-         <table border="0" cellpadding="0" cellspacing="0" style="border-collapse: collapse">
-            <tr>
-               <td class="FEKETE_TRANSPARENT_CR11" width="20" height="15">14</td>
-               <td width="4"></td>
-               <td class="URES_SZURKE" width="1"></td>
-               <td width="5"></td>
-               <td class="FEKETE_TRANSPARENT_CL11" width="269">VAS FERENC</td>
-               <td class="URES_SZURKE" width="1"></td>
-               <td class="FEKETE_TRANSPARENT_CR11" width="50">110456</td>
-            </tr>
-         </table>
-         </div>
-         <table border="0" cellpadding="0" cellspacing="0" style="border-collapse: collapse">
-            <tr><td class="URES_SZURKE" width="350" height="1"></td></tr>
-         </table>
-   
-         <div class="MOff" style="cursor: pointer; width: 350;" onMouseOut="this.className='MOff';" onmouseover="this.className='MOn_1';" OnClick="jatekos_nez_p01_jegyzokonyv_nez_2('130374');">          
-         <table border="0" cellpadding="0" cellspacing="0" style="border-collapse: collapse">
-            <tr>
-               <td class="FEKETE_TRANSPARENT_CR11" width="20" height="15">15</td>
-               <td width="4"></td>
-               <td class="URES_SZURKE" width="1"></td>
-               <td width="5"></td>
-               <td class="FEKETE_TRANSPARENT_CL11" width="269">MAROSVÖLGYI TAMÁS</td>
-               <td class="URES_SZURKE" width="1"></td>
-               <td class="FEKETE_TRANSPARENT_CR11" width="50">130374</td>
-            </tr>
-         </table>
-         </div>
-         <table border="0" cellpadding="0" cellspacing="0" style="border-collapse: collapse">
-            <tr><td class="URES_SZURKE" width="350" height="1"></td></tr>
-         </table>
-   
-         <div class="MOff" style="cursor: pointer; width: 350;" onMouseOut="this.className='MOff';" onmouseover="this.className='MOn_1';" OnClick="jatekos_nez_p01_jegyzokonyv_nez_2('286858');">          
-         <table border="0" cellpadding="0" cellspacing="0" style="border-collapse: collapse">
-            <tr>
-               <td class="FEKETE_TRANSPARENT_CR11" width="20" height="15">13</td>
-               <td width="4"></td>
-               <td class="URES_SZURKE" width="1"></td>
-               <td width="5"></td>
-               <td class="FEKETE_TRANSPARENT_CL11" width="269">WEISZ ZOLTÁN</td>
-               <td class="URES_SZURKE" width="1"></td>
-               <td class="FEKETE_TRANSPARENT_CR11" width="50">286858</td>
-            </tr>
-         </table>
-         </div>
-         <table border="0" cellpadding="0" cellspacing="0" style="border-collapse: collapse">
-            <tr><td class="URES_SZURKE" width="350" height="1"></td></tr>
-         </table>
+«FOR player : match.home.substitutes»
+«get_players(player)»
+«ENDFOR»
+
    
       </td>
       <td width="9"></td>
@@ -611,107 +412,10 @@ function jatekvezeto_nez_p01_jegyzokonyv_nez_1(be_01)
       <td width="10"></td>
       <td width="350" valign="top">
 
-         <div class="MOff" style="cursor: pointer; width: 350;" onMouseOut="this.className='MOff';" onmouseover="this.className='MOn_1';" OnClick="jatekos_nez_p01_jegyzokonyv_nez_2('186443');">          
-         <table border="0" cellpadding="0" cellspacing="0" style="border-collapse: collapse">
-            <tr>
-               <td class="FEKETE_TRANSPARENT_CR11" width="20" height="15">4</td>
-               <td width="4"></td>
-               <td class="URES_SZURKE" width="1"></td>
-               <td width="5"></td>
-               <td class="FEKETE_TRANSPARENT_CL11" width="269">ANDORKA KRISTÓF</td>
-               <td class="URES_SZURKE" width="1"></td>
-               <td class="FEKETE_TRANSPARENT_CR11" width="50">186443</td>
-            </tr>
-         </table>
-         </div>
-         <table border="0" cellpadding="0" cellspacing="0" style="border-collapse: collapse">
-            <tr><td class="URES_SZURKE" width="350" height="1"></td></tr>
-         </table>
-   
-         <div class="MOff" style="cursor: pointer; width: 350;" onMouseOut="this.className='MOff';" onmouseover="this.className='MOn_1';" OnClick="jatekos_nez_p01_jegyzokonyv_nez_2('201975');">          
-         <table border="0" cellpadding="0" cellspacing="0" style="border-collapse: collapse">
-            <tr>
-               <td class="FEKETE_TRANSPARENT_CR11" width="20" height="15">18</td>
-               <td width="4"></td>
-               <td class="URES_SZURKE" width="1"></td>
-               <td width="5"></td>
-               <td class="FEKETE_TRANSPARENT_CL11" width="269">RAJNAY GÁBOR</td>
-               <td class="URES_SZURKE" width="1"></td>
-               <td class="FEKETE_TRANSPARENT_CR11" width="50">201975</td>
-            </tr>
-         </table>
-         </div>
-         <table border="0" cellpadding="0" cellspacing="0" style="border-collapse: collapse">
-            <tr><td class="URES_SZURKE" width="350" height="1"></td></tr>
-         </table>
-   
-         <div class="MOff" style="cursor: pointer; width: 350;" onMouseOut="this.className='MOff';" onmouseover="this.className='MOn_1';" OnClick="jatekos_nez_p01_jegyzokonyv_nez_2('130991');">          
-         <table border="0" cellpadding="0" cellspacing="0" style="border-collapse: collapse">
-            <tr>
-               <td class="FEKETE_TRANSPARENT_CR11" width="20" height="15">9</td>
-               <td width="4"></td>
-               <td class="URES_SZURKE" width="1"></td>
-               <td width="5"></td>
-               <td class="FEKETE_TRANSPARENT_CL11" width="269">KERTÉSZ GERGÕ</td>
-               <td class="URES_SZURKE" width="1"></td>
-               <td class="FEKETE_TRANSPARENT_CR11" width="50">130991</td>
-            </tr>
-         </table>
-         </div>
-         <table border="0" cellpadding="0" cellspacing="0" style="border-collapse: collapse">
-            <tr><td class="URES_SZURKE" width="350" height="1"></td></tr>
-         </table>
-   
-         <div class="MOff" style="cursor: pointer; width: 350;" onMouseOut="this.className='MOff';" onmouseover="this.className='MOn_1';" OnClick="jatekos_nez_p01_jegyzokonyv_nez_2('286244');">          
-         <table border="0" cellpadding="0" cellspacing="0" style="border-collapse: collapse">
-            <tr>
-               <td class="FEKETE_TRANSPARENT_CR11" width="20" height="15">10</td>
-               <td width="4"></td>
-               <td class="URES_SZURKE" width="1"></td>
-               <td width="5"></td>
-               <td class="FEKETE_TRANSPARENT_CL11" width="269">MUNKÁCSI RICHÁRD</td>
-               <td class="URES_SZURKE" width="1"></td>
-               <td class="FEKETE_TRANSPARENT_CR11" width="50">286244</td>
-            </tr>
-         </table>
-         </div>
-         <table border="0" cellpadding="0" cellspacing="0" style="border-collapse: collapse">
-            <tr><td class="URES_SZURKE" width="350" height="1"></td></tr>
-         </table>
-   
-         <div class="MOff" style="cursor: pointer; width: 350;" onMouseOut="this.className='MOff';" onmouseover="this.className='MOn_1';" OnClick="jatekos_nez_p01_jegyzokonyv_nez_2('120916');">          
-         <table border="0" cellpadding="0" cellspacing="0" style="border-collapse: collapse">
-            <tr>
-               <td class="FEKETE_TRANSPARENT_CR11" width="20" height="15">8</td>
-               <td width="4"></td>
-               <td class="URES_SZURKE" width="1"></td>
-               <td width="5"></td>
-               <td class="FEKETE_TRANSPARENT_CL11" width="269">FRITZ BALÁZS</td>
-               <td class="URES_SZURKE" width="1"></td>
-               <td class="FEKETE_TRANSPARENT_CR11" width="50">120916</td>
-            </tr>
-         </table>
-         </div>
-         <table border="0" cellpadding="0" cellspacing="0" style="border-collapse: collapse">
-            <tr><td class="URES_SZURKE" width="350" height="1"></td></tr>
-         </table>
-   
-         <div class="MOff" style="cursor: pointer; width: 350;" onMouseOut="this.className='MOff';" onmouseover="this.className='MOn_1';" OnClick="jatekos_nez_p01_jegyzokonyv_nez_2('469799');">          
-         <table border="0" cellpadding="0" cellspacing="0" style="border-collapse: collapse">
-            <tr>
-               <td class="FEKETE_TRANSPARENT_CR11" width="20" height="15">66</td>
-               <td width="4"></td>
-               <td class="URES_SZURKE" width="1"></td>
-               <td width="5"></td>
-               <td class="FEKETE_TRANSPARENT_CL11" width="269">PAPP ENDRE LEVENTE</td>
-               <td class="URES_SZURKE" width="1"></td>
-               <td class="FEKETE_TRANSPARENT_CR11" width="50">469799</td>
-            </tr>
-         </table>
-         </div>
-         <table border="0" cellpadding="0" cellspacing="0" style="border-collapse: collapse">
-            <tr><td class="URES_SZURKE" width="350" height="1"></td></tr>
-         </table>
+«FOR player : match.visitor.substitutes»
+«get_players(player)»
+«ENDFOR»
+
    
       </td>
    </tr>            
