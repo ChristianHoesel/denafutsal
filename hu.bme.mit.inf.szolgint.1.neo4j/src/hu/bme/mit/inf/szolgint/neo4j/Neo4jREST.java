@@ -2,12 +2,12 @@ package hu.bme.mit.inf.szolgint.neo4j;
 
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
-import org.json.simple.JSONValue;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.ws.rs.core.MediaType;
@@ -16,7 +16,6 @@ import com.sun.jersey.api.client.Client;
 import com.sun.jersey.api.client.ClientHandlerException;
 import com.sun.jersey.api.client.ClientResponse;
 import com.sun.jersey.api.client.WebResource;
-import com.sun.jersey.json.impl.provider.entity.JSONObjectProvider;
 
 public class Neo4jREST {
 
@@ -241,9 +240,8 @@ public class Neo4jREST {
 		return location;
 	}
 
-	public void deleteRelationship(URI startNode)
-			throws URISyntaxException {
-		
+	public void deleteRelationship(URI startNode) throws URISyntaxException {
+
 		URI fromUri = new URI(startNode.toString() + "/relationships/all");
 
 		WebResource resource = Client.create().resource(fromUri);
@@ -261,17 +259,17 @@ public class Neo4jREST {
 			JSONArray jsonArray = (JSONArray) obj;
 
 			for (int i = 0; i < jsonArray.size(); i++) {
-				
+
 				JSONObject jsonObject = (JSONObject) jsonArray.get(i);
 				String self = (String) jsonObject.get("self");
-				
-				System.out.print(String.format(
-						"Deleting relationship [%s]", self));
-				
+
+				System.out.print(String.format("Deleting relationship [%s]",
+						self));
+
 				resource = Client.create().resource(self);
-				response = resource.type(MediaType.APPLICATION_JSON)
-						.delete(ClientResponse.class);
-				
+				response = resource.type(MediaType.APPLICATION_JSON).delete(
+						ClientResponse.class);
+
 				System.out.println(String.format(", status code [%d]",
 						response.getStatus()));
 			}
@@ -281,5 +279,99 @@ public class Neo4jREST {
 		}
 
 		response.close();
+	}
+
+	public String cypherQuery(String query) throws URISyntaxException {
+		System.out
+				.println(String
+						.format("----  ----  ----  ----  Start of %s method  ----  ----  ----  ----",
+								"cypherQuery"));
+
+		// A Cypher elérési útja:
+		URI cypherUri = new URI(SERVER_ROOT_URI + "/db/data/cypher");
+
+		// Összeállítjuk a Cypher lekérdezést egy JSON-ba és kiírjuk a konzolra:
+		String cypher_query_string = new String(String.format(
+				"{\"query\" : \"%s\", \"params\" : {} }", query));
+		System.out.println(String.format("The query in JSON: %s",
+				cypher_query_string));
+
+		// Lekérdezzük a szervert:
+		WebResource resource = Client.create().resource(cypherUri);
+		ClientResponse response = resource.accept(MediaType.APPLICATION_JSON)
+				.type(MediaType.APPLICATION_JSON).entity(cypher_query_string)
+				.post(ClientResponse.class);
+
+		// Kiszedjük a válaszból a lekérdezés eredményét:
+		String result_in_json = response.getEntity(String.class);
+		System.out.println(String.format("The results in JSON: %s",
+				result_in_json));
+
+		System.out
+				.println(String
+						.format("----  ----  ----  ----  End of %s method  ----  ----  ----  ----",
+								"cypherQuery"));
+		return result_in_json;
+	}
+
+	public List<URI> findNodeWithProperty(String property, String value)
+			throws URISyntaxException {
+		
+		ArrayList<URI> node_list = new ArrayList<URI>();
+		
+		System.out
+				.println(String
+						.format("----  ----  ----  ----  Start of %s method  ----  ----  ----  ----",
+								"findNodeWithProperty"));
+
+		// A Cypher lekérdezésünk:
+		String query = new String(
+				String.format(
+						"START n=node(*) WHERE has(n.%s) AND n.%s =~ '.*%s.*' RETURN n",
+						property, property, value));
+
+		String query_result_in_json = cypherQuery(query);
+
+		try {
+			JSONParser parser = new JSONParser();
+			Object obj = parser.parse(query_result_in_json);
+			JSONObject query_full_result_in_jsonObject = (JSONObject) obj;
+
+
+			System.out.println(query_full_result_in_jsonObject);
+
+
+
+			JSONArray query_result_data_jsonArray = (JSONArray) query_full_result_in_jsonObject
+					.get("data");
+
+
+
+			System.out.println(query_result_data_jsonArray);
+
+
+			for (int i = 0; i < query_result_data_jsonArray.size(); i++) {
+				JSONArray result_node_array = (JSONArray) query_result_data_jsonArray
+						.get(i);
+
+				JSONObject result_node = (JSONObject) result_node_array.get(0);
+
+				System.out.println(String.format("Node: %s", result_node));
+				
+				node_list.add(URI.create(result_node.get("self").toString()));
+
+			}
+
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
+
+		System.out
+				.println(String
+						.format("----  ----  ----  ----  End of %s method  ----  ----  ----  ----",
+								"findNodeWithProperty"));
+
+		return node_list;
+
 	}
 }
