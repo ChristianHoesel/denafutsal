@@ -1,0 +1,293 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<forms-definition product-version="5.10">
+  <migration-product-version>5.10</migration-product-version>
+  <application name="RestSearch" version="1.0">
+    <permissions>process#RestSearch--1.0</permissions>
+    <application-label>RestSearch</application-label>
+    <application-layout>html/RestSearch_process_template.html</application-layout>
+    <mandatory-symbol>*</mandatory-symbol>
+    <error-template>html/RestSearch_error_template.html</error-template>
+    <forms>
+      <form first-page="SearchJob" id="RestSearch--1.0--RestSearch$entry">
+        <form-type>entry</form-type>
+        <permissions>activity#RestSearch--1.0--RestSearch</permissions>
+        <pages>
+          <page id="SearchJob">
+            <page-label>Search Job</page-label>
+            <allow-html-in-label>false</allow-html-in-label>
+            <page-layout>html/RestSearch_SearchJob.html</page-layout>
+            <widgets>
+              <widget id="Home" type="BUTTON_SUBMIT">
+                <label-button>false</label-button>
+                <label>Home</label>
+                <allow-html-in-label>false</allow-html-in-label>
+                <label-position>LEFT</label-position>
+                <html-attributes>
+                  <html-attribute name="style">display: none;</html-attribute>
+                </html-attributes>
+              </widget>
+              <widget id="Partners" type="BUTTON_SUBMIT">
+                <label-button>false</label-button>
+                <label>Partners</label>
+                <allow-html-in-label>false</allow-html-in-label>
+                <label-position>LEFT</label-position>
+                <html-attributes>
+                  <html-attribute name="style">display: none;</html-attribute>
+                </html-attributes>
+              </widget>
+              <widget id="Company" type="BUTTON_SUBMIT">
+                <label-button>false</label-button>
+                <label>Company</label>
+                <allow-html-in-label>false</allow-html-in-label>
+                <label-position>LEFT</label-position>
+                <html-attributes>
+                  <html-attribute name="style">display: none;</html-attribute>
+                </html-attributes>
+              </widget>
+              <widget id="SearchJob" type="BUTTON_SUBMIT">
+                <label-button>false</label-button>
+                <label>SearchJob</label>
+                <allow-html-in-label>false</allow-html-in-label>
+                <label-position>LEFT</label-position>
+                <html-attributes>
+                  <html-attribute name="style">display: none;</html-attribute>
+                </html-attributes>
+              </widget>
+              <widget id="SearchCV" type="BUTTON_SUBMIT">
+                <label-button>false</label-button>
+                <label>SearchCV</label>
+                <allow-html-in-label>false</allow-html-in-label>
+                <label-position>LEFT</label-position>
+                <html-attributes>
+                  <html-attribute name="style">display: none;</html-attribute>
+                </html-attributes>
+              </widget>
+              <widget id="ManageCV" type="BUTTON_SUBMIT">
+                <label-button>false</label-button>
+                <label>ManageCV</label>
+                <allow-html-in-label>false</allow-html-in-label>
+                <label-position>LEFT</label-position>
+                <html-attributes>
+                  <html-attribute name="style">display: none;</html-attribute>
+                </html-attributes>
+              </widget>
+              <widget id="TermsOfUse" type="BUTTON_SUBMIT">
+                <label-button>false</label-button>
+                <label>TermsOfUse</label>
+                <allow-html-in-label>false</allow-html-in-label>
+                <label-position>LEFT</label-position>
+                <html-attributes>
+                  <html-attribute name="style">display: none;</html-attribute>
+                </html-attributes>
+              </widget>
+              <widget id="PrivacyPolicies" type="BUTTON_SUBMIT">
+                <label-button>false</label-button>
+                <label>PrivacyPolicies</label>
+                <allow-html-in-label>false</allow-html-in-label>
+                <label-position>LEFT</label-position>
+                <html-attributes>
+                  <html-attribute name="style">display: none;</html-attribute>
+                </html-attributes>
+              </widget>
+              <widget id="Exit" type="BUTTON_SUBMIT">
+                <label-button>false</label-button>
+                <label>Exit</label>
+                <allow-html-in-label>false</allow-html-in-label>
+                <label-position>LEFT</label-position>
+                <html-attributes>
+                  <html-attribute name="style">display: none;</html-attribute>
+                </html-attributes>
+              </widget>
+              <widget id="Text_field9" type="TEXTBOX">
+                <initial-value>
+                  <expression>${pref_query}</expression>
+                </initial-value>
+                <allow-html-in-field>false</allow-html-in-field>
+                <mandatory>false</mandatory>
+                <readonly>false</readonly>
+                <label>Query</label>
+                <allow-html-in-label>false</allow-html-in-label>
+                <label-position>LEFT</label-position>
+              </widget>
+              <widget id="Submit1" type="BUTTON_SUBMIT">
+                <label-button>false</label-button>
+                <label>Search</label>
+                <allow-html-in-label>false</allow-html-in-label>
+                <label-position>LEFT</label-position>
+              </widget>
+              <widget id="HTML_widget1" type="MESSAGE">
+                <initial-value>
+                  <expression>${dbResult}</expression>
+                </initial-value>
+                <allow-html-in-field>true</allow-html-in-field>
+                <variable-bound>${dbResult}</variable-bound>
+              </widget>
+              <widget id="HTML_widget2" type="MESSAGE">
+                <initial-value>
+                  <expression>${indeedResult}</expression>
+                </initial-value>
+                <allow-html-in-field>true</allow-html-in-field>
+                <variable-bound>${indeedResult}</variable-bound>
+              </widget>
+              <widget id="ManageVacancies" type="BUTTON_SUBMIT">
+                <label-button>false</label-button>
+                <label>ManageVacancies</label>
+                <allow-html-in-label>false</allow-html-in-label>
+                <label-position>LEFT</label-position>
+                <html-attributes>
+                  <html-attribute name="style">display: none;</html-attribute>
+                </html-attributes>
+              </widget>
+              <widget id="Preferences" type="BUTTON_SUBMIT">
+                <label-button>false</label-button>
+                <label>Preferences</label>
+                <allow-html-in-label>false</allow-html-in-label>
+                <label-position>LEFT</label-position>
+                <html-attributes>
+                  <html-attribute name="style">display: none;</html-attribute>
+                </html-attributes>
+              </widget>
+              <widget id="FAQs" type="BUTTON_SUBMIT">
+                <label-button>false</label-button>
+                <label>FAQs</label>
+                <allow-html-in-label>false</allow-html-in-label>
+                <label-position>LEFT</label-position>
+                <html-attributes>
+                  <html-attribute name="style">display: none;</html-attribute>
+                </html-attributes>
+              </widget>
+              <widget id="Select1" type="LISTBOX_SIMPLE">
+                <available-values>
+                  <expression>${vacancyIDs}</expression>
+                </available-values>
+                <mandatory>false</mandatory>
+                <readonly>false</readonly>
+                <html-attributes>
+                  <html-attribute name="id">vacancyIDs</html-attribute>
+                  <html-attribute name="style">display: none;</html-attribute>
+                </html-attributes>
+              </widget>
+              <widget id="Submit2" type="BUTTON_SUBMIT">
+                <label-button>false</label-button>
+                <label>Details</label>
+                <allow-html-in-label>false</allow-html-in-label>
+                <label-position>LEFT</label-position>
+                <html-attributes>
+                  <html-attribute name="id">detailsbutton</html-attribute>
+                  <html-attribute name="style">display: none;</html-attribute>
+                </html-attributes>
+              </widget>
+              <widget id="Contact" type="BUTTON_SUBMIT">
+                <label-button>false</label-button>
+                <label>Contact</label>
+                <allow-html-in-label>false</allow-html-in-label>
+                <label-position>LEFT</label-position>
+                <html-attributes>
+                  <html-attribute name="style">display: none;</html-attribute>
+                </html-attributes>
+              </widget>
+            </widgets>
+            <actions>
+              <action type="SET_VARIABLE">
+                <variable>t</variable>
+                <variable-type>UNKNOWN</variable-type>
+                <expression>${"Home"}</expression>
+                <submit-button>Home</submit-button>
+              </action>
+              <action type="SET_VARIABLE">
+                <variable>t</variable>
+                <variable-type>UNKNOWN</variable-type>
+                <expression>${"SearchJob"}</expression>
+                <submit-button>SearchJob</submit-button>
+              </action>
+              <action type="SET_VARIABLE">
+                <variable>t</variable>
+                <variable-type>UNKNOWN</variable-type>
+                <expression>${"Partners"}</expression>
+                <submit-button>Partners</submit-button>
+              </action>
+              <action type="SET_VARIABLE">
+                <variable>t</variable>
+                <variable-type>UNKNOWN</variable-type>
+                <expression>${"SearchCV"}</expression>
+                <submit-button>SearchCV</submit-button>
+              </action>
+              <action type="SET_VARIABLE">
+                <variable>t</variable>
+                <variable-type>UNKNOWN</variable-type>
+                <expression>${"FAQs"}</expression>
+                <submit-button>FAQs</submit-button>
+              </action>
+              <action type="SET_VARIABLE">
+                <variable>t</variable>
+                <variable-type>UNKNOWN</variable-type>
+                <expression>${"Preferences"}</expression>
+                <submit-button>Preferences</submit-button>
+              </action>
+              <action type="SET_VARIABLE">
+                <variable>t</variable>
+                <variable-type>UNKNOWN</variable-type>
+                <expression>${"Contact"}</expression>
+                <submit-button>Contact</submit-button>
+              </action>
+              <action type="SET_VARIABLE">
+                <variable>t</variable>
+                <variable-type>UNKNOWN</variable-type>
+                <expression>${"ManageVacancies"}</expression>
+                <submit-button>ManageVacancies</submit-button>
+              </action>
+              <action type="SET_VARIABLE">
+                <variable>t</variable>
+                <variable-type>UNKNOWN</variable-type>
+                <expression>${"Company"}</expression>
+                <submit-button>Company</submit-button>
+              </action>
+              <action type="SET_VARIABLE">
+                <variable>t</variable>
+                <variable-type>UNKNOWN</variable-type>
+                <expression>${"ManageCV"}</expression>
+                <submit-button>ManageCV</submit-button>
+              </action>
+              <action type="SET_VARIABLE">
+                <variable>t</variable>
+                <variable-type>UNKNOWN</variable-type>
+                <expression>${"TermsOfUse"}</expression>
+                <submit-button>TermsOfUse</submit-button>
+              </action>
+              <action type="SET_VARIABLE">
+                <variable>t</variable>
+                <variable-type>UNKNOWN</variable-type>
+                <expression>${"PrivacyPolicies"}</expression>
+                <submit-button>PrivacyPolicies</submit-button>
+              </action>
+              <action type="SET_VARIABLE">
+                <variable>t</variable>
+                <variable-type>UNKNOWN</variable-type>
+                <expression>${"Exit"}</expression>
+                <submit-button>Exit</submit-button>
+              </action>
+              <action type="SET_VARIABLE">
+                <variable>pref_query</variable>
+                <variable-type>PROCESS_VARIABLE</variable-type>
+                <expression>${field_Text_field9}</expression>
+                <submit-button>Submit1</submit-button>
+              </action>
+              <action type="SET_VARIABLE">
+                <variable>t</variable>
+                <variable-type>UNKNOWN</variable-type>
+                <expression>${"Details"}</expression>
+                <submit-button>Submit2</submit-button>
+              </action>
+              <action type="SET_VARIABLE">
+                <variable>toShow</variable>
+                <variable-type>UNKNOWN</variable-type>
+                <expression>${field_Select1}</expression>
+                <submit-button>Submit2</submit-button>
+              </action>
+            </actions>
+          </page>
+        </pages>
+      </form>
+    </forms>
+  </application>
+</forms-definition>

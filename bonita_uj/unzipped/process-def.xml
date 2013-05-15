@@ -1,0 +1,229 @@
+<?xml version="1.0" encoding="UTF-8"?><process-definition product-version="5.10">
+  <process name="RestSearch" version="1.0">
+    <label>RestSearch</label>
+    <description/>
+    <type>PROCESS</type>
+    <participants>
+      <participant name="Initiator">
+        <label>Initiator</label>
+        <description>Person who takes the first action to start the process</description>
+        <role-mapper>
+          <classname>org.bonitasoft.connectors.bonita.resolvers.ProcessInitiatorRoleResolver</classname>
+          <parameters/>
+        </role-mapper>
+      </participant>
+    </participants>
+    <data-fields>
+      <data-field name="indeedResult">
+        <label>indeedResult</label>
+        <value>rO0ABXA=</value>
+        <datatype-classname>java.lang.String</datatype-classname>
+        <is-transient>false</is-transient>
+        <enumeration-values/>
+      </data-field>
+      <data-field name="pref_max">
+        <label>pref_max</label>
+        <value>rO0ABXA=</value>
+        <datatype-classname>java.lang.String</datatype-classname>
+        <is-transient>false</is-transient>
+        <enumeration-values/>
+      </data-field>
+      <data-field name="pref_jobtype">
+        <label>pref_jobtype</label>
+        <value>rO0ABXA=</value>
+        <datatype-classname>java.lang.String</datatype-classname>
+        <is-transient>false</is-transient>
+        <enumeration-values/>
+      </data-field>
+      <data-field name="pref_country">
+        <label>pref_country</label>
+        <value>rO0ABXA=</value>
+        <datatype-classname>java.lang.String</datatype-classname>
+        <is-transient>false</is-transient>
+        <enumeration-values/>
+      </data-field>
+      <data-field name="query_str">
+        <label>query_str</label>
+        <value>rO0ABXA=</value>
+        <datatype-classname>java.lang.String</datatype-classname>
+        <is-transient>false</is-transient>
+        <enumeration-values/>
+      </data-field>
+      <data-field name="pref_state">
+        <label>pref_state</label>
+        <value>rO0ABXA=</value>
+        <datatype-classname>java.lang.String</datatype-classname>
+        <is-transient>false</is-transient>
+        <enumeration-values/>
+      </data-field>
+      <data-field name="pref_city">
+        <label>pref_city</label>
+        <value>rO0ABXA=</value>
+        <datatype-classname>java.lang.String</datatype-classname>
+        <is-transient>false</is-transient>
+        <enumeration-values/>
+      </data-field>
+      <data-field name="pref_query">
+        <label>pref_query</label>
+        <value>rO0ABXA=</value>
+        <datatype-classname>java.lang.String</datatype-classname>
+        <is-transient>false</is-transient>
+        <enumeration-values/>
+      </data-field>
+      <data-field name="pref_company">
+        <label>pref_company</label>
+        <value>rO0ABXA=</value>
+        <datatype-classname>java.lang.String</datatype-classname>
+        <is-transient>false</is-transient>
+        <enumeration-values/>
+      </data-field>
+      <data-field name="pref_salary">
+        <label>pref_salary</label>
+        <value>rO0ABXA=</value>
+        <datatype-classname>java.lang.String</datatype-classname>
+        <is-transient>false</is-transient>
+        <enumeration-values/>
+      </data-field>
+      <data-field name="pref_position">
+        <label>pref_position</label>
+        <value>rO0ABXA=</value>
+        <datatype-classname>java.lang.String</datatype-classname>
+        <is-transient>false</is-transient>
+        <enumeration-values/>
+      </data-field>
+    </data-fields>
+    <attachments/>
+    <activities>
+      <activity name="RestSearch">
+        <label>RestSearch</label>
+        <description/>
+        <priority>0</priority>
+        <executing-time>0</executing-time>
+        <split-type>AND</split-type>
+        <join-type>XOR</join-type>
+        <type>Human</type>
+        <asynchronous>false</asynchronous>
+        <terminate-process>false</terminate-process>
+        <performers>
+          <performer>Initiator</performer>
+        </performers>
+        <connectors>
+          <connector>
+            <classname>IndeedConnector</classname>
+            <description/>
+            <event>taskOnFinish</event>
+            <throw-exception>true</throw-exception>
+            <error-code>Indeed error</error-code>
+            <parameters>
+              <parameter name="setPref_position">rO0ABXVyABNbTGphdmEubGFuZy5PYmplY3Q7kM5YnxBzKWwCAAB4cAAAAAF0ABAke3ByZWZfcG9z
+aXRpb259</parameter>
+              <parameter name="setPref_salary">rO0ABXVyABNbTGphdmEubGFuZy5PYmplY3Q7kM5YnxBzKWwCAAB4cAAAAAF0AA4ke3ByZWZfc2Fs
+YXJ5fQ==</parameter>
+              <parameter name="indeedResult">rO0ABXVyABNbTGphdmEubGFuZy5PYmplY3Q7kM5YnxBzKWwCAAB4cAAAAAF0AA4ke3Jlc3VsdF9o
+dG1sfQ==</parameter>
+              <parameter name="setPref_state">rO0ABXVyABNbTGphdmEubGFuZy5PYmplY3Q7kM5YnxBzKWwCAAB4cAAAAAF0AA0ke3ByZWZfc3Rh
+dGV9</parameter>
+              <parameter name="setPref_query">rO0ABXVyABNbTGphdmEubGFuZy5PYmplY3Q7kM5YnxBzKWwCAAB4cAAAAAF0AA0ke3ByZWZfcXVl
+cnl9</parameter>
+              <parameter name="setPref_city">rO0ABXVyABNbTGphdmEubGFuZy5PYmplY3Q7kM5YnxBzKWwCAAB4cAAAAAF0AAwke3ByZWZfY2l0
+eX0=</parameter>
+              <parameter name="setPref_jobtype">rO0ABXVyABNbTGphdmEubGFuZy5PYmplY3Q7kM5YnxBzKWwCAAB4cAAAAAF0AA8ke3ByZWZfam9i
+dHlwZX0=</parameter>
+              <parameter name="setPref_max">rO0ABXVyABNbTGphdmEubGFuZy5PYmplY3Q7kM5YnxBzKWwCAAB4cAAAAAF0AAske3ByZWZfbWF4
+fQ==</parameter>
+              <parameter name="setPref_country">rO0ABXVyABNbTGphdmEubGFuZy5PYmplY3Q7kM5YnxBzKWwCAAB4cAAAAAF0AA8ke3ByZWZfY291
+bnRyeX0=</parameter>
+              <parameter name="setPref_company">rO0ABXVyABNbTGphdmEubGFuZy5PYmplY3Q7kM5YnxBzKWwCAAB4cAAAAAF0AA8ke3ByZWZfY29t
+cGFueX0=</parameter>
+            </parameters>
+          </connector>
+          <connector>
+            <classname>org.bonitasoft.connectors.drools.StatelessKnowledgeSessionExecute</classname>
+            <description/>
+            <event>taskOnFinish</event>
+            <throw-exception>true</throw-exception>
+            <parameters>
+              <parameter name="indeedResult">rO0ABXVyABNbTGphdmEubGFuZy5PYmplY3Q7kM5YnxBzKWwCAAB4cAAAAAF0AJgke2ltcG9ydCBj
+b20uc2FtcGxlLlBhcnNlSHRtbDsNaW1wb3J0IGNvbS5zYW1wbGUuVmFjYW5jeUluZGVlZE9iamVj
+dDsNDVN0cmluZyByZXQgPSBQYXJzZUh0bWwuaW50b0h0bWwoKFZhY2FuY3lJbmRlZWRPYmplY3Rb
+XSkgcmV2aXNlZExpc3RPZkZhY3RzKQ0NcmV0fQ==</parameter>
+              <parameter name="setListOfFacts">rO0ABXVyABNbTGphdmEubGFuZy5PYmplY3Q7kM5YnxBzKWwCAAB4cAAAAAF0Abgke2ltcG9ydCBj
+b20uc2FtcGxlLlBhcnNlSHRtbDsNaW1wb3J0IGNvbS5zYW1wbGUuVmFjYW5jeUluZGVlZE9iamVj
+dDsNDVN0cmluZyBwbGFjZSA9IHByZWZfY291bnRyeSArICIgIiArIHByZWZfc3RhdGUgKyAiICIg
+KyBwcmVmX2NpdHkNVmFjYW5jeUluZGVlZE9iamVjdFtdIHJldCA9IFBhcnNlSHRtbC5wYXJzZUh0
+bWwoaW5kZWVkUmVzdWx0LCBxdWVyeV9zdHIsIHBsYWNlLCBwcmVmX2NvbXBhbnksIHF1ZXJ5X3N0
+ciwgImZhbHNlIikNLy9WYWNhbmN5SW5kZWVkT2JqZWN0W10gcmV0ID0gUGFyc2VIdG1sLnBhcnNl
+SHRtbChQYXJzZUh0bWwuZGF0YSwgIiIsICIiLCAiIiwgIiIsICJmYWxzZSIpDUFycmF5TGlzdCBs
+aXN0ID0gbmV3IEFycmF5TGlzdCgpOw1mb3IoVmFjYW5jeUluZGVlZE9iamVjdCBvIDogcmV0KSB7
+DQlsaXN0LmFkZChvKTsNfQ0NcmV0dXJuIGxpc3Q7fQ==</parameter>
+              <parameter name="setDrlFilePath">rO0ABXVyABNbTGphdmEubGFuZy5PYmplY3Q7kM5YnxBzKWwCAAB4cAAAAAF0AE1EOlxVbml2ZXJz
+aXR5XE1EU0Qgw6lzIFN6b2xnaW50XGh1LmJtZS5taXQuaW5mLnN6b2xnaW50LmRyb29sc1xiaW5c
+U2FtcGxlLmRybA==</parameter>
+            </parameters>
+          </connector>
+        </connectors>
+        <data-fields/>
+        <deadlines/>
+        <outgoing-events/>
+        <boundary-events/>
+        <subflow-in-parameters/>
+        <subflow-out-parameters/>
+      </activity>
+      <activity name="End">
+        <label>End</label>
+        <description/>
+        <priority>0</priority>
+        <executing-time>0</executing-time>
+        <split-type>AND</split-type>
+        <join-type>XOR</join-type>
+        <type>Automatic</type>
+        <asynchronous>false</asynchronous>
+        <terminate-process>false</terminate-process>
+        <performers/>
+        <connectors/>
+        <data-fields/>
+        <deadlines/>
+        <outgoing-events/>
+        <boundary-events/>
+        <subflow-in-parameters/>
+        <subflow-out-parameters/>
+      </activity>
+      <activity name="Start">
+        <label>Start</label>
+        <description/>
+        <priority>0</priority>
+        <executing-time>0</executing-time>
+        <split-type>AND</split-type>
+        <join-type>XOR</join-type>
+        <type>Automatic</type>
+        <asynchronous>false</asynchronous>
+        <terminate-process>false</terminate-process>
+        <performers/>
+        <connectors/>
+        <data-fields/>
+        <deadlines/>
+        <outgoing-events/>
+        <boundary-events/>
+        <subflow-in-parameters/>
+        <subflow-out-parameters/>
+      </activity>
+    </activities>
+    <transitions>
+      <transition name="RestSearch__End">
+        <description/>
+        <from>RestSearch</from>
+        <to>End</to>
+        <is-default>false</is-default>
+      </transition>
+      <transition name="Start__RestSearch">
+        <description/>
+        <from>Start</from>
+        <to>RestSearch</to>
+        <is-default>false</is-default>
+      </transition>
+    </transitions>
+    <connectors/>
+    <categories/>
+    <event-sub-processes/>
+  </process>
+</process-definition>
