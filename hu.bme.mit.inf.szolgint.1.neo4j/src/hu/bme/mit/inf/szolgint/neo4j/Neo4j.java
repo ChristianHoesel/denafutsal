@@ -21,6 +21,8 @@ import org.neo4j.kernel.impl.util.FileUtils;
 public class Neo4j {
 	private String DB_PATH;
 
+	GraphDatabaseService graphDb;
+
 	public String getDB_PATH() {
 		return DB_PATH;
 	}
@@ -159,7 +161,7 @@ public class Neo4j {
 		graphDb = openDB();
 
 		String query = String
-				//.format("START n=node(*) WHERE has(n.word) AND n.word =~ '.*%s.*' RETURN n",
+				// .format("START n=node(*) WHERE has(n.word) AND n.word =~ '.*%s.*' RETURN n",
 				.format("START n=node(*) WHERE has(n.word) AND n.word = '%s' RETURN n",
 						word);
 
@@ -169,9 +171,12 @@ public class Neo4j {
 		Iterator<Node> nodes = result.columnAs("n");
 
 		for (Node node : IteratorUtil.asIterable(nodes)) {
-			System.out.println(node + ": " + node.getProperty("word"));
+			System.out.println(String.format(
+					"Adding word '%s' to the result list...",
+					node.getProperty("word")));
 			node_list.add(node);
 		}
+
 		closeDB();
 		System.out.println(String.format(
 				"----  ----  ----  ----  %s ----  ----  ----  ----",
@@ -180,6 +185,8 @@ public class Neo4j {
 	}
 
 	public void addSynonymToWord(String synonym, String word) {
+		Relationship relationship;
+
 		List<Node> word_node = findWord(word);
 		List<Node> synonym_node = findWord(synonym);
 
@@ -195,18 +202,60 @@ public class Neo4j {
 
 		graphDb = openDB();
 
-		Transaction tx = graphDb.beginTx();
-		try {
+		/*
+		 * Braintrees: ez így nem mûködik:
+		 * Node node1 = word_node.get(0);
+		 * Node node2 = synonym_node.get(0);
+		 */
 
-			relationship = word_node.get(0).createRelationshipTo(
-					synonym_node.get(0), RelTypes.SYNONYM);
-			relationship = synonym_node.get(0).createRelationshipTo(
-					word_node.get(0), RelTypes.SYNONYM);
+		Node node1 = graphDb.getNodeById(word_node.get(0).getId());
+		Node node2 = graphDb.getNodeById(synonym_node.get(0).getId());
+
+		Transaction tx = graphDb.beginTx();
+
+		try {
+			relationship = node1.createRelationshipTo(node2, RelTypes.SYNONYM);
+			relationship = node2.createRelationshipTo(node1, RelTypes.SYNONYM);
 			tx.success();
 		} finally {
 			tx.finish();
 		}
 		closeDB();
+	}
+
+	public List<Node> getAWordSynonyms(String word) {
+		System.out.println(String.format(
+				"----  ----  ----  ----  %s ----  ----  ----  ----",
+				"Start of method getAWordSynonyms"));
+		List<Node> synonym_list = new ArrayList<Node>();
+
+		Node the_word = findWord(word).get(0);
+		System.out.println(the_word.getId());
+
+		graphDb = openDB();
+
+		Node node = graphDb.getNodeById(the_word.getId());
+
+		Iterable<Relationship> relationship_list = node
+				.getRelationships(Neo4j.RelTypes.SYNONYM);
+
+		for (Relationship relationship : relationship_list) {
+			
+			for (int i = 0; i < relationship.getNodes().length; i++) {
+				Node i_node = relationship.getNodes()[i];
+				if (i_node.getId()!=node.getId()) {
+					System.out.println(i_node);
+					synonym_list.add(i_node);
+				}
+			}
+
+		}
+
+		closeDB();
+		System.out.println(String.format(
+				"----  ----  ----  ----  %s ----  ----  ----  ----",
+				"End of method getAWordSynonyms"));
+		return synonym_list;
 	}
 
 	public List<Node> listAllWord() {
@@ -224,6 +273,14 @@ public class Neo4j {
 		Iterator<Node> nodes = result.columnAs("n");
 
 		for (Node node : IteratorUtil.asIterable(nodes)) {
+
+			try {
+				System.out.println(String.format("%s - %s", node,
+						node.getProperty("word")));
+			} catch (Exception e) {
+				System.out.println(String.format("%s - %s", node, "None"));
+				// e.printStackTrace();
+			}
 			node_list.add(node);
 		}
 		closeDB();
@@ -233,73 +290,13 @@ public class Neo4j {
 		return node_list;
 	}
 
-	String greeting;
-	// START SNIPPET: vars
-	GraphDatabaseService graphDb;
-	Node firstNode;
-	Node secondNode;
-	Relationship relationship;
-
-	// END SNIPPET: vars
-
-	// START SNIPPET: createReltype
-
-	// END SNIPPET: createReltype
-
-	void createDb() {
-
-		graphDb = new GraphDatabaseFactory().newEmbeddedDatabase(DB_PATH);
-		registerShutdownHook(graphDb);
-
-		// START SNIPPET: transaction
-		Transaction tx = graphDb.beginTx();
-		try {
-			// Updating operations go here
-			// END SNIPPET: transaction
-			// START SNIPPET: addData
-			firstNode = graphDb.createNode();
-			firstNode.setProperty("message", "Hello, ");
-			secondNode = graphDb.createNode();
-			secondNode.setProperty("message", "World!");
-
-			relationship = firstNode.createRelationshipTo(secondNode,
-					RelTypes.SYNONYM);
-			relationship.setProperty("message", "brave Neo4j ");
-			// END SNIPPET: addData
-
-			// START SNIPPET: readData
-			System.out.print(firstNode.getProperty("message"));
-			System.out.print(relationship.getProperty("message"));
-			System.out.print(secondNode.getProperty("message"));
-			// END SNIPPET: readData
-
-			greeting = ((String) firstNode.getProperty("message"))
-					+ ((String) relationship.getProperty("message"))
-					+ ((String) secondNode.getProperty("message"));
-
-			// START SNIPPET: transaction
-			tx.success();
-		} finally {
-			tx.finish();
-		}
-		// END SNIPPET: transaction
-	}
-
-	void removeData() {
-		Transaction tx = graphDb.beginTx();
-		try {
-			// START SNIPPET: removingData
-			// let's remove the data
-			firstNode.getSingleRelationship(RelTypes.SYNONYM,
-					Direction.OUTGOING).delete();
-			firstNode.delete();
-			secondNode.delete();
-			// END SNIPPET: removingData
-
-			tx.success();
-		} finally {
-			tx.finish();
-		}
-	}
+	/*
+	 * void removeData() { Transaction tx = graphDb.beginTx(); try {
+	 * firstNode.getSingleRelationship(RelTypes.SYNONYM,
+	 * Direction.OUTGOING).delete(); firstNode.delete(); secondNode.delete(); //
+	 * END SNIPPET: removingData
+	 * 
+	 * tx.success(); } finally { tx.finish(); } }
+	 */
 
 }

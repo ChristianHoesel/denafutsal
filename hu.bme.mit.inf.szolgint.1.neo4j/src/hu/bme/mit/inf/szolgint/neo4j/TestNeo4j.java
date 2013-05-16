@@ -29,16 +29,12 @@ public class TestNeo4j {
         */
         // Szinonímák meghatározása:
         // Adott szóhoz új szó felvétele:
-        jobs.addSynonymToWord("T", "Ty");
+        jobs.addSynonymToWord("T1", "Ty1");
         
-        List<Node> words = jobs.listAllWord();
+        //jobs.listAllWord();
         
-        for (int i = 0; i < words.size(); i++) {
-			System.out.println(words.get(i));
-		}
+        jobs.getAWordSynonyms("T1"); 
         
-
-     
     }
 
 }
