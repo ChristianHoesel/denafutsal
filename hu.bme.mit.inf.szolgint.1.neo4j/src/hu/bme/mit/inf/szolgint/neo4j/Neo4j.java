@@ -8,7 +8,6 @@ import java.util.List;
 
 import org.neo4j.cypher.javacompat.ExecutionEngine;
 import org.neo4j.cypher.javacompat.ExecutionResult;
-import org.neo4j.graphdb.Direction;
 import org.neo4j.graphdb.GraphDatabaseService;
 import org.neo4j.graphdb.Node;
 import org.neo4j.graphdb.Relationship;
@@ -74,12 +73,13 @@ public class Neo4j {
 		});
 	}
 
-	public void addNewWord(String word) {
+	public Node addNewWord(String word) {
 		System.out.println(String.format(
 				"----  ----  ----  ----  %s ----  ----  ----  ----",
 				"Start of method addNewWord"));
 		System.out.println(String.format("Trying to add new word (%s) to DB",
 				word));
+
 		graphDb = openDB();
 
 		ExecutionEngine engine = new ExecutionEngine(graphDb);
@@ -89,9 +89,10 @@ public class Neo4j {
 								word));
 
 		Iterator<Long> row_number = result.columnAs("count(*)");
-
+		
+		Node newNode = null; 
+		
 		if (row_number.next() == 0) {
-			Node newNode;
 			Transaction tx = graphDb.beginTx();
 			try {
 				newNode = graphDb.createNode();
@@ -111,6 +112,7 @@ public class Neo4j {
 		System.out.println(String.format(
 				"----  ----  ----  ----  %s ----  ----  ----  ----",
 				"End of method addNewWord"));
+		return newNode;
 	}
 
 	public void deleteWord(String word) {
@@ -187,14 +189,17 @@ public class Neo4j {
 	public void addSynonymToWord(String synonym, String word) {
 		Relationship relationship;
 
+		// Ellenõrizzük, hogy léteznek-e már a szavak a DB-ben:
 		List<Node> word_node = findWord(word);
 		List<Node> synonym_node = findWord(synonym);
-
+		
+		// Ha a 'word' nem létezik, akkor létrehozzuk:
 		if (word_node.isEmpty()) {
 			addNewWord(word);
 			word_node = findWord(word);
 		}
-
+		
+		// Ha a 'synonym' nem létezik akkor létrehozzuk:
 		if (synonym_node.isEmpty()) {
 			addNewWord(synonym);
 			synonym_node = findWord(synonym);

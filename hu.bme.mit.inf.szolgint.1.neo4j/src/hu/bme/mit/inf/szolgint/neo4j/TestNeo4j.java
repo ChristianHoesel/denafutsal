@@ -33,7 +33,7 @@ public class TestNeo4j {
         
         //jobs.listAllWord();
         
-        jobs.getAWordSynonyms("T1"); 
+        //jobs.getAWordSynonyms("T1"); 
         
     }
 
