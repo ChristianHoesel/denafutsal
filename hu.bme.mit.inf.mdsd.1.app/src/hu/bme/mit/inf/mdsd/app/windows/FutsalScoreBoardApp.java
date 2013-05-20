@@ -1322,22 +1322,22 @@ public class FutsalScoreBoardApp {
 		
 		Label label_3 = new Label(composite_4, SWT.CENTER);
 		FormData fd_label_3 = new FormData();
-		fd_label_3.bottom = new FormAttachment(0, 117);
-		fd_label_3.right = new FormAttachment(0, 610);
 		fd_label_3.top = new FormAttachment(0);
 		fd_label_3.left = new FormAttachment(0);
+		fd_label_3.right = new FormAttachment(100);
 		label_3.setLayoutData(fd_label_3);
 		label_3.setBackground(SWTResourceManager.getColor(0, 0, 0));
 		label_3.setForeground(SWTResourceManager.getColor(255, 204, 0));
 		label_3.setAlignment(SWT.CENTER);
 		label_3.setFont(SWTResourceManager.getFont("Score Board", 90, SWT.NORMAL));
-		label_3.setText("0:0");
+		label_3.setText("00:00");
 		
 		Label label_4 = new Label(composite_4, SWT.NONE);
+		fd_label_3.bottom = new FormAttachment(label_4);
 		FormData fd_label_4 = new FormData();
-		fd_label_4.right = new FormAttachment(0, 610);
-		fd_label_4.top = new FormAttachment(0, 115);
+		fd_label_4.top = new FormAttachment(0, 113);
 		fd_label_4.left = new FormAttachment(0);
+		fd_label_4.right = new FormAttachment(100);
 		label_4.setLayoutData(fd_label_4);
 		label_4.setFont(SWTResourceManager.getFont("Score Board", 43, SWT.NORMAL));
 		label_4.setAlignment(SWT.CENTER);
@@ -1355,8 +1355,7 @@ public class FutsalScoreBoardApp {
 			}
 		});
 		FormData fd_btnNewButton = new FormData();
-		fd_btnNewButton.top = new FormAttachment(label_4, 6);
-		fd_btnNewButton.right = new FormAttachment(0, 249);
+		fd_btnNewButton.top = new FormAttachment(0, 255);
 		fd_btnNewButton.left = new FormAttachment(0, 10);
 		btnNewButton.setLayoutData(fd_btnNewButton);
 		
@@ -1365,8 +1364,8 @@ public class FutsalScoreBoardApp {
 		btnNewButton_1.setImage(SWTResourceManager.getImage(FutsalScoreBoardApp.class, "/hu/bme/mit/inf/mdsd/app/icons/whistle.png"));
 		FormData fd_btnNewButton_1 = new FormData();
 		fd_btnNewButton_1.bottom = new FormAttachment(btnNewButton, 0, SWT.BOTTOM);
-		fd_btnNewButton_1.top = new FormAttachment(label_4, 6);
-		fd_btnNewButton_1.left = new FormAttachment(100, -249);
+		fd_btnNewButton_1.top = new FormAttachment(btnNewButton, 0, SWT.TOP);
+		fd_btnNewButton_1.left = new FormAttachment(btnNewButton, 112);
 		fd_btnNewButton_1.right = new FormAttachment(100, -10);
 		btnNewButton_1.setLayoutData(fd_btnNewButton_1);
 		btnNewButton_1.setText("0");
@@ -1380,52 +1379,49 @@ public class FutsalScoreBoardApp {
 		});
 		btnNewButton_2.setImage(SWTResourceManager.getImage(FutsalScoreBoardApp.class, "/hu/bme/mit/inf/mdsd/app/icons/1369093953_Box_Yellow.png"));
 		FormData fd_btnNewButton_2 = new FormData();
-		fd_btnNewButton_2.top = new FormAttachment(0, 264);
 		fd_btnNewButton_2.left = new FormAttachment(0, 10);
 		btnNewButton_2.setLayoutData(fd_btnNewButton_2);
 		
 		Button btnNewButton_3 = new Button(composite_4, SWT.NONE);
-		fd_btnNewButton_2.right = new FormAttachment(100, -484);
+		fd_btnNewButton.right = new FormAttachment(100, -361);
+		fd_btnNewButton_2.right = new FormAttachment(btnNewButton_3, -6);
 		btnNewButton_3.setImage(SWTResourceManager.getImage(FutsalScoreBoardApp.class, "/hu/bme/mit/inf/mdsd/app/icons/1369093352_stop-red.png"));
 		FormData fd_btnNewButton_3 = new FormData();
-		fd_btnNewButton_3.left = new FormAttachment(btnNewButton_2, 6);
-		fd_btnNewButton_3.top = new FormAttachment(btnNewButton, 6);
+		fd_btnNewButton_3.left = new FormAttachment(0, 132);
+		fd_btnNewButton_3.top = new FormAttachment(btnNewButton_2, -1, SWT.TOP);
 		btnNewButton_3.setLayoutData(fd_btnNewButton_3);
 		
 		Button btnNewButton_4 = new Button(composite_4, SWT.NONE);
-		fd_btnNewButton_3.right = new FormAttachment(btnNewButton_4, -112);
+		fd_btnNewButton_3.right = new FormAttachment(100, -361);
 		btnNewButton_4.setImage(SWTResourceManager.getImage(FutsalScoreBoardApp.class, "/hu/bme/mit/inf/mdsd/app/icons/1369093352_stop-red.png"));
 		FormData fd_btnNewButton_4 = new FormData();
-		fd_btnNewButton_4.left = new FormAttachment(0, 361);
 		fd_btnNewButton_4.bottom = new FormAttachment(btnNewButton_2, 0, SWT.BOTTOM);
-		fd_btnNewButton_4.top = new FormAttachment(btnNewButton_2, 0, SWT.TOP);
+		fd_btnNewButton_4.left = new FormAttachment(0, 361);
 		btnNewButton_4.setLayoutData(fd_btnNewButton_4);
 		
 		Button btnNewButton_5 = new Button(composite_4, SWT.NONE);
 		fd_btnNewButton_4.right = new FormAttachment(btnNewButton_5, -6);
 		btnNewButton_5.setImage(SWTResourceManager.getImage(FutsalScoreBoardApp.class, "/hu/bme/mit/inf/mdsd/app/icons/1369093953_Box_Yellow.png"));
 		FormData fd_btnNewButton_5 = new FormData();
-		fd_btnNewButton_5.bottom = new FormAttachment(btnNewButton_2, 0, SWT.BOTTOM);
-		fd_btnNewButton_5.top = new FormAttachment(btnNewButton_2, 0, SWT.TOP);
 		fd_btnNewButton_5.right = new FormAttachment(100, -9);
 		fd_btnNewButton_5.left = new FormAttachment(0, 484);
+		fd_btnNewButton_5.top = new FormAttachment(btnNewButton_2, 0, SWT.TOP);
 		btnNewButton_5.setLayoutData(fd_btnNewButton_5);
 		
 		Button btnNewButton_6 = new Button(composite_4, SWT.NONE);
-		fd_btnNewButton_2.bottom = new FormAttachment(btnNewButton_6, -6);
+		fd_btnNewButton_2.bottom = new FormAttachment(100, -295);
 		btnNewButton_6.setImage(SWTResourceManager.getImage(FutsalScoreBoardApp.class, "/hu/bme/mit/inf/mdsd/app/icons/1369093397_time_frame.png"));
 		FormData fd_btnNewButton_6 = new FormData();
-		fd_btnNewButton_6.top = new FormAttachment(0, 344);
+		fd_btnNewButton_6.top = new FormAttachment(btnNewButton_2, 6);
 		fd_btnNewButton_6.left = new FormAttachment(0, 10);
 		btnNewButton_6.setLayoutData(fd_btnNewButton_6);
 		
 		Button btnNewButton_7 = new Button(composite_4, SWT.NONE);
-		fd_btnNewButton_3.bottom = new FormAttachment(btnNewButton_7, -5);
 		fd_btnNewButton_6.right = new FormAttachment(btnNewButton_7, -7);
 		btnNewButton_7.setImage(SWTResourceManager.getImage(FutsalScoreBoardApp.class, "/hu/bme/mit/inf/mdsd/app/icons/1369093447_aerow_winter.png"));
 		FormData fd_btnNewButton_7 = new FormData();
+		fd_btnNewButton_7.top = new FormAttachment(btnNewButton_3, 3);
 		fd_btnNewButton_7.left = new FormAttachment(0, 133);
-		fd_btnNewButton_7.top = new FormAttachment(0, 343);
 		btnNewButton_7.setLayoutData(fd_btnNewButton_7);
 		
 		Button btnNewButton_8 = new Button(composite_4, SWT.NONE);
@@ -1438,27 +1434,42 @@ public class FutsalScoreBoardApp {
 		btnNewButton_8.setImage(SWTResourceManager.getImage(FutsalScoreBoardApp.class, "/hu/bme/mit/inf/mdsd/app/icons/1369093447_aerow_winter.png"));
 		FormData fd_btnNewButton_8 = new FormData();
 		fd_btnNewButton_8.left = new FormAttachment(0, 361);
-		fd_btnNewButton_8.top = new FormAttachment(0, 342);
+		fd_btnNewButton_8.bottom = new FormAttachment(btnNewButton_6, 0, SWT.BOTTOM);
+		fd_btnNewButton_8.top = new FormAttachment(btnNewButton_6, -2, SWT.TOP);
 		btnNewButton_8.setLayoutData(fd_btnNewButton_8);
 		
 		Button btnNewButton_9 = new Button(composite_4, SWT.NONE);
-		fd_btnNewButton_8.right = new FormAttachment(btnNewButton_9, -6);
+		fd_btnNewButton_8.right = new FormAttachment(100, -132);
 		btnNewButton_9.setImage(SWTResourceManager.getImage(FutsalScoreBoardApp.class, "/hu/bme/mit/inf/mdsd/app/icons/1369093397_time_frame.png"));
 		FormData fd_btnNewButton_9 = new FormData();
+		fd_btnNewButton_9.bottom = new FormAttachment(btnNewButton_6, 0, SWT.BOTTOM);
+		fd_btnNewButton_9.top = new FormAttachment(btnNewButton_6, 0, SWT.TOP);
+		fd_btnNewButton_9.left = new FormAttachment(btnNewButton_8, 6);
 		fd_btnNewButton_9.right = new FormAttachment(100, -9);
-		fd_btnNewButton_9.left = new FormAttachment(0, 484);
-		fd_btnNewButton_9.top = new FormAttachment(btnNewButton_8, 0, SWT.TOP);
 		btnNewButton_9.setLayoutData(fd_btnNewButton_9);
 		
 		table = new Table(composite_4, SWT.BORDER | SWT.FULL_SELECTION);
+		fd_btnNewButton_7.bottom = new FormAttachment(table, -5);
+		fd_btnNewButton_6.bottom = new FormAttachment(100, -228);
 		FormData fd_table = new FormData();
-		fd_table.right = new FormAttachment(btnNewButton_1, 0, SWT.RIGHT);
-		fd_table.bottom = new FormAttachment(btnNewButton_6, 252, SWT.BOTTOM);
 		fd_table.top = new FormAttachment(btnNewButton_6, 6);
-		fd_table.left = new FormAttachment(btnNewButton, 0, SWT.LEFT);
+		fd_table.bottom = new FormAttachment(100, -10);
+		fd_table.left = new FormAttachment(0, 10);
+		fd_table.right = new FormAttachment(100, -10);
 		table.setLayoutData(fd_table);
 		table.setHeaderVisible(true);
 		table.setLinesVisible(true);
+		
+		Button btnNewButton_10 = new Button(composite_4, SWT.NONE);
+		btnNewButton_10.setFont(SWTResourceManager.getFont("Score Board", 22, SWT.NORMAL));
+		fd_label_4.bottom = new FormAttachment(100, -506);
+		FormData fd_btnNewButton_10 = new FormData();
+		fd_btnNewButton_10.bottom = new FormAttachment(btnNewButton, -6);
+		fd_btnNewButton_10.right = new FormAttachment(label_3, -10, SWT.RIGHT);
+		fd_btnNewButton_10.top = new FormAttachment(label_4, 6);
+		fd_btnNewButton_10.left = new FormAttachment(btnNewButton, 0, SWT.LEFT);
+		btnNewButton_10.setLayoutData(fd_btnNewButton_10);
+		btnNewButton_10.setText("Start First Half");
 		
 		expandBar_2 = new ExpandBar(shlFustalScoreboard, SWT.NONE);
 		expandBar_2.setLayoutData(BorderLayout.NORTH);
