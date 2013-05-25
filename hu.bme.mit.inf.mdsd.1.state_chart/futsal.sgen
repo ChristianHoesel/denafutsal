@@ -1,0 +1,19 @@
+GeneratorModel for yakindu::java {
+
+	statechart futsal_report_generator {
+
+		feature Outlet {
+			targetProject = "hu.bme.mit.inf.mdsd.one.app"
+			targetFolder = "src-gen"			
+		}
+		
+		feature Naming {
+        	basePackage = "hu.bme.mit.inf.mdsd.one.app.statechart"
+        	implementationSuffix = "Impl"        	
+		}
+		
+		feature GeneralFeatures {
+			TimerService = true
+		}
+	}
+}
