@@ -2,6 +2,8 @@ package hu.bme.mit.inf.mdsd.one.app.composites;
 
 import hu.bme.mit.inf.mdsd.one.app.management.IManageStateChart;
 import hu.bme.mit.inf.mdsd.one.app.management.ManageStateChart;
+import hu.bme.mit.inf.mdsd.one.app.management.IManageModel;
+import hu.bme.mit.inf.mdsd.one.app.management.ManageModel;
 
 //import org.eclipse.jface.action.IMenuManager;
 //import org.eclipse.jface.action.IToolBarManager;
@@ -23,12 +25,15 @@ import org.eclipse.swt.widgets.Table;
 import org.eclipse.swt.widgets.Text;
 import org.eclipse.ui.part.ViewPart;
 import org.eclipse.wb.swt.SWTResourceManager;
+import org.eclipse.swt.events.FocusAdapter;
+import org.eclipse.swt.events.FocusEvent;
 
 public class MainView extends ViewPart {
 	
 	public static final String ID = "hu.bme.mit.inf.mdsd.one.app.composites.MainView"; //$NON-NLS-1$
 
 	private IManageStateChart manageST;
+	private IManageModel manageModel;
 	
 	private Text referee;
 	private Text assistant;
@@ -178,6 +183,7 @@ public class MainView extends ViewPart {
 	private Button btnGoalHome;
 	private Button btnTOHome;
 	private Table table;
+	private Text id;
 	
 	public void setTime(final int sec, final int ms) {
 		
@@ -206,6 +212,9 @@ public class MainView extends ViewPart {
 	 */
 	@Override
 	public void createPartControl(Composite parent) {
+		
+		manageModel = new ManageModel();
+		
 		Composite container = new Composite(parent, SWT.NONE);
 		container.setLayout(new FormLayout());
 		
@@ -227,6 +236,13 @@ public class MainView extends ViewPart {
 			composite.setLayout(new FormLayout());
 			
 			referee = new Text(composite, SWT.BORDER);
+			referee.addFocusListener(new FocusAdapter() {
+				@Override
+				public void focusLost(FocusEvent e) {
+					manageModel.setReferee(referee);
+				}
+			});
+			referee.setText(manageModel.getReferee());
 			FormData fd_referee = new FormData();
 			fd_referee.top = new FormAttachment(0, 10);
 			fd_referee.left = new FormAttachment(0, 10);
@@ -295,11 +311,13 @@ public class MainView extends ViewPart {
 			fd_date.right = new FormAttachment(address, 0, SWT.RIGHT);
 			date.setLayoutData(fd_date);
 			
-			Combo type = new Combo(composite, SWT.NONE);
-			FormData fd_type = new FormData();
-			fd_type.top = new FormAttachment(assistant, 0, SWT.TOP);
-			fd_type.right = new FormAttachment(date, -6);
-			type.setLayoutData(fd_type);
+			Combo matchtype = new Combo(composite, SWT.NONE);
+			matchtype.setItems(manageModel.getMatchTypeItems());
+			FormData fd_matchtype = new FormData();
+			fd_matchtype.left = new FormAttachment(address, 0, SWT.LEFT);
+			fd_matchtype.top = new FormAttachment(assistant, 0, SWT.TOP);
+			fd_matchtype.right = new FormAttachment(date, -6);
+			matchtype.setLayoutData(fd_matchtype);
 			
 			Label lblAddress = new Label(composite, SWT.NONE);
 			FormData fd_lblAddress = new FormData();
@@ -310,10 +328,39 @@ public class MainView extends ViewPart {
 			
 			Label lblType = new Label(composite, SWT.NONE);
 			FormData fd_lblType = new FormData();
-			fd_lblType.top = new FormAttachment(assistant, 2, SWT.TOP);
-			fd_lblType.right = new FormAttachment(type, -6);
+			fd_lblType.top = new FormAttachment(assistant, 3, SWT.TOP);
+			fd_lblType.right = new FormAttachment(matchtype, -6);
 			lblType.setLayoutData(fd_lblType);
 			lblType.setText("Type");
+			
+			Combo agegroup = new Combo(composite, SWT.NONE);
+			agegroup.setItems(manageModel.getAgeGroupItems());
+			FormData fd_agegroup = new FormData();
+			fd_agegroup.top = new FormAttachment(assistant, 0, SWT.TOP);
+			agegroup.setLayoutData(fd_agegroup);
+			
+			Label lblAgeGroup = new Label(composite, SWT.NONE);
+			fd_agegroup.left = new FormAttachment(lblAgeGroup, 6);
+			FormData fd_lblAgeGroup = new FormData();
+			fd_lblAgeGroup.right = new FormAttachment(100, -334);
+			fd_lblAgeGroup.top = new FormAttachment(assistant, 3, SWT.TOP);
+			lblAgeGroup.setLayoutData(fd_lblAgeGroup);
+			lblAgeGroup.setText("Age Group");
+			
+			id = new Text(composite, SWT.BORDER);
+			fd_agegroup.right = new FormAttachment(100, -240);
+			FormData fd_id = new FormData();
+			fd_id.right = new FormAttachment(lblAddress, -6);
+			fd_id.top = new FormAttachment(referee, 0, SWT.TOP);
+			id.setLayoutData(fd_id);
+			
+			Label lblId = new Label(composite, SWT.NONE);
+			fd_id.left = new FormAttachment(0, 490);
+			FormData fd_lblId = new FormData();
+			fd_lblId.top = new FormAttachment(referee, 3, SWT.TOP);
+			fd_lblId.left = new FormAttachment(lblAgeGroup, 0, SWT.LEFT);
+			lblId.setLayoutData(fd_lblId);
+			lblId.setText("ID");
 		}
 		
 		ExpandBar expandBarLogging = new ExpandBar(container, SWT.NONE);
@@ -334,6 +381,7 @@ public class MainView extends ViewPart {
 		compositeLogging.setLayout(new FormLayout());
 		
 		logging = new Text(compositeLogging, SWT.BORDER | SWT.READ_ONLY | SWT.V_SCROLL | SWT.MULTI);
+		logging.setText("Hogyavogya");
 		FormData fd_logging = new FormData();
 		fd_logging.top = new FormAttachment(0, 10);
 		fd_logging.left = new FormAttachment(0, 10);
@@ -1837,6 +1885,7 @@ public class MainView extends ViewPart {
 		initializeMenu();
 		
 		manageST = new ManageStateChart(this);
+		
 	}
 
 	/**
