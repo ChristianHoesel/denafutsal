@@ -555,6 +555,11 @@ public class MainView extends ViewPart {
 		lblTeamHome.setText("Team");
 		
 		teamHome = new Text(compositeHome, SWT.BORDER);
+		teamHome.addFocusListener(new FocusAdapter() {
+			@Override
+			public void focusLost(FocusEvent e) {
+			}
+		});
 		FormData fd_teamHome = new FormData();
 		fd_teamHome.top = new FormAttachment(lblTeamHome, -2, SWT.TOP);
 		fd_teamHome.left = new FormAttachment(lblTeamHome, 6);

@@ -12,6 +12,8 @@ import java.util.TimerTask;
 
 import model.Role;
 
+import org.eclipse.core.runtime.preferences.ConfigurationScope;
+import org.eclipse.core.runtime.preferences.IEclipsePreferences;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.ui.PlatformUI;
@@ -114,6 +116,8 @@ public class ManageStateChart implements IManageStateChart {
 		sm.runCycle();
 		// TODO: Get preferences
 		// ...
+		IEclipsePreferences preferences = ConfigurationScope.INSTANCE
+	            .getNode("hu.bme.mit.inf.mdsd.one.app");
 		{
 			sm.getSCITimer().setBt_long(15);
 			sm.getSCITimer().setEt_long(10);
