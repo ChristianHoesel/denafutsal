@@ -194,6 +194,11 @@ public class MainView extends ViewPart {
 
 	private ExpandBar expandBarVisitor;
 	
+	private Combo agegroup;
+	private Combo matchtype;
+	
+	private DateTime date;
+	
 	public void updateHomeFaultBtnText(final String text) {
 		Display.getDefault().syncExec(new Runnable() {
 		    public void run() {
@@ -324,6 +329,27 @@ public class MainView extends ViewPart {
 		});	
 	}
 	
+	public void appendText2Logging(final String text) {
+		Display.getDefault().syncExec(new Runnable() {
+			public void run() {
+
+				logging.append("\n" + text);
+
+			}
+		});
+
+	}
+	
+	public void setTextFromModel(final Text text, final String modelText) {
+		Display.getDefault().syncExec(new Runnable() {
+			public void run() {
+
+				text.setText(modelText);
+
+			}
+		});
+	}
+	
 	public MainView() {
 	}
 
@@ -360,10 +386,11 @@ public class MainView extends ViewPart {
 			referee.addFocusListener(new FocusAdapter() {
 				@Override
 				public void focusLost(FocusEvent e) {
-					manageModel.setReferee(referee);
+					manageModel.setRefereeText(referee);
+					appendText2Logging(manageModel.getRefereeText());
 				}
 			});
-			referee.setText(manageModel.getReferee());
+			referee.setText(manageModel.getRefereeText());
 			FormData fd_referee = new FormData();
 			fd_referee.top = new FormAttachment(0, 10);
 			fd_referee.left = new FormAttachment(0, 10);
@@ -371,6 +398,14 @@ public class MainView extends ViewPart {
 			referee.setLayoutData(fd_referee);
 			
 			assistant = new Text(composite, SWT.BORDER);
+			assistant.addFocusListener(new FocusAdapter() {
+				@Override
+				public void focusLost(FocusEvent e) {
+					manageModel.setAssistantText(assistant);
+					appendText2Logging(manageModel.getAssistantText());
+				}
+			});
+			assistant.setText(manageModel.getAssistantText());
 			FormData fd_assistant = new FormData();
 			fd_assistant.width = 100;
 			fd_assistant.top = new FormAttachment(referee, 2);
@@ -392,6 +427,15 @@ public class MainView extends ViewPart {
 			lblAssistant.setText("Assistant");
 			
 			supervisor = new Text(composite, SWT.BORDER);
+			supervisor.addFocusListener(new FocusAdapter() {
+				@Override
+				public void focusLost(FocusEvent e) {
+					manageModel.setSupervisorText(supervisor);
+					appendText2Logging(manageModel.getSupervisorText());
+				}
+			});
+			supervisor.setText(manageModel.getSupervisorText());
+			
 			FormData fd_supervisor = new FormData();
 			fd_supervisor.width = 100;
 			fd_supervisor.bottom = new FormAttachment(assistant, 0, SWT.BOTTOM);
@@ -399,6 +443,14 @@ public class MainView extends ViewPart {
 			supervisor.setLayoutData(fd_supervisor);
 			
 			third_referee = new Text(composite, SWT.BORDER);
+			third_referee.addFocusListener(new FocusAdapter() {
+				@Override
+				public void focusLost(FocusEvent e) {
+					manageModel.setThirdRefereeRefereeText(third_referee);
+					appendText2Logging(manageModel.getThirdRefereeRefereeText());
+				}
+			});
+			third_referee.setText(manageModel.getThirdRefereeRefereeText());
 			FormData fd_third_referee = new FormData();
 			fd_third_referee.width = 100;
 			fd_third_referee.bottom = new FormAttachment(referee, 0, SWT.BOTTOM);
@@ -420,20 +472,49 @@ public class MainView extends ViewPart {
 			lblThirdReferee.setText("Third Referee");
 			
 			address = new Text(composite, SWT.BORDER);
+			address.addFocusListener(new FocusAdapter() {
+				@Override
+				public void focusLost(FocusEvent e) {
+					manageModel.setAddressText(address);
+					appendText2Logging(manageModel.getAddressText());
+				}
+			});
+			address.setText(manageModel.getAddressText());
 			FormData fd_address = new FormData();
 			fd_address.width = 164;
 			fd_address.top = new FormAttachment(referee, 0, SWT.TOP);
 			fd_address.right = new FormAttachment(100, -10);
 			address.setLayoutData(fd_address);
 			
-			DateTime date = new DateTime(composite, SWT.BORDER);
+			date = new DateTime(composite, SWT.BORDER);
+			
+			date.setDate(manageModel.getYearOfDate(), manageModel.getMonthOfDate(), manageModel.getDayOfDate());
+			date.addFocusListener(new FocusAdapter() {
+				@Override
+				public void focusLost(FocusEvent e) {
+					manageModel.setDateDateTime(date);
+					appendText2Logging(manageModel.getDateDateTime());
+				}
+			});
+			
+			
 			FormData fd_date = new FormData();
 			fd_date.top = new FormAttachment(assistant, 0, SWT.TOP);
 			fd_date.right = new FormAttachment(address, 0, SWT.RIGHT);
 			date.setLayoutData(fd_date);
 			
-			Combo matchtype = new Combo(composite, SWT.NONE);
+			matchtype = new Combo(composite, SWT.NONE);
 			matchtype.setItems(manageModel.getMatchTypeItems());
+			
+			matchtype.addFocusListener(new FocusAdapter() {
+				@Override
+				public void focusLost(FocusEvent e) {
+					manageModel.setMatchTypeCombo(matchtype);
+					appendText2Logging(manageModel.getMatchTypeCombo());
+				}
+			});
+			matchtype.select(manageModel.getMatchTyeSelection());
+			
 			FormData fd_matchtype = new FormData();
 			fd_matchtype.left = new FormAttachment(address, 0, SWT.LEFT);
 			fd_matchtype.top = new FormAttachment(assistant, 0, SWT.TOP);
@@ -454,8 +535,18 @@ public class MainView extends ViewPart {
 			lblType.setLayoutData(fd_lblType);
 			lblType.setText("Type");
 			
-			Combo agegroup = new Combo(composite, SWT.NONE);
+			agegroup = new Combo(composite, SWT.NONE);
 			agegroup.setItems(manageModel.getAgeGroupItems());
+			
+			agegroup.addFocusListener(new FocusAdapter() {
+				@Override
+				public void focusLost(FocusEvent e) {
+					manageModel.setAgeGroupCombo(agegroup);
+					appendText2Logging(manageModel.getAgeGroupCombo());
+				}
+			});
+			agegroup.select(manageModel.getAgeGroupSelection());
+			
 			FormData fd_agegroup = new FormData();
 			fd_agegroup.top = new FormAttachment(assistant, 0, SWT.TOP);
 			agegroup.setLayoutData(fd_agegroup);
@@ -469,6 +560,14 @@ public class MainView extends ViewPart {
 			lblAgeGroup.setText("Age Group");
 			
 			matchId = new Text(composite, SWT.BORDER);
+			matchId.addFocusListener(new FocusAdapter() {
+				@Override
+				public void focusLost(FocusEvent e) {
+					manageModel.setMatchIDText(matchId);
+					appendText2Logging(manageModel.getMatchIDText());
+				}
+			});
+			matchId.setText(manageModel.getMatchIDText());
 			fd_agegroup.right = new FormAttachment(100, -240);
 			FormData fd_matchId = new FormData();
 			fd_matchId.right = new FormAttachment(lblAddress, -6);

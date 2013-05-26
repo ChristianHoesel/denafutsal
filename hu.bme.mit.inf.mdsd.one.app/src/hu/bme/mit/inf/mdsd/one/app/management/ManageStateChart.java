@@ -107,7 +107,7 @@ public class ManageStateChart implements IManageStateChart {
 		this.helper = new ManageStateChartHelper(sm, this);
 		this.search = new SearchHelper(view.getModel());
 
-		helper.registerGoalCounts(view.getModel());
+		//helper.registerGoalCounts(view.getModel());
 
 		sm.getSCITimer().setSCITimerOperationCallback(new PlaySound());
 		sm.setTimerService(new TimerService());

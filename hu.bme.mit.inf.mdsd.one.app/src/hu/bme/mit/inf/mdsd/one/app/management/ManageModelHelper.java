@@ -14,8 +14,7 @@ import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
 public class ManageModelHelper {
 
 	private ManageModel mm;
-	public static final String TESTMODEL = "D:\\University\\runtime-EclipseApplication\\TestProject\\My.model";
-	
+	//public static final String TESTMODEL = "D:\\University\\runtime-EclipseApplication\\TestProject\\My.model";
 	
 	public ManageModelHelper(ManageModel manageModel) {
 		this.mm = manageModel;
