@@ -5,6 +5,8 @@ import hu.bme.mit.inf.mdsd.one.app.management.ManageStateChart;
 import hu.bme.mit.inf.mdsd.one.app.management.IManageModel;
 import hu.bme.mit.inf.mdsd.one.app.management.ManageModel;
 
+import model.Match;
+
 //import org.eclipse.jface.action.IMenuManager;
 //import org.eclipse.jface.action.IToolBarManager;
 import org.eclipse.swt.SWT;
@@ -183,7 +185,41 @@ public class MainView extends ViewPart {
 	private Button btnGoalHome;
 	private Button btnTOHome;
 	private Table table;
-	private Text id;
+	private Text matchId;
+	
+	public void updateHomeFaultBtnText(final String text) {
+		Display.getDefault().syncExec(new Runnable() {
+		    public void run() {
+				btnFaultHome.setText(text);			
+		    }
+		});
+	}
+	
+	public void updateVisitorFaultBtnText(final String text) {
+		Display.getDefault().syncExec(new Runnable() {
+		    public void run() {
+				btnFaultVisitor.setText(text);			
+		    }
+		});
+	}
+	
+	public void modifyHomeTOs(final boolean isEnabled) {
+		
+		Display.getDefault().syncExec(new Runnable() {
+		    public void run() {
+				btnTOHome.setEnabled(isEnabled);			
+		    }
+		});	
+	}
+	
+	public void modifyVisitorTOs(final boolean isEnabled) {
+		
+		Display.getDefault().syncExec(new Runnable() {
+		    public void run() {
+				btnTOVisitor.setEnabled(isEnabled);			
+		    }
+		});	
+	}
 	
 	public void setTime(final int sec, final int ms) {
 		
@@ -203,6 +239,84 @@ public class MainView extends ViewPart {
 		});	
 	}
 	
+	public void setScore(final int home, final int visitor) {
+		
+		Display.getDefault().syncExec(new Runnable() {
+		    public void run() {
+				
+				String home_s = Integer.toString(home);
+				String visitor_s = Integer.toString(visitor);
+				
+				score.setText(home_s + ":" + visitor_s);
+				
+		    }
+		});	
+	}
+	
+
+	public void setManageTimeButtonText(final String calculateManageTimeBtnText) {
+		Display.getDefault().syncExec(new Runnable() {
+		    public void run() {				
+				if(!manageTimeBtn.getText().equals(calculateManageTimeBtnText))
+					manageTimeBtn.setText(calculateManageTimeBtnText);
+				manageTimeBtn.update();
+				manageTimeBtn.redraw();
+			}
+		});	
+	}
+	
+	public void defaultHomeToBtnImage() {		
+		Display.getDefault().syncExec(new Runnable() {
+		    public void run() {				
+				if(btnTOHome.getImage() == null) {
+					btnTOHome.setImage(SWTResourceManager.getImage(MainView.class, "/icons/to.png"));
+				}
+				btnTOHome.update();
+				btnTOHome.redraw();
+			}
+		});	
+	}
+	
+	public void defaultVisitorToBtnImage() {		
+		Display.getDefault().syncExec(new Runnable() {
+		    public void run() {				
+				if(btnTOVisitor.getImage() == null) {
+					btnTOVisitor.setImage(SWTResourceManager.getImage(MainView.class, "/icons/to.png"));
+				}
+				btnTOVisitor.update();
+				btnTOVisitor.redraw();
+			}
+		});	
+	}
+	
+	public void changeHomeToBtnImage() {		
+		Display.getDefault().syncExec(new Runnable() {
+		    public void run() {				
+				if(btnTOHome.getImage() == null) {
+					btnTOHome.setImage(SWTResourceManager.getImage(MainView.class, "/icons/to.png"));
+				} else {
+					btnTOHome.setImage(null);
+				}
+				btnTOHome.update();
+				btnTOHome.redraw();
+			}
+		});	
+	}
+	
+	public void changeVisitorToBtnImage() {		
+		Display.getDefault().syncExec(new Runnable() {
+		    public void run() {				
+				if(btnTOVisitor.getImage() == null) {
+					btnTOVisitor.setImage(SWTResourceManager.getImage(MainView.class, "/icons/to.png"));
+				} else {
+					btnTOVisitor.setImage(null);
+				}
+				btnTOVisitor.update();
+				btnTOVisitor.redraw();
+			}
+		});	
+	}
+	
 	public MainView() {
 	}
 
@@ -211,9 +325,9 @@ public class MainView extends ViewPart {
 	 * @param parent
 	 */
 	@Override
-	public void createPartControl(Composite parent) {
-		
-		manageModel = new ManageModel();
+	public void createPartControl(Composite parent) {		
+
+		manageModel = new ManageModel(this);
 		
 		Composite container = new Composite(parent, SWT.NONE);
 		container.setLayout(new FormLayout());
@@ -347,15 +461,15 @@ public class MainView extends ViewPart {
 			lblAgeGroup.setLayoutData(fd_lblAgeGroup);
 			lblAgeGroup.setText("Age Group");
 			
-			id = new Text(composite, SWT.BORDER);
+			matchId = new Text(composite, SWT.BORDER);
 			fd_agegroup.right = new FormAttachment(100, -240);
-			FormData fd_id = new FormData();
-			fd_id.right = new FormAttachment(lblAddress, -6);
-			fd_id.top = new FormAttachment(referee, 0, SWT.TOP);
-			id.setLayoutData(fd_id);
+			FormData fd_matchId = new FormData();
+			fd_matchId.right = new FormAttachment(lblAddress, -6);
+			fd_matchId.top = new FormAttachment(referee, 0, SWT.TOP);
+			fd_matchId.width = 123;
+			matchId.setLayoutData(fd_matchId);
 			
 			Label lblId = new Label(composite, SWT.NONE);
-			fd_id.left = new FormAttachment(0, 490);
 			FormData fd_lblId = new FormData();
 			fd_lblId.top = new FormAttachment(referee, 3, SWT.TOP);
 			fd_lblId.left = new FormAttachment(lblAgeGroup, 0, SWT.LEFT);
@@ -1714,7 +1828,7 @@ public class MainView extends ViewPart {
 		fd_manageTimeBtn.left = new FormAttachment(0, 10);
 		fd_manageTimeBtn.right = new FormAttachment(100, -10);
 		manageTimeBtn.setLayoutData(fd_manageTimeBtn);
-		manageTimeBtn.setText("Start first half");
+		manageTimeBtn.setText("Test");
 		
 		btnFaultHome = new Button(compositeMain, SWT.NONE);
 		btnFaultHome.addSelectionListener(new SelectionAdapter() {
@@ -1885,7 +1999,6 @@ public class MainView extends ViewPart {
 		initializeMenu();
 		
 		manageST = new ManageStateChart(this);
-		
 	}
 
 	/**
@@ -1914,5 +2027,9 @@ public class MainView extends ViewPart {
 	@Override
 	public void setFocus() {
 		// Set the focus
+	}
+
+	public Match getModel() {
+		return manageModel.getMatch();
 	}
 }

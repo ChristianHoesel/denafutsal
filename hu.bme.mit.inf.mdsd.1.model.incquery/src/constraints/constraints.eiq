@@ -4,37 +4,6 @@ import "http://model/1.0"
 
 //Based on model
 
-/**
- * A cserejátékosok között nincs kezdõjátékos, és fordítva
- */
-@Constraint(
-	location = TeamMember,
-	severity = "error",
-	message = "$TeamMember$ is  in the starting line and in the substitutes of $Team$ at the same time."
-)
-pattern startersAndSubstitutes(Team : Team, TeamMember : TeamMember) {
-	Team.startingLine.teamMember(Team, TeamMember);
-	Team.substitutes.teamMember(Team, TeamMember);
-}
-
-/**
- * Minden csapattag a csapatában cserejátékos vagy kezdõjátékos és/vagy személyzeti tag
- */
-@Constraint(
-	location = TeamMember,
-	severity = "error",
-	message = "$TeamMember$ is in the $Team$, but doesn't have any role."
-)
-pattern teamMemberHasNoRoleInTeam(Team : Team, TeamMember : TeamMember) {
-	Team.members(Team, TeamMember);
-	M == count find teamMemberHasRole(TeamMember);
-	check(M == 0);
-}
-
-private pattern teamMemberHasRole(TeamMember : TeamMember) {
-	Role.teamMember(_, TeamMember);
-}
-
 //Based on rules
 
 /**

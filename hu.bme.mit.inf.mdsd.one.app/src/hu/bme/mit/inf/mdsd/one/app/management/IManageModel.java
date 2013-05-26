@@ -1,5 +1,7 @@
 package hu.bme.mit.inf.mdsd.one.app.management;
 
+import model.Match;
+
 import org.eclipse.swt.widgets.Text;
 
 public interface IManageModel {
@@ -10,5 +12,6 @@ public interface IManageModel {
 	
 	public String getReferee();
 	public void setReferee(Text text);
+	Match getMatch();
 
 }

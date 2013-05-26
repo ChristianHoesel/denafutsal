@@ -1,0 +1,9 @@
+package databinding
+
+import "http://model/1.0"
+
+@ObservableValue
+pattern getGoalCount(match : Match, home, visitor) {
+	Match.Home.goalCount(match, home);
+	Match.Visitor.goalCount(match, visitor);
+}

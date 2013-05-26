@@ -1,26 +1,33 @@
 package hu.bme.mit.inf.mdsd.one.app.management;
 
+import hu.bme.mit.inf.mdsd.one.app.composites.MainView;
+
 import java.util.ArrayList;
 import java.util.List;
 
-import org.eclipse.swt.widgets.Text;
-
+import model.AgeGroup;
 import model.Match;
 import model.ModelFactory;
 import model.Person;
-import model.Player;
-import model.Team;
-import model.TeamMember;
-import model.impl.ModelPackageImpl;
-
-import model.Position;
-import model.AgeGroup;
 import model.Type;
+
+import org.eclipse.core.databinding.observable.ChangeEvent;
+import org.eclipse.core.databinding.observable.IChangeListener;
+import org.eclipse.core.databinding.observable.list.IObservableList;
+import org.eclipse.incquery.databinding.runtime.api.IncQueryObservables;
+import org.eclipse.incquery.runtime.api.EngineManager;
+import org.eclipse.incquery.runtime.api.IncQueryEngine;
+import org.eclipse.incquery.runtime.exception.IncQueryException;
+import org.eclipse.swt.widgets.Text;
+
+import databinding.getgoalcount.GetGoalCountMatch;
+import databinding.getgoalcount.GetGoalCountMatcher;
 
 public class ManageModel implements IManageModel {
 
-	private ModelFactory factory;
-	
+	private ModelFactory factory;	
+	private MainView view;
+	private Match match;
 	private Person referee;
 
 	public void setReferee(Person referee) {
@@ -63,19 +70,24 @@ public class ManageModel implements IManageModel {
 	/**
 	 * A konstruktorunk:
 	 */
-	public ManageModel() {
-		ModelPackageImpl.init();
+	public ManageModel(MainView view) {
+		this.view = view;
+		
 		factory = ModelFactory.eINSTANCE;
 		
-		referee = factory.createPerson();
-		referee.setName("CSIRKE RUDOLF");
+		/* Teszteléshez, majd ezt innen kiszedheted nyugodtan */
+		ManageModelHelper helper = new ManageModelHelper(this);
+		helper.readModelFromFile(ManageModelHelper.TESTMODEL);
+		/**/
 		
+		referee = factory.createPerson();
+		referee.setName("CSIRKE RUDOLF");		
 	}
 
 	/**
 	 * @param args
 	 */
-	public static void main(String[] args) {
+	/*public static void main(String[] args) {
 
 		ManageModel manageModel = new ManageModel();
 
@@ -123,7 +135,7 @@ public class ManageModel implements IManageModel {
 
 		System.out.println();
 
-	}
+	}*/
 
 	@Override
 	public String getReferee() {
@@ -135,4 +147,11 @@ public class ManageModel implements IManageModel {
 		referee.setName(text.getText());		
 	}
 
+	public Match getMatch() {
+		return match;
+	}
+
+	public void setMatch(Match match) {
+		this.match = match;
+	}	
 }

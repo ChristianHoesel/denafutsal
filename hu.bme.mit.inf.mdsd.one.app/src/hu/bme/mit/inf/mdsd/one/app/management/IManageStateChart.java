@@ -3,7 +3,6 @@ package hu.bme.mit.inf.mdsd.one.app.management;
 public interface IManageStateChart {
 
 	void updateTime();
-	void updateScore();
 	void manageTime();
 	void manageHomeFaults();
 	void manageVisitorFaults();

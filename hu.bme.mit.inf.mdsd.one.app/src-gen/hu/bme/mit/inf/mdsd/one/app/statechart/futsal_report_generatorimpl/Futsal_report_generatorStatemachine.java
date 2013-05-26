@@ -50,12 +50,6 @@ public class Futsal_report_generatorStatemachine
 			stop = true;
 		}
 
-		private boolean extratime;
-
-		public void raiseExtratime() {
-			extratime = true;
-		}
-
 		private boolean end_breaktime;
 
 		public void raiseEnd_breaktime() {
@@ -72,6 +66,46 @@ public class Futsal_report_generatorStatemachine
 
 		public void raiseVisitor_timeout() {
 			visitor_timeout = true;
+		}
+
+		private int ht_long;
+
+		public int getHt_long() {
+			return ht_long;
+		}
+
+		public void setHt_long(int value) {
+			this.ht_long = value;
+		}
+
+		private int bt_long;
+
+		public int getBt_long() {
+			return bt_long;
+		}
+
+		public void setBt_long(int value) {
+			this.bt_long = value;
+		}
+
+		private int et_long;
+
+		public int getEt_long() {
+			return et_long;
+		}
+
+		public void setEt_long(int value) {
+			this.et_long = value;
+		}
+
+		private int to_long;
+
+		public int getTo_long() {
+			return to_long;
+		}
+
+		public void setTo_long(int value) {
+			this.to_long = value;
 		}
 
 		private boolean pause_v;
@@ -114,16 +148,6 @@ public class Futsal_report_generatorStatemachine
 			this.breaktime_tick = value;
 		}
 
-		private int extratime_tick;
-
-		public int getExtratime_tick() {
-			return extratime_tick;
-		}
-
-		public void setExtratime_tick(int value) {
-			this.extratime_tick = value;
-		}
-
 		private int timeout_tick;
 
 		public int getTimeout_tick() {
@@ -158,7 +182,6 @@ public class Futsal_report_generatorStatemachine
 			pause = false;
 			continue_ID = false;
 			stop = false;
-			extratime = false;
 			end_breaktime = false;
 			home_timeout = false;
 			visitor_timeout = false;
@@ -168,6 +191,12 @@ public class Futsal_report_generatorStatemachine
 
 	private SCITimerImpl sCITimer;
 	private final class SCIFoulsImpl implements SCIFouls {
+
+		private boolean continue_ID;
+
+		public void raiseContinue() {
+			continue_ID = true;
+		}
 
 		private int home_counter;
 
@@ -209,12 +238,16 @@ public class Futsal_report_generatorStatemachine
 			this.visitor_done = value;
 		}
 
+		public void clearEvents() {
+			continue_ID = false;
+		}
+
 	}
 
 	private SCIFoulsImpl sCIFouls;
 
 	public enum State {
-		main_region__1st_Halftime, main_region__2nd_Halftime, main_region__final_, main_region__1st_Extratime, main_region__2nd_Extratime, main_region_Breaktime, main_region_End_Match, main_region_End_2nd_Extratime, main_region__1st_Visitor_Timeout, main_region__1st_Home_Timeout, main_region_Init, main_region__2nd_Visitor_Timeout, main_region__2nd_Home_Timeout, main_region_Waiting_For_the_Start_of_1st_Halftime, main_region_Waiting_for_the_Start_of_Breaktime, fouls_Counting_Fouls, fouls_Doing_some_noise_to_Home, fouls_Doing_some_noise_to_Visitor, $NullState$
+		main_region__1st_Halftime, main_region__2nd_Halftime, main_region__final_, main_region__1st_Extratime, main_region__2nd_Extratime, main_region_Breaktime, main_region_End_Match, main_region_End_2nd_Extratime, main_region__1st_Visitor_Timeout, main_region__1st_Home_Timeout, main_region_Init, main_region__2nd_Visitor_Timeout, main_region__2nd_Home_Timeout, main_region_Waiting_For_the_Start_of_1st_Halftime, main_region_Waiting_for_the_Start_of_Breaktime, main_region_Waitng_For_the_Start_of_2nd_Halftime, main_region_Waiting_For_the_Start_of_2nd_Extratime, fouls_Counting_Fouls, fouls_Doing_some_noise_to_Home, fouls_Doing_some_noise_to_Visitor, $NullState$
 	};
 
 	private final State[] stateVector = new State[2];
@@ -257,6 +290,14 @@ public class Futsal_report_generatorStatemachine
 		clearEvents();
 		clearOutEvents();
 
+		sCITimer.ht_long = 0;
+
+		sCITimer.bt_long = 0;
+
+		sCITimer.et_long = 0;
+
+		sCITimer.to_long = 0;
+
 		sCITimer.pause_v = false;
 
 		sCITimer.stop_v = false;
@@ -264,8 +305,6 @@ public class Futsal_report_generatorStatemachine
 		sCITimer.tick = 0;
 
 		sCITimer.breaktime_tick = 0;
-
-		sCITimer.extratime_tick = 0;
 
 		sCITimer.timeout_tick = 0;
 
@@ -307,6 +346,14 @@ public class Futsal_report_generatorStatemachine
 
 		sCIFouls.visitor_done = false;
 
+		sCITimer.bt_long = 60;
+
+		sCITimer.et_long = 60;
+
+		sCITimer.ht_long = 60;
+
+		sCITimer.to_long = 60;
+
 		nextStateIndex = 0;
 		stateVector[0] = State.main_region_Init;
 
@@ -323,10 +370,6 @@ public class Futsal_report_generatorStatemachine
 				getTimerService()
 						.resetTimer(
 								futsal_report_generator_main_region__1st_Halftime_time_event_0);
-
-				sCITimer.raisePause();
-
-				sCITimer.pause_v = true;
 				break;
 
 			case main_region__2nd_Halftime :
@@ -369,6 +412,10 @@ public class Futsal_report_generatorStatemachine
 						.resetTimer(
 								futsal_report_generator_main_region_Breaktime_time_event_0);
 
+				sCITimer.home_timeout_enabled = true;
+
+				sCITimer.visitor_timeout_enabled = true;
+
 				sCIFouls.home_counter = 0;
 
 				sCIFouls.visitors_counter = 0;
@@ -389,7 +436,7 @@ public class Futsal_report_generatorStatemachine
 				nextStateIndex = 0;
 				stateVector[0] = State.$NullState$;
 
-				sCITimer.tick = 2 * 20 + 1 * 10;
+				sCITimer.tick = 2 * sCITimer.ht_long + 1 * sCITimer.et_long;
 
 				sCITimer.raiseStop();
 
@@ -414,6 +461,8 @@ public class Futsal_report_generatorStatemachine
 				getTimerService()
 						.resetTimer(
 								futsal_report_generator_main_region__1st_Home_Timeout_time_event_0);
+
+				sCITimer.operationCallback.playSound();
 				break;
 
 			case main_region_Init :
@@ -455,6 +504,16 @@ public class Futsal_report_generatorStatemachine
 				stateVector[0] = State.$NullState$;
 				break;
 
+			case main_region_Waitng_For_the_Start_of_2nd_Halftime :
+				nextStateIndex = 0;
+				stateVector[0] = State.$NullState$;
+				break;
+
+			case main_region_Waiting_For_the_Start_of_2nd_Extratime :
+				nextStateIndex = 0;
+				stateVector[0] = State.$NullState$;
+				break;
+
 			default :
 				break;
 		}
@@ -488,6 +547,7 @@ public class Futsal_report_generatorStatemachine
 
 	protected void clearEvents() {
 		sCITimer.clearEvents();
+		sCIFouls.clearEvents();
 
 		for (int i = 0; i < timeEvents.length; i++) {
 			timeEvents[i] = false;
@@ -529,6 +589,10 @@ public class Futsal_report_generatorStatemachine
 				return stateVector[0] == State.main_region_Waiting_For_the_Start_of_1st_Halftime;
 			case main_region_Waiting_for_the_Start_of_Breaktime :
 				return stateVector[0] == State.main_region_Waiting_for_the_Start_of_Breaktime;
+			case main_region_Waitng_For_the_Start_of_2nd_Halftime :
+				return stateVector[0] == State.main_region_Waitng_For_the_Start_of_2nd_Halftime;
+			case main_region_Waiting_For_the_Start_of_2nd_Extratime :
+				return stateVector[0] == State.main_region_Waiting_For_the_Start_of_2nd_Extratime;
 			case fouls_Counting_Fouls :
 				return stateVector[1] == State.fouls_Counting_Fouls;
 			case fouls_Doing_some_noise_to_Home :
@@ -569,7 +633,7 @@ public class Futsal_report_generatorStatemachine
 
 	/* The reactions of state 1st Halftime. */
 	private void reactMain_region_1st_Halftime() {
-		if (sCITimer.tick >= 1 * 20) {
+		if (sCITimer.tick >= 1 * sCITimer.ht_long) {
 			nextStateIndex = 0;
 			stateVector[0] = State.$NullState$;
 
@@ -577,13 +641,9 @@ public class Futsal_report_generatorStatemachine
 					.resetTimer(
 							futsal_report_generator_main_region__1st_Halftime_time_event_0);
 
-			sCITimer.raisePause();
-
-			sCITimer.pause_v = true;
-
 			sCITimer.operationCallback.playSound();
 
-			sCITimer.tick = 1 * 20;
+			sCITimer.tick = 1 * sCITimer.ht_long;
 
 			nextStateIndex = 0;
 			stateVector[0] = State.main_region_Waiting_for_the_Start_of_Breaktime;
@@ -596,16 +656,14 @@ public class Futsal_report_generatorStatemachine
 						.resetTimer(
 								futsal_report_generator_main_region__1st_Halftime_time_event_0);
 
-				sCITimer.raisePause();
-
-				sCITimer.pause_v = true;
-
 				getTimerService()
 						.setTimer(
 								futsal_report_generator_main_region__1st_Visitor_Timeout_time_event_0,
 								1, cycleStartTime);
 
 				sCITimer.visitor_timeout_enabled = false;
+
+				sCITimer.timeout_tick = 0;
 
 				nextStateIndex = 0;
 				stateVector[0] = State.main_region__1st_Visitor_Timeout;
@@ -618,10 +676,6 @@ public class Futsal_report_generatorStatemachine
 							.resetTimer(
 									futsal_report_generator_main_region__1st_Halftime_time_event_0);
 
-					sCITimer.raisePause();
-
-					sCITimer.pause_v = true;
-
 					getTimerService()
 							.setTimer(
 									futsal_report_generator_main_region__1st_Home_Timeout_time_event_0,
@@ -629,7 +683,7 @@ public class Futsal_report_generatorStatemachine
 
 					sCITimer.home_timeout_enabled = false;
 
-					sCITimer.operationCallback.playSound();
+					sCITimer.timeout_tick = 0;
 
 					nextStateIndex = 0;
 					stateVector[0] = State.main_region__1st_Home_Timeout;
@@ -645,7 +699,7 @@ public class Futsal_report_generatorStatemachine
 
 	/* The reactions of state 2nd Halftime. */
 	private void reactMain_region_2nd_Halftime() {
-		if (sCITimer.tick >= 2 * 20) {
+		if (sCITimer.tick >= 2 * sCITimer.ht_long) {
 			nextStateIndex = 0;
 			stateVector[0] = State.$NullState$;
 
@@ -655,7 +709,7 @@ public class Futsal_report_generatorStatemachine
 
 			sCITimer.pause_v = true;
 
-			sCITimer.tick = 2 * 200;
+			sCITimer.tick = 2 * sCITimer.ht_long;
 
 			sCITimer.operationCallback.playSound();
 
@@ -679,6 +733,8 @@ public class Futsal_report_generatorStatemachine
 
 				sCITimer.home_timeout_enabled = false;
 
+				sCITimer.timeout_tick = 0;
+
 				nextStateIndex = 0;
 				stateVector[0] = State.main_region__2nd_Home_Timeout;
 			} else {
@@ -700,6 +756,8 @@ public class Futsal_report_generatorStatemachine
 
 					sCITimer.visitor_timeout_enabled = false;
 
+					sCITimer.timeout_tick = 0;
+
 					nextStateIndex = 0;
 					stateVector[0] = State.main_region__2nd_Visitor_Timeout;
 				} else {
@@ -718,7 +776,7 @@ public class Futsal_report_generatorStatemachine
 
 	/* The reactions of state 1st Extratime. */
 	private void reactMain_region_1st_Extratime() {
-		if (sCITimer.tick >= 2 * 20 + 1 * 10) {
+		if (sCITimer.tick >= 2 * sCITimer.ht_long + 1 * sCITimer.et_long) {
 			nextStateIndex = 0;
 			stateVector[0] = State.$NullState$;
 
@@ -726,16 +784,16 @@ public class Futsal_report_generatorStatemachine
 
 			sCITimer.operationCallback.playSound();
 
-			sCITimer.tick = 2 * 20 + 1 * 10;
+			sCITimer.tick = 2 * sCITimer.ht_long + 1 * sCITimer.et_long;
 
 			nextStateIndex = 0;
-			stateVector[0] = State.main_region__2nd_Extratime;
+			stateVector[0] = State.main_region_Waiting_For_the_Start_of_2nd_Extratime;
 		}
 	}
 
 	/* The reactions of state 2nd Extratime. */
 	private void reactMain_region_2nd_Extratime() {
-		if (sCITimer.tick >= 2 * 20 + 2 * 10) {
+		if (sCITimer.tick >= 2 * sCITimer.ht_long + 2 * sCITimer.et_long) {
 			nextStateIndex = 0;
 			stateVector[0] = State.$NullState$;
 
@@ -748,12 +806,17 @@ public class Futsal_report_generatorStatemachine
 
 	/* The reactions of state Breaktime. */
 	private void reactMain_region_Breaktime() {
-		if (sCITimer.breaktime_tick >= 15 || sCITimer.end_breaktime) {
+		if (sCITimer.breaktime_tick >= sCITimer.bt_long
+				|| sCITimer.end_breaktime) {
 			nextStateIndex = 0;
 			stateVector[0] = State.$NullState$;
 
 			getTimerService().resetTimer(
 					futsal_report_generator_main_region_Breaktime_time_event_0);
+
+			sCITimer.home_timeout_enabled = true;
+
+			sCITimer.visitor_timeout_enabled = true;
 
 			sCIFouls.home_counter = 0;
 
@@ -765,13 +828,8 @@ public class Futsal_report_generatorStatemachine
 
 			sCIFouls.visitor_done = false;
 
-			getTimerService()
-					.setTimer(
-							futsal_report_generator_main_region__2nd_Halftime_time_event_0,
-							1, cycleStartTime);
-
 			nextStateIndex = 0;
-			stateVector[0] = State.main_region__2nd_Halftime;
+			stateVector[0] = State.main_region_Waitng_For_the_Start_of_2nd_Halftime;
 		} else {
 			if (timeEvents[futsal_report_generator_main_region_Breaktime_time_event_0
 					.getIndex()]) {
@@ -782,7 +840,7 @@ public class Futsal_report_generatorStatemachine
 
 	/* The reactions of state End Match. */
 	private void reactMain_region_End_Match() {
-		if (sCITimer.extratime) {
+		if (sCITimer.continue_ID) {
 			nextStateIndex = 0;
 			stateVector[0] = State.$NullState$;
 
@@ -797,7 +855,7 @@ public class Futsal_report_generatorStatemachine
 
 	/* The reactions of state 1st Visitor Timeout. */
 	private void reactMain_region_1st_Visitor_Timeout() {
-		if (sCITimer.timeout_tick >= 60) {
+		if (sCITimer.timeout_tick >= sCITimer.to_long) {
 			nextStateIndex = 0;
 			stateVector[0] = State.$NullState$;
 
@@ -824,13 +882,15 @@ public class Futsal_report_generatorStatemachine
 
 	/* The reactions of state 1st Home Timeout. */
 	private void reactMain_region_1st_Home_Timeout() {
-		if (sCITimer.timeout_tick >= 60) {
+		if (sCITimer.timeout_tick >= sCITimer.to_long) {
 			nextStateIndex = 0;
 			stateVector[0] = State.$NullState$;
 
 			getTimerService()
 					.resetTimer(
 							futsal_report_generator_main_region__1st_Home_Timeout_time_event_0);
+
+			sCITimer.operationCallback.playSound();
 
 			getTimerService()
 					.setTimer(
@@ -860,7 +920,7 @@ public class Futsal_report_generatorStatemachine
 
 	/* The reactions of state 2nd Visitor Timeout. */
 	private void reactMain_region_2nd_Visitor_Timeout() {
-		if (sCITimer.timeout_tick >= 60) {
+		if (sCITimer.timeout_tick >= sCITimer.to_long) {
 			nextStateIndex = 0;
 			stateVector[0] = State.$NullState$;
 
@@ -887,7 +947,7 @@ public class Futsal_report_generatorStatemachine
 
 	/* The reactions of state 2nd Home Timeout. */
 	private void reactMain_region_2nd_Home_Timeout() {
-		if (sCITimer.timeout_tick >= 60) {
+		if (sCITimer.timeout_tick >= sCITimer.to_long) {
 			nextStateIndex = 0;
 			stateVector[0] = State.$NullState$;
 
@@ -940,12 +1000,41 @@ public class Futsal_report_generatorStatemachine
 					futsal_report_generator_main_region_Breaktime_time_event_0,
 					1, cycleStartTime);
 
-			sCITimer.home_timeout_enabled = true;
+			sCITimer.home_timeout_enabled = false;
 
-			sCITimer.visitor_timeout_enabled = true;
+			sCITimer.visitor_timeout_enabled = false;
 
 			nextStateIndex = 0;
 			stateVector[0] = State.main_region_Breaktime;
+		}
+	}
+
+	/* The reactions of state Waitng For the Start of 2nd Halftime. */
+	private void reactMain_region_Waitng_For_the_Start_of_2nd_Halftime() {
+		if (sCITimer.continue_ID) {
+			nextStateIndex = 0;
+			stateVector[0] = State.$NullState$;
+
+			getTimerService()
+					.setTimer(
+							futsal_report_generator_main_region__2nd_Halftime_time_event_0,
+							1, cycleStartTime);
+
+			nextStateIndex = 0;
+			stateVector[0] = State.main_region__2nd_Halftime;
+		}
+	}
+
+	/* The reactions of state Waiting For the Start of 2nd Extratime. */
+	private void reactMain_region_Waiting_For_the_Start_of_2nd_Extratime() {
+		if (sCITimer.continue_ID) {
+			nextStateIndex = 0;
+			stateVector[0] = State.$NullState$;
+
+			sCITimer.tick = 2 * sCITimer.ht_long + 1 * sCITimer.et_long;
+
+			nextStateIndex = 0;
+			stateVector[0] = State.main_region__2nd_Extratime;
 		}
 	}
 
@@ -974,10 +1063,28 @@ public class Futsal_report_generatorStatemachine
 
 	/* The reactions of state Doing some noise to Home. */
 	private void reactFouls_Doing_some_noise_to_Home() {
+		if (sCIFouls.continue_ID) {
+			nextStateIndex = 1;
+			stateVector[1] = State.$NullState$;
+
+			sCIFouls.home_done = true;
+
+			nextStateIndex = 1;
+			stateVector[1] = State.fouls_Counting_Fouls;
+		}
 	}
 
 	/* The reactions of state Doing some noise to Visitor. */
 	private void reactFouls_Doing_some_noise_to_Visitor() {
+		if (sCIFouls.continue_ID) {
+			nextStateIndex = 1;
+			stateVector[1] = State.$NullState$;
+
+			sCIFouls.visitor_done = true;
+
+			nextStateIndex = 1;
+			stateVector[1] = State.fouls_Counting_Fouls;
+		}
 	}
 
 	public void runCycle() {
@@ -1033,6 +1140,12 @@ public class Futsal_report_generatorStatemachine
 					break;
 				case main_region_Waiting_for_the_Start_of_Breaktime :
 					reactMain_region_Waiting_for_the_Start_of_Breaktime();
+					break;
+				case main_region_Waitng_For_the_Start_of_2nd_Halftime :
+					reactMain_region_Waitng_For_the_Start_of_2nd_Halftime();
+					break;
+				case main_region_Waiting_For_the_Start_of_2nd_Extratime :
+					reactMain_region_Waiting_For_the_Start_of_2nd_Extratime();
 					break;
 				case fouls_Counting_Fouls :
 					reactFouls_Counting_Fouls();
