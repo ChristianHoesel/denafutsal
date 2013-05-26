@@ -2,6 +2,7 @@ package hu.bme.mit.inf.mdsd.one.app.management;
 
 import java.util.Collection;
 
+import model.Player;
 import model.Role;
 
 import org.eclipse.jface.viewers.IStructuredContentProvider;
@@ -9,10 +10,10 @@ import org.eclipse.jface.viewers.LabelProvider;
 
 public interface ISearchHelper {
 	
-	Collection<Role> possibleHomeScorers();
-	Collection<Role> possibleVisitorScorers();
-	Collection<Role> possibleHomeYellows();
-	Collection<Role> possibleVisitorYellows();
+	Collection<Player> possibleHomeScorers();
+	Collection<Player> possibleVisitorScorers();
+	Collection<Player> possibleHomeYellows();
+	Collection<Player> possibleVisitorYellows();
 	Collection<Role> possibleHomeReds();
 	Collection<Role> possibleVisitorReds();
 	

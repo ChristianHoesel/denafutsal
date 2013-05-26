@@ -137,6 +137,10 @@ public class ManageStateChartHelper {
 	public void playSound() {
 		new MakeSound().playSound();
 	}
+	
+	public int getCurrentMatchTime() {
+		return sm.getSCITimer().getTick();
+	}
 
 	public int getTick() throws Exception {
 		if (sm.isStateActive(State.main_region__1st_Halftime)) {

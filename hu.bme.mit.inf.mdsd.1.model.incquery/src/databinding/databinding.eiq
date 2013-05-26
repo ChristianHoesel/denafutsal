@@ -7,3 +7,50 @@ pattern getGoalCount(match : Match, home, visitor) {
 	Match.Home.goalCount(match, home);
 	Match.Visitor.goalCount(match, visitor);
 }
+
+pattern hasRed(role : Role) {
+	Role.teamMember.isSentOff(role, true);
+}
+
+pattern hasYellow(role : Role) {
+	Role.teamMember.hasYellowCard(role, true);
+}
+
+pattern possibleHomeScorers(match : Match, role : Role) {
+	Match.Home.members.playerRole(match, role);
+	neg find hasRed(role);
+}
+
+pattern possibleVisitorScorers(match : Match, role : Role) {
+	Match.Visitor.members.playerRole(match, role);
+	neg find hasRed(role);
+}
+
+pattern possibleHomeYellows(match : Match, role : Role) {
+	Match.Home.members.playerRole(match, role);
+	neg find hasRed(role);
+	neg find hasYellow(role);
+}
+
+pattern possibleVisitorYellows(match : Match, role : Role) {
+	Match.Visitor.members.playerRole(match, role);
+	neg find hasRed(role);
+	neg find hasYellow(role);
+}
+
+
+pattern possibleHomeReds(match : Match, role : Role) {
+	Match.Home.members.playerRole(match, role);
+	neg find hasRed(role);
+} or {
+	Match.Home.members.staffRole(match, role);
+	neg find hasRed(role);	
+}
+
+pattern possibleVisitorReds(match : Match, role : Role) {
+	Match.Visitor.members.playerRole(match, role);
+	neg find hasRed(role);
+} or {
+	Match.Visitor.members.staffRole(match, role);
+	neg find hasRed(role);	
+}

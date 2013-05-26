@@ -10,6 +10,8 @@ import hu.bme.mit.inf.mdsd.one.app.statechart.futsal_report_generatorimpl.IFutsa
 import java.util.Timer;
 import java.util.TimerTask;
 
+import model.Role;
+
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.ui.PlatformUI;
@@ -25,6 +27,7 @@ public class ManageStateChart implements IManageStateChart {
 	private Timer tH = null;
 	private Timer tV = null;
 	private ManageStateChartHelper helper;
+	private ISearchHelper search;
 	private static int stateDelay = 1500;
 
 	protected class UpdateTimeTask extends TimerTask {
@@ -39,8 +42,10 @@ public class ManageStateChart implements IManageStateChart {
 		public void run() {
 			view.modifyHomeTOs(sm.getSCITimer().getHome_timeout_enabled());
 			view.modifyVisitorTOs(sm.getSCITimer().getVisitor_timeout_enabled());
-			view.updateHomeFaultBtnText(helper.calculateFaultBtnText(sm.getSCIFouls().getHome_counter()));
-			view.updateVisitorFaultBtnText(helper.calculateFaultBtnText(sm.getSCIFouls().getVisitors_counter()));
+			view.updateHomeFaultBtnText(helper.calculateFaultBtnText(sm
+					.getSCIFouls().getHome_counter()));
+			view.updateVisitorFaultBtnText(helper.calculateFaultBtnText(sm
+					.getSCIFouls().getVisitors_counter()));
 
 			if (!sm.isStateActive(s)) {
 				updateTimeTaskScheduled = false;
@@ -98,9 +103,10 @@ public class ManageStateChart implements IManageStateChart {
 
 		this.view = view;
 		this.helper = new ManageStateChartHelper(sm, this);
+		this.search = new SearchHelper(view.getModel());
 
 		helper.registerGoalCounts(view.getModel());
-		
+
 		sm.getSCITimer().setSCITimerOperationCallback(new PlaySound());
 		sm.setTimerService(new TimerService());
 		sm.enter();
@@ -196,7 +202,7 @@ public class ManageStateChart implements IManageStateChart {
 		sm.getSCIFouls().setHome_counter(home_counter);
 		view.updateHomeFaultBtnText(helper.calculateFaultBtnText(home_counter));
 		sm.runCycle();
-		if(home_counter == 5) {
+		if (home_counter == 5) {
 			sm.getSCIFouls().raiseContinue();
 			sm.runCycle();
 		}
@@ -209,47 +215,124 @@ public class ManageStateChart implements IManageStateChart {
 		view.updateVisitorFaultBtnText(helper
 				.calculateFaultBtnText(visitor_counter));
 		sm.runCycle();
-		if(visitor_counter == 5) {
+		if (visitor_counter == 5) {
 			sm.getSCIFouls().raiseContinue();
-			sm.runCycle();					
+			sm.runCycle();
 		}
 	}
 
 	@Override
 	public void giveHomeYellowCard() {
-		System.out.println("home-yellow");
-	}
-
-	@Override
-	public void giveVisitorYellowCard() {
-		System.out.println("visitor-yellow");
-	}
-
-	@Override
-	public void giveHomeRedCard() {
-		System.out.println("home-red");
-	}
-
-	@Override
-	public void giveVisitorRedCard() {
-		System.out.println("visitor-red");
-	}
-
-	@Override
-	public void giveHomeGoal() {
 		PlatformUI.getWorkbench().getDisplay().asyncExec(new Runnable() {
-		    public void run() {
-			    Shell activeShell = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getShell();
-			    SearchDialog dialog = new SearchDialog(activeShell, SWT.CLOSE | SWT.APPLICATION_MODAL);
-			    dialog.setText("Search Home Scorer");
-			    dialog.open();
+			public void run() {
+				Shell activeShell = PlatformUI.getWorkbench()
+						.getActiveWorkbenchWindow().getShell();
+				SearchDialog dialog = new SearchDialog(activeShell, SWT.CLOSE
+						| SWT.APPLICATION_MODAL);
+				dialog.setText("Search Home Player For Yellow Card");
+				dialog.setLabelProvider(search.getRoleLabelProvider());
+				dialog.setContentProvider(search
+						.getHomeYellowsContentProvider());
+				dialog.setInput(view.getModel());
+				Role role = (Role) dialog.open();
+				view.getManageModel().homeYellowCard(role, helper.getCurrentMatchTime());
 			}
 		});
 	}
 
 	@Override
-	public void giveVisitoryGoal() {
-		System.out.println("visitor-goal");
+	public void giveVisitorYellowCard() {
+		PlatformUI.getWorkbench().getDisplay().asyncExec(new Runnable() {
+			public void run() {
+				Shell activeShell = PlatformUI.getWorkbench()
+						.getActiveWorkbenchWindow().getShell();
+				SearchDialog dialog = new SearchDialog(activeShell, SWT.CLOSE
+						| SWT.APPLICATION_MODAL);
+				dialog.setText("Search Visitor Player For Yellow Card");
+				dialog.setLabelProvider(search.getRoleLabelProvider());
+				dialog.setContentProvider(search
+						.getVisitorYellowsContentProvider());
+				dialog.setInput(view.getModel());
+				Role role = (Role) dialog.open();
+				view.getManageModel().visitorYellowCard(role, helper.getCurrentMatchTime());
+			}
+		});
+	}
+
+	@Override
+	public void giveHomeRedCard() {
+		PlatformUI.getWorkbench().getDisplay().asyncExec(new Runnable() {
+			public void run() {
+				Shell activeShell = PlatformUI.getWorkbench()
+						.getActiveWorkbenchWindow().getShell();
+				SearchDialog dialog = new SearchDialog(activeShell, SWT.CLOSE
+						| SWT.APPLICATION_MODAL);
+				dialog.setText("Search Home Player For Red Card");
+				dialog.setLabelProvider(search.getRoleLabelProvider());
+				dialog.setContentProvider(search.getHomeRedsContentProvider());
+				dialog.setInput(view.getModel());
+				Role role = (Role) dialog.open();
+				view.getManageModel().homeRedCard(role, helper.getCurrentMatchTime());
+			}
+		});
+
+	}
+
+	@Override
+	public void giveVisitorRedCard() {
+		PlatformUI.getWorkbench().getDisplay().asyncExec(new Runnable() {
+			public void run() {
+				Shell activeShell = PlatformUI.getWorkbench()
+						.getActiveWorkbenchWindow().getShell();
+				SearchDialog dialog = new SearchDialog(activeShell, SWT.CLOSE
+						| SWT.APPLICATION_MODAL);
+				dialog.setText("Search Visitor Player For Red Card");
+				dialog.setLabelProvider(search.getRoleLabelProvider());
+				dialog.setContentProvider(search
+						.getVisitorRedsContentProvider());
+				dialog.setInput(view.getModel());
+				Role role = (Role) dialog.open();
+				view.getManageModel().visitorRedCard(role, helper.getCurrentMatchTime());
+			}
+		});
+	}
+
+	@Override
+	public void giveHomeGoal() {
+		PlatformUI.getWorkbench().getDisplay().asyncExec(new Runnable() {
+			public void run() {
+				Shell activeShell = PlatformUI.getWorkbench()
+						.getActiveWorkbenchWindow().getShell();
+				SearchDialog dialog = new SearchDialog(activeShell, SWT.CLOSE
+						| SWT.APPLICATION_MODAL);
+				dialog.setText("Search Home Scorer");
+				dialog.setLabelProvider(search.getRoleLabelProvider());
+				dialog.setContentProvider(search
+						.getHomeScorersContentProvider());
+				dialog.setInput(view.getModel());
+				Role role = (Role) dialog.open();
+				view.getManageModel().homeGoal(role, helper.getCurrentMatchTime());
+			}
+		});
+	}
+
+	@Override
+	public void giveVisitorGoal() {
+		PlatformUI.getWorkbench().getDisplay().asyncExec(new Runnable() {
+			public void run() {
+				Shell activeShell = PlatformUI.getWorkbench()
+						.getActiveWorkbenchWindow().getShell();
+				SearchDialog dialog = new SearchDialog(activeShell, SWT.CLOSE
+						| SWT.APPLICATION_MODAL);
+				dialog.setText("Search Visitor Scorer");
+				dialog.setLabelProvider(search.getRoleLabelProvider());
+				dialog.setContentProvider(search
+						.getVisitorScorersContentProvider());
+				dialog.setInput(view.getModel());
+				Role role = (Role) dialog.open();
+				view.getManageModel().visitorGoal(role, helper.getCurrentMatchTime());
+			}
+		});
 	}
 
 	@Override

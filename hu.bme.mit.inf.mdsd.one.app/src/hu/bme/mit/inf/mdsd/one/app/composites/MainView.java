@@ -1,15 +1,15 @@
 package hu.bme.mit.inf.mdsd.one.app.composites;
 
-import hu.bme.mit.inf.mdsd.one.app.management.IManageStateChart;
-import hu.bme.mit.inf.mdsd.one.app.management.ManageStateChart;
 import hu.bme.mit.inf.mdsd.one.app.management.IManageModel;
+import hu.bme.mit.inf.mdsd.one.app.management.IManageStateChart;
 import hu.bme.mit.inf.mdsd.one.app.management.ManageModel;
-
+import hu.bme.mit.inf.mdsd.one.app.management.ManageStateChart;
 import model.Match;
 
-//import org.eclipse.jface.action.IMenuManager;
-//import org.eclipse.jface.action.IToolBarManager;
 import org.eclipse.swt.SWT;
+import org.eclipse.swt.custom.ScrolledComposite;
+import org.eclipse.swt.events.FocusAdapter;
+import org.eclipse.swt.events.FocusEvent;
 import org.eclipse.swt.events.SelectionAdapter;
 import org.eclipse.swt.events.SelectionEvent;
 import org.eclipse.swt.layout.FormAttachment;
@@ -20,15 +20,17 @@ import org.eclipse.swt.widgets.Combo;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.DateTime;
 import org.eclipse.swt.widgets.Display;
+import org.eclipse.swt.widgets.Event;
 import org.eclipse.swt.widgets.ExpandBar;
 import org.eclipse.swt.widgets.ExpandItem;
 import org.eclipse.swt.widgets.Label;
+import org.eclipse.swt.widgets.Listener;
 import org.eclipse.swt.widgets.Table;
 import org.eclipse.swt.widgets.Text;
 import org.eclipse.ui.part.ViewPart;
 import org.eclipse.wb.swt.SWTResourceManager;
-import org.eclipse.swt.events.FocusAdapter;
-import org.eclipse.swt.events.FocusEvent;
+//import org.eclipse.jface.action.IMenuManager;
+//import org.eclipse.jface.action.IToolBarManager;
 
 public class MainView extends ViewPart {
 	
@@ -186,6 +188,11 @@ public class MainView extends ViewPart {
 	private Button btnTOHome;
 	private Table table;
 	private Text matchId;
+	private Composite compositeMiddle;
+
+	private ScrolledComposite sc;
+
+	private ExpandBar expandBarVisitor;
 	
 	public void updateHomeFaultBtnText(final String text) {
 		Display.getDefault().syncExec(new Runnable() {
@@ -503,11 +510,32 @@ public class MainView extends ViewPart {
 		fd_logging.bottom = new FormAttachment(100, -10);
 		logging.setLayoutData(fd_logging);
 		
-		ExpandBar expandBarHome = new ExpandBar(container, SWT.NONE);
+		sc = new ScrolledComposite(container, SWT.V_SCROLL);
+		sc.setLayout(new FormLayout());
+		FormData fd_sCompositeMiddle = new FormData();
+		fd_sCompositeMiddle.left = new FormAttachment(0);
+		fd_sCompositeMiddle.right = new FormAttachment(100,0);
+		fd_sCompositeMiddle.top = new FormAttachment(expandBarMatchData, 0);
+		fd_sCompositeMiddle.bottom = new FormAttachment(expandBarLogging, 0);
+		sc.setLayoutData(fd_sCompositeMiddle);
+		
+		compositeMiddle = new Composite(sc, SWT.NONE);
+		sc.setLayout(new FormLayout());
+		sc.setContent(compositeMiddle);
+		
+		compositeMiddle.setLayout(new FormLayout());
+		FormData fd_compositeMiddle = new FormData();
+		fd_compositeMiddle.left = new FormAttachment(0);
+		fd_compositeMiddle.right = new FormAttachment(100,0);
+		fd_compositeMiddle.top = new FormAttachment(0, 0);
+		compositeMiddle.setLayoutData(fd_compositeMiddle);
+		
+		
+		ExpandBar expandBarHome = new ExpandBar(compositeMiddle, SWT.NONE);
 		FormData fd_expandBarHome = new FormData();
-		fd_expandBarHome.top = new FormAttachment(expandBarMatchData, 0);
-		fd_expandBarHome.left = new FormAttachment(expandBarMatchData, 0, SWT.LEFT);
-		fd_expandBarHome.bottom = new FormAttachment(expandBarLogging, 0);
+		fd_expandBarHome.top = new FormAttachment(0);
+		fd_expandBarHome.left = new FormAttachment(0);
+		fd_expandBarHome.bottom = new FormAttachment(100, 0);
 		fd_expandBarHome.width = 290;
 		expandBarHome.setLayoutData(fd_expandBarHome);
 		
@@ -1140,11 +1168,11 @@ public class MainView extends ViewPart {
 		
 		xpndtmHome.setHeight(700);
 		
-		ExpandBar expandBarVisitor = new ExpandBar(container, SWT.NONE);
+		expandBarVisitor = new ExpandBar(compositeMiddle, SWT.NONE);
 		FormData fd_expandBarVisitor = new FormData();
-		fd_expandBarVisitor.top = new FormAttachment(expandBarMatchData, 0);
-		fd_expandBarVisitor.right = new FormAttachment(expandBarMatchData, 0, SWT.RIGHT);
-		fd_expandBarVisitor.bottom = new FormAttachment(expandBarLogging, 0);
+		fd_expandBarVisitor.top = new FormAttachment(0);
+		fd_expandBarVisitor.right = new FormAttachment(100, 0);
+		fd_expandBarVisitor.bottom = new FormAttachment(100, 0);
 		fd_expandBarVisitor.width = 290;
 		expandBarVisitor.setLayoutData(fd_expandBarVisitor);
 		
@@ -1778,12 +1806,12 @@ public class MainView extends ViewPart {
 		
 		xpndtmVisitor.setHeight(700);
 		
-		Composite compositeMain = new Composite(container, SWT.NONE);
+		Composite compositeMain = new Composite(compositeMiddle, SWT.NONE);
 		compositeMain.setLayout(new FormLayout());
 		FormData fd_compositeMain = new FormData();
-		fd_compositeMain.top = new FormAttachment(expandBarMatchData, 0);
+		fd_compositeMain.top = new FormAttachment(0);
 		fd_compositeMain.left = new FormAttachment(expandBarHome, 0);
-		fd_compositeMain.bottom = new FormAttachment(expandBarLogging, 0);
+		fd_compositeMain.bottom = new FormAttachment(100, 0);
 		fd_compositeMain.right = new FormAttachment(expandBarVisitor, 0);
 		compositeMain.setLayoutData(fd_compositeMain);
 		
@@ -1928,7 +1956,7 @@ public class MainView extends ViewPart {
 		btnGoalVisitor.addSelectionListener(new SelectionAdapter() {
 			@Override
 			public void widgetSelected(SelectionEvent e) {
-				manageST.giveVisitoryGoal();
+				manageST.giveVisitorGoal();
 			}
 		});
 		btnGoalVisitor.setImage(SWTResourceManager.getImage(MainView.class, "/icons/goal.png"));
@@ -1994,6 +2022,22 @@ public class MainView extends ViewPart {
 		table.setHeaderVisible(true);
 		table.setLinesVisible(true);
 
+		compositeMiddle.setSize(compositeMiddle.computeSize(SWT.DEFAULT, SWT.DEFAULT));		
+		sc.addListener(SWT.Resize, new Listener() {
+			
+			@Override
+			public void handleEvent(Event event) {
+				int h = compositeMiddle.getBounds().height;
+				int w = sc.getBounds().width;
+				
+				compositeMiddle.setSize(w, h);
+				if(sc.getVerticalBar().isVisible()) {
+					FormData layoutData = (FormData) expandBarVisitor.getLayoutData();
+					layoutData.right.offset = -sc.getVerticalBar().getSize().x;
+				}
+			}
+		});
+		
 		createActions();
 		initializeToolBar();
 		initializeMenu();
@@ -2031,5 +2075,9 @@ public class MainView extends ViewPart {
 
 	public Match getModel() {
 		return manageModel.getMatch();
+	}
+
+	public IManageModel getManageModel() {
+		return manageModel;
 	}
 }

@@ -11,7 +11,7 @@ public interface IManageStateChart {
 	void giveHomeRedCard();
 	void giveVisitorRedCard();
 	void giveHomeGoal();
-	void giveVisitoryGoal();
+	void giveVisitorGoal();
 	void useHomeTimeOut();
 	void useVisitorTimeOut();	
 }

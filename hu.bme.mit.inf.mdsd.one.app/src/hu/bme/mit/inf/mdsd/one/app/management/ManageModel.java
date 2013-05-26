@@ -9,6 +9,7 @@ import model.AgeGroup;
 import model.Match;
 import model.ModelFactory;
 import model.Person;
+import model.Role;
 import model.Type;
 
 import org.eclipse.core.databinding.observable.ChangeEvent;
@@ -153,5 +154,41 @@ public class ManageModel implements IManageModel {
 
 	public void setMatch(Match match) {
 		this.match = match;
+	}
+
+	@Override
+	public void homeGoal(Role role, int time) {
+		// TODO Auto-generated method stub
+		System.out.println("homegoal");
+	}
+
+	@Override
+	public void visitorGoal(Role role, int time) {
+		// TODO Auto-generated method stub
+		System.out.println("visitorgoal");
+	}
+
+	@Override
+	public void homeYellowCard(Role role, int time) {
+		// TODO Auto-generated method stub
+		System.out.println("homeyellow");
+	}
+
+	@Override
+	public void visitorYellowCard(Role role, int time) {
+		// TODO Auto-generated method stub
+		System.out.println("visitoryellow");
+	}
+
+	@Override
+	public void homeRedCard(Role role, int time) {
+		// TODO Auto-generated method stub
+		System.out.println("homered");
+	}
+
+	@Override
+	public void visitorRedCard(Role role, int time) {
+		// TODO Auto-generated method stub
+		System.out.println("visitorred");
 	}	
 }
