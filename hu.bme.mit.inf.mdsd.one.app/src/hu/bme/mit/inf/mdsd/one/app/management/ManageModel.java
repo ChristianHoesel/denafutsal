@@ -13,6 +13,8 @@ import model.Match;
 import model.ModelFactory;
 import model.Person;
 import model.Role;
+import model.StaffRole;
+import model.Team;
 import model.Type;
 
 import org.eclipse.core.databinding.observable.ChangeEvent;
@@ -67,6 +69,19 @@ public class ManageModel implements IManageModel {
 
 		return convert2StringArray(matchTypeItems);
 	}
+	
+	@Override
+	public String[] getStaffRoleItems() {
+		List<String> staffRoleItems = new ArrayList<String>();
+
+		List<StaffRole> sr = java.util.Arrays.asList(StaffRole.values());
+
+		for (int i = 0; i < sr.size(); i++) {
+			staffRoleItems.add(sr.get(i).toString());
+		}
+
+		return convert2StringArray(staffRoleItems);
+	}
 
 	/**
 	 * A konstruktorunk:
@@ -108,6 +123,16 @@ public class ManageModel implements IManageModel {
 
 		Date date = new Date();
 		match.setDate(date);
+		
+		Team homeTeam = factory.createTeam();	
+		homeTeam.setName("*Done*");
+		match.setHome(homeTeam);
+		
+		Team visitorTeam = factory.createTeam();
+		visitorTeam.setName("*Done*");
+		match.setVisitor(visitorTeam);
+		
+		
 
 	}
 
@@ -276,14 +301,22 @@ public class ManageModel implements IManageModel {
 
 	@Override
 	public String getTeamHomeText() {
-		// TODO Auto-generated method stub
-		return null;
+		return match.getHome().getName();
 	}
 
 	@Override
 	public void setTeamHomeText(Text text) {
-		// TODO Auto-generated method stub
+		match.getHome().setName(text.getText());
+	}
+	
+	@Override
+	public String getTeamVisitorText() {
+		return match.getVisitor().getName();
+	}
 
+	@Override
+	public void setTeamVisitorText(Text text) {
+		match.getVisitor().setName(text.getText());
 	}
 
 	@Override

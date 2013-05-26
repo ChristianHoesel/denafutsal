@@ -12,9 +12,12 @@ public interface IManageModel {
 	// Combosdobozok feltöltése:	
 	public String[] getAgeGroupItems();
 	public String[] getMatchTypeItems();
+	public String[] getStaffRoleItems();
 	
 	public int getAgeGroupSelection();
 	public int getMatchTyeSelection();
+	
+	
 	
 	public String getRefereeText();
 	public void setRefereeText(Text text);
@@ -49,6 +52,9 @@ public interface IManageModel {
 	
 	public String getTeamHomeText();
 	public void setTeamHomeText(Text text);
+	
+	public String getTeamVisitorText();
+	public void setTeamVisitorText(Text text);
 	
 	
 	// A Home csapat kezdõ összeállítása:

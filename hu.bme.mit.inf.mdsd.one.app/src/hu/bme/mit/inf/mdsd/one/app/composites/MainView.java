@@ -601,7 +601,7 @@ public class MainView extends ViewPart {
 		compositeLogging.setLayout(new FormLayout());
 		
 		logging = new Text(compositeLogging, SWT.BORDER | SWT.READ_ONLY | SWT.V_SCROLL | SWT.MULTI);
-		logging.setText("Hogyavogya");
+		
 		FormData fd_logging = new FormData();
 		fd_logging.top = new FormAttachment(0, 10);
 		fd_logging.left = new FormAttachment(0, 10);
@@ -657,8 +657,11 @@ public class MainView extends ViewPart {
 		teamHome.addFocusListener(new FocusAdapter() {
 			@Override
 			public void focusLost(FocusEvent e) {
+				manageModel.setTeamHomeText(teamHome);
+				appendText2Logging(manageModel.getTeamHomeText());
 			}
 		});
+		teamHome.setText(manageModel.getTeamHomeText());
 		FormData fd_teamHome = new FormData();
 		fd_teamHome.top = new FormAttachment(lblTeamHome, -2, SWT.TOP);
 		fd_teamHome.left = new FormAttachment(lblTeamHome, 6);
@@ -1207,6 +1210,7 @@ public class MainView extends ViewPart {
 		idH8Staff.setLayoutData(fd_idH8Staff);
 		
 		staffT1H = new Combo(compositeHome, SWT.NONE);
+		staffT1H.setItems(manageModel.getStaffRoleItems());
 		FormData fd_staffT1H = new FormData();
 		fd_staffT1H.top = new FormAttachment(staffH1N, 0, SWT.TOP);
 		fd_staffT1H.left = new FormAttachment(idH1Staff, 6);
@@ -1214,6 +1218,7 @@ public class MainView extends ViewPart {
 		staffT1H.setLayoutData(fd_staffT1H);
 		
 		staffT2H = new Combo(compositeHome, SWT.NONE);
+		staffT2H.setItems(manageModel.getStaffRoleItems());
 		FormData fd_staffT2H = new FormData();
 		fd_staffT2H.top = new FormAttachment(staffH2N, 0, SWT.TOP);
 		fd_staffT2H.left = new FormAttachment(idH2Staff, 6);
@@ -1221,6 +1226,7 @@ public class MainView extends ViewPart {
 		staffT2H.setLayoutData(fd_staffT2H);
 		
 		staffT3H = new Combo(compositeHome, SWT.NONE);
+		staffT3H.setItems(manageModel.getStaffRoleItems());
 		FormData fd_staffT3H = new FormData();
 		fd_staffT3H.top = new FormAttachment(staffH3N, 0, SWT.TOP);
 		fd_staffT3H.left = new FormAttachment(idH3Staff, 6);
@@ -1228,6 +1234,7 @@ public class MainView extends ViewPart {
 		staffT3H.setLayoutData(fd_staffT3H);
 		
 		staffT4H = new Combo(compositeHome, SWT.NONE);
+		staffT4H.setItems(manageModel.getStaffRoleItems());
 		FormData fd_staffT4H = new FormData();
 		fd_staffT4H.top = new FormAttachment(staffH4N, 0, SWT.TOP);
 		fd_staffT4H.left = new FormAttachment(idH4Staff, 6);
@@ -1235,6 +1242,7 @@ public class MainView extends ViewPart {
 		staffT4H.setLayoutData(fd_staffT4H);
 		
 		staffT5H = new Combo(compositeHome, SWT.NONE);
+		staffT5H.setItems(manageModel.getStaffRoleItems());
 		FormData fd_staffT5H = new FormData();
 		fd_staffT5H.top = new FormAttachment(staffH5N, 0, SWT.TOP);
 		fd_staffT5H.left = new FormAttachment(idH5Staff, 6);
@@ -1242,6 +1250,7 @@ public class MainView extends ViewPart {
 		staffT5H.setLayoutData(fd_staffT5H);
 		
 		staffT6H = new Combo(compositeHome, SWT.NONE);
+		staffT6H.setItems(manageModel.getStaffRoleItems());
 		FormData fd_staffT6H = new FormData();
 		fd_staffT6H.top = new FormAttachment(staffH6N, 0, SWT.TOP);
 		fd_staffT6H.left = new FormAttachment(idH6Staff, 6);
@@ -1249,6 +1258,7 @@ public class MainView extends ViewPart {
 		staffT6H.setLayoutData(fd_staffT6H);
 		
 		staffT7H = new Combo(compositeHome, SWT.NONE);
+		staffT7H.setItems(manageModel.getStaffRoleItems());
 		FormData fd_staffT7H = new FormData();
 		fd_staffT7H.top = new FormAttachment(staffH7N, 0, SWT.TOP);
 		fd_staffT7H.left = new FormAttachment(idH7Staff, 6);
@@ -1256,6 +1266,7 @@ public class MainView extends ViewPart {
 		staffT7H.setLayoutData(fd_staffT7H);
 		
 		staffT8H = new Combo(compositeHome, SWT.NONE);
+		staffT8H.setItems(manageModel.getStaffRoleItems());
 		FormData fd_staffT8H = new FormData();
 		fd_staffT8H.top = new FormAttachment(staffH8N, 0, SWT.TOP);
 		fd_staffT8H.left = new FormAttachment(idH8Staff, 6);
@@ -1297,6 +1308,14 @@ public class MainView extends ViewPart {
 		lblTeamVisitor.setText("Team");
 		
 		teamVisitor = new Text(compositeVisitor, SWT.BORDER);
+		teamVisitor.addFocusListener(new FocusAdapter() {
+			@Override
+			public void focusLost(FocusEvent e) {
+				manageModel.setTeamVisitorText(teamVisitor);
+				appendText2Logging(manageModel.getTeamVisitorText());
+			}
+		});
+		teamVisitor.setText(manageModel.getTeamVisitorText());
 		FormData fd_teamVisitor = new FormData();
 		fd_teamVisitor.top = new FormAttachment(lblTeamVisitor, -2, SWT.TOP);
 		fd_teamVisitor.left = new FormAttachment(lblTeamVisitor, 6);
@@ -1845,6 +1864,7 @@ public class MainView extends ViewPart {
 		idV8Staff.setLayoutData(fd_idV8Staff);
 		
 		staffT1V = new Combo(compositeVisitor, SWT.NONE);
+		staffT1V.setItems(manageModel.getStaffRoleItems());
 		FormData fd_staffT1V = new FormData();
 		fd_staffT1V.top = new FormAttachment(staffV1N, 0, SWT.TOP);
 		fd_staffT1V.left = new FormAttachment(idV1Staff, 6);
@@ -1852,6 +1872,7 @@ public class MainView extends ViewPart {
 		staffT1V.setLayoutData(fd_staffT1V);
 		
 		staffT2V = new Combo(compositeVisitor, SWT.NONE);
+		staffT2V.setItems(manageModel.getStaffRoleItems());
 		FormData fd_staffT2V = new FormData();
 		fd_staffT2V.top = new FormAttachment(staffV2N, 0, SWT.TOP);
 		fd_staffT2V.left = new FormAttachment(idV2Staff, 6);
@@ -1859,6 +1880,7 @@ public class MainView extends ViewPart {
 		staffT2V.setLayoutData(fd_staffT2V);
 		
 		staffT3V = new Combo(compositeVisitor, SWT.NONE);
+		staffT3V.setItems(manageModel.getStaffRoleItems());
 		FormData fd_staffT3V = new FormData();
 		fd_staffT3V.top = new FormAttachment(staffV3N, 0, SWT.TOP);
 		fd_staffT3V.left = new FormAttachment(idV3Staff, 6);
@@ -1866,6 +1888,7 @@ public class MainView extends ViewPart {
 		staffT3V.setLayoutData(fd_staffT3V);
 		
 		staffT4V = new Combo(compositeVisitor, SWT.NONE);
+		staffT4V.setItems(manageModel.getStaffRoleItems());
 		FormData fd_staffT4V = new FormData();
 		fd_staffT4V.top = new FormAttachment(staffV4N, 0, SWT.TOP);
 		fd_staffT4V.left = new FormAttachment(idV4Staff, 6);
@@ -1873,6 +1896,7 @@ public class MainView extends ViewPart {
 		staffT4V.setLayoutData(fd_staffT4V);
 		
 		staffT5V = new Combo(compositeVisitor, SWT.NONE);
+		staffT5V.setItems(manageModel.getStaffRoleItems());
 		FormData fd_staffT5V = new FormData();
 		fd_staffT5V.top = new FormAttachment(staffV5N, 0, SWT.TOP);
 		fd_staffT5V.left = new FormAttachment(idV5Staff, 6);
@@ -1880,6 +1904,7 @@ public class MainView extends ViewPart {
 		staffT5V.setLayoutData(fd_staffT5V);
 		
 		staffT6V = new Combo(compositeVisitor, SWT.NONE);
+		staffT6V.setItems(manageModel.getStaffRoleItems());
 		FormData fd_staffT6V = new FormData();
 		fd_staffT6V.top = new FormAttachment(staffV6N, 0, SWT.TOP);
 		fd_staffT6V.left = new FormAttachment(idV6Staff, 6);
@@ -1887,6 +1912,7 @@ public class MainView extends ViewPart {
 		staffT6V.setLayoutData(fd_staffT6V);
 		
 		staffT7V = new Combo(compositeVisitor, SWT.NONE);
+		staffT7V.setItems(manageModel.getStaffRoleItems());
 		FormData fd_staffT7V = new FormData();
 		fd_staffT7V.top = new FormAttachment(staffV7N, 0, SWT.TOP);
 		fd_staffT7V.left = new FormAttachment(idV7Staff, 6);
@@ -1894,6 +1920,7 @@ public class MainView extends ViewPart {
 		staffT7V.setLayoutData(fd_staffT7V);
 		
 		staffT8V = new Combo(compositeVisitor, SWT.NONE);
+		staffT8V.setItems(manageModel.getStaffRoleItems());
 		FormData fd_staffT8V = new FormData();
 		fd_staffT8V.top = new FormAttachment(staffV8N, 0, SWT.TOP);
 		fd_staffT8V.left = new FormAttachment(idV8Staff, 6);
