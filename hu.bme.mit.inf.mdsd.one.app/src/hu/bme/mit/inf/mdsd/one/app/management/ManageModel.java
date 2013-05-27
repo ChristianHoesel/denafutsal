@@ -11,6 +11,8 @@ import java.util.Date;
 import java.util.List;
 
 import model.AgeGroup;
+import model.Event;
+import model.EventType;
 import model.Match;
 import model.ModelFactory;
 import model.Person;
@@ -175,7 +177,7 @@ public class ManageModel implements IManageModel {
 			player.setShirtNo(i);
 			if (i == 0) {
 				player.setPosition(Position.GOALKEEPER);
-				match.getVisitor().setCaptain(player);
+				match.getVisitor().setCaptain(player);				
 			} else {
 				player.setPosition(Position.FIELD_PLAYER);
 			}
@@ -188,7 +190,12 @@ public class ManageModel implements IManageModel {
 
 			match.getVisitor().getStartingLine().add(player);
 		}
-
+		
+		homeGoal(match.getHome().getMembers().get(0).getPlayerRole(), 123);
+		homeRedCard(match.getHome().getMembers().get(0).getPlayerRole(), 124);
+		homeRedCardWithBan(match.getHome().getMembers().get(0).getPlayerRole(), 125);
+		homeYellowCard(match.getHome().getMembers().get(0).getPlayerRole(), 126);
+		
 	}
 
 	/**
@@ -266,42 +273,6 @@ public class ManageModel implements IManageModel {
 	}
 
 	@Override
-	public void homeGoal(Role role, int time) {
-		// TODO Auto-generated method stub
-		System.out.println("homegoal");
-	}
-
-	@Override
-	public void visitorGoal(Role role, int time) {
-		// TODO Auto-generated method stub
-		System.out.println("visitorgoal");
-	}
-
-	@Override
-	public void homeYellowCard(Role role, int time) {
-		// TODO Auto-generated method stub
-		System.out.println("homeyellow");
-	}
-
-	@Override
-	public void visitorYellowCard(Role role, int time) {
-		// TODO Auto-generated method stub
-		System.out.println("visitoryellow");
-	}
-
-	@Override
-	public void homeRedCard(Role role, int time) {
-		// TODO Auto-generated method stub
-		System.out.println("homered");
-	}
-
-	@Override
-	public void visitorRedCard(Role role, int time) {
-		// TODO Auto-generated method stub
-		System.out.println("visitorred");
-	}
-
-	@Override
 	public String getAssistantText() {
 		return match.getAssistant().getName();
 	}
@@ -362,7 +333,7 @@ public class ManageModel implements IManageModel {
 	@Override
 	public void setMatchIDText(Text text, String error) {
 		Boolean valid = true; // Ide kerül majd a validátor
-		
+
 		if (valid) {
 			try {
 				match.setId(Integer.parseInt(text.getText()));
@@ -414,8 +385,8 @@ public class ManageModel implements IManageModel {
 		} else {
 			view.appendTextToLogging(error);
 			text.setBackground(red);
-		}	
-		
+		}
+
 	}
 
 	@Override
@@ -432,8 +403,8 @@ public class ManageModel implements IManageModel {
 		} else {
 			view.appendTextToLogging(error);
 			text.setBackground(red);
-		}	
-		
+		}
+
 	}
 
 	@Override
@@ -450,8 +421,8 @@ public class ManageModel implements IManageModel {
 		} else {
 			view.appendTextToLogging(error);
 			text.setBackground(red);
-		}	
-		
+		}
+
 	}
 
 	@Override
@@ -468,8 +439,8 @@ public class ManageModel implements IManageModel {
 		} else {
 			view.appendTextToLogging(error);
 			text.setBackground(red);
-		}	
-		
+		}
+
 	}
 
 	@Override
@@ -483,20 +454,19 @@ public class ManageModel implements IManageModel {
 		if (valid) {
 			try {
 				match.getHome().getMembers().get(0)
-				.setId(Integer.parseInt((text.getText())));
+						.setId(Integer.parseInt((text.getText())));
 				text.setBackground(green);
 			} catch (Exception e) {
 				text.setBackground(red);
 				view.appendTextToLogging(e.toString());
 				view.appendTextToLogging(error);
 			}
-			
+
 		} else {
 			view.appendTextToLogging(error);
 			text.setBackground(red);
-		}	
-		
-		
+		}
+
 	}
 
 	@Override
@@ -511,19 +481,18 @@ public class ManageModel implements IManageModel {
 		if (valid) {
 			try {
 				match.getHome().getStartingLine().get(0)
-				.setShirtNo(Integer.parseInt(text.getText()));
+						.setShirtNo(Integer.parseInt(text.getText()));
 				text.setBackground(green);
 			} catch (Exception e) {
 				text.setBackground(red);
 				view.appendTextToLogging(e.toString());
 				view.appendTextToLogging(error);
 			}
-			
+
 		} else {
 			view.appendTextToLogging(error);
 			text.setBackground(red);
-		}	
-		
+		}
 
 	}
 
@@ -681,9 +650,9 @@ public class ManageModel implements IManageModel {
 
 	@Override
 	public void setMatchTypeCombo(Combo combo, String error) {
-		
+
 		int cs = combo.getSelectionIndex();
-		
+
 		Boolean valid = true; // Ide kerül majd a validátor
 		if (valid) {
 			match.setType(Type.get(cs));
@@ -691,10 +660,7 @@ public class ManageModel implements IManageModel {
 		} else {
 			view.appendTextToLogging(error);
 			combo.setBackground(red);
-		}	
-		
-		
-		
+		}
 
 	}
 
@@ -724,18 +690,16 @@ public class ManageModel implements IManageModel {
 	@SuppressWarnings("deprecation")
 	@Override
 	public void setDateDateTime(DateTime datetime, String error) {
-		
+
 		Boolean valid = true; // Ide kerül majd a validátor
 		if (valid) {
-			match.setDate(new Date(datetime.getYear() - 1900, datetime.getMonth(),
-					datetime.getDay()));
+			match.setDate(new Date(datetime.getYear() - 1900, datetime
+					.getMonth(), datetime.getDay()));
 			datetime.setBackground(green);
 		} else {
 			view.appendTextToLogging(error);
 			datetime.setBackground(red);
-		}	
-		
-		
+		}
 
 	}
 
@@ -821,6 +785,66 @@ public class ManageModel implements IManageModel {
 
 		MatchGenerator generator = new MatchGenerator();
 		generator.generateDataModel(match);
+	}
+
+	
+	public void addNewEvent(Role role, int time, EventType et) {
+		Event event = factory.createEvent();
+		event.setCommitter(role.getTeamMember());
+		event.setTime(time);
+		event.setType(et);
+		match.getEvents().add(event);
+
+	}
+	
+	@Override
+	public void homeGoal(Role role, int time) {
+		addNewEvent(role, time, EventType.GOAL);		
+	}
+
+	@Override
+	public void visitorGoal(Role role, int time) {
+		addNewEvent(role, time, EventType.GOAL);		
+	}
+
+	@Override
+	public void homeYellowCard(Role role, int time) {
+		addNewEvent(role, time, EventType.YELLOW_CARD);		
+	}
+
+	@Override
+	public void visitorYellowCard(Role role, int time) {
+		addNewEvent(role, time, EventType.YELLOW_CARD);	
+	}
+
+	@Override
+	public void homeRedCard(Role role, int time) {
+		addNewEvent(role, time, EventType.RED_CARD);	
+	}
+
+	@Override
+	public void visitorRedCard(Role role, int time) {
+		addNewEvent(role, time, EventType.RED_CARD);
+	}
+
+	@Override
+	public void homeRedCardWithBan(Role role, int time) {
+		addNewEvent(role, time, EventType.RED_CARD_WITH_BAN);
+
+	}
+
+	@Override
+	public void visitorRedCardWithBan(Role role, int time) {
+		addNewEvent(role, time, EventType.RED_CARD_WITH_BAN);
+
+	}
+	
+	public void getEventsToLogging() {
+		
+		List<Event> event_list = match.getEvents();
+		for (int i = 0; i < event_list.size(); i++) {
+			view.appendTextToLogging(event_list.get(i).toString());
+		}
 	}
 
 }

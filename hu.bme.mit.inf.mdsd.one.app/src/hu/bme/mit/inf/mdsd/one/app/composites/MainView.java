@@ -2422,6 +2422,7 @@ public class MainView extends ViewPart {
 		initializeMenu();
 		
 		manageST = new ManageStateChart(this);
+		manageModel.getEventsToLogging();
 	}
 
 	/**
