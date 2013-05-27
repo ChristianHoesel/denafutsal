@@ -135,13 +135,33 @@ public class ManageModel implements IManageModel {
 		visitorTeam.setName("*Done*");
 		match.setVisitor(visitorTeam);
 
-		// TODO: csapatkapitányok
-
 		for (int i = 0; i < 5; i++) {
 			Player player = factory.createPlayer();
 			player.setShirtNo(i);
 			if (i == 1) {
 				player.setPosition(Position.GOALKEEPER);
+				match.getHome().setCaptain(player);
+			} else {
+				player.setPosition(Position.FIELD_PLAYER);
+			}
+			TeamMember teamMember = factory.createTeamMember();
+
+			teamMember.setId(i);
+			teamMember.setName(String.format("Player %d", i));
+
+			teamMember.setPlayerRole(player);
+			
+			match.getHome().getMembers().add(teamMember);
+
+			match.getHome().getStartingLine().add(player);
+		}
+		
+		for (int i = 0; i < 5; i++) {
+			Player player = factory.createPlayer();
+			player.setShirtNo(i);
+			if (i == 1) {
+				player.setPosition(Position.GOALKEEPER);
+				match.getVisitor().setCaptain(player);
 			} else {
 				player.setPosition(Position.FIELD_PLAYER);
 			}
@@ -152,7 +172,7 @@ public class ManageModel implements IManageModel {
 
 			teamMember.setPlayerRole(player);
 
-			match.getHome().getStartingLine().add(player);
+			match.getVisitor().getStartingLine().add(player);
 		}
 
 	}
@@ -352,25 +372,24 @@ public class ManageModel implements IManageModel {
 
 	@Override
 	public String getIdH1StartText() {
-		// TODO Auto-generated method stub
-		return null;
+		System.out.println("kefrkkrekkrk" + String.valueOf(match.getHome().getMembers().get(0).getId()));
+		return String.valueOf(match.getHome().getMembers().get(0).getId());
 	}
 
 	@Override
 	public void setIdH1StartText(Text text) {
-		// TODO Auto-generated method stub
-
+		match.getHome().getMembers().get(0).setId(Integer.parseInt((text.getText())));
 	}
 
 	@Override
 	public String getShirtH1StartText() {
-		// TODO Auto-generated method stub
-		return null;
+		return String.valueOf(match.getHome().getStartingLine().get(0).getShirtNo());
 	}
 
 	@Override
 	public void setShirtH1StartText(Text text) {
-		// TODO Auto-generated method stub
+		match.getHome().getStartingLine().get(0)
+				.setShirtNo(Integer.parseInt(text.getText()));
 
 	}
 
@@ -386,25 +405,23 @@ public class ManageModel implements IManageModel {
 
 	@Override
 	public String getIdH2StartText() {
-		// TODO Auto-generated method stub
-		return null;
+		return String.valueOf(match.getHome().getMembers().get(1).getId());
 	}
 
 	@Override
 	public void setIdH2StartText(Text text) {
-		// TODO Auto-generated method stub
+		match.getHome().getMembers().get(1).setId(Integer.parseInt((text.getText())));
 
 	}
 
 	@Override
 	public String getShirtH2StartText() {
-		// TODO Auto-generated method stub
-		return null;
+		return String.valueOf(match.getHome().getStartingLine().get(1).getShirtNo());
 	}
 
 	@Override
 	public void setShirtH2StartText(Text text) {
-		// TODO Auto-generated method stub
+		match.getHome().getStartingLine().get(1).setShirtNo(Integer.parseInt(text.getText()));
 
 	}
 
@@ -421,25 +438,23 @@ public class ManageModel implements IManageModel {
 
 	@Override
 	public String getIdH3StartText() {
-		// TODO Auto-generated method stub
-		return null;
+		return String.valueOf(match.getHome().getMembers().get(2).getId());
 	}
 
 	@Override
 	public void setIdH3StartText(Text text) {
-		// TODO Auto-generated method stub
+		match.getHome().getMembers().get(2).setId(Integer.parseInt((text.getText())));
 
 	}
 
 	@Override
 	public String getShirtH3StartText() {
-		// TODO Auto-generated method stub
-		return null;
+		return String.valueOf(match.getHome().getStartingLine().get(2).getShirtNo());
 	}
 
 	@Override
 	public void setShirtH3StartText(Text text) {
-		// TODO Auto-generated method stub
+		match.getHome().getStartingLine().get(2).setShirtNo(Integer.parseInt(text.getText()));
 
 	}
 
@@ -455,25 +470,23 @@ public class ManageModel implements IManageModel {
 
 	@Override
 	public String getIdH4StartText() {
-		// TODO Auto-generated method stub
-		return null;
+		return String.valueOf(match.getHome().getMembers().get(3).getId());
 	}
 
 	@Override
 	public void setIdH4StartText(Text text) {
-		// TODO Auto-generated method stub
+		match.getHome().getMembers().get(3).setId(Integer.parseInt((text.getText())));
 
 	}
 
 	@Override
 	public String getShirtH4StartText() {
-		// TODO Auto-generated method stub
-		return null;
+		return String.valueOf(match.getHome().getStartingLine().get(3).getShirtNo());
 	}
 
 	@Override
 	public void setShirtH4StartText(Text text) {
-		// TODO Auto-generated method stub
+		match.getHome().getStartingLine().get(3).setShirtNo(Integer.parseInt(text.getText()));
 
 	}
 
@@ -490,25 +503,23 @@ public class ManageModel implements IManageModel {
 
 	@Override
 	public String getIdH5StartText() {
-		// TODO Auto-generated method stub
-		return null;
+		return String.valueOf(match.getHome().getMembers().get(4).getId());
 	}
 
 	@Override
 	public void setIdH5StartText(Text text) {
-		// TODO Auto-generated method stub
+		match.getHome().getMembers().get(4).setId(Integer.parseInt((text.getText())));
 
 	}
 
 	@Override
 	public String getShirtH5StartText() {
-		// TODO Auto-generated method stub
-		return null;
+		return String.valueOf(match.getHome().getStartingLine().get(4).getShirtNo());
 	}
 
 	@Override
 	public void setShirtH5StartText(Text text) {
-		// TODO Auto-generated method stub
+		match.getHome().getStartingLine().get(4).setShirtNo(Integer.parseInt(text.getText()));
 
 	}
 

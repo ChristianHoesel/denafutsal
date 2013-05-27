@@ -987,6 +987,20 @@ public class MainView extends ViewPart {
 		cpH7Sub.setLayoutData(fd_cpH7Sub);
 		
 		idH1Start = new Text(compositeHome, SWT.BORDER);
+		idH1Start.addFocusListener(new FocusAdapter() {
+			@Override
+			public void focusLost(FocusEvent e) {			
+				Display.getDefault().syncExec(new Runnable() {
+					public void run() {
+						manageModel.setIdH1StartText(idH1Start);
+						appendText2Logging(manageModel.getIdH1StartText());
+					}
+				});
+				
+			}
+		});
+		setTextFromModel(idH1Start, manageModel.getIdH1StartText());
+		
 		FormData fd_idH1Start = new FormData();
 		fd_idH1Start.width = 34;
 		fd_idH1Start.top = new FormAttachment(startH1N, 0, SWT.TOP);
@@ -994,6 +1008,20 @@ public class MainView extends ViewPart {
 		idH1Start.setLayoutData(fd_idH1Start);
 		
 		idH2Start = new Text(compositeHome, SWT.BORDER);
+		idH2Start.addFocusListener(new FocusAdapter() {
+			@Override
+			public void focusLost(FocusEvent e) {			
+				Display.getDefault().syncExec(new Runnable() {
+					public void run() {
+						manageModel.setIdH2StartText(idH2Start);
+						appendText2Logging(manageModel.getIdH2StartText());
+					}
+				});
+				
+			}
+		});
+		setTextFromModel(idH2Start, manageModel.getIdH2StartText());
+		
 		FormData fd_idH2Start = new FormData();
 		fd_idH2Start.width = 34;
 		fd_idH2Start.top = new FormAttachment(startH2N, 0, SWT.TOP);
@@ -1001,6 +1029,20 @@ public class MainView extends ViewPart {
 		idH2Start.setLayoutData(fd_idH2Start);
 		
 		idH3Start = new Text(compositeHome, SWT.BORDER);
+		idH3Start.addFocusListener(new FocusAdapter() {
+			@Override
+			public void focusLost(FocusEvent e) {			
+				Display.getDefault().syncExec(new Runnable() {
+					public void run() {
+						manageModel.setIdH3StartText(idH3Start);
+						appendText2Logging(manageModel.getIdH3StartText());
+					}
+				});
+				
+			}
+		});
+		setTextFromModel(idH3Start, manageModel.getIdH3StartText());
+		
 		FormData fd_idH3Start = new FormData();
 		fd_idH3Start.width = 34;
 		fd_idH3Start.top = new FormAttachment(startH3N, 0, SWT.TOP);
@@ -1008,6 +1050,20 @@ public class MainView extends ViewPart {
 		idH3Start.setLayoutData(fd_idH3Start);
 		
 		idH4Start = new Text(compositeHome, SWT.BORDER);
+		idH4Start.addFocusListener(new FocusAdapter() {
+			@Override
+			public void focusLost(FocusEvent e) {			
+				Display.getDefault().syncExec(new Runnable() {
+					public void run() {
+						manageModel.setIdH4StartText(idH4Start);
+						appendText2Logging(manageModel.getIdH4StartText());
+					}
+				});
+				
+			}
+		});
+		setTextFromModel(idH4Start, manageModel.getIdH4StartText());
+		
 		FormData fd_idH4Start = new FormData();
 		fd_idH4Start.width = 34;
 		fd_idH4Start.top = new FormAttachment(startH4N, 0, SWT.TOP);
@@ -1015,6 +1071,20 @@ public class MainView extends ViewPart {
 		idH4Start.setLayoutData(fd_idH4Start);
 		
 		idH5Start = new Text(compositeHome, SWT.BORDER);
+		idH5Start.addFocusListener(new FocusAdapter() {
+			@Override
+			public void focusLost(FocusEvent e) {			
+				Display.getDefault().syncExec(new Runnable() {
+					public void run() {
+						manageModel.setIdH5StartText(idH5Start);
+						appendText2Logging(manageModel.getIdH5StartText());
+					}
+				});
+				
+			}
+		});
+		setTextFromModel(idH5Start, manageModel.getIdH5StartText());
+		
 		FormData fd_idH5Start = new FormData();
 		fd_idH5Start.width = 34;
 		fd_idH5Start.top = new FormAttachment(startH5N, 0, SWT.TOP);
@@ -1071,6 +1141,20 @@ public class MainView extends ViewPart {
 		idH7Sub.setLayoutData(fd_idH7Sub);
 		
 		shirtH1Start = new Text(compositeHome, SWT.BORDER);
+		shirtH1Start.addFocusListener(new FocusAdapter() {
+			@Override
+			public void focusLost(FocusEvent e) {			
+				Display.getDefault().syncExec(new Runnable() {
+					public void run() {
+						manageModel.setShirtH1StartText(shirtH1Start);
+						appendText2Logging(manageModel.getShirtH1StartText());
+					}
+				});
+				
+			}
+		});
+		setTextFromModel(shirtH1Start, manageModel.getShirtH1StartText());
+		
 		FormData fd_shirtH1Start = new FormData();
 		fd_shirtH1Start.top = new FormAttachment(startH1N, 0, SWT.TOP);
 		fd_shirtH1Start.left = new FormAttachment(idH1Start, 6);
@@ -1078,6 +1162,20 @@ public class MainView extends ViewPart {
 		shirtH1Start.setLayoutData(fd_shirtH1Start);
 		
 		shirtH2Start = new Text(compositeHome, SWT.BORDER);
+		shirtH2Start.addFocusListener(new FocusAdapter() {
+			@Override
+			public void focusLost(FocusEvent e) {			
+				Display.getDefault().syncExec(new Runnable() {
+					public void run() {
+						manageModel.setShirtH2StartText(shirtH2Start);
+						appendText2Logging(manageModel.getShirtH2StartText());
+					}
+				});
+				
+			}
+		});
+		setTextFromModel(shirtH2Start, manageModel.getShirtH2StartText());
+		
 		FormData fd_shirtH2Start = new FormData();
 		fd_shirtH2Start.top = new FormAttachment(startH2N, 0, SWT.TOP);
 		fd_shirtH2Start.left = new FormAttachment(idH2Start, 6);
@@ -1085,6 +1183,20 @@ public class MainView extends ViewPart {
 		shirtH2Start.setLayoutData(fd_shirtH2Start);
 		
 		shirtH3Start = new Text(compositeHome, SWT.BORDER);
+		shirtH3Start.addFocusListener(new FocusAdapter() {
+			@Override
+			public void focusLost(FocusEvent e) {			
+				Display.getDefault().syncExec(new Runnable() {
+					public void run() {
+						manageModel.setShirtH3StartText(shirtH3Start);
+						appendText2Logging(manageModel.getShirtH3StartText());
+					}
+				});
+				
+			}
+		});
+		setTextFromModel(shirtH3Start, manageModel.getShirtH3StartText());
+		
 		FormData fd_shirtH3Start = new FormData();
 		fd_shirtH3Start.top = new FormAttachment(startH3N, 0, SWT.TOP);
 		fd_shirtH3Start.left = new FormAttachment(idH3Start, 6);
@@ -1092,6 +1204,20 @@ public class MainView extends ViewPart {
 		shirtH3Start.setLayoutData(fd_shirtH3Start);
 		
 		shirtH4Start = new Text(compositeHome, SWT.BORDER);
+		shirtH4Start.addFocusListener(new FocusAdapter() {
+			@Override
+			public void focusLost(FocusEvent e) {			
+				Display.getDefault().syncExec(new Runnable() {
+					public void run() {
+						manageModel.setShirtH4StartText(shirtH4Start);
+						appendText2Logging(manageModel.getShirtH4StartText());
+					}
+				});
+				
+			}
+		});
+		setTextFromModel(shirtH4Start, manageModel.getShirtH4StartText());
+		
 		FormData fd_shirtH4Start = new FormData();
 		fd_shirtH4Start.top = new FormAttachment(startH4N, 0, SWT.TOP);
 		fd_shirtH4Start.left = new FormAttachment(idH4Start, 6);
@@ -1099,6 +1225,19 @@ public class MainView extends ViewPart {
 		shirtH4Start.setLayoutData(fd_shirtH4Start);
 		
 		shirtH5Start = new Text(compositeHome, SWT.BORDER);
+		shirtH5Start.addFocusListener(new FocusAdapter() {
+			@Override
+			public void focusLost(FocusEvent e) {			
+				Display.getDefault().syncExec(new Runnable() {
+					public void run() {
+						manageModel.setShirtH5StartText(shirtH5Start);
+						appendText2Logging(manageModel.getShirtH5StartText());
+					}
+				});
+				
+			}
+		});
+		setTextFromModel(shirtH5Start, manageModel.getShirtH5StartText());
 		FormData fd_shirtH5Start = new FormData();
 		fd_shirtH5Start.top = new FormAttachment(startH5N, 0, SWT.TOP);
 		fd_shirtH5Start.left = new FormAttachment(idH5Start, 6);
