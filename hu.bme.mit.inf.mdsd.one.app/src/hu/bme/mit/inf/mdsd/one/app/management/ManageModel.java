@@ -16,6 +16,7 @@ import model.EventType;
 import model.Match;
 import model.ModelFactory;
 import model.Role;
+import model.StaffMember;
 import model.StaffRole;
 import model.Type;
 
@@ -166,6 +167,36 @@ public class ManageModel implements IManageModel {
 
 			match.getHome().getStartingLine().add(player);
 		}
+		
+		for (int i = 5; i < 12; i++) {
+			Player player = factory.createPlayer();
+			player.setShirtNo(i);
+			player.setPosition(Position.FIELD_PLAYER);
+			
+			TeamMember teamMember = factory.createTeamMember();
+
+			teamMember.setId(i);
+			teamMember.setName(String.format("Player %d", i));
+
+			teamMember.setPlayerRole(player);
+
+			match.getHome().getMembers().add(teamMember);
+
+		}
+		
+		for (int i = 12; i < 20; i++) {
+			StaffMember staffmember = factory.createStaffMember();
+			staffmember.setRole(StaffRole.OTHER);
+			
+			TeamMember teamMember = factory.createTeamMember();
+			
+			teamMember.setId(i);
+			teamMember.setName(String.format("Staffmember %d", i));
+			
+			teamMember.setStaffRole(staffmember);
+			
+			match.getHome().getMembers().add(teamMember);
+		}
 
 		for (int i = 0; i < 5; i++) {
 			Player player = factory.createPlayer();
@@ -186,6 +217,22 @@ public class ManageModel implements IManageModel {
 			match.getVisitor().getMembers().add(teamMember);
 
 			match.getVisitor().getStartingLine().add(player);
+		}
+		
+		for (int i = 5; i < 12; i++) {
+			Player player = factory.createPlayer();
+			player.setShirtNo(i);
+			player.setPosition(Position.FIELD_PLAYER);
+			
+			TeamMember teamMember = factory.createTeamMember();
+
+			teamMember.setId(i);
+			teamMember.setName(String.format("Player %d", i));
+
+			teamMember.setPlayerRole(player);
+
+			match.getVisitor().getMembers().add(teamMember);
+			
 		}
 		
 		homeGoal(match.getHome().getMembers().get(0).getPlayerRole(), 123);
