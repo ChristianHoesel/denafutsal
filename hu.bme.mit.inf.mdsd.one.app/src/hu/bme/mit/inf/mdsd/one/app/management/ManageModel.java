@@ -27,6 +27,7 @@ import org.eclipse.incquery.databinding.runtime.api.IncQueryObservables;
 import org.eclipse.incquery.runtime.api.EngineManager;
 import org.eclipse.incquery.runtime.api.IncQueryEngine;
 import org.eclipse.incquery.runtime.exception.IncQueryException;
+import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Combo;
 import org.eclipse.swt.widgets.DateTime;
 import org.eclipse.swt.widgets.Text;
@@ -138,7 +139,7 @@ public class ManageModel implements IManageModel {
 		for (int i = 0; i < 5; i++) {
 			Player player = factory.createPlayer();
 			player.setShirtNo(i);
-			if (i == 1) {
+			if (i == 0) {
 				player.setPosition(Position.GOALKEEPER);
 				match.getHome().setCaptain(player);
 			} else {
@@ -159,7 +160,7 @@ public class ManageModel implements IManageModel {
 		for (int i = 0; i < 5; i++) {
 			Player player = factory.createPlayer();
 			player.setShirtNo(i);
-			if (i == 1) {
+			if (i == 0) {
 				player.setPosition(Position.GOALKEEPER);
 				match.getVisitor().setCaptain(player);
 			} else {
@@ -372,7 +373,6 @@ public class ManageModel implements IManageModel {
 
 	@Override
 	public String getIdH1StartText() {
-		System.out.println("kefrkkrekkrk" + String.valueOf(match.getHome().getMembers().get(0).getId()));
 		return String.valueOf(match.getHome().getMembers().get(0).getId());
 	}
 
@@ -563,6 +563,7 @@ public class ManageModel implements IManageModel {
 		return match.getDate().getDay();
 	}
 
+	@SuppressWarnings("deprecation")
 	@Override
 	public void setDateDateTime(DateTime datetime) {
 		match.setDate(new Date(datetime.getYear() - 1900, datetime.getMonth(),
@@ -575,5 +576,64 @@ public class ManageModel implements IManageModel {
 		DateFormat dateFormat = new SimpleDateFormat("yyyy.MM.dd.");
 		return dateFormat.format(match.getDate());
 	}
+	
+	@Override
+	public String getCaptainHome() {
+		return match.getHome().getCaptain().getName();
+	}
+	
+	@Override
+	public Boolean getCpH1Start() {		
+		return match.getHome().getStartingLine().get(0).equals(match.getHome().getCaptain());
+	}
+
+	@Override
+	public void setCpH1Start() {
+		match.getHome().setCaptain(match.getHome().getStartingLine().get(0));
+	}
+
+	@Override
+	public Boolean getCpH2Start() {
+		return match.getHome().getStartingLine().get(1).equals(match.getHome().getCaptain());
+	}
+
+	@Override
+	public void setCpH2Start() {
+		match.getHome().setCaptain(match.getHome().getStartingLine().get(1));
+	}
+
+	@Override
+	public Boolean getCpH3Start() {
+		return match.getHome().getStartingLine().get(2).equals(match.getHome().getCaptain());
+	}
+
+	@Override
+	public void setCpH3Start() {
+		match.getHome().setCaptain(match.getHome().getStartingLine().get(2));
+	}
+
+	@Override
+	public Boolean getCpH4Start() {
+		return match.getHome().getStartingLine().get(3).equals(match.getHome().getCaptain());
+	}
+
+	@Override
+	public void setCpH4Start() {
+		match.getHome().setCaptain(match.getHome().getStartingLine().get(3));
+	}
+
+	@Override
+	public Boolean getCpH5Start() {
+		return match.getHome().getStartingLine().get(4).equals(match.getHome().getCaptain());
+	}
+
+	@Override
+	public void setCpH5Start() {
+		match.getHome().setCaptain(match.getHome().getStartingLine().get(4));
+	}
+
+	
+
+
 
 }

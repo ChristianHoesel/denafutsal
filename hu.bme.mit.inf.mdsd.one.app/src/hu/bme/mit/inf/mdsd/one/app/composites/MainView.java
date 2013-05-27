@@ -329,7 +329,7 @@ public class MainView extends ViewPart {
 		});	
 	}
 	
-	public void appendText2Logging(final String text) {
+	public void appendTextToLogging(final String text) {
 		Display.getDefault().syncExec(new Runnable() {
 			public void run() {
 
@@ -387,7 +387,7 @@ public class MainView extends ViewPart {
 				@Override
 				public void focusLost(FocusEvent e) {
 					manageModel.setRefereeText(referee);
-					appendText2Logging(manageModel.getRefereeText());
+					appendTextToLogging(manageModel.getRefereeText());
 				}
 			});
 			referee.setText(manageModel.getRefereeText());
@@ -402,7 +402,7 @@ public class MainView extends ViewPart {
 				@Override
 				public void focusLost(FocusEvent e) {
 					manageModel.setAssistantText(assistant);
-					appendText2Logging(manageModel.getAssistantText());
+					appendTextToLogging(manageModel.getAssistantText());
 				}
 			});
 			assistant.setText(manageModel.getAssistantText());
@@ -431,7 +431,7 @@ public class MainView extends ViewPart {
 				@Override
 				public void focusLost(FocusEvent e) {
 					manageModel.setSupervisorText(supervisor);
-					appendText2Logging(manageModel.getSupervisorText());
+					appendTextToLogging(manageModel.getSupervisorText());
 				}
 			});
 			supervisor.setText(manageModel.getSupervisorText());
@@ -447,7 +447,7 @@ public class MainView extends ViewPart {
 				@Override
 				public void focusLost(FocusEvent e) {
 					manageModel.setThirdRefereeRefereeText(third_referee);
-					appendText2Logging(manageModel.getThirdRefereeRefereeText());
+					appendTextToLogging(manageModel.getThirdRefereeRefereeText());
 				}
 			});
 			third_referee.setText(manageModel.getThirdRefereeRefereeText());
@@ -476,7 +476,7 @@ public class MainView extends ViewPart {
 				@Override
 				public void focusLost(FocusEvent e) {
 					manageModel.setAddressText(address);
-					appendText2Logging(manageModel.getAddressText());
+					appendTextToLogging(manageModel.getAddressText());
 				}
 			});
 			address.setText(manageModel.getAddressText());
@@ -493,7 +493,7 @@ public class MainView extends ViewPart {
 				@Override
 				public void focusLost(FocusEvent e) {
 					manageModel.setDateDateTime(date);
-					appendText2Logging(manageModel.getDateDateTime());
+					appendTextToLogging(manageModel.getDateDateTime());
 				}
 			});
 			
@@ -510,7 +510,7 @@ public class MainView extends ViewPart {
 				@Override
 				public void focusLost(FocusEvent e) {
 					manageModel.setMatchTypeCombo(matchtype);
-					appendText2Logging(manageModel.getMatchTypeCombo());
+					appendTextToLogging(manageModel.getMatchTypeCombo());
 				}
 			});
 			matchtype.select(manageModel.getMatchTyeSelection());
@@ -542,7 +542,7 @@ public class MainView extends ViewPart {
 				@Override
 				public void focusLost(FocusEvent e) {
 					manageModel.setAgeGroupCombo(agegroup);
-					appendText2Logging(manageModel.getAgeGroupCombo());
+					appendTextToLogging(manageModel.getAgeGroupCombo());
 				}
 			});
 			agegroup.select(manageModel.getAgeGroupSelection());
@@ -564,7 +564,7 @@ public class MainView extends ViewPart {
 				@Override
 				public void focusLost(FocusEvent e) {
 					manageModel.setMatchIDText(matchId);
-					appendText2Logging(manageModel.getMatchIDText());
+					appendTextToLogging(manageModel.getMatchIDText());
 				}
 			});
 			matchId.setText(manageModel.getMatchIDText());
@@ -658,7 +658,7 @@ public class MainView extends ViewPart {
 			@Override
 			public void focusLost(FocusEvent e) {
 				manageModel.setTeamHomeText(teamHome);
-				appendText2Logging(manageModel.getTeamHomeText());
+				appendTextToLogging(manageModel.getTeamHomeText());
 			}
 		});
 		teamHome.setText(manageModel.getTeamHomeText());
@@ -682,7 +682,7 @@ public class MainView extends ViewPart {
 				Display.getDefault().syncExec(new Runnable() {
 					public void run() {
 						manageModel.setStartH1NText(startH1N);
-						appendText2Logging(manageModel.getStartH1NText());
+						appendTextToLogging(manageModel.getStartH1NText());
 					}
 				});
 				
@@ -702,7 +702,7 @@ public class MainView extends ViewPart {
 				Display.getDefault().syncExec(new Runnable() {
 					public void run() {
 						manageModel.setStartH2NText(startH2N);
-						appendText2Logging(manageModel.getStartH2NText());
+						appendTextToLogging(manageModel.getStartH2NText());
 					}
 				});
 				
@@ -722,7 +722,7 @@ public class MainView extends ViewPart {
 				Display.getDefault().syncExec(new Runnable() {
 					public void run() {
 						manageModel.setStartH3NText(startH3N);
-						appendText2Logging(manageModel.getStartH3NText());
+						appendTextToLogging(manageModel.getStartH3NText());
 					}
 				});
 				
@@ -742,7 +742,7 @@ public class MainView extends ViewPart {
 				Display.getDefault().syncExec(new Runnable() {
 					public void run() {
 						manageModel.setStartH4NText(startH4N);
-						appendText2Logging(manageModel.getStartH4NText());
+						appendTextToLogging(manageModel.getStartH4NText());
 					}
 				});
 				
@@ -762,7 +762,7 @@ public class MainView extends ViewPart {
 				Display.getDefault().syncExec(new Runnable() {
 					public void run() {
 						manageModel.setStartH5NText(startH5N);
-						appendText2Logging(manageModel.getStartH5NText());
+						appendTextToLogging(manageModel.getStartH5NText());
 					}
 				});
 				
@@ -809,10 +809,18 @@ public class MainView extends ViewPart {
 		FormData fd_startGkH5 = new FormData();
 		fd_startGkH5.top = new FormAttachment(startH5N, 2, SWT.TOP);
 		fd_startGkH5.left = new FormAttachment(startH5N, 6);
-		startGkH5.setLayoutData(fd_startGkH5);
+		startGkH5.setLayoutData(fd_startGkH5);		
 		
+		Button cpH1Start = new Button(compositeHome, SWT.RADIO);		
+		cpH1Start.addSelectionListener(new SelectionAdapter() {
+			@Override
+			public void widgetSelected(SelectionEvent e) {
+				manageModel.setCpH1Start();
+				appendTextToLogging(manageModel.getCaptainHome());
+			}
+		});
+		cpH1Start.setSelection(manageModel.getCpH1Start());
 		
-		Button cpH1Start = new Button(compositeHome, SWT.RADIO);
 		cpH1Start.setLayoutData(new FormData());
 		FormData fd_cpH1Start = new FormData();
 		fd_cpH1Start.top = new FormAttachment(startH1N, 2, SWT.TOP);
@@ -820,6 +828,15 @@ public class MainView extends ViewPart {
 		cpH1Start.setLayoutData(fd_cpH1Start);
 		
 		Button cpH2Start = new Button(compositeHome, SWT.RADIO);
+		cpH2Start.addSelectionListener(new SelectionAdapter() {
+			@Override
+			public void widgetSelected(SelectionEvent e) {
+				manageModel.setCpH2Start();
+				appendTextToLogging(manageModel.getCaptainHome());
+			}
+		});
+		cpH2Start.setSelection(manageModel.getCpH2Start());
+		
 		cpH2Start.setLayoutData(new FormData());
 		FormData fd_cpH2Start = new FormData();
 		fd_cpH2Start.top = new FormAttachment(startH2N, 2, SWT.TOP);
@@ -827,6 +844,15 @@ public class MainView extends ViewPart {
 		cpH2Start.setLayoutData(fd_cpH2Start);
 		
 		Button cpH3Start = new Button(compositeHome, SWT.RADIO);
+		cpH3Start.addSelectionListener(new SelectionAdapter() {
+			@Override
+			public void widgetSelected(SelectionEvent e) {
+				manageModel.setCpH3Start();
+				appendTextToLogging(manageModel.getCaptainHome());
+			}
+		});
+		cpH3Start.setSelection(manageModel.getCpH3Start());
+		
 		cpH3Start.setLayoutData(new FormData());
 		FormData fd_cpH3Start = new FormData();
 		fd_cpH3Start.top = new FormAttachment(startH3N, 2, SWT.TOP);
@@ -834,6 +860,15 @@ public class MainView extends ViewPart {
 		cpH3Start.setLayoutData(fd_cpH3Start);
 		
 		Button cpH4Start = new Button(compositeHome, SWT.RADIO);
+		cpH4Start.addSelectionListener(new SelectionAdapter() {
+			@Override
+			public void widgetSelected(SelectionEvent e) {
+				manageModel.setCpH4Start();
+				appendTextToLogging(manageModel.getCaptainHome());
+			}
+		});
+		cpH4Start.setSelection(manageModel.getCpH4Start());
+		
 		cpH4Start.setLayoutData(new FormData());
 		FormData fd_cpH4Start = new FormData();
 		fd_cpH4Start.top = new FormAttachment(startH4N, 2, SWT.TOP);
@@ -841,6 +876,15 @@ public class MainView extends ViewPart {
 		cpH4Start.setLayoutData(fd_cpH4Start);
 		
 		Button cpH5Start = new Button(compositeHome, SWT.RADIO);
+		cpH5Start.addSelectionListener(new SelectionAdapter() {
+			@Override
+			public void widgetSelected(SelectionEvent e) {
+				manageModel.setCpH5Start();
+				appendTextToLogging(manageModel.getCaptainHome());
+			}
+		});
+		cpH5Start.setSelection(manageModel.getCpH5Start());
+		
 		FormData fd_cpH5Start = new FormData();
 		fd_cpH5Start.top = new FormAttachment(startH5N, 2, SWT.TOP);
 		fd_cpH5Start.left = new FormAttachment(startGkH5, 6);
@@ -993,7 +1037,7 @@ public class MainView extends ViewPart {
 				Display.getDefault().syncExec(new Runnable() {
 					public void run() {
 						manageModel.setIdH1StartText(idH1Start);
-						appendText2Logging(manageModel.getIdH1StartText());
+						appendTextToLogging(manageModel.getIdH1StartText());
 					}
 				});
 				
@@ -1014,7 +1058,7 @@ public class MainView extends ViewPart {
 				Display.getDefault().syncExec(new Runnable() {
 					public void run() {
 						manageModel.setIdH2StartText(idH2Start);
-						appendText2Logging(manageModel.getIdH2StartText());
+						appendTextToLogging(manageModel.getIdH2StartText());
 					}
 				});
 				
@@ -1035,7 +1079,7 @@ public class MainView extends ViewPart {
 				Display.getDefault().syncExec(new Runnable() {
 					public void run() {
 						manageModel.setIdH3StartText(idH3Start);
-						appendText2Logging(manageModel.getIdH3StartText());
+						appendTextToLogging(manageModel.getIdH3StartText());
 					}
 				});
 				
@@ -1056,7 +1100,7 @@ public class MainView extends ViewPart {
 				Display.getDefault().syncExec(new Runnable() {
 					public void run() {
 						manageModel.setIdH4StartText(idH4Start);
-						appendText2Logging(manageModel.getIdH4StartText());
+						appendTextToLogging(manageModel.getIdH4StartText());
 					}
 				});
 				
@@ -1077,7 +1121,7 @@ public class MainView extends ViewPart {
 				Display.getDefault().syncExec(new Runnable() {
 					public void run() {
 						manageModel.setIdH5StartText(idH5Start);
-						appendText2Logging(manageModel.getIdH5StartText());
+						appendTextToLogging(manageModel.getIdH5StartText());
 					}
 				});
 				
@@ -1147,7 +1191,7 @@ public class MainView extends ViewPart {
 				Display.getDefault().syncExec(new Runnable() {
 					public void run() {
 						manageModel.setShirtH1StartText(shirtH1Start);
-						appendText2Logging(manageModel.getShirtH1StartText());
+						appendTextToLogging(manageModel.getShirtH1StartText());
 					}
 				});
 				
@@ -1168,7 +1212,7 @@ public class MainView extends ViewPart {
 				Display.getDefault().syncExec(new Runnable() {
 					public void run() {
 						manageModel.setShirtH2StartText(shirtH2Start);
-						appendText2Logging(manageModel.getShirtH2StartText());
+						appendTextToLogging(manageModel.getShirtH2StartText());
 					}
 				});
 				
@@ -1189,7 +1233,7 @@ public class MainView extends ViewPart {
 				Display.getDefault().syncExec(new Runnable() {
 					public void run() {
 						manageModel.setShirtH3StartText(shirtH3Start);
-						appendText2Logging(manageModel.getShirtH3StartText());
+						appendTextToLogging(manageModel.getShirtH3StartText());
 					}
 				});
 				
@@ -1210,7 +1254,7 @@ public class MainView extends ViewPart {
 				Display.getDefault().syncExec(new Runnable() {
 					public void run() {
 						manageModel.setShirtH4StartText(shirtH4Start);
-						appendText2Logging(manageModel.getShirtH4StartText());
+						appendTextToLogging(manageModel.getShirtH4StartText());
 					}
 				});
 				
@@ -1231,7 +1275,7 @@ public class MainView extends ViewPart {
 				Display.getDefault().syncExec(new Runnable() {
 					public void run() {
 						manageModel.setShirtH5StartText(shirtH5Start);
-						appendText2Logging(manageModel.getShirtH5StartText());
+						appendTextToLogging(manageModel.getShirtH5StartText());
 					}
 				});
 				
@@ -1516,7 +1560,7 @@ public class MainView extends ViewPart {
 			@Override
 			public void focusLost(FocusEvent e) {
 				manageModel.setTeamVisitorText(teamVisitor);
-				appendText2Logging(manageModel.getTeamVisitorText());
+				appendTextToLogging(manageModel.getTeamVisitorText());
 			}
 		});
 		teamVisitor.setText(manageModel.getTeamVisitorText());

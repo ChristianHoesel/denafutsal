@@ -3,6 +3,7 @@ package hu.bme.mit.inf.mdsd.one.app.management;
 import model.Match;
 import model.Role;
 
+import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Combo;
 import org.eclipse.swt.widgets.DateTime;
 import org.eclipse.swt.widgets.Text;
@@ -113,8 +114,24 @@ public interface IManageModel {
 	public void setShirtH5StartText(Text text);
 	
 	//-----------------------------------------
-	
 
+	public String getCaptainHome();
+	
+	public Boolean getCpH1Start();
+	public void setCpH1Start();
+	
+	public Boolean getCpH2Start();
+	public void setCpH2Start();
+	
+	public Boolean getCpH3Start();
+	public void setCpH3Start();
+	
+	public Boolean getCpH4Start();
+	public void setCpH4Start();
+	
+	public Boolean getCpH5Start();
+	public void setCpH5Start();
+	
 	/*
 	
 	///
