@@ -1,6 +1,10 @@
 package hu.bme.mit.inf.mdsd.reportgenerator.helper;
 
 import java.io.ByteArrayInputStream;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IFolder;
 import org.eclipse.core.resources.IProject;
@@ -154,26 +158,31 @@ public class GeneratorHelper {
 		// Return with the file.
 		return file;
 	}
+	
+	public static File createFiletoOutputFolder(String folder, String name,
+			CharSequence content) throws IOException {
+		
+		File file = new File(folder + "/" + name + ".html");
 
+		if (file.exists())
+			file.delete();
 
-	// public static IProject createProject(String name) throws CoreException {
-	// // Referring a project in the workspace by it's name
-	// IProject project = ResourcesPlugin.getWorkspace().getRoot()
-	// .getProject(name);
-	//
-	// // If the project is not exist it will be created.
-	// IProgressMonitor monitor = new NullProgressMonitor();
-	// if (!project.exists())
-	// project.create(monitor);
-	//
-	// // The project should be opened.
-	// project.open(IResource.BACKGROUND_REFRESH, monitor);
-	//
-	// // Setting natures of the project
-	// IProjectDescription desc = project.getDescription();
-	// desc.setNatureIds(new String[] { "org.eclipse.jdt.core.javanature"
-	// /* ,"org.eclipse.pde.PluginNature" */});
-	// project.setDescription(desc, monitor);
-	// return project;
-	// }
+		FileOutputStream fop = null;
+
+		fop = new FileOutputStream(file);
+
+		if (!file.exists()) {
+			file.createNewFile();
+		}
+
+		byte[] contentInBytes = content.toString().getBytes();
+
+		fop.write(contentInBytes);
+		fop.flush();
+		fop.close();
+
+		fop.close();
+
+		return file;
+	}
 }

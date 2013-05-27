@@ -17,6 +17,10 @@ class MatchGenerator {
 		GeneratorHelper::createHTMLFile(dataModel.eResource, dataModel.id.toString, true, dataModel.compile);
 	}
 	
+	def generateDataModelToOutputFolder(Match dataModel, String folder) {
+       GeneratorHelper::createFiletoOutputFolder(folder,  dataModel.id.toString, dataModel.compile); 
+    }
+	
 	def get_goals(Event e) '''
 	<div class="MOff" style="cursor: pointer; width: 350;" onMouseOut="this.className='MOff';" onmouseover="this.className='MOn_1';" OnClick="jatekos_nez_p01_jegyzokonyv_nez_2('«e.committer.id»');">
 	<table border="0" cellpadding="0" cellspacing="0" style="border-collapse: collapse">
