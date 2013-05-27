@@ -12,9 +12,12 @@ import model.AgeGroup;
 import model.Match;
 import model.ModelFactory;
 import model.Person;
+import model.Player;
+import model.Position;
 import model.Role;
 import model.StaffRole;
 import model.Team;
+import model.TeamMember;
 import model.Type;
 
 import org.eclipse.core.databinding.observable.ChangeEvent;
@@ -69,7 +72,7 @@ public class ManageModel implements IManageModel {
 
 		return convert2StringArray(matchTypeItems);
 	}
-	
+
 	@Override
 	public String[] getStaffRoleItems() {
 		List<String> staffRoleItems = new ArrayList<String>();
@@ -123,16 +126,34 @@ public class ManageModel implements IManageModel {
 
 		Date date = new Date();
 		match.setDate(date);
-		
-		Team homeTeam = factory.createTeam();	
+
+		Team homeTeam = factory.createTeam();
 		homeTeam.setName("*Done*");
 		match.setHome(homeTeam);
-		
+
 		Team visitorTeam = factory.createTeam();
 		visitorTeam.setName("*Done*");
 		match.setVisitor(visitorTeam);
-		
-		
+
+		// TODO: csapatkapitányok
+
+		for (int i = 0; i < 5; i++) {
+			Player player = factory.createPlayer();
+			player.setShirtNo(i);
+			if (i == 1) {
+				player.setPosition(Position.GOALKEEPER);
+			} else {
+				player.setPosition(Position.FIELD_PLAYER);
+			}
+			TeamMember teamMember = factory.createTeamMember();
+
+			teamMember.setId(i);
+			teamMember.setName(String.format("Player %d", i));
+
+			teamMember.setPlayerRole(player);
+
+			match.getHome().getStartingLine().add(player);
+		}
 
 	}
 
@@ -308,7 +329,7 @@ public class ManageModel implements IManageModel {
 	public void setTeamHomeText(Text text) {
 		match.getHome().setName(text.getText());
 	}
-	
+
 	@Override
 	public String getTeamVisitorText() {
 		return match.getVisitor().getName();
@@ -321,14 +342,12 @@ public class ManageModel implements IManageModel {
 
 	@Override
 	public String getStartH1NText() {
-		// TODO Auto-generated method stub
-		return null;
+		return match.getHome().getStartingLine().get(0).getName();
 	}
 
 	@Override
 	public void setStartH1NText(Text text) {
-		// TODO Auto-generated method stub
-
+		match.getHome().getMembers().get(0).setName(text.getText());
 	}
 
 	@Override
@@ -357,14 +376,12 @@ public class ManageModel implements IManageModel {
 
 	@Override
 	public String getStartH2NText() {
-		// TODO Auto-generated method stub
-		return null;
+		return match.getHome().getStartingLine().get(1).getName();
 	}
 
 	@Override
 	public void setStartH2NText(Text text) {
-		// TODO Auto-generated method stub
-
+		match.getHome().getMembers().get(1).setName(text.getText());
 	}
 
 	@Override
@@ -393,13 +410,12 @@ public class ManageModel implements IManageModel {
 
 	@Override
 	public String getStartH3NText() {
-		// TODO Auto-generated method stub
-		return null;
+		return match.getHome().getStartingLine().get(2).getName();
 	}
 
 	@Override
 	public void setStartH3NText(Text text) {
-		// TODO Auto-generated method stub
+		match.getHome().getMembers().get(2).setName(text.getText());
 
 	}
 
@@ -429,14 +445,12 @@ public class ManageModel implements IManageModel {
 
 	@Override
 	public String getStartH4NText() {
-		// TODO Auto-generated method stub
-		return null;
+		return match.getHome().getStartingLine().get(3).getName();
 	}
 
 	@Override
 	public void setStartH4NText(Text text) {
-		// TODO Auto-generated method stub
-
+		match.getHome().getMembers().get(3).setName(text.getText());
 	}
 
 	@Override
@@ -465,13 +479,12 @@ public class ManageModel implements IManageModel {
 
 	@Override
 	public String getStartH5NText() {
-		// TODO Auto-generated method stub
-		return null;
+		return match.getHome().getStartingLine().get(4).getName();
 	}
 
 	@Override
 	public void setStartH5NText(Text text) {
-		// TODO Auto-generated method stub
+		match.getHome().getMembers().get(4).setName(text.getText());
 
 	}
 
@@ -541,8 +554,9 @@ public class ManageModel implements IManageModel {
 
 	@Override
 	public void setDateDateTime(DateTime datetime) {
-		match.setDate(new Date(datetime.getYear()-1900, datetime.getMonth(), datetime.getDay()));
-		
+		match.setDate(new Date(datetime.getYear() - 1900, datetime.getMonth(),
+				datetime.getDay()));
+
 	}
 
 	@Override

@@ -676,6 +676,19 @@ public class MainView extends ViewPart {
 		lblStartinglineHome.setText("Starting line");
 		
 		startH1N = new Text(compositeHome, SWT.BORDER);
+		startH1N.addFocusListener(new FocusAdapter() {
+			@Override
+			public void focusLost(FocusEvent e) {			
+				Display.getDefault().syncExec(new Runnable() {
+					public void run() {
+						manageModel.setStartH1NText(startH1N);
+						appendText2Logging(manageModel.getStartH1NText());
+					}
+				});
+				
+			}
+		});
+		setTextFromModel(startH1N, manageModel.getStartH1NText());
 		FormData fd_startH1N = new FormData();
 		fd_startH1N.width = 120;
 		fd_startH1N.top = new FormAttachment(lblStartinglineHome, 6);
@@ -683,6 +696,19 @@ public class MainView extends ViewPart {
 		startH1N.setLayoutData(fd_startH1N);
 		
 		startH2N = new Text(compositeHome, SWT.BORDER);
+		startH2N.addFocusListener(new FocusAdapter() {
+			@Override
+			public void focusLost(FocusEvent e) {			
+				Display.getDefault().syncExec(new Runnable() {
+					public void run() {
+						manageModel.setStartH2NText(startH2N);
+						appendText2Logging(manageModel.getStartH2NText());
+					}
+				});
+				
+			}
+		});
+		setTextFromModel(startH2N, manageModel.getStartH2NText());
 		FormData fd_startH2N = new FormData();
 		fd_startH2N.width = 120;
 		fd_startH2N.top = new FormAttachment(startH1N, 6);
@@ -690,6 +716,19 @@ public class MainView extends ViewPart {
 		startH2N.setLayoutData(fd_startH2N);
 		
 		startH3N = new Text(compositeHome, SWT.BORDER);
+		startH3N.addFocusListener(new FocusAdapter() {
+			@Override
+			public void focusLost(FocusEvent e) {			
+				Display.getDefault().syncExec(new Runnable() {
+					public void run() {
+						manageModel.setStartH3NText(startH3N);
+						appendText2Logging(manageModel.getStartH3NText());
+					}
+				});
+				
+			}
+		});
+		setTextFromModel(startH3N, manageModel.getStartH3NText());
 		FormData fd_startH3N = new FormData();
 		fd_startH3N.width = 120;
 		fd_startH3N.top = new FormAttachment(startH2N, 6);
@@ -697,6 +736,19 @@ public class MainView extends ViewPart {
 		startH3N.setLayoutData(fd_startH3N);
 		
 		startH4N = new Text(compositeHome, SWT.BORDER);
+		startH4N.addFocusListener(new FocusAdapter() {
+			@Override
+			public void focusLost(FocusEvent e) {			
+				Display.getDefault().syncExec(new Runnable() {
+					public void run() {
+						manageModel.setStartH4NText(startH4N);
+						appendText2Logging(manageModel.getStartH4NText());
+					}
+				});
+				
+			}
+		});
+		setTextFromModel(startH4N, manageModel.getStartH4NText());
 		FormData fd_startH4N = new FormData();
 		fd_startH4N.width = 120;
 		fd_startH4N.top = new FormAttachment(startH3N, 6);
@@ -704,6 +756,19 @@ public class MainView extends ViewPart {
 		startH4N.setLayoutData(fd_startH4N);
 		
 		startH5N = new Text(compositeHome, SWT.BORDER);
+		startH5N.addFocusListener(new FocusAdapter() {
+			@Override
+			public void focusLost(FocusEvent e) {			
+				Display.getDefault().syncExec(new Runnable() {
+					public void run() {
+						manageModel.setStartH5NText(startH5N);
+						appendText2Logging(manageModel.getStartH5NText());
+					}
+				});
+				
+			}
+		});
+		setTextFromModel(startH5N, manageModel.getStartH5NText());
 		FormData fd_startH5N = new FormData();
 		fd_startH5N.width = 120;
 		fd_startH5N.top = new FormAttachment(startH4N, 6);
