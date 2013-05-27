@@ -386,7 +386,7 @@ public class MainView extends ViewPart {
 			referee.addFocusListener(new FocusAdapter() {
 				@Override
 				public void focusLost(FocusEvent e) {
-					manageModel.setRefereeText(referee);
+					manageModel.setRefereeText(referee, "The referee's name is not valid!");
 					appendTextToLogging(manageModel.getRefereeText());
 				}
 			});
@@ -401,7 +401,7 @@ public class MainView extends ViewPart {
 			assistant.addFocusListener(new FocusAdapter() {
 				@Override
 				public void focusLost(FocusEvent e) {
-					manageModel.setAssistantText(assistant);
+					manageModel.setAssistantText(assistant, "The assistant's name is not valid!");
 					appendTextToLogging(manageModel.getAssistantText());
 				}
 			});
@@ -430,7 +430,7 @@ public class MainView extends ViewPart {
 			supervisor.addFocusListener(new FocusAdapter() {
 				@Override
 				public void focusLost(FocusEvent e) {
-					manageModel.setSupervisorText(supervisor);
+					manageModel.setSupervisorText(supervisor, "TODO: ERROR");
 					appendTextToLogging(manageModel.getSupervisorText());
 				}
 			});
@@ -446,7 +446,7 @@ public class MainView extends ViewPart {
 			third_referee.addFocusListener(new FocusAdapter() {
 				@Override
 				public void focusLost(FocusEvent e) {
-					manageModel.setThirdRefereeRefereeText(third_referee);
+					manageModel.setThirdRefereeRefereeText(third_referee, "TODO: ERROR");
 					appendTextToLogging(manageModel.getThirdRefereeRefereeText());
 				}
 			});
@@ -475,7 +475,7 @@ public class MainView extends ViewPart {
 			address.addFocusListener(new FocusAdapter() {
 				@Override
 				public void focusLost(FocusEvent e) {
-					manageModel.setAddressText(address);
+					manageModel.setAddressText(address, "TODO: ERROR");
 					appendTextToLogging(manageModel.getAddressText());
 				}
 			});
@@ -492,7 +492,7 @@ public class MainView extends ViewPart {
 			date.addFocusListener(new FocusAdapter() {
 				@Override
 				public void focusLost(FocusEvent e) {
-					manageModel.setDateDateTime(date);
+					manageModel.setDateDateTime(date, "TODO: ERROR");
 					appendTextToLogging(manageModel.getDateDateTime());
 				}
 			});
@@ -509,7 +509,7 @@ public class MainView extends ViewPart {
 			matchtype.addFocusListener(new FocusAdapter() {
 				@Override
 				public void focusLost(FocusEvent e) {
-					manageModel.setMatchTypeCombo(matchtype);
+					manageModel.setMatchTypeCombo(matchtype, "TODO: ERROR");
 					appendTextToLogging(manageModel.getMatchTypeCombo());
 				}
 			});
@@ -541,7 +541,7 @@ public class MainView extends ViewPart {
 			agegroup.addFocusListener(new FocusAdapter() {
 				@Override
 				public void focusLost(FocusEvent e) {
-					manageModel.setAgeGroupCombo(agegroup);
+					manageModel.setAgeGroupCombo(agegroup, "TODO: ERROR");
 					appendTextToLogging(manageModel.getAgeGroupCombo());
 				}
 			});
@@ -563,7 +563,7 @@ public class MainView extends ViewPart {
 			matchId.addFocusListener(new FocusAdapter() {
 				@Override
 				public void focusLost(FocusEvent e) {
-					manageModel.setMatchIDText(matchId);
+					manageModel.setMatchIDText(matchId, "TODO: ERROR");
 					appendTextToLogging(manageModel.getMatchIDText());
 				}
 			});
@@ -657,7 +657,7 @@ public class MainView extends ViewPart {
 		teamHome.addFocusListener(new FocusAdapter() {
 			@Override
 			public void focusLost(FocusEvent e) {
-				manageModel.setTeamHomeText(teamHome);
+				manageModel.setTeamHomeText(teamHome, "TODO: ERROR");
 				appendTextToLogging(manageModel.getTeamHomeText());
 			}
 		});
@@ -1559,7 +1559,7 @@ public class MainView extends ViewPart {
 		teamVisitor.addFocusListener(new FocusAdapter() {
 			@Override
 			public void focusLost(FocusEvent e) {
-				manageModel.setTeamVisitorText(teamVisitor);
+				manageModel.setTeamVisitorText(teamVisitor, "TODO: ERROR");
 				appendTextToLogging(manageModel.getTeamVisitorText());
 			}
 		});

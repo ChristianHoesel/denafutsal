@@ -32,15 +32,23 @@ import org.eclipse.incquery.databinding.runtime.api.IncQueryObservables;
 import org.eclipse.incquery.runtime.api.EngineManager;
 import org.eclipse.incquery.runtime.api.IncQueryEngine;
 import org.eclipse.incquery.runtime.exception.IncQueryException;
+import org.eclipse.swt.graphics.Color;
+import org.eclipse.swt.graphics.Device;
+import org.eclipse.swt.graphics.GCData;
 import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Combo;
 import org.eclipse.swt.widgets.DateTime;
+import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Text;
 
 import databinding.getgoalcount.GetGoalCountMatch;
 import databinding.getgoalcount.GetGoalCountMatcher;
 
 public class ManageModel implements IManageModel {
+
+	final static Device device = Display.getCurrent();
+	final static Color green = new Color(device, 0, 255, 0);
+	final static Color red = new Color(device, 255, 0, 0);
 
 	private ModelFactory factory;
 	private MainView view;
@@ -156,12 +164,12 @@ public class ManageModel implements IManageModel {
 			teamMember.setName(String.format("Player %d", i));
 
 			teamMember.setPlayerRole(player);
-			
+
 			match.getHome().getMembers().add(teamMember);
 
 			match.getHome().getStartingLine().add(player);
 		}
-		
+
 		for (int i = 0; i < 5; i++) {
 			Player player = factory.createPlayer();
 			player.setShirtNo(i);
@@ -237,8 +245,16 @@ public class ManageModel implements IManageModel {
 	}
 
 	@Override
-	public void setRefereeText(Text text) {
-		match.getReferee().setName(text.getText());
+	public void setRefereeText(Text text, String error) {
+		Boolean valid = false; // Ide kerül majd a validátor
+		if (valid) {
+			match.getReferee().setName(text.getText());
+			text.setBackground(green);
+		} else {
+			view.appendTextToLogging(error);
+			text.setBackground(red);
+		}
+
 	}
 
 	public Match getMatch() {
@@ -291,8 +307,15 @@ public class ManageModel implements IManageModel {
 	}
 
 	@Override
-	public void setAssistantText(Text text) {
-		match.getAssistant().setName(text.getText());
+	public void setAssistantText(Text text, String error) {
+		Boolean valid = false; // Ide kerül majd a validátor
+		if (valid) {
+			match.getAssistant().setName(text.getText());
+			text.setBackground(green);
+		} else {
+			view.appendTextToLogging(error);
+			text.setBackground(red);
+		}
 	}
 
 	@Override
@@ -301,8 +324,16 @@ public class ManageModel implements IManageModel {
 	}
 
 	@Override
-	public void setThirdRefereeRefereeText(Text text) {
-		match.getThirdReferee().setName(text.getText());
+	public void setThirdRefereeRefereeText(Text text, String error) {
+		Boolean valid = false; // Ide kerül majd a validátor
+		if (valid) {
+			match.getThirdReferee().setName(text.getText());
+			text.setBackground(green);
+		} else {
+			view.appendTextToLogging(error);
+			text.setBackground(red);
+		}
+
 	}
 
 	@Override
@@ -311,8 +342,16 @@ public class ManageModel implements IManageModel {
 	}
 
 	@Override
-	public void setSupervisorText(Text text) {
-		match.getSupervisor().setName(text.getText());
+	public void setSupervisorText(Text text, String error) {
+		Boolean valid = false; // Ide kerül majd a validátor
+		if (valid) {
+			match.getSupervisor().setName(text.getText());
+			text.setBackground(green);
+		} else {
+			view.appendTextToLogging(error);
+			text.setBackground(red);
+		}
+
 	}
 
 	@Override
@@ -321,8 +360,21 @@ public class ManageModel implements IManageModel {
 	}
 
 	@Override
-	public void setMatchIDText(Text text) {
-		match.setId(Integer.parseInt(text.getText()));
+	public void setMatchIDText(Text text, String error) {
+		Boolean valid = false; // Ide kerül majd a validátor
+		if (valid) {
+			try {
+				match.setId(Integer.parseInt(text.getText()));
+				text.setBackground(green);
+			} catch (Exception e) {
+				System.out.println(e);
+				text.setBackground(red);
+			}
+		} else {
+			view.appendTextToLogging(error);
+			text.setBackground(red);
+		}
+
 	}
 
 	@Override
@@ -331,9 +383,19 @@ public class ManageModel implements IManageModel {
 	}
 
 	@Override
-	public void setAgeGroupCombo(Combo combo) {
+	public void setAgeGroupCombo(Combo combo, String error) {
+
 		int cs = combo.getSelectionIndex();
-		match.setAgeGroup(AgeGroup.get(cs));
+
+		Boolean valid = false; // Ide kerül majd a validátor
+		if (valid) {
+			match.setAgeGroup(AgeGroup.get(cs));
+			combo.setBackground(green);
+		} else {
+			view.appendTextToLogging(error);
+			combo.setBackground(red);
+		}
+
 	}
 
 	@Override
@@ -342,8 +404,16 @@ public class ManageModel implements IManageModel {
 	}
 
 	@Override
-	public void setAddressText(Text text) {
-		match.setLocation(text.getText());
+	public void setAddressText(Text text, String error) {
+		Boolean valid = false; // Ide kerül majd a validátor
+		if (valid) {
+			match.setLocation(text.getText());
+			text.setBackground(green);
+		} else {
+			view.appendTextToLogging(error);
+			text.setBackground(red);
+		}	
+		
 	}
 
 	@Override
@@ -352,8 +422,16 @@ public class ManageModel implements IManageModel {
 	}
 
 	@Override
-	public void setTeamHomeText(Text text) {
-		match.getHome().setName(text.getText());
+	public void setTeamHomeText(Text text, String error) {
+		Boolean valid = false; // Ide kerül majd a validátor
+		if (valid) {
+			match.getHome().setName(text.getText());
+			text.setBackground(green);
+		} else {
+			view.appendTextToLogging(error);
+			text.setBackground(red);
+		}	
+		
 	}
 
 	@Override
@@ -362,8 +440,16 @@ public class ManageModel implements IManageModel {
 	}
 
 	@Override
-	public void setTeamVisitorText(Text text) {
-		match.getVisitor().setName(text.getText());
+	public void setTeamVisitorText(Text text, String error) {
+		Boolean valid = false; // Ide kerül majd a validátor
+		if (valid) {
+			match.getVisitor().setName(text.getText());
+			text.setBackground(green);
+		} else {
+			view.appendTextToLogging(error);
+			text.setBackground(red);
+		}	
+		
 	}
 
 	@Override
@@ -383,12 +469,14 @@ public class ManageModel implements IManageModel {
 
 	@Override
 	public void setIdH1StartText(Text text) {
-		match.getHome().getMembers().get(0).setId(Integer.parseInt((text.getText())));
+		match.getHome().getMembers().get(0)
+				.setId(Integer.parseInt((text.getText())));
 	}
 
 	@Override
 	public String getShirtH1StartText() {
-		return String.valueOf(match.getHome().getStartingLine().get(0).getShirtNo());
+		return String.valueOf(match.getHome().getStartingLine().get(0)
+				.getShirtNo());
 	}
 
 	@Override
@@ -415,18 +503,21 @@ public class ManageModel implements IManageModel {
 
 	@Override
 	public void setIdH2StartText(Text text) {
-		match.getHome().getMembers().get(1).setId(Integer.parseInt((text.getText())));
+		match.getHome().getMembers().get(1)
+				.setId(Integer.parseInt((text.getText())));
 
 	}
 
 	@Override
 	public String getShirtH2StartText() {
-		return String.valueOf(match.getHome().getStartingLine().get(1).getShirtNo());
+		return String.valueOf(match.getHome().getStartingLine().get(1)
+				.getShirtNo());
 	}
 
 	@Override
 	public void setShirtH2StartText(Text text) {
-		match.getHome().getStartingLine().get(1).setShirtNo(Integer.parseInt(text.getText()));
+		match.getHome().getStartingLine().get(1)
+				.setShirtNo(Integer.parseInt(text.getText()));
 
 	}
 
@@ -448,18 +539,21 @@ public class ManageModel implements IManageModel {
 
 	@Override
 	public void setIdH3StartText(Text text) {
-		match.getHome().getMembers().get(2).setId(Integer.parseInt((text.getText())));
+		match.getHome().getMembers().get(2)
+				.setId(Integer.parseInt((text.getText())));
 
 	}
 
 	@Override
 	public String getShirtH3StartText() {
-		return String.valueOf(match.getHome().getStartingLine().get(2).getShirtNo());
+		return String.valueOf(match.getHome().getStartingLine().get(2)
+				.getShirtNo());
 	}
 
 	@Override
 	public void setShirtH3StartText(Text text) {
-		match.getHome().getStartingLine().get(2).setShirtNo(Integer.parseInt(text.getText()));
+		match.getHome().getStartingLine().get(2)
+				.setShirtNo(Integer.parseInt(text.getText()));
 
 	}
 
@@ -480,18 +574,21 @@ public class ManageModel implements IManageModel {
 
 	@Override
 	public void setIdH4StartText(Text text) {
-		match.getHome().getMembers().get(3).setId(Integer.parseInt((text.getText())));
+		match.getHome().getMembers().get(3)
+				.setId(Integer.parseInt((text.getText())));
 
 	}
 
 	@Override
 	public String getShirtH4StartText() {
-		return String.valueOf(match.getHome().getStartingLine().get(3).getShirtNo());
+		return String.valueOf(match.getHome().getStartingLine().get(3)
+				.getShirtNo());
 	}
 
 	@Override
 	public void setShirtH4StartText(Text text) {
-		match.getHome().getStartingLine().get(3).setShirtNo(Integer.parseInt(text.getText()));
+		match.getHome().getStartingLine().get(3)
+				.setShirtNo(Integer.parseInt(text.getText()));
 
 	}
 
@@ -513,18 +610,21 @@ public class ManageModel implements IManageModel {
 
 	@Override
 	public void setIdH5StartText(Text text) {
-		match.getHome().getMembers().get(4).setId(Integer.parseInt((text.getText())));
+		match.getHome().getMembers().get(4)
+				.setId(Integer.parseInt((text.getText())));
 
 	}
 
 	@Override
 	public String getShirtH5StartText() {
-		return String.valueOf(match.getHome().getStartingLine().get(4).getShirtNo());
+		return String.valueOf(match.getHome().getStartingLine().get(4)
+				.getShirtNo());
 	}
 
 	@Override
 	public void setShirtH5StartText(Text text) {
-		match.getHome().getStartingLine().get(4).setShirtNo(Integer.parseInt(text.getText()));
+		match.getHome().getStartingLine().get(4)
+				.setShirtNo(Integer.parseInt(text.getText()));
 
 	}
 
@@ -539,9 +639,21 @@ public class ManageModel implements IManageModel {
 	}
 
 	@Override
-	public void setMatchTypeCombo(Combo combo) {
+	public void setMatchTypeCombo(Combo combo, String error) {
+		
 		int cs = combo.getSelectionIndex();
-		match.setType(Type.get(cs));
+		
+		Boolean valid = false; // Ide kerül majd a validátor
+		if (valid) {
+			match.setType(Type.get(cs));
+			combo.setBackground(green);
+		} else {
+			view.appendTextToLogging(error);
+			combo.setBackground(red);
+		}	
+		
+		
+		
 
 	}
 
@@ -570,9 +682,19 @@ public class ManageModel implements IManageModel {
 
 	@SuppressWarnings("deprecation")
 	@Override
-	public void setDateDateTime(DateTime datetime) {
-		match.setDate(new Date(datetime.getYear() - 1900, datetime.getMonth(),
-				datetime.getDay()));
+	public void setDateDateTime(DateTime datetime, String error) {
+		
+		Boolean valid = false; // Ide kerül majd a validátor
+		if (valid) {
+			match.setDate(new Date(datetime.getYear() - 1900, datetime.getMonth(),
+					datetime.getDay()));
+			datetime.setBackground(green);
+		} else {
+			view.appendTextToLogging(error);
+			datetime.setBackground(red);
+		}	
+		
+		
 
 	}
 
@@ -581,15 +703,16 @@ public class ManageModel implements IManageModel {
 		DateFormat dateFormat = new SimpleDateFormat("yyyy.MM.dd.");
 		return dateFormat.format(match.getDate());
 	}
-	
+
 	@Override
 	public String getCaptainHome() {
 		return match.getHome().getCaptain().getName();
 	}
-	
+
 	@Override
-	public Boolean getCpH1Start() {		
-		return match.getHome().getStartingLine().get(0).equals(match.getHome().getCaptain());
+	public Boolean getCpH1Start() {
+		return match.getHome().getStartingLine().get(0)
+				.equals(match.getHome().getCaptain());
 	}
 
 	@Override
@@ -599,7 +722,8 @@ public class ManageModel implements IManageModel {
 
 	@Override
 	public Boolean getCpH2Start() {
-		return match.getHome().getStartingLine().get(1).equals(match.getHome().getCaptain());
+		return match.getHome().getStartingLine().get(1)
+				.equals(match.getHome().getCaptain());
 	}
 
 	@Override
@@ -609,7 +733,8 @@ public class ManageModel implements IManageModel {
 
 	@Override
 	public Boolean getCpH3Start() {
-		return match.getHome().getStartingLine().get(2).equals(match.getHome().getCaptain());
+		return match.getHome().getStartingLine().get(2)
+				.equals(match.getHome().getCaptain());
 	}
 
 	@Override
@@ -619,7 +744,8 @@ public class ManageModel implements IManageModel {
 
 	@Override
 	public Boolean getCpH4Start() {
-		return match.getHome().getStartingLine().get(3).equals(match.getHome().getCaptain());
+		return match.getHome().getStartingLine().get(3)
+				.equals(match.getHome().getCaptain());
 	}
 
 	@Override
@@ -629,7 +755,8 @@ public class ManageModel implements IManageModel {
 
 	@Override
 	public Boolean getCpH5Start() {
-		return match.getHome().getStartingLine().get(4).equals(match.getHome().getCaptain());
+		return match.getHome().getStartingLine().get(4)
+				.equals(match.getHome().getCaptain());
 	}
 
 	@Override
@@ -639,24 +766,20 @@ public class ManageModel implements IManageModel {
 
 	@Override
 	public void generateReport() {
-		
-		//TODO: ezen még ügyködni kell
-		
+
+		// TODO: ezen még ügyködni kell
+
 		System.out.println(match.eResource());
-		
+
 		Resource resource = match.eResource();
 		ResourceSet resourceSet = resource.getResourceSet();
-		
+
 		File tempFile = new File("match.obj");
-        Resource complete_resource = resourceSet.createResource(URI.createFileURI(tempFile.getAbsolutePath()));
- 
-		
+		Resource complete_resource = resourceSet.createResource(URI
+				.createFileURI(tempFile.getAbsolutePath()));
+
 		MatchGenerator generator = new MatchGenerator();
 		generator.generateDataModel(match);
 	}
-
-	
-
-
 
 }

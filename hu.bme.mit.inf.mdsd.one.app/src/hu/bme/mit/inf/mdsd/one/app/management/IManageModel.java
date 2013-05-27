@@ -21,41 +21,41 @@ public interface IManageModel {
 	
 	
 	public String getRefereeText();
-	public void setRefereeText(Text text);
+	public void setRefereeText(Text text, String error);
 	
 	public String getAssistantText();
-	public void setAssistantText(Text text);
+	public void setAssistantText(Text text, String error);
 	
 	public String getThirdRefereeRefereeText();
-	public void setThirdRefereeRefereeText(Text text);
+	public void setThirdRefereeRefereeText(Text text, String error);
 	
 	public String getSupervisorText();
-	public void setSupervisorText(Text text);
+	public void setSupervisorText(Text text, String error);
 	
 	public String getMatchIDText();
-	public void setMatchIDText(Text text);
+	public void setMatchIDText(Text text, String error);
 	
 	public String getAgeGroupCombo();
-	public void setAgeGroupCombo(Combo combo);
+	public void setAgeGroupCombo(Combo combo, String error);
 	
 	public String getMatchTypeCombo();
-	public void setMatchTypeCombo(Combo combo);
+	public void setMatchTypeCombo(Combo combo, String error);
 	
 	public String getAddressText();
-	public void setAddressText(Text text);
+	public void setAddressText(Text text, String error);
 	
 	public int getYearOfDate();
 	public int getMonthOfDate();
 	public int getDayOfDate();
 	
 	public String getDateDateTime();
-	public void setDateDateTime(DateTime datetime);
+	public void setDateDateTime(DateTime datetime, String error);
 	
 	public String getTeamHomeText();
-	public void setTeamHomeText(Text text);
+	public void setTeamHomeText(Text text, String error);
 	
 	public String getTeamVisitorText();
-	public void setTeamVisitorText(Text text);
+	public void setTeamVisitorText(Text text, String error);
 	
 	
 	// A Home csapat kezdõ összeállítása:
