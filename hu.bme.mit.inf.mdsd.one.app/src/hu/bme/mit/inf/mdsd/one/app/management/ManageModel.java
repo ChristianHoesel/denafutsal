@@ -246,7 +246,7 @@ public class ManageModel implements IManageModel {
 
 	@Override
 	public void setRefereeText(Text text, String error) {
-		Boolean valid = false; // Ide kerül majd a validátor
+		Boolean valid = true; // Ide kerül majd a validátor
 		if (valid) {
 			match.getReferee().setName(text.getText());
 			text.setBackground(green);
@@ -308,7 +308,7 @@ public class ManageModel implements IManageModel {
 
 	@Override
 	public void setAssistantText(Text text, String error) {
-		Boolean valid = false; // Ide kerül majd a validátor
+		Boolean valid = true; // Ide kerül majd a validátor
 		if (valid) {
 			match.getAssistant().setName(text.getText());
 			text.setBackground(green);
@@ -325,7 +325,7 @@ public class ManageModel implements IManageModel {
 
 	@Override
 	public void setThirdRefereeRefereeText(Text text, String error) {
-		Boolean valid = false; // Ide kerül majd a validátor
+		Boolean valid = true; // Ide kerül majd a validátor
 		if (valid) {
 			match.getThirdReferee().setName(text.getText());
 			text.setBackground(green);
@@ -343,7 +343,7 @@ public class ManageModel implements IManageModel {
 
 	@Override
 	public void setSupervisorText(Text text, String error) {
-		Boolean valid = false; // Ide kerül majd a validátor
+		Boolean valid = true; // Ide kerül majd a validátor
 		if (valid) {
 			match.getSupervisor().setName(text.getText());
 			text.setBackground(green);
@@ -361,14 +361,16 @@ public class ManageModel implements IManageModel {
 
 	@Override
 	public void setMatchIDText(Text text, String error) {
-		Boolean valid = false; // Ide kerül majd a validátor
+		Boolean valid = true; // Ide kerül majd a validátor
+		
 		if (valid) {
 			try {
 				match.setId(Integer.parseInt(text.getText()));
 				text.setBackground(green);
 			} catch (Exception e) {
-				System.out.println(e);
 				text.setBackground(red);
+				view.appendTextToLogging(error);
+				view.appendTextToLogging(e.toString());
 			}
 		} else {
 			view.appendTextToLogging(error);
@@ -387,7 +389,7 @@ public class ManageModel implements IManageModel {
 
 		int cs = combo.getSelectionIndex();
 
-		Boolean valid = false; // Ide kerül majd a validátor
+		Boolean valid = true; // Ide kerül majd a validátor
 		if (valid) {
 			match.setAgeGroup(AgeGroup.get(cs));
 			combo.setBackground(green);
@@ -405,7 +407,7 @@ public class ManageModel implements IManageModel {
 
 	@Override
 	public void setAddressText(Text text, String error) {
-		Boolean valid = false; // Ide kerül majd a validátor
+		Boolean valid = true; // Ide kerül majd a validátor
 		if (valid) {
 			match.setLocation(text.getText());
 			text.setBackground(green);
@@ -423,7 +425,7 @@ public class ManageModel implements IManageModel {
 
 	@Override
 	public void setTeamHomeText(Text text, String error) {
-		Boolean valid = false; // Ide kerül majd a validátor
+		Boolean valid = true; // Ide kerül majd a validátor
 		if (valid) {
 			match.getHome().setName(text.getText());
 			text.setBackground(green);
@@ -441,7 +443,7 @@ public class ManageModel implements IManageModel {
 
 	@Override
 	public void setTeamVisitorText(Text text, String error) {
-		Boolean valid = false; // Ide kerül majd a validátor
+		Boolean valid = true; // Ide kerül majd a validátor
 		if (valid) {
 			match.getVisitor().setName(text.getText());
 			text.setBackground(green);
@@ -458,8 +460,16 @@ public class ManageModel implements IManageModel {
 	}
 
 	@Override
-	public void setStartH1NText(Text text) {
-		match.getHome().getMembers().get(0).setName(text.getText());
+	public void setStartH1NText(Text text, String error) {
+		Boolean valid = true; // Ide kerül majd a validátor
+		if (valid) {
+			match.getHome().getMembers().get(0).setName(text.getText());
+			text.setBackground(green);
+		} else {
+			view.appendTextToLogging(error);
+			text.setBackground(red);
+		}	
+		
 	}
 
 	@Override
@@ -468,9 +478,25 @@ public class ManageModel implements IManageModel {
 	}
 
 	@Override
-	public void setIdH1StartText(Text text) {
-		match.getHome().getMembers().get(0)
+	public void setIdH1StartText(Text text, String error) {
+		Boolean valid = true; // Ide kerül majd a validátor
+		if (valid) {
+			try {
+				match.getHome().getMembers().get(0)
 				.setId(Integer.parseInt((text.getText())));
+				text.setBackground(green);
+			} catch (Exception e) {
+				text.setBackground(red);
+				view.appendTextToLogging(e.toString());
+				view.appendTextToLogging(error);
+			}
+			
+		} else {
+			view.appendTextToLogging(error);
+			text.setBackground(red);
+		}	
+		
+		
 	}
 
 	@Override
@@ -480,9 +506,24 @@ public class ManageModel implements IManageModel {
 	}
 
 	@Override
-	public void setShirtH1StartText(Text text) {
-		match.getHome().getStartingLine().get(0)
+	public void setShirtH1StartText(Text text, String error) {
+		Boolean valid = true; // Ide kerül majd a validátor
+		if (valid) {
+			try {
+				match.getHome().getStartingLine().get(0)
 				.setShirtNo(Integer.parseInt(text.getText()));
+				text.setBackground(green);
+			} catch (Exception e) {
+				text.setBackground(red);
+				view.appendTextToLogging(e.toString());
+				view.appendTextToLogging(error);
+			}
+			
+		} else {
+			view.appendTextToLogging(error);
+			text.setBackground(red);
+		}	
+		
 
 	}
 
@@ -643,7 +684,7 @@ public class ManageModel implements IManageModel {
 		
 		int cs = combo.getSelectionIndex();
 		
-		Boolean valid = false; // Ide kerül majd a validátor
+		Boolean valid = true; // Ide kerül majd a validátor
 		if (valid) {
 			match.setType(Type.get(cs));
 			combo.setBackground(green);
@@ -684,7 +725,7 @@ public class ManageModel implements IManageModel {
 	@Override
 	public void setDateDateTime(DateTime datetime, String error) {
 		
-		Boolean valid = false; // Ide kerül majd a validátor
+		Boolean valid = true; // Ide kerül majd a validátor
 		if (valid) {
 			match.setDate(new Date(datetime.getYear() - 1900, datetime.getMonth(),
 					datetime.getDay()));

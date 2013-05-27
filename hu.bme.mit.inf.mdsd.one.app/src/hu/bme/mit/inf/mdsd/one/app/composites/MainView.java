@@ -681,7 +681,7 @@ public class MainView extends ViewPart {
 			public void focusLost(FocusEvent e) {			
 				Display.getDefault().syncExec(new Runnable() {
 					public void run() {
-						manageModel.setStartH1NText(startH1N);
+						manageModel.setStartH1NText(startH1N, "TODO: ERROR");
 						appendTextToLogging(manageModel.getStartH1NText());
 					}
 				});
@@ -1036,7 +1036,7 @@ public class MainView extends ViewPart {
 			public void focusLost(FocusEvent e) {			
 				Display.getDefault().syncExec(new Runnable() {
 					public void run() {
-						manageModel.setIdH1StartText(idH1Start);
+						manageModel.setIdH1StartText(idH1Start, "TODO: ERROR");
 						appendTextToLogging(manageModel.getIdH1StartText());
 					}
 				});
@@ -1190,7 +1190,7 @@ public class MainView extends ViewPart {
 			public void focusLost(FocusEvent e) {			
 				Display.getDefault().syncExec(new Runnable() {
 					public void run() {
-						manageModel.setShirtH1StartText(shirtH1Start);
+						manageModel.setShirtH1StartText(shirtH1Start, "TODO: ERROR");
 						appendTextToLogging(manageModel.getShirtH1StartText());
 					}
 				});

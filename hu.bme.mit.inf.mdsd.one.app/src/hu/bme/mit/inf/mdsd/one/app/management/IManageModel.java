@@ -61,13 +61,13 @@ public interface IManageModel {
 	// A Home csapat kezdõ összeállítása:
 	
 	public String getStartH1NText();
-	public void setStartH1NText(Text text);
+	public void setStartH1NText(Text text, String error);
 	
 	public String getIdH1StartText();
-	public void setIdH1StartText(Text text);
+	public void setIdH1StartText(Text text, String error);
 	
 	public String getShirtH1StartText();
-	public void setShirtH1StartText(Text text);
+	public void setShirtH1StartText(Text text, String error);
 	
 	//-----------------------------------------
 	
