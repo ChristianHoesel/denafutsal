@@ -156,4 +156,6 @@ startH5N    cpH5Start   idH5Start   shirtH5Start
 	void visitorYellowCard(Role role, int time);
 	void homeRedCard(Role role, int time);
 	void visitorRedCard(Role role, int time);
+	
+	void generateReport();
 }

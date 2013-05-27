@@ -1,7 +1,9 @@
 package hu.bme.mit.inf.mdsd.one.app.management;
 
 import hu.bme.mit.inf.mdsd.one.app.composites.MainView;
+import hu.bme.mit.inf.mdsd.reportgenerator.templates.MatchGenerator;
 
+import java.io.File;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -23,6 +25,9 @@ import model.Type;
 import org.eclipse.core.databinding.observable.ChangeEvent;
 import org.eclipse.core.databinding.observable.IChangeListener;
 import org.eclipse.core.databinding.observable.list.IObservableList;
+import org.eclipse.emf.common.util.URI;
+import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.incquery.databinding.runtime.api.IncQueryObservables;
 import org.eclipse.incquery.runtime.api.EngineManager;
 import org.eclipse.incquery.runtime.api.IncQueryEngine;
@@ -630,6 +635,24 @@ public class ManageModel implements IManageModel {
 	@Override
 	public void setCpH5Start() {
 		match.getHome().setCaptain(match.getHome().getStartingLine().get(4));
+	}
+
+	@Override
+	public void generateReport() {
+		
+		//TODO: ezen még ügyködni kell
+		
+		System.out.println(match.eResource());
+		
+		Resource resource = match.eResource();
+		ResourceSet resourceSet = resource.getResourceSet();
+		
+		File tempFile = new File("match.obj");
+        Resource complete_resource = resourceSet.createResource(URI.createFileURI(tempFile.getAbsolutePath()));
+ 
+		
+		MatchGenerator generator = new MatchGenerator();
+		generator.generateDataModel(match);
 	}
 
 	
