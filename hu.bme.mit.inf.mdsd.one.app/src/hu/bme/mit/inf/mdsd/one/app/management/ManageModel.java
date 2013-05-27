@@ -105,14 +105,19 @@ public class ManageModel implements IManageModel {
 	/**
 	 * A konstruktorunk:
 	 */
+	public ManageModel(MainView view, Match model) {
+		this.view = view;
+		this.match = model;
+	}
+
 	public ManageModel(MainView view) {
 		this.view = view;
 
 		factory = ModelFactory.eINSTANCE;
 
 		/* Teszteléshez, majd ezt innen kiszedheted nyugodtan */
-		// ManageModelHelper helper = new ManageModelHelper(this);
-		// helper.readModelFromFile(ManageModelHelper.TESTMODEL);
+		// match =
+		// ManageModelHelper.readModelFromFile(ManageModelHelper.TESTMODEL);
 		/**/
 
 		match = factory.createMatch();
@@ -187,6 +192,8 @@ public class ManageModel implements IManageModel {
 			teamMember.setName(String.format("Player %d", i));
 
 			teamMember.setPlayerRole(player);
+
+			match.getVisitor().getMembers().add(teamMember);
 
 			match.getVisitor().getStartingLine().add(player);
 		}

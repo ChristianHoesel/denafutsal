@@ -1,6 +1,8 @@
 package hu.bme.mit.inf.mdsd.one.app.management;
 
 import hu.bme.mit.inf.mdsd.one.app.composites.MainView;
+import hu.bme.mit.inf.mdsd.one.app.composites.Preferences;
+import hu.bme.mit.inf.mdsd.one.app.composites.PreferencesPage;
 import hu.bme.mit.inf.mdsd.one.app.composites.SearchDialog;
 import hu.bme.mit.inf.mdsd.one.app.statechart.TimerService;
 import hu.bme.mit.inf.mdsd.one.app.statechart.futsal_report_generatorimpl.Futsal_report_generatorStatemachine;
@@ -14,6 +16,7 @@ import model.Role;
 
 import org.eclipse.core.runtime.preferences.ConfigurationScope;
 import org.eclipse.core.runtime.preferences.IEclipsePreferences;
+import org.eclipse.jface.preference.IPreferenceStore;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.ui.PlatformUI;
@@ -114,15 +117,13 @@ public class ManageStateChart implements IManageStateChart {
 		sm.enter();
 		// Init state
 		sm.runCycle();
-		// TODO: Get preferences
-		// ...
-		IEclipsePreferences preferences = ConfigurationScope.INSTANCE
-	            .getNode("hu.bme.mit.inf.mdsd.one.app");
+		
+		IPreferenceStore preferenceStore = PlatformUI.getPreferenceStore();
 		{
-			sm.getSCITimer().setBt_long(15);
-			sm.getSCITimer().setEt_long(10);
-			sm.getSCITimer().setHt_long(2 * 60);
-			sm.getSCITimer().setTo_long(10);
+			sm.getSCITimer().setBt_long(preferenceStore.getInt(PreferencesPage.BT_LONG));
+			sm.getSCITimer().setEt_long(preferenceStore.getInt(PreferencesPage.ET_LONG));
+			sm.getSCITimer().setHt_long(preferenceStore.getInt(PreferencesPage.HT_LONG));
+			sm.getSCITimer().setTo_long(preferenceStore.getInt(PreferencesPage.TO_LONG));
 		}
 
 		// Waiting for state

@@ -1,7 +1,24 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <?eclipse version="3.4"?>
 <plugin>
-
+   <extension
+    point="org.eclipse.ui.activities">
+ <activity
+       id="someid.remove"
+       name="RemoveSearchMenu">
+    <enabledWhen>
+       <with
+             variable="activePartId">
+          <equals
+                value="someidr.RemoveSearchMenu1">
+          </equals>
+       </with></enabledWhen>
+ </activity>
+ <activityPatternBinding
+       activityId="someid.remove"
+       pattern="org.eclipse.search.*">
+ </activityPatternBinding>
+ </extension>
    <extension
          id="application"
          point="org.eclipse.core.runtime.applications">
@@ -50,11 +67,128 @@
          <menu
                label="File">
             <command
+                  commandId="hu.bme.mit.inf.mdsd.one.app.new"
+                  label="New"
+                  style="push">
+            </command>
+            <command
+                  commandId="hu.bme.mit.inf.mdsd.one.app.restart"
+                  label="Restart"
+                  style="push">
+            </command>
+            <separator
+                  name="separator1">
+            </separator>
+            <command
+                  commandId="hu.bme.mit.inf.mdsd.one.app.open"
+                  label="Open">
+            </command>
+            <command
+                  commandId="hu.bme.mit.inf.mdsd.one.app.save"
+                  label="Save">
+            </command>
+            <separator
+                  name="separator"
+                  visible="true">
+            </separator>
+            <command
+                  commandId="hu.bme.mit.inf.mdsd.one.app.generate"
+                  label="Generate Report"
+                  style="push">
+            </command>
+            <separator
+                  name="separator2"
+                  visible="true">
+            </separator>
+            <command
+                  commandId="hu.bme.mit.inf.mdsd.one.app.settings"
+                  label="Preferences"
+                  style="push">
+            </command>
+            <separator
+                  name="separator3"
+                  visible="true">
+            </separator>
+            <command
                   commandId="org.eclipse.ui.file.exit"
                   label="Exit">
             </command>
          </menu>
+         <menu
+               label="Help">
+            <command
+                  commandId="hu.bme.mit.inf.mdsd.one.app.help"
+                  label="Help Contents"
+                  style="push">
+            </command>
+            <command
+                  commandId="hu.bme.mit.inf.mdsd.one.app.keyassist"
+                  label="Key Assist"
+                  style="push">
+            </command>
+            <separator
+                  name="separator4"
+                  visible="true">
+            </separator>
+            <command
+                  commandId="hu.bme.mit.inf.mdsd.one.app.about"
+                  label="About"
+                  style="push">
+            </command>
+         </menu>
       </menuContribution>
    </extension>
+   <extension
+         point="org.eclipse.ui.commands">
+      <command
+            defaultHandler="hu.bme.mit.inf.mdsd.one.app.commands.SettingsCommand"
+            id="hu.bme.mit.inf.mdsd.one.app.settings"
+            name="Preferences">
+      </command>
+      <command
+            defaultHandler="hu.bme.mit.inf.mdsd.one.app.commands.NewCommand"
+            id="hu.bme.mit.inf.mdsd.one.app.new"
+            name="New">
+      </command>
+      <command
+            defaultHandler="hu.bme.mit.inf.mdsd.one.app.commands.ReopenViewCommand"
+            id="hu.bme.mit.inf.mdsd.one.app.reopen"
+            name="Reopen View">
+      </command>
+      <command
+            defaultHandler="hu.bme.mit.inf.mdsd.one.app.commands.RestartCommand"
+            id="hu.bme.mit.inf.mdsd.one.app.restart"
+            name="Restart">
+      </command>
+      <command
+            defaultHandler="hu.bme.mit.inf.mdsd.one.app.commands.OpenCommand"
+            id="hu.bme.mit.inf.mdsd.one.app.open"
+            name="Open">
+      </command>
+      <command
+            defaultHandler="hu.bme.mit.inf.mdsd.one.app.commands.SaveCommand"
+            id="hu.bme.mit.inf.mdsd.one.app.save"
+            name="Save">
+      </command>
+   </extension>
+   
+   <extension
+         point="org.eclipse.ui.preferencePages">
+      <page
+            class="hu.bme.mit.inf.mdsd.one.app.composites.PreferencesPage"
+            id="hu.bme.mit.inf.mdsd.one.app.preference"
+            name="Match data">
+      </page>
+   </extension>
+   <!--<extension
+         point="org.eclipse.core.runtime.preferences">
+      <scope
+            class="hu.bme.mit.inf.mdsd.one.app.composites.PreferencesPage"
+            name="Preferences">
+      </scope>
+      <initializer
+            class="hu.bme.mit.inf.mdsd.one.app.PreferencesInitializer">
+      </initializer>
+   </extension>-->
 
 </plugin>
