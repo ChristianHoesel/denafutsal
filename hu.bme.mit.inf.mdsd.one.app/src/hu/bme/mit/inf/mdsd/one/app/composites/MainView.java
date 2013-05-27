@@ -377,7 +377,8 @@ public class MainView extends ViewPart implements IPartListener2 {
 
 		if (ViewData.instance().useModel())
 			manageModel = new ManageModel(this, ViewData.instance().getModel());
-		manageModel = new ManageModel(this);
+		else
+			manageModel = new ManageModel(this);
 
 		Composite container = new Composite(parent, SWT.NONE);
 		container.setLayout(new FormLayout());

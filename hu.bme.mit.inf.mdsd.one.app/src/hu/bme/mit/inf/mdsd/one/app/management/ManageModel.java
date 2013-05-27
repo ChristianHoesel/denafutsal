@@ -30,6 +30,7 @@ import org.eclipse.core.databinding.observable.list.IObservableList;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
+import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.incquery.databinding.runtime.api.IncQueryObservables;
 import org.eclipse.incquery.runtime.api.EngineManager;
 import org.eclipse.incquery.runtime.api.IncQueryEngine;
@@ -120,7 +121,12 @@ public class ManageModel implements IManageModel {
 		// ManageModelHelper.readModelFromFile(ManageModelHelper.TESTMODEL);
 		/**/
 
+		ResourceSet rSet = new ResourceSetImpl();
+		Resource resource = rSet.createResource(URI.createURI("models.model"));
+		
 		match = factory.createMatch();
+
+		resource.getContents().add(match);
 
 		// Bírók létrehozása:
 
