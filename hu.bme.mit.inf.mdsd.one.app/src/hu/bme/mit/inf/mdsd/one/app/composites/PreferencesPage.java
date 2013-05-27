@@ -1,5 +1,7 @@
 package hu.bme.mit.inf.mdsd.one.app.composites;
 
+import javax.swing.filechooser.FileSystemView;
+
 import org.eclipse.jface.preference.IPreferenceStore;
 import org.eclipse.jface.preference.PreferencePage;
 import org.eclipse.swt.SWT;
@@ -8,6 +10,7 @@ import org.eclipse.swt.events.MouseListener;
 import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Control;
+import org.eclipse.swt.widgets.DirectoryDialog;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.FileDialog;
 import org.eclipse.swt.widgets.Label;
@@ -16,6 +19,7 @@ import org.eclipse.swt.widgets.Text;
 import org.eclipse.ui.IWorkbench;
 import org.eclipse.ui.IWorkbenchPreferencePage;
 import org.eclipse.ui.PlatformUI;
+import org.eclipse.swt.events.MouseAdapter;
 
 public class PreferencesPage extends PreferencePage implements
 		IWorkbenchPreferencePage {
@@ -29,6 +33,7 @@ public class PreferencesPage extends PreferencePage implements
 	public static final String FAN_WAV = "fan_wav";
 	public static final String SOUND_WAV_E = "sound_wav_e";
 	public static final String FAN_WAV_E = "fan_wav_e";
+	public static final String OUT_FOLD = "";
 	private Text textSound;
 	private Spinner pt_s;
 	private Spinner pt_m;
@@ -43,6 +48,7 @@ public class PreferencesPage extends PreferencePage implements
 	private Text textFan;
 	private Button btnPlayF;
 	private Button btnPlayS;
+	private Text textOutputFolder;
 
 	/**
 	 * Create the preference page.
@@ -193,6 +199,23 @@ public class PreferencesPage extends PreferencePage implements
 		btnPlayF = new Button(container, SWT.CHECK);
 		btnPlayF.setText("Play fans during the match");
 		btnPlayF.setBounds(160, 280, 198, 16);
+		
+		Label lblOutputFolder = new Label(container, SWT.NONE);
+		lblOutputFolder.setBounds(10, 310, 81, 15);
+		lblOutputFolder.setText("Output folder:");
+		
+		textOutputFolder = new Text(container, SWT.BORDER);
+		textOutputFolder.setBounds(10, 331, 277, 21);
+		
+		Button btnBrowseOutputFolder = new Button(container, SWT.NONE);
+		btnBrowseOutputFolder.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseUp(MouseEvent e) {
+				handleOutPutFolderBrowseDialog(e, textOutputFolder);
+			}
+		});
+		btnBrowseOutputFolder.setBounds(293, 329, 65, 25);
+		btnBrowseOutputFolder.setText("Browse");
 		btnBrowse.addMouseListener(new MouseListener() {
 
 			@Override
@@ -240,6 +263,17 @@ public class PreferencesPage extends PreferencePage implements
         if(selected != null)
         	text.setText(selected);
 	}
+	
+	protected void handleOutPutFolderBrowseDialog(MouseEvent e, Text text) {
+		
+		DirectoryDialog dd = new DirectoryDialog(Display.getCurrent().getActiveShell(), SWT.OPEN);
+        dd.setText("Select output folder");
+        
+        String selected = dd.open();
+        
+        if(selected != null)
+        	text.setText(selected);
+	}
 
 	/**
 	 * Initialize the preference page.
@@ -261,6 +295,10 @@ public class PreferencesPage extends PreferencePage implements
 		s.setDefault(FAN_WAV, "");
 		s.setDefault(SOUND_WAV_E, true);
 		s.setDefault(FAN_WAV_E, false);
+		
+		FileSystemView filesys = FileSystemView.getFileSystemView();
+		
+		s.setDefault(OUT_FOLD, filesys.getHomeDirectory().toPath().toString());
 	}
 	
 	@Override
@@ -275,6 +313,7 @@ public class PreferencesPage extends PreferencePage implements
 		s.setValue(FAN_WAV, textFan.getText());
 		s.setValue(SOUND_WAV_E, btnPlayS.getSelection());
 		s.setValue(FAN_WAV_E, btnPlayF.getSelection());
+		s.setValue(OUT_FOLD, textOutputFolder.getText());
 		
 		return super.performOk();
 	}
@@ -355,5 +394,6 @@ public class PreferencesPage extends PreferencePage implements
 		btnPlayS.setSelection(s.getBoolean(SOUND_WAV_E));
 		textFan.setText(s.getString(FAN_WAV));
 		textSound.setText(s.getString(SOUND_WAV));
+		textOutputFolder.setText(s.getString(OUT_FOLD));
 	}
 }

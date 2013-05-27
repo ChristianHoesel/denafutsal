@@ -114,6 +114,13 @@
                   label="Exit">
             </command>
          </menu>
+         <menu label="Report">
+         <command
+                  commandId="hu.bme.mit.inf.mdsd.one.app.generatehtml"
+                  label="Generate Report"
+                  style="push">
+            </command>
+         </menu>
          <menu
                label="Help">
             <command
@@ -169,6 +176,11 @@
             defaultHandler="hu.bme.mit.inf.mdsd.one.app.commands.SaveCommand"
             id="hu.bme.mit.inf.mdsd.one.app.save"
             name="Save">
+      </command>
+      <command
+            defaultHandler="hu.bme.mit.inf.mdsd.one.app.commands.GenerateHTMLReport"
+            id="hu.bme.mit.inf.mdsd.one.app.generatehtml"
+            name="GenerateHTML">
       </command>
    </extension>
    
