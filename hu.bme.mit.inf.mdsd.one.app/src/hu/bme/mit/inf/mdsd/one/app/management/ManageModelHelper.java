@@ -21,6 +21,7 @@ public class ManageModelHelper {
 
 	public ManageModelHelper(ManageModel manageModel) {
 		this.mm = manageModel;
+	
 	}
 
 	public static Match readModelFromFile(String path) {

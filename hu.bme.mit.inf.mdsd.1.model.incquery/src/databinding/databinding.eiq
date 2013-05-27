@@ -54,3 +54,8 @@ pattern possibleVisitorReds(match : Match, role : Role) {
 	Match.Visitor.members.staffRole(match, role);
 	neg find hasRed(role);	
 }
+
+pattern redWithBans(team : Team, event : Event) {
+	Event.type(event, ::RedCardWithBan);
+	Event.committer.team(event, team);
+}

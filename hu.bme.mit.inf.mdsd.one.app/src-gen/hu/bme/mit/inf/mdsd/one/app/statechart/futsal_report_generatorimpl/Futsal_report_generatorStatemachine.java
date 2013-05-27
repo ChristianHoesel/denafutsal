@@ -10,18 +10,22 @@ public class Futsal_report_generatorStatemachine
 			true, 0);
 	private final TimeEvent futsal_report_generator_main_region__2nd_Halftime_time_event_0 = new TimeEvent(
 			true, 1);
-	private final TimeEvent futsal_report_generator_main_region_Breaktime_time_event_0 = new TimeEvent(
+	private final TimeEvent futsal_report_generator_main_region__1st_Extratime_time_event_0 = new TimeEvent(
 			true, 2);
-	private final TimeEvent futsal_report_generator_main_region__1st_Visitor_Timeout_time_event_0 = new TimeEvent(
+	private final TimeEvent futsal_report_generator_main_region__2nd_Extratime_time_event_0 = new TimeEvent(
 			true, 3);
-	private final TimeEvent futsal_report_generator_main_region__1st_Home_Timeout_time_event_0 = new TimeEvent(
+	private final TimeEvent futsal_report_generator_main_region_Breaktime_time_event_0 = new TimeEvent(
 			true, 4);
-	private final TimeEvent futsal_report_generator_main_region__2nd_Visitor_Timeout_time_event_0 = new TimeEvent(
+	private final TimeEvent futsal_report_generator_main_region__1st_Visitor_Timeout_time_event_0 = new TimeEvent(
 			true, 5);
-	private final TimeEvent futsal_report_generator_main_region__2nd_Home_Timeout_time_event_0 = new TimeEvent(
+	private final TimeEvent futsal_report_generator_main_region__1st_Home_Timeout_time_event_0 = new TimeEvent(
 			true, 6);
+	private final TimeEvent futsal_report_generator_main_region__2nd_Visitor_Timeout_time_event_0 = new TimeEvent(
+			true, 7);
+	private final TimeEvent futsal_report_generator_main_region__2nd_Home_Timeout_time_event_0 = new TimeEvent(
+			true, 8);
 
-	private final boolean[] timeEvents = new boolean[7];
+	private final boolean[] timeEvents = new boolean[9];
 
 	private final class SCITimerImpl implements SCITimer {
 
@@ -267,6 +271,10 @@ public class Futsal_report_generatorStatemachine
 				.setStatemachine(this);
 		futsal_report_generator_main_region__2nd_Halftime_time_event_0
 				.setStatemachine(this);
+		futsal_report_generator_main_region__1st_Extratime_time_event_0
+				.setStatemachine(this);
+		futsal_report_generator_main_region__2nd_Extratime_time_event_0
+				.setStatemachine(this);
 		futsal_report_generator_main_region_Breaktime_time_event_0
 				.setStatemachine(this);
 		futsal_report_generator_main_region__1st_Visitor_Timeout_time_event_0
@@ -392,6 +400,10 @@ public class Futsal_report_generatorStatemachine
 				nextStateIndex = 0;
 				stateVector[0] = State.$NullState$;
 
+				getTimerService()
+						.resetTimer(
+								futsal_report_generator_main_region__1st_Extratime_time_event_0);
+
 				sCITimer.pause_v = true;
 
 				sCITimer.operationCallback.playSound();
@@ -400,6 +412,10 @@ public class Futsal_report_generatorStatemachine
 			case main_region__2nd_Extratime :
 				nextStateIndex = 0;
 				stateVector[0] = State.$NullState$;
+
+				getTimerService()
+						.resetTimer(
+								futsal_report_generator_main_region__2nd_Extratime_time_event_0);
 
 				sCITimer.operationCallback.playSound();
 				break;
@@ -780,6 +796,10 @@ public class Futsal_report_generatorStatemachine
 			nextStateIndex = 0;
 			stateVector[0] = State.$NullState$;
 
+			getTimerService()
+					.resetTimer(
+							futsal_report_generator_main_region__1st_Extratime_time_event_0);
+
 			sCITimer.pause_v = true;
 
 			sCITimer.operationCallback.playSound();
@@ -788,6 +808,11 @@ public class Futsal_report_generatorStatemachine
 
 			nextStateIndex = 0;
 			stateVector[0] = State.main_region_Waiting_For_the_Start_of_2nd_Extratime;
+		} else {
+			if (timeEvents[futsal_report_generator_main_region__1st_Extratime_time_event_0
+					.getIndex()]) {
+				sCITimer.tick += 1;
+			}
 		}
 	}
 
@@ -797,10 +822,19 @@ public class Futsal_report_generatorStatemachine
 			nextStateIndex = 0;
 			stateVector[0] = State.$NullState$;
 
+			getTimerService()
+					.resetTimer(
+							futsal_report_generator_main_region__2nd_Extratime_time_event_0);
+
 			sCITimer.operationCallback.playSound();
 
 			nextStateIndex = 0;
 			stateVector[0] = State.main_region_End_2nd_Extratime;
+		} else {
+			if (timeEvents[futsal_report_generator_main_region__2nd_Extratime_time_event_0
+					.getIndex()]) {
+				sCITimer.tick += 1;
+			}
 		}
 	}
 
@@ -843,6 +877,11 @@ public class Futsal_report_generatorStatemachine
 		if (sCITimer.continue_ID) {
 			nextStateIndex = 0;
 			stateVector[0] = State.$NullState$;
+
+			getTimerService()
+					.setTimer(
+							futsal_report_generator_main_region__1st_Extratime_time_event_0,
+							1, cycleStartTime);
 
 			nextStateIndex = 0;
 			stateVector[0] = State.main_region__1st_Extratime;
@@ -1030,6 +1069,11 @@ public class Futsal_report_generatorStatemachine
 		if (sCITimer.continue_ID) {
 			nextStateIndex = 0;
 			stateVector[0] = State.$NullState$;
+
+			getTimerService()
+					.setTimer(
+							futsal_report_generator_main_region__2nd_Extratime_time_event_0,
+							1, cycleStartTime);
 
 			sCITimer.tick = 2 * sCITimer.ht_long + 1 * sCITimer.et_long;
 

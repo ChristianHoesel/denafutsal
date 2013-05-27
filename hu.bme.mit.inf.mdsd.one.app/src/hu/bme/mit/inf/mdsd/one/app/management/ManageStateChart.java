@@ -1,7 +1,7 @@
 package hu.bme.mit.inf.mdsd.one.app.management;
 
 import hu.bme.mit.inf.mdsd.one.app.composites.MainView;
-import hu.bme.mit.inf.mdsd.one.app.composites.Preferences;
+import hu.bme.mit.inf.mdsd.one.app.composites.Penalties;
 import hu.bme.mit.inf.mdsd.one.app.composites.PreferencesPage;
 import hu.bme.mit.inf.mdsd.one.app.composites.SearchDialog;
 import hu.bme.mit.inf.mdsd.one.app.statechart.TimerService;
@@ -9,17 +9,25 @@ import hu.bme.mit.inf.mdsd.one.app.statechart.futsal_report_generatorimpl.Futsal
 import hu.bme.mit.inf.mdsd.one.app.statechart.futsal_report_generatorimpl.Futsal_report_generatorStatemachine.State;
 import hu.bme.mit.inf.mdsd.one.app.statechart.futsal_report_generatorimpl.IFutsal_report_generatorStatemachine.SCITimerOperationCallback;
 
+import java.util.Collection;
 import java.util.Timer;
 import java.util.TimerTask;
 
+import model.Event;
+import model.Match;
+import model.Player;
 import model.Role;
 
-import org.eclipse.core.runtime.preferences.ConfigurationScope;
-import org.eclipse.core.runtime.preferences.IEclipsePreferences;
+import org.eclipse.emf.common.util.EList;
 import org.eclipse.jface.preference.IPreferenceStore;
 import org.eclipse.swt.SWT;
+import org.eclipse.swt.widgets.Display;
+import org.eclipse.swt.widgets.MessageBox;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.ui.PlatformUI;
+
+import databinding.redwithbans.RedWithBansMatch;
+import databinding.redwithbans.RedWithBansMatcher;
 
 public class ManageStateChart implements IManageStateChart {
 
@@ -31,9 +39,14 @@ public class ManageStateChart implements IManageStateChart {
 	private Timer t;
 	private Timer tH = null;
 	private Timer tV = null;
+	private int pt_long = 0;
 	private ManageStateChartHelper helper;
 	private ISearchHelper search;
 	private static int stateDelay = 1500;
+
+	public int getBanTime() {
+		return pt_long;
+	}
 
 	protected class UpdateTimeTask extends TimerTask {
 
@@ -41,6 +54,7 @@ public class ManageStateChart implements IManageStateChart {
 
 		public UpdateTimeTask(State starterState) {
 			this.s = starterState;
+			int a = 2;
 		}
 
 		@Override
@@ -110,20 +124,28 @@ public class ManageStateChart implements IManageStateChart {
 		this.helper = new ManageStateChartHelper(sm, this);
 		this.search = new SearchHelper(view.getModel());
 
-		//helper.registerGoalCounts(view.getModel());
+		setGoalsLabel();
+
+		// helper.registerGoalCounts(view.getModel());
 
 		sm.getSCITimer().setSCITimerOperationCallback(new PlaySound());
 		sm.setTimerService(new TimerService());
 		sm.enter();
 		// Init state
 		sm.runCycle();
-		
+
 		IPreferenceStore preferenceStore = PlatformUI.getPreferenceStore();
 		{
-			sm.getSCITimer().setBt_long(preferenceStore.getInt(PreferencesPage.BT_LONG));
-			sm.getSCITimer().setEt_long(preferenceStore.getInt(PreferencesPage.ET_LONG));
-			sm.getSCITimer().setHt_long(preferenceStore.getInt(PreferencesPage.HT_LONG));
-			sm.getSCITimer().setTo_long(preferenceStore.getInt(PreferencesPage.TO_LONG));
+			sm.getSCITimer().setBt_long(
+					preferenceStore.getInt(PreferencesPage.BT_LONG));
+			sm.getSCITimer().setEt_long(
+					preferenceStore.getInt(PreferencesPage.ET_LONG));
+			sm.getSCITimer().setHt_long(
+					preferenceStore.getInt(PreferencesPage.HT_LONG));
+			sm.getSCITimer().setTo_long(
+					preferenceStore.getInt(PreferencesPage.TO_LONG));
+
+			pt_long = preferenceStore.getInt(PreferencesPage.PT_LONG);
 		}
 
 		// Waiting for state
@@ -155,8 +177,41 @@ public class ManageStateChart implements IManageStateChart {
 
 			view.setTime(sec, ms);
 		} catch (Exception e) {
-			e.printStackTrace();
+			t.cancel();
+			updateTimeTaskScheduled = false;
 		}
+	}
+
+	private void setBansTime() throws Exception {
+		Match model = view.getModel();
+		EList<Event> homeGoals = model.getHome().getGoals();
+		Event homeLastGoal = null;
+		if (!homeGoals.isEmpty())
+			homeLastGoal = homeGoals.get(homeGoals.size() - 1);
+		EList<Event> visitorGoals = model.getVisitor().getGoals();
+		Event visitorLastGoal = null;
+		if (!visitorGoals.isEmpty())
+			visitorLastGoal = visitorGoals.get(visitorGoals.size() - 1);
+
+		RedWithBansMatcher matcherHome = RedWithBansMatcher.factory()
+				.getMatcher(view.getModel());
+		Collection<RedWithBansMatch> homeBans = matcherHome.getAllMatches(view
+				.getModel().getHome(), null);
+
+		RedWithBansMatcher matcherVisitor = RedWithBansMatcher.factory()
+				.getMatcher(view.getModel());
+		Collection<RedWithBansMatch> visitorBans = matcherVisitor
+				.getAllMatches(view.getModel().getVisitor(), null);
+
+		String h = helper.calculateBanStr(homeBans, visitorLastGoal);
+		String v = helper.calculateBanStr(visitorBans, homeLastGoal);
+
+		view.setBanTimes("  " + h, v + "  ");
+	}
+
+	private void setGoalsLabel() {
+		view.setScore(view.getModel().getHome().getGoalCount(), view.getModel()
+				.getVisitor().getGoalCount());
 	}
 
 	@Override
@@ -164,6 +219,12 @@ public class ManageStateChart implements IManageStateChart {
 
 		setTimeLabelText();
 		setManageTimerBtnText(view);
+		try {
+			setBansTime();
+			setGoalsLabel();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 
 		if (!helper.needToRunTimer()) {
 
@@ -183,6 +244,9 @@ public class ManageStateChart implements IManageStateChart {
 
 	@Override
 	public void manageTime() {
+		
+		new Penalties(Display.getCurrent().getActiveShell()).open();
+		
 		if (!helper.needToRunTimer()) {
 			sm.getSCITimer().raiseContinue();
 			sm.runCycle();
@@ -240,7 +304,8 @@ public class ManageStateChart implements IManageStateChart {
 						.getHomeYellowsContentProvider());
 				dialog.setInput(view.getModel());
 				Role role = (Role) dialog.open();
-				view.getManageModel().homeYellowCard(role, helper.getCurrentMatchTime());
+				view.getManageModel().homeYellowCard(role,
+						helper.getCurrentMatchTime());
 			}
 		});
 	}
@@ -259,7 +324,8 @@ public class ManageStateChart implements IManageStateChart {
 						.getVisitorYellowsContentProvider());
 				dialog.setInput(view.getModel());
 				Role role = (Role) dialog.open();
-				view.getManageModel().visitorYellowCard(role, helper.getCurrentMatchTime());
+				view.getManageModel().visitorYellowCard(role,
+						helper.getCurrentMatchTime());
 			}
 		});
 	}
@@ -277,7 +343,35 @@ public class ManageStateChart implements IManageStateChart {
 				dialog.setContentProvider(search.getHomeRedsContentProvider());
 				dialog.setInput(view.getModel());
 				Role role = (Role) dialog.open();
-				view.getManageModel().homeRedCard(role, helper.getCurrentMatchTime());
+
+				if (role == null)
+					return;
+				if (role instanceof Player) {
+					int style = SWT.ICON_QUESTION | SWT.YES | SWT.NO
+							| SWT.CANCEL;
+
+					MessageBox messageBox = new MessageBox(activeShell, style);
+					messageBox.setMessage("Would you like to give a ban too?");
+
+					int ban = messageBox.open();
+					if (ban == SWT.CANCEL)
+						return;
+					if (ban == SWT.YES) {
+						view.getManageModel().homeRedCardWithBan(role,
+								helper.getCurrentMatchTime());
+						try {
+							setBansTime();
+						} catch (Exception e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}
+						return;
+					}
+
+				}
+
+				view.getManageModel().homeRedCard(role,
+						helper.getCurrentMatchTime());
 			}
 		});
 
@@ -297,7 +391,34 @@ public class ManageStateChart implements IManageStateChart {
 						.getVisitorRedsContentProvider());
 				dialog.setInput(view.getModel());
 				Role role = (Role) dialog.open();
-				view.getManageModel().visitorRedCard(role, helper.getCurrentMatchTime());
+
+				if (role == null)
+					return;
+				if (role instanceof Player) {
+					int style = SWT.ICON_QUESTION | SWT.YES | SWT.NO
+							| SWT.CANCEL;
+
+					MessageBox messageBox = new MessageBox(activeShell, style);
+					messageBox.setMessage("Would you like to give a ban too?");
+
+					int ban = messageBox.open();
+					if (ban == SWT.CANCEL)
+						return;
+					if (ban == SWT.YES) {
+						view.getManageModel().visitorRedCardWithBan(role,
+								helper.getCurrentMatchTime());
+						try {
+							setBansTime();
+						} catch (Exception e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}
+						return;
+					}
+				}
+
+				view.getManageModel().visitorRedCard(role,
+						helper.getCurrentMatchTime());
 			}
 		});
 	}
@@ -316,7 +437,16 @@ public class ManageStateChart implements IManageStateChart {
 						.getHomeScorersContentProvider());
 				dialog.setInput(view.getModel());
 				Role role = (Role) dialog.open();
-				view.getManageModel().homeGoal(role, helper.getCurrentMatchTime());
+				view.getManageModel().homeGoal(role,
+						helper.getCurrentMatchTime());
+
+				try {
+					setBansTime();
+					setGoalsLabel();
+				} catch (Exception e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 			}
 		});
 	}
@@ -335,7 +465,16 @@ public class ManageStateChart implements IManageStateChart {
 						.getVisitorScorersContentProvider());
 				dialog.setInput(view.getModel());
 				Role role = (Role) dialog.open();
-				view.getManageModel().visitorGoal(role, helper.getCurrentMatchTime());
+				view.getManageModel().visitorGoal(role,
+						helper.getCurrentMatchTime());
+
+				try {
+					setBansTime();
+					setGoalsLabel();
+				} catch (Exception e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 			}
 		});
 	}

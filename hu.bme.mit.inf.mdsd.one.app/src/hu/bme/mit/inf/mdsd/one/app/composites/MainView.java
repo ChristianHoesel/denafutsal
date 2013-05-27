@@ -206,6 +206,26 @@ public class MainView extends ViewPart implements IPartListener2 {
 
 	private Composite parent;
 
+	private Label pHome;
+	private Label pVisitor;
+
+	public void disableManageBtn() {
+		Display.getDefault().syncExec(new Runnable() {
+			public void run() {
+				manageTimeBtn.setEnabled(false);
+			}
+		});
+	}
+
+	public void setBanTimes(final String home, final String visitor) {
+		Display.getDefault().syncExec(new Runnable() {
+			public void run() {
+				pHome.setText(home);
+				pVisitor.setText(visitor);
+			}
+		});
+	}
+	
 	public void updateHomeFaultBtnText(final String text) {
 		Display.getDefault().syncExec(new Runnable() {
 			public void run() {
@@ -261,13 +281,8 @@ public class MainView extends ViewPart implements IPartListener2 {
 	public void setScore(final int home, final int visitor) {
 
 		Display.getDefault().syncExec(new Runnable() {
-			public void run() {
-
-				String home_s = Integer.toString(home);
-				String visitor_s = Integer.toString(visitor);
-
-				score.setText(home_s + ":" + visitor_s);
-
+			public void run() {				
+				score.setText(home + ":" + visitor);
 			}
 		});
 	}
@@ -2234,6 +2249,7 @@ public class MainView extends ViewPart implements IPartListener2 {
 		time.setLayoutData(fd_time);
 		time.setText("00:00");
 
+		
 		score = new Label(compositeMain, SWT.NONE);
 		score.setFont(SWTResourceManager.getFont("Score Board", 39, SWT.NORMAL));
 		score.setForeground(SWTResourceManager.getColor(205, 133, 63));
@@ -2247,6 +2263,31 @@ public class MainView extends ViewPart implements IPartListener2 {
 		score.setLayoutData(fd_score);
 		score.setText("0:0");
 
+		pHome = new Label(compositeMain, SWT.NONE);
+		pHome.setFont(SWTResourceManager.getFont("Score Board", 20, SWT.NORMAL));
+		pHome.setForeground(SWTResourceManager.getColor(205, 133, 63));
+		pHome.setBackground(SWTResourceManager.getColor(0, 0, 0));
+		pHome.setAlignment(SWT.LEFT);
+		FormData fd_pHome = new FormData();
+		fd_pHome.top = new FormAttachment(score, 0);
+		fd_pHome.left = new FormAttachment(0, 0);
+		fd_pHome.right = new FormAttachment(50, 0);
+		fd_pHome.height = 45;
+		pHome.setLayoutData(fd_pHome);
+		
+		pVisitor = new Label(compositeMain, SWT.NONE);
+		pVisitor.setFont(SWTResourceManager.getFont("Score Board", 20, SWT.NORMAL));
+		pVisitor.setForeground(SWTResourceManager.getColor(205, 133, 63));
+		pVisitor.setBackground(SWTResourceManager.getColor(0, 0, 0));
+		pVisitor.setAlignment(SWT.RIGHT);
+		FormData fd_pVisitor = new FormData();
+		fd_pVisitor.top = new FormAttachment(score, 0);
+		fd_pVisitor.left = new FormAttachment(50, 0);
+		fd_pVisitor.right = new FormAttachment(100, 0);
+		fd_pVisitor.height = 45;
+		pVisitor.setLayoutData(fd_pVisitor);
+		
+		
 		manageTimeBtn = new Button(compositeMain, SWT.NONE);
 		manageTimeBtn.addSelectionListener(new SelectionAdapter() {
 			@Override
@@ -2258,7 +2299,7 @@ public class MainView extends ViewPart implements IPartListener2 {
 				SWT.NORMAL));
 		FormData fd_manageTimeBtn = new FormData();
 		fd_manageTimeBtn.height = 50;
-		fd_manageTimeBtn.top = new FormAttachment(score, 6);
+		fd_manageTimeBtn.top = new FormAttachment(pHome, 6);
 		fd_manageTimeBtn.left = new FormAttachment(0, 10);
 		fd_manageTimeBtn.right = new FormAttachment(100, -10);
 		manageTimeBtn.setLayoutData(fd_manageTimeBtn);

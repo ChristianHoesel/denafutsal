@@ -16,10 +16,10 @@
         <outgoingTransitions xmi:id="_DuNP8I9QEeKdo4Ud0MIVEQ" specification="" target="_2xFEYJAOEeKAILd_p9EiHA"/>
       </vertices>
       <vertices xsi:type="sgraph:FinalState" xmi:id="_EwxgMI9QEeKdo4Ud0MIVEQ" incomingTransitions="_sMEMEJCTEeKtRtfOXfcpcw"/>
-      <vertices xsi:type="sgraph:State" xmi:id="__If7kI-8EeKVGMZYs580Hg" specification="exit / Timer.pause_v = true&#xD;&#xA;exit / Timer.playSound" name="1st Extratime" incomingTransitions="_mVRDwI_CEeKVGMZYs580Hg">
+      <vertices xsi:type="sgraph:State" xmi:id="__If7kI-8EeKVGMZYs580Hg" specification="every 1 ms / Timer.tick += 1&#xD;&#xA;exit / Timer.pause_v = true&#xD;&#xA;exit / Timer.playSound" name="1st Extratime" incomingTransitions="_mVRDwI_CEeKVGMZYs580Hg">
         <outgoingTransitions xmi:id="_T8ThsI-9EeKVGMZYs580Hg" specification="[Timer.tick >= 2*Timer.ht_long+1*Timer.et_long]" target="_m8KUAMUdEeK68tkhlW3HpA"/>
       </vertices>
-      <vertices xsi:type="sgraph:State" xmi:id="_DYfxII-9EeKVGMZYs580Hg" specification="entry / Timer.tick = 2*Timer.ht_long + 1*Timer.et_long&#xD;&#xA;exit / Timer.playSound" name="2nd Extratime" incomingTransitions="_uO7XAMUdEeK68tkhlW3HpA">
+      <vertices xsi:type="sgraph:State" xmi:id="_DYfxII-9EeKVGMZYs580Hg" specification="entry / Timer.tick = 2*Timer.ht_long + 1*Timer.et_long&#xD;&#xA;every 1 ms / Timer.tick += 1&#xD;&#xA;exit / Timer.playSound" name="2nd Extratime" incomingTransitions="_uO7XAMUdEeK68tkhlW3HpA">
         <outgoingTransitions xmi:id="_Uwhz8I-9EeKVGMZYs580Hg" specification="[Timer.tick >= 2*Timer.ht_long+2*Timer.et_long]" target="_U2g7rY_HEeKVGMZYs580Hg"/>
       </vertices>
       <vertices xsi:type="sgraph:State" xmi:id="_yjMygI-9EeKVGMZYs580Hg" specification="entry / Timer.home_timeout_enabled = false&#xD;&#xA;entry / Timer.visitor_timeout_enabled = false&#xD;&#xA;every 1 ms / Timer.breaktime_tick += 1&#xD;&#xA;exit / Timer.home_timeout_enabled = true&#xD;&#xA;exit / Timer.visitor_timeout_enabled = true&#xD;&#xA;exit / Fouls.home_counter = 0&#xD;&#xA;exit / Fouls.visitors_counter = 0&#xD;&#xA;exit / Timer.playSound&#xD;&#xA;exit / Fouls.home_done = false&#xD;&#xA;exit / Fouls.visitor_done = false" name="Breaktime" incomingTransitions="_dttN0JDPEeKRVODR6tVH2w">

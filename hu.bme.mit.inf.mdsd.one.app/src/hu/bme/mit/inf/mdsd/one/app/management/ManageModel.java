@@ -15,37 +15,19 @@ import model.Event;
 import model.EventType;
 import model.Match;
 import model.ModelFactory;
-import model.Person;
-import model.Player;
-import model.Position;
 import model.Role;
 import model.StaffRole;
-import model.Team;
-import model.TeamMember;
 import model.Type;
 
-import org.eclipse.core.databinding.observable.ChangeEvent;
-import org.eclipse.core.databinding.observable.IChangeListener;
-import org.eclipse.core.databinding.observable.list.IObservableList;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
-import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
-import org.eclipse.incquery.databinding.runtime.api.IncQueryObservables;
-import org.eclipse.incquery.runtime.api.EngineManager;
-import org.eclipse.incquery.runtime.api.IncQueryEngine;
-import org.eclipse.incquery.runtime.exception.IncQueryException;
 import org.eclipse.swt.graphics.Color;
 import org.eclipse.swt.graphics.Device;
-import org.eclipse.swt.graphics.GCData;
-import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Combo;
 import org.eclipse.swt.widgets.DateTime;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Text;
-
-import databinding.getgoalcount.GetGoalCountMatch;
-import databinding.getgoalcount.GetGoalCountMatcher;
 
 public class ManageModel implements IManageModel {
 
@@ -109,6 +91,8 @@ public class ManageModel implements IManageModel {
 	public ManageModel(MainView view, Match model) {
 		this.view = view;
 		this.match = model;
+	
+		factory = ModelFactory.eINSTANCE;
 	}
 
 	public ManageModel(MainView view) {
@@ -117,10 +101,10 @@ public class ManageModel implements IManageModel {
 		factory = ModelFactory.eINSTANCE;
 
 		/* Teszteléshez, majd ezt innen kiszedheted nyugodtan */
-		// match =
-		// ManageModelHelper.readModelFromFile(ManageModelHelper.TESTMODEL);
+		 match =
+		 ManageModelHelper.readModelFromFile(ManageModelHelper.TESTMODEL);
 		/**/
-
+/*
 		ResourceSet rSet = new ResourceSetImpl();
 		Resource resource = rSet.createResource(URI.createURI("models.model"));
 		
@@ -208,7 +192,7 @@ public class ManageModel implements IManageModel {
 		homeRedCard(match.getHome().getMembers().get(0).getPlayerRole(), 124);
 		homeRedCardWithBan(match.getHome().getMembers().get(0).getPlayerRole(), 125);
 		homeYellowCard(match.getHome().getMembers().get(0).getPlayerRole(), 126);
-		
+		*/
 	}
 
 	/**

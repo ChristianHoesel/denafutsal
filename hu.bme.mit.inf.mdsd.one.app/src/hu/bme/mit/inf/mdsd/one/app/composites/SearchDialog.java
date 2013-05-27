@@ -165,7 +165,7 @@ public class SearchDialog extends Dialog {
 				
 				if(!selection.isEmpty()) {
 					result = selection.getFirstElement();
-					shell.dispose();
+					shell.close();
 				}
 			}
 		});
