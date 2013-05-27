@@ -92,15 +92,6 @@
                   visible="true">
             </separator>
             <command
-                  commandId="hu.bme.mit.inf.mdsd.one.app.generate"
-                  label="Generate Report"
-                  style="push">
-            </command>
-            <separator
-                  name="separator2"
-                  visible="true">
-            </separator>
-            <command
                   commandId="hu.bme.mit.inf.mdsd.one.app.settings"
                   label="Preferences"
                   style="push">
@@ -117,7 +108,47 @@
          <menu label="Report">
          <command
                   commandId="hu.bme.mit.inf.mdsd.one.app.generatehtml"
-                  label="Generate Report"
+                  label="Generate report (HTML)"
+                  style="push">
+            </command>
+            <command
+                  commandId="hu.bme.mit.inf.mdsd.one.app.generatetex"
+                  label="Generate report (TeX)"
+                  style="push">
+            </command>
+            <separator
+                  name="separator5"
+                  visible="true">
+            </separator>
+            <command
+                  commandId="hu.bme.mit.inf.mdsd.one.app.uploadhtml"
+                  label="Upload generated HTML report"
+                  style="push">
+            </command>
+            <command
+                  commandId="hu.bme.mit.inf.mdsd.one.app.uploadtex"
+                  label="Upload generated TeX report"
+                  style="push">
+            </command>
+            <separator
+                  name="separator6"
+                  visible="true">
+            </separator>
+            <command
+                  commandId="hu.bme.mit.inf.mdsd.one.app.downloadhtml"
+                  label="Download HTML report"
+                  style="push">
+            </command>
+            
+            <command
+                  commandId="hu.bme.mit.inf.mdsd.one.app.downloadpdf"
+                  label="Download PDF report"
+                  style="push">
+            </command>
+            
+            <command
+                  commandId="hu.bme.mit.inf.mdsd.one.app.downloadpdflog"
+                  label="Download PDF generator log"
                   style="push">
             </command>
          </menu>
@@ -182,6 +213,42 @@
             id="hu.bme.mit.inf.mdsd.one.app.generatehtml"
             name="GenerateHTML">
       </command>
+      <command
+            defaultHandler="hu.bme.mit.inf.mdsd.one.app.commands.GenerateTeXReport"
+            id="hu.bme.mit.inf.mdsd.one.app.generatetex"
+            name="GenerateTeX">
+            </command>
+            <command
+            defaultHandler="hu.bme.mit.inf.mdsd.one.app.commands.UploadHTML"
+                  id="hu.bme.mit.inf.mdsd.one.app.uploadhtml"
+                  
+                  name="UploadHTML">
+            </command>
+             <command
+            defaultHandler="hu.bme.mit.inf.mdsd.one.app.commands.UploadTex"
+                  id="hu.bme.mit.inf.mdsd.one.app.uploadtex"
+                  name="Uploadtex">
+            </command>
+            <command
+                defaultHandler="hu.bme.mit.inf.mdsd.one.app.commands.DownloadHTML"
+                  id="hu.bme.mit.inf.mdsd.one.app.downloadhtml"
+                  name="DownloadHTML">
+            </command>
+            
+            <command
+                    defaultHandler="hu.bme.mit.inf.mdsd.one.app.commands.DownloadPDF"
+                  id="hu.bme.mit.inf.mdsd.one.app.downloadpdf"
+                  name="DownloadPDF">
+            </command>
+            
+            <command
+                  defaultHandler="hu.bme.mit.inf.mdsd.one.app.commands.DownloadPDFLog"
+                  id="hu.bme.mit.inf.mdsd.one.app.downloadpdflog"
+                  name="DownloadPDFLog">
+            </command>
+            
+            
+            
    </extension>
    
    <extension
