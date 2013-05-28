@@ -66,6 +66,9 @@ public interface IManageModel {
 	public String getStartH1NText();
 	public void setStartH1NText(Text text, String error);
 	
+	public String getHNText(int id);
+	public void setHNText(int id, Text text, String error);
+	
 	public String getIdH1StartText();
 	public void setIdH1StartText(Text text, String error);
 	
@@ -246,4 +249,7 @@ startH5N    cpH5Start   idH5Start   shirtH5Start
 	public void setStaffT8VCombo(Combo combo, String error);
 	public String getStaffT8VCombo();
 	public int getStaffT8VSelection();
+	
+	public void setVIdText(int i, Text text, String error);
+	public String getVIdText(int i);
 }

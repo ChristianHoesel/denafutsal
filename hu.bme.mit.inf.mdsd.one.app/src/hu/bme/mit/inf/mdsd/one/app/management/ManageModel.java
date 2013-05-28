@@ -507,6 +507,24 @@ public class ManageModel implements IManageModel {
 		}
 
 	}
+	
+	@Override
+	public String getHNText(int id) {
+		return match.getHome().getStartingLine().get(id).getName();
+	}
+
+	@Override
+	public void setHNText(int id, Text text, String error) {
+		Boolean valid = true; // Ide kerül majd a validátor
+		if (valid) {
+			match.getHome().getMembers().get(id).setName(text.getText());
+			text.setBackground(green);
+		} else {
+			view.appendTextToLogging(error);
+			text.setBackground(red);
+		}
+
+	}
 
 	@Override
 	public String getIdH1StartText() {
@@ -1218,6 +1236,33 @@ public class ManageModel implements IManageModel {
 	@Override
 	public void setCpV5Start() {
 		match.getVisitor().setCaptain(match.getVisitor().getStartingLine().get(4));
+	}
+
+	// TODO: Ez elvileg így jó lesz:
+	@Override
+	public void setVIdText(int i, Text text, String error) {
+		Boolean valid = true; // Ide kerül majd a validátor
+		if (valid) {
+			try {
+				match.getVisitor().getMembers().get(i).setId(Integer.parseInt(text.getText()));
+				text.setBackground(green);
+			} catch (Exception e) {
+				text.setBackground(red);
+				view.appendTextToLogging(e.toString());
+				view.appendTextToLogging(error);
+			}
+
+		} else {
+			view.appendTextToLogging(error);
+			text.setBackground(red);
+		}
+		
+	}
+	
+	// TODO: Ez elvileg így jó lesz:
+	@Override
+	public String getVIdText(int i) {
+		return String.valueOf(match.getVisitor().getMembers().get(i).getId());
 	}
 
 

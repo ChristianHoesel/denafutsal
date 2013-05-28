@@ -755,14 +755,15 @@ public class MainView extends ViewPart implements IPartListener2 {
 			public void focusLost(FocusEvent e) {
 				Display.getDefault().syncExec(new Runnable() {
 					public void run() {
-						manageModel.setStartH1NText(startH1N, "TODO: ERROR");
-						appendTextToLogging(manageModel.getStartH1NText());
+						manageModel.setHNText(0, startH1N, "TODO: ERROR");
+						appendTextToLogging(manageModel.getHNText(0));
 					}
 				});
 
 			}
 		});
-		setTextFromModel(startH1N, manageModel.getStartH1NText());
+		setTextFromModel(startH1N, manageModel.getHNText(0));
+		
 		FormData fd_startH1N = new FormData();
 		fd_startH1N.width = 120;
 		fd_startH1N.top = new FormAttachment(lblStartinglineHome, 6);
@@ -775,14 +776,15 @@ public class MainView extends ViewPart implements IPartListener2 {
 			public void focusLost(FocusEvent e) {
 				Display.getDefault().syncExec(new Runnable() {
 					public void run() {
-						manageModel.setStartH2NText(startH2N);
-						appendTextToLogging(manageModel.getStartH2NText());
+						manageModel.setHNText(1, startH2N, "TODO: ERROR");
+						appendTextToLogging(manageModel.getHNText(1));
 					}
 				});
 
 			}
 		});
-		setTextFromModel(startH2N, manageModel.getStartH2NText());
+		setTextFromModel(startH2N, manageModel.getHNText(1));
+		
 		FormData fd_startH2N = new FormData();
 		fd_startH2N.width = 120;
 		fd_startH2N.top = new FormAttachment(startH1N, 6);
@@ -1969,6 +1971,23 @@ public class MainView extends ViewPart implements IPartListener2 {
 		cpV7Sub.setLayoutData(fd_cpV7Sub);
 
 		idV1Start = new Text(compositeVisitor, SWT.BORDER);
+		
+		//TODO
+		
+		idV1Start.addFocusListener(new FocusAdapter() {
+			@Override
+			public void focusLost(FocusEvent e) {
+				Display.getDefault().syncExec(new Runnable() {
+					public void run() {
+						manageModel.setVIdText(0, idV1Start, "TODO: ERROR");
+						appendTextToLogging(manageModel.getVIdText(0));
+					}
+				});
+
+			}
+		});
+		setTextFromModel(idV1Start, manageModel.getVIdText(0));
+		
 		FormData fd_idV1Start = new FormData();
 		fd_idV1Start.width = 34;
 		fd_idV1Start.top = new FormAttachment(startV1N, 0, SWT.TOP);
@@ -1976,6 +1995,20 @@ public class MainView extends ViewPart implements IPartListener2 {
 		idV1Start.setLayoutData(fd_idV1Start);
 
 		idV2Start = new Text(compositeVisitor, SWT.BORDER);
+		idV2Start.addFocusListener(new FocusAdapter() {
+			@Override
+			public void focusLost(FocusEvent e) {
+				Display.getDefault().syncExec(new Runnable() {
+					public void run() {
+						manageModel.setVIdText(0, idV2Start, "TODO: ERROR");
+						appendTextToLogging(manageModel.getVIdText(1));
+					}
+				});
+
+			}
+		});
+		setTextFromModel(idV2Start, manageModel.getVIdText(1));
+		
 		FormData fd_idV2Start = new FormData();
 		fd_idV2Start.width = 34;
 		fd_idV2Start.top = new FormAttachment(startV2N, 0, SWT.TOP);
@@ -1983,6 +2016,20 @@ public class MainView extends ViewPart implements IPartListener2 {
 		idV2Start.setLayoutData(fd_idV2Start);
 
 		idV3Start = new Text(compositeVisitor, SWT.BORDER);
+		idV3Start.addFocusListener(new FocusAdapter() {
+			@Override
+			public void focusLost(FocusEvent e) {
+				Display.getDefault().syncExec(new Runnable() {
+					public void run() {
+						manageModel.setVIdText(0, idV3Start, "TODO: ERROR");
+						appendTextToLogging(manageModel.getVIdText(2));
+					}
+				});
+
+			}
+		});
+		setTextFromModel(idV3Start, manageModel.getVIdText(2));
+		
 		FormData fd_idV3Start = new FormData();
 		fd_idV3Start.width = 34;
 		fd_idV3Start.top = new FormAttachment(startV3N, 0, SWT.TOP);
