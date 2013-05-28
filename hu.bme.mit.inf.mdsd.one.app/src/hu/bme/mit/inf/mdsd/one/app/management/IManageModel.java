@@ -19,7 +19,7 @@ public interface IManageModel {
 	public String[] getStaffRoleItems();
 	
 	public int getAgeGroupSelection();
-	public int getMatchTyeSelection();
+	public int getMatchTypeSelection();
 	
 	
 	
@@ -151,6 +151,81 @@ startH5N    cpH5Start   idH5Start   shirtH5Start
 	
 	*/
 	
+	
+	// A Visitor csapat kezdõje:
+	
+	public String getStartV1NText();
+	public void setStartV1NText(Text text, String error);
+	
+	public String getIdV1StartText();
+	public void setIdV1StartText(Text text, String error);
+	
+	public String getShirtV1StartText();
+	public void setShirtV1StartText(Text text, String error);
+	
+	//-----------------------------------------
+	
+	public String getStartV2NText();
+	public void setStartV2NText(Text text);
+	
+	public String getIdV2StartText();
+	public void setIdV2StartText(Text text);
+	
+	public String getShirtV2StartText();
+	public void setShirtV2StartText(Text text);
+	
+	//-----------------------------------------
+	
+	public String getStartV3NText();
+	public void setStartV3NText(Text text);
+	
+	public String getIdV3StartText();
+	public void setIdV3StartText(Text text);
+	
+	public String getShirtV3StartText();
+	public void setShirtV3StartText(Text text);
+	
+	//-----------------------------------------
+	
+	public String getStartV4NText();
+	public void setStartV4NText(Text text);
+	
+	public String getIdV4StartText();
+	public void setIdV4StartText(Text text);
+	
+	public String getShirtV4StartText();
+	public void setShirtV4StartText(Text text);
+	
+	//-----------------------------------------
+	
+	public String getStartV5NText();
+	public void setStartV5NText(Text text);
+	
+	public String getIdV5StartText();
+	public void setIdV5StartText(Text text);
+	
+	public String getShirtV5StartText();
+	public void setShirtV5StartText(Text text);
+	
+	//-----------------------------------------
+
+	public String getCaptainVisitor();
+	
+	public Boolean getCpV1Start();
+	public void setCpV1Start();
+	
+	public Boolean getCpV2Start();
+	public void setCpV2Start();
+	
+	public Boolean getCpV3Start();
+	public void setCpV3Start();
+	
+	public Boolean getCpV4Start();
+	public void setCpV4Start();
+	
+	public Boolean getCpV5Start();
+	public void setCpV5Start();
+	
 	Match getMatch();
 	/* Eventek */
 	void homeGoal(Role role, int time);
@@ -167,4 +242,8 @@ startH5N    cpH5Start   idH5Start   shirtH5Start
 	public List<String[]> getEventList();
 	
 	public void getEventsToLogging();
+	
+	public void setStaffT8VCombo(Combo combo, String error);
+	public String getStaffT8VCombo();
+	public int getStaffT8VSelection();
 }

@@ -206,7 +206,7 @@ public class ManageModel implements IManageModel {
 
 		for (int i = 0; i < 5; i++) {
 			Player player = factory.createPlayer();
-			player.setShirtNo(i);
+			player.setShirtNo(i+100);
 			if (i == 0) {
 				player.setPosition(Position.GOALKEEPER);
 				match.getVisitor().setCaptain(player);				
@@ -215,8 +215,8 @@ public class ManageModel implements IManageModel {
 			}
 			TeamMember teamMember = factory.createTeamMember();
 
-			teamMember.setId(i);
-			teamMember.setName(String.format("Player %d", i));
+			teamMember.setId(i+100);
+			teamMember.setName(String.format("Player %d", i+100));
 
 			teamMember.setPlayerRole(player);
 
@@ -227,13 +227,13 @@ public class ManageModel implements IManageModel {
 		
 		for (int i = 5; i < 12; i++) {
 			Player player = factory.createPlayer();
-			player.setShirtNo(i);
+			player.setShirtNo(i+100);
 			player.setPosition(Position.FIELD_PLAYER);
 			
 			TeamMember teamMember = factory.createTeamMember();
 
-			teamMember.setId(i);
-			teamMember.setName(String.format("Player %d", i));
+			teamMember.setId(i+100);
+			teamMember.setName(String.format("Player %d", i+100));
 
 			teamMember.setPlayerRole(player);
 
@@ -241,11 +241,26 @@ public class ManageModel implements IManageModel {
 			
 		}
 		
+		for (int i = 12; i < 20; i++) {
+			StaffMember staffmember = factory.createStaffMember();
+			staffmember.setRole(StaffRole.OTHER);
+			
+			TeamMember teamMember = factory.createTeamMember();
+			
+			teamMember.setId(i+100);
+			teamMember.setName(String.format("Staffmember %d", i+100));
+			
+			teamMember.setStaffRole(staffmember);
+			
+			match.getVisitor().getMembers().add(teamMember);
+		}
+		
+		/*
 		homeGoal(match.getHome().getMembers().get(0).getPlayerRole(), 123);
 		homeRedCard(match.getHome().getMembers().get(0).getPlayerRole(), 124);
 		homeRedCardWithBan(match.getHome().getMembers().get(0).getPlayerRole(), 125);
 		homeYellowCard(match.getHome().getMembers().get(0).getPlayerRole(), 126);
-		
+		*/
 	}
 
 	/**
@@ -715,7 +730,7 @@ public class ManageModel implements IManageModel {
 	}
 
 	@Override
-	public int getMatchTyeSelection() {
+	public int getMatchTypeSelection() {
 		return match.getType().getValue();
 	}
 
@@ -906,5 +921,304 @@ public class ManageModel implements IManageModel {
 		
 		return result;
 	}
+
+	@Override
+	public int getStaffT8VSelection() {
+		return match.getVisitor().getStaff().get(7).getRole().getValue();
+	}
+	
+	@Override
+	public String getStaffT8VCombo() {
+		return match.getVisitor().getStaff().get(7).getRole().toString();
+	}
+
+	@Override
+	public void setStaffT8VCombo(Combo combo, String error) {
+
+		int cs = combo.getSelectionIndex();
+
+		Boolean valid = true; // Ide kerül majd a validátor
+		if (valid) {
+			match.getVisitor().getStaff().get(7).setRole(StaffRole.get(cs));
+			combo.setBackground(green);
+		} else {
+			view.appendTextToLogging(error);
+			combo.setBackground(red);
+		}
+
+	}
+
+
+	public String getStartV1NText() {
+		return match.getVisitor().getStartingLine().get(0).getName();
+	}
+
+	@Override
+	public void setStartV1NText(Text text, String error) {
+		Boolean valid = true; // Ide kerül majd a validátor
+		if (valid) {
+			match.getVisitor().getMembers().get(0).setName(text.getText());
+			text.setBackground(green);
+		} else {
+			view.appendTextToLogging(error);
+			text.setBackground(red);
+		}
+
+	}
+
+	@Override
+	public String getIdV1StartText() {
+		return String.valueOf(match.getVisitor().getMembers().get(0).getId());
+	}
+
+	@Override
+	public void setIdV1StartText(Text text, String error) {
+		Boolean valid = true; // Ide kerül majd a validátor
+		if (valid) {
+			try {
+				match.getVisitor().getMembers().get(0)
+						.setId(Integer.parseInt((text.getText())));
+				text.setBackground(green);
+			} catch (Exception e) {
+				text.setBackground(red);
+				view.appendTextToLogging(e.toString());
+				view.appendTextToLogging(error);
+			}
+
+		} else {
+			view.appendTextToLogging(error);
+			text.setBackground(red);
+		}
+
+	}
+
+	@Override
+	public String getShirtV1StartText() {
+		return String.valueOf(match.getVisitor().getStartingLine().get(0)
+				.getShirtNo());
+	}
+
+	@Override
+	public void setShirtV1StartText(Text text, String error) {
+		Boolean valid = true; // Ide kerül majd a validátor
+		if (valid) {
+			try {
+				match.getVisitor().getStartingLine().get(0)
+						.setShirtNo(Integer.parseInt(text.getText()));
+				text.setBackground(green);
+			} catch (Exception e) {
+				text.setBackground(red);
+				view.appendTextToLogging(e.toString());
+				view.appendTextToLogging(error);
+			}
+
+		} else {
+			view.appendTextToLogging(error);
+			text.setBackground(red);
+		}
+
+	}
+
+	@Override
+	public String getStartV2NText() {
+		return match.getVisitor().getStartingLine().get(1).getName();
+	}
+
+	@Override
+	public void setStartV2NText(Text text) {
+		match.getVisitor().getMembers().get(1).setName(text.getText());
+	}
+
+	@Override
+	public String getIdV2StartText() {
+		return String.valueOf(match.getVisitor().getMembers().get(1).getId());
+	}
+
+	@Override
+	public void setIdV2StartText(Text text) {
+		match.getVisitor().getMembers().get(1)
+				.setId(Integer.parseInt((text.getText())));
+
+	}
+
+	@Override
+	public String getShirtV2StartText() {
+		return String.valueOf(match.getVisitor().getStartingLine().get(1)
+				.getShirtNo());
+	}
+
+	@Override
+	public void setShirtV2StartText(Text text) {
+		match.getVisitor().getStartingLine().get(1)
+				.setShirtNo(Integer.parseInt(text.getText()));
+
+	}
+
+	@Override
+	public String getStartV3NText() {
+		return match.getVisitor().getStartingLine().get(2).getName();
+	}
+
+	@Override
+	public void setStartV3NText(Text text) {
+		match.getVisitor().getMembers().get(2).setName(text.getText());
+
+	}
+
+	@Override
+	public String getIdV3StartText() {
+		return String.valueOf(match.getVisitor().getMembers().get(2).getId());
+	}
+
+	@Override
+	public void setIdV3StartText(Text text) {
+		match.getVisitor().getMembers().get(2)
+				.setId(Integer.parseInt((text.getText())));
+
+	}
+
+	@Override
+	public String getShirtV3StartText() {
+		return String.valueOf(match.getVisitor().getStartingLine().get(2)
+				.getShirtNo());
+	}
+
+	@Override
+	public void setShirtV3StartText(Text text) {
+		match.getVisitor().getStartingLine().get(2)
+				.setShirtNo(Integer.parseInt(text.getText()));
+
+	}
+
+	@Override
+	public String getStartV4NText() {
+		return match.getVisitor().getStartingLine().get(3).getName();
+	}
+
+	@Override
+	public void setStartV4NText(Text text) {
+		match.getVisitor().getMembers().get(3).setName(text.getText());
+	}
+
+	@Override
+	public String getIdV4StartText() {
+		return String.valueOf(match.getVisitor().getMembers().get(3).getId());
+	}
+
+	@Override
+	public void setIdV4StartText(Text text) {
+		match.getVisitor().getMembers().get(3)
+				.setId(Integer.parseInt((text.getText())));
+
+	}
+
+	@Override
+	public String getShirtV4StartText() {
+		return String.valueOf(match.getVisitor().getStartingLine().get(3)
+				.getShirtNo());
+	}
+
+	@Override
+	public void setShirtV4StartText(Text text) {
+		match.getVisitor().getStartingLine().get(3)
+				.setShirtNo(Integer.parseInt(text.getText()));
+
+	}
+
+	@Override
+	public String getStartV5NText() {
+		return match.getVisitor().getStartingLine().get(4).getName();
+	}
+
+	@Override
+	public void setStartV5NText(Text text) {
+		match.getVisitor().getMembers().get(4).setName(text.getText());
+
+	}
+
+	@Override
+	public String getIdV5StartText() {
+		return String.valueOf(match.getVisitor().getMembers().get(4).getId());
+	}
+
+	@Override
+	public void setIdV5StartText(Text text) {
+		match.getVisitor().getMembers().get(4)
+				.setId(Integer.parseInt((text.getText())));
+
+	}
+
+	@Override
+	public String getShirtV5StartText() {
+		return String.valueOf(match.getVisitor().getStartingLine().get(4)
+				.getShirtNo());
+	}
+
+	@Override
+	public void setShirtV5StartText(Text text) {
+		match.getVisitor().getStartingLine().get(4)
+				.setShirtNo(Integer.parseInt(text.getText()));
+
+	}
+
+    public String getCaptainVisitor() {
+		return match.getVisitor().getCaptain().getName();
+	}
+
+	@Override
+	public Boolean getCpV1Start() {
+		return match.getVisitor().getStartingLine().get(0)
+				.equals(match.getVisitor().getCaptain());
+	}
+
+	@Override
+	public void setCpV1Start() {
+		match.getVisitor().setCaptain(match.getVisitor().getStartingLine().get(0));
+	}
+
+	@Override
+	public Boolean getCpV2Start() {
+		return match.getVisitor().getStartingLine().get(1)
+				.equals(match.getVisitor().getCaptain());
+	}
+
+	@Override
+	public void setCpV2Start() {
+		match.getVisitor().setCaptain(match.getVisitor().getStartingLine().get(1));
+	}
+
+	@Override
+	public Boolean getCpV3Start() {
+		return match.getVisitor().getStartingLine().get(2)
+				.equals(match.getVisitor().getCaptain());
+	}
+
+	@Override
+	public void setCpV3Start() {
+		match.getVisitor().setCaptain(match.getVisitor().getStartingLine().get(2));
+	}
+
+	@Override
+	public Boolean getCpV4Start() {
+		return match.getVisitor().getStartingLine().get(3)
+				.equals(match.getVisitor().getCaptain());
+	}
+
+	@Override
+	public void setCpV4Start() {
+		match.getVisitor().setCaptain(match.getVisitor().getStartingLine().get(3));
+	}
+
+	@Override
+	public Boolean getCpV5Start() {
+		return match.getVisitor().getStartingLine().get(4)
+				.equals(match.getVisitor().getCaptain());
+	}
+
+	@Override
+	public void setCpV5Start() {
+		match.getVisitor().setCaptain(match.getVisitor().getStartingLine().get(4));
+	}
+
 
 }

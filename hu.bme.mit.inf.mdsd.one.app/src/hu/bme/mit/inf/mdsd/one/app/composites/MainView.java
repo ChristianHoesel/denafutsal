@@ -586,7 +586,7 @@ public class MainView extends ViewPart implements IPartListener2 {
 					appendTextToLogging(manageModel.getMatchTypeCombo());
 				}
 			});
-			matchtype.select(manageModel.getMatchTyeSelection());
+			matchtype.select(manageModel.getMatchTypeSelection());
 
 			FormData fd_matchtype = new FormData();
 			fd_matchtype.left = new FormAttachment(address, 0, SWT.LEFT);
@@ -1653,6 +1653,20 @@ public class MainView extends ViewPart implements IPartListener2 {
 		lblStartinglineVisitor.setText("Starting line");
 
 		startV1N = new Text(compositeVisitor, SWT.BORDER);
+		startV1N.addFocusListener(new FocusAdapter() {
+			@Override
+			public void focusLost(FocusEvent e) {
+				Display.getDefault().syncExec(new Runnable() {
+					public void run() {
+						manageModel.setStartV1NText(startV1N, "TODO: ERROR");
+						appendTextToLogging(manageModel.getStartV1NText());
+					}
+				});
+
+			}
+		});
+		setTextFromModel(startV1N, manageModel.getStartV1NText());
+		
 		FormData fd_startV1N = new FormData();
 		fd_startV1N.width = 120;
 		fd_startV1N.top = new FormAttachment(lblStartinglineVisitor, 6);
@@ -1660,6 +1674,20 @@ public class MainView extends ViewPart implements IPartListener2 {
 		startV1N.setLayoutData(fd_startV1N);
 
 		startV2N = new Text(compositeVisitor, SWT.BORDER);
+		startV2N.addFocusListener(new FocusAdapter() {
+			@Override
+			public void focusLost(FocusEvent e) {
+				Display.getDefault().syncExec(new Runnable() {
+					public void run() {
+						manageModel.setStartV2NText(startV2N);
+						appendTextToLogging(manageModel.getStartV2NText());
+					}
+				});
+
+			}
+		});
+		setTextFromModel(startV2N, manageModel.getStartV2NText());
+		
 		FormData fd_startV2N = new FormData();
 		fd_startV2N.width = 120;
 		fd_startV2N.top = new FormAttachment(startV1N, 6);
@@ -1667,6 +1695,20 @@ public class MainView extends ViewPart implements IPartListener2 {
 		startV2N.setLayoutData(fd_startV2N);
 
 		startV3N = new Text(compositeVisitor, SWT.BORDER);
+		startV3N.addFocusListener(new FocusAdapter() {
+			@Override
+			public void focusLost(FocusEvent e) {
+				Display.getDefault().syncExec(new Runnable() {
+					public void run() {
+						manageModel.setStartV3NText(startV3N);
+						appendTextToLogging(manageModel.getStartV3NText());
+					}
+				});
+
+			}
+		});
+		setTextFromModel(startV3N, manageModel.getStartV3NText());
+		
 		FormData fd_startV3N = new FormData();
 		fd_startV3N.width = 120;
 		fd_startV3N.top = new FormAttachment(startV2N, 6);
@@ -1674,6 +1716,20 @@ public class MainView extends ViewPart implements IPartListener2 {
 		startV3N.setLayoutData(fd_startV3N);
 
 		startV4N = new Text(compositeVisitor, SWT.BORDER);
+		startV4N.addFocusListener(new FocusAdapter() {
+			@Override
+			public void focusLost(FocusEvent e) {
+				Display.getDefault().syncExec(new Runnable() {
+					public void run() {
+						manageModel.setStartV4NText(startV4N);
+						appendTextToLogging(manageModel.getStartV4NText());
+					}
+				});
+
+			}
+		});
+		setTextFromModel(startV4N, manageModel.getStartV4NText());
+		
 		FormData fd_startV4N = new FormData();
 		fd_startV4N.width = 120;
 		fd_startV4N.top = new FormAttachment(startV3N, 6);
@@ -1681,6 +1737,20 @@ public class MainView extends ViewPart implements IPartListener2 {
 		startV4N.setLayoutData(fd_startV4N);
 
 		startV5N = new Text(compositeVisitor, SWT.BORDER);
+		startV5N.addFocusListener(new FocusAdapter() {
+			@Override
+			public void focusLost(FocusEvent e) {
+				Display.getDefault().syncExec(new Runnable() {
+					public void run() {
+						manageModel.setStartV5NText(startV5N);
+						appendTextToLogging(manageModel.getStartV5NText());
+					}
+				});
+
+			}
+		});
+		setTextFromModel(startV5N, manageModel.getStartV5NText());
+		
 		FormData fd_startV5N = new FormData();
 		fd_startV5N.width = 120;
 		fd_startV5N.top = new FormAttachment(startV4N, 6);
@@ -2244,6 +2314,17 @@ public class MainView extends ViewPart implements IPartListener2 {
 
 		staffT8V = new Combo(compositeVisitor, SWT.NONE);
 		staffT8V.setItems(manageModel.getStaffRoleItems());
+		
+		//TODO
+		staffT8V.addFocusListener(new FocusAdapter() {
+			@Override
+			public void focusLost(FocusEvent e) {
+				manageModel.setStaffT8VCombo(staffT8V, "TODO: ERROR");
+				appendTextToLogging(manageModel.getStaffT8VCombo());
+			}
+		});
+		staffT8V.select(manageModel.getStaffT8VSelection());
+		
 		FormData fd_staffT8V = new FormData();
 		fd_staffT8V.top = new FormAttachment(staffV8N, 0, SWT.TOP);
 		fd_staffT8V.left = new FormAttachment(idV8Staff, 6);
