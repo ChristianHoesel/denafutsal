@@ -66,8 +66,13 @@ public interface IManageModel {
 	public String getStartH1NText();
 	public void setStartH1NText(Text text, String error);
 	
+	// TODO: Ez a kettõ a fõ metódus most
 	public String getHNText(int id);
 	public void setHNText(int id, Text text, String error);
+	
+	// TODO: Ezek a visitorhoz mennek:
+	public String getVNText(int id);
+	public void setVNText(int id, Text text, String error);
 	
 	public String getIdH1StartText();
 	public void setIdH1StartText(Text text, String error);

@@ -508,16 +508,38 @@ public class ManageModel implements IManageModel {
 
 	}
 	
+	// TODO: Ez elvileg így jó lesz:
 	@Override
 	public String getHNText(int id) {
 		return match.getHome().getStartingLine().get(id).getName();
 	}
 
+	// TODO: Ez elvileg így jó lesz:
 	@Override
 	public void setHNText(int id, Text text, String error) {
 		Boolean valid = true; // Ide kerül majd a validátor
 		if (valid) {
 			match.getHome().getMembers().get(id).setName(text.getText());
+			text.setBackground(green);
+		} else {
+			view.appendTextToLogging(error);
+			text.setBackground(red);
+		}
+
+	}
+	
+	// TODO: Ez elvileg így jó lesz:
+	@Override
+	public String getVNText(int id) {
+		return match.getVisitor().getStartingLine().get(id).getName();
+	}
+
+	// TODO: Ez elvileg így jó lesz:
+	@Override
+	public void setVNText(int id, Text text, String error) {
+		Boolean valid = true; // Ide kerül majd a validátor
+		if (valid) {
+			match.getVisitor().getMembers().get(id).setName(text.getText());
 			text.setBackground(green);
 		} else {
 			view.appendTextToLogging(error);

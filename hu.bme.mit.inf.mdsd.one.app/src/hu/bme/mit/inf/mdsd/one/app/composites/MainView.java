@@ -797,14 +797,15 @@ public class MainView extends ViewPart implements IPartListener2 {
 			public void focusLost(FocusEvent e) {
 				Display.getDefault().syncExec(new Runnable() {
 					public void run() {
-						manageModel.setStartH3NText(startH3N);
-						appendTextToLogging(manageModel.getStartH3NText());
+						manageModel.setHNText(2, startH3N, "TODO: ERROR");
+						appendTextToLogging(manageModel.getHNText(2));
 					}
 				});
 
 			}
 		});
-		setTextFromModel(startH3N, manageModel.getStartH3NText());
+		setTextFromModel(startH3N, manageModel.getHNText(2));
+		
 		FormData fd_startH3N = new FormData();
 		fd_startH3N.width = 120;
 		fd_startH3N.top = new FormAttachment(startH2N, 6);
@@ -817,14 +818,15 @@ public class MainView extends ViewPart implements IPartListener2 {
 			public void focusLost(FocusEvent e) {
 				Display.getDefault().syncExec(new Runnable() {
 					public void run() {
-						manageModel.setStartH4NText(startH4N);
-						appendTextToLogging(manageModel.getStartH4NText());
+						manageModel.setHNText(3, startH4N, "TODO: ERROR");
+						appendTextToLogging(manageModel.getHNText(3));
 					}
 				});
 
 			}
 		});
-		setTextFromModel(startH4N, manageModel.getStartH4NText());
+		setTextFromModel(startH4N, manageModel.getHNText(3));
+		
 		FormData fd_startH4N = new FormData();
 		fd_startH4N.width = 120;
 		fd_startH4N.top = new FormAttachment(startH3N, 6);
@@ -837,14 +839,15 @@ public class MainView extends ViewPart implements IPartListener2 {
 			public void focusLost(FocusEvent e) {
 				Display.getDefault().syncExec(new Runnable() {
 					public void run() {
-						manageModel.setStartH5NText(startH5N);
-						appendTextToLogging(manageModel.getStartH5NText());
+						manageModel.setHNText(4, startH5N, "TODO: ERROR");
+						appendTextToLogging(manageModel.getHNText(4));
 					}
 				});
 
 			}
 		});
-		setTextFromModel(startH5N, manageModel.getStartH5NText());
+		setTextFromModel(startH5N, manageModel.getHNText(4));
+		
 		FormData fd_startH5N = new FormData();
 		fd_startH5N.width = 120;
 		fd_startH5N.top = new FormAttachment(startH4N, 6);
@@ -1660,14 +1663,14 @@ public class MainView extends ViewPart implements IPartListener2 {
 			public void focusLost(FocusEvent e) {
 				Display.getDefault().syncExec(new Runnable() {
 					public void run() {
-						manageModel.setStartV1NText(startV1N, "TODO: ERROR");
-						appendTextToLogging(manageModel.getStartV1NText());
+						manageModel.setVNText(0, startV1N, "TODO: ERROR");
+						appendTextToLogging(manageModel.getVNText(0));
 					}
 				});
 
 			}
 		});
-		setTextFromModel(startV1N, manageModel.getStartV1NText());
+		setTextFromModel(startV1N, manageModel.getVNText(0));
 		
 		FormData fd_startV1N = new FormData();
 		fd_startV1N.width = 120;
@@ -1681,14 +1684,14 @@ public class MainView extends ViewPart implements IPartListener2 {
 			public void focusLost(FocusEvent e) {
 				Display.getDefault().syncExec(new Runnable() {
 					public void run() {
-						manageModel.setStartV2NText(startV2N);
-						appendTextToLogging(manageModel.getStartV2NText());
+						manageModel.setVNText(1, startV2N, "TODO: ERROR");
+						appendTextToLogging(manageModel.getVNText(1));
 					}
 				});
 
 			}
 		});
-		setTextFromModel(startV2N, manageModel.getStartV2NText());
+		setTextFromModel(startV2N, manageModel.getVNText(1));
 		
 		FormData fd_startV2N = new FormData();
 		fd_startV2N.width = 120;
@@ -1702,14 +1705,14 @@ public class MainView extends ViewPart implements IPartListener2 {
 			public void focusLost(FocusEvent e) {
 				Display.getDefault().syncExec(new Runnable() {
 					public void run() {
-						manageModel.setStartV3NText(startV3N);
-						appendTextToLogging(manageModel.getStartV3NText());
+						manageModel.setVNText(2, startV3N, "TODO: ERROR");
+						appendTextToLogging(manageModel.getVNText(2));
 					}
 				});
 
 			}
 		});
-		setTextFromModel(startV3N, manageModel.getStartV3NText());
+		setTextFromModel(startV3N, manageModel.getVNText(2));
 		
 		FormData fd_startV3N = new FormData();
 		fd_startV3N.width = 120;
@@ -1723,14 +1726,14 @@ public class MainView extends ViewPart implements IPartListener2 {
 			public void focusLost(FocusEvent e) {
 				Display.getDefault().syncExec(new Runnable() {
 					public void run() {
-						manageModel.setStartV4NText(startV4N);
-						appendTextToLogging(manageModel.getStartV4NText());
+						manageModel.setVNText(3, startV4N, "TODO: ERROR");
+						appendTextToLogging(manageModel.getVNText(3));
 					}
 				});
 
 			}
 		});
-		setTextFromModel(startV4N, manageModel.getStartV4NText());
+		setTextFromModel(startV4N, manageModel.getVNText(3));
 		
 		FormData fd_startV4N = new FormData();
 		fd_startV4N.width = 120;
@@ -1744,14 +1747,14 @@ public class MainView extends ViewPart implements IPartListener2 {
 			public void focusLost(FocusEvent e) {
 				Display.getDefault().syncExec(new Runnable() {
 					public void run() {
-						manageModel.setStartV5NText(startV5N);
-						appendTextToLogging(manageModel.getStartV5NText());
+						manageModel.setVNText(4, startV5N, "TODO: ERROR");
+						appendTextToLogging(manageModel.getVNText(4));
 					}
 				});
 
 			}
 		});
-		setTextFromModel(startV5N, manageModel.getStartV5NText());
+		setTextFromModel(startV5N, manageModel.getVNText(4));
 		
 		FormData fd_startV5N = new FormData();
 		fd_startV5N.width = 120;
@@ -2363,6 +2366,7 @@ public class MainView extends ViewPart implements IPartListener2 {
 		staffT8V.setItems(manageModel.getStaffRoleItems());
 		
 		//TODO
+		/*
 		staffT8V.addFocusListener(new FocusAdapter() {
 			@Override
 			public void focusLost(FocusEvent e) {
@@ -2371,6 +2375,7 @@ public class MainView extends ViewPart implements IPartListener2 {
 			}
 		});
 		staffT8V.select(manageModel.getStaffT8VSelection());
+		*/
 		
 		FormData fd_staffT8V = new FormData();
 		fd_staffT8V.top = new FormAttachment(staffV8N, 0, SWT.TOP);
