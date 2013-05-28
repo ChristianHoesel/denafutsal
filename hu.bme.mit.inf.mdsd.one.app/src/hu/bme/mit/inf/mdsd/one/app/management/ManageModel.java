@@ -15,14 +15,20 @@ import model.Event;
 import model.EventType;
 import model.Match;
 import model.ModelFactory;
+import model.Person;
+import model.Player;
+import model.Position;
 import model.Role;
 import model.StaffMember;
 import model.StaffRole;
+import model.Team;
+import model.TeamMember;
 import model.Type;
 
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
+import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.swt.graphics.Color;
 import org.eclipse.swt.graphics.Device;
 import org.eclipse.swt.widgets.Combo;
@@ -102,10 +108,10 @@ public class ManageModel implements IManageModel {
 		factory = ModelFactory.eINSTANCE;
 
 		/* Teszteléshez, majd ezt innen kiszedheted nyugodtan */
-		 match =
-		 ManageModelHelper.readModelFromFile(ManageModelHelper.TESTMODEL);
+		 //match =
+		 //ManageModelHelper.readModelFromFile(ManageModelHelper.TESTMODEL);
 		/**/
-/*
+
 		ResourceSet rSet = new ResourceSetImpl();
 		Resource resource = rSet.createResource(URI.createURI("models.model"));
 		
@@ -239,7 +245,7 @@ public class ManageModel implements IManageModel {
 		homeRedCard(match.getHome().getMembers().get(0).getPlayerRole(), 124);
 		homeRedCardWithBan(match.getHome().getMembers().get(0).getPlayerRole(), 125);
 		homeYellowCard(match.getHome().getMembers().get(0).getPlayerRole(), 126);
-		*/
+		
 	}
 
 	/**
