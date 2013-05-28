@@ -185,4 +185,31 @@ public class GeneratorHelper {
 
 		return file;
 	}
+	
+	public static File createTex(String fileName,
+			CharSequence content) throws IOException {
+		
+		File file = new File(fileName);
+
+		if (file.exists())
+			file.delete();
+
+		FileOutputStream fop = null;
+
+		fop = new FileOutputStream(file);
+
+		if (!file.exists()) {
+			file.createNewFile();
+		}
+
+		byte[] contentInBytes = content.toString().getBytes();
+
+		fop.write(contentInBytes);
+		fop.flush();
+		fop.close();
+
+		fop.close();
+
+		return file;
+	}
 }

@@ -20,6 +20,10 @@ class MatchGenerator {
 	def generateDataModelToOutputFolder(Match dataModel, String folder) {
        GeneratorHelper::createFiletoOutputFolder(folder,  dataModel.id.toString, dataModel.compile); 
     }
+    
+    def generateTex(Match dataModel, String filename) {
+       GeneratorHelper::createTex(filename, dataModel.compileTex); 
+    }
 	
 	def get_goals(Event e) '''
 	<div class="MOff" style="cursor: pointer; width: 350;" onMouseOut="this.className='MOff';" onmouseover="this.className='MOn_1';" OnClick="jatekos_nez_p01_jegyzokonyv_nez_2('«e.committer.id»');">
@@ -600,4 +604,35 @@ function jatekos_nez_p01_jegyzokonyv_nez_2(be_01)
 </html>
 
 	'''
+
+def compileTex(Match match) '''
+\documentclass[10pt,a4paper]{article}
+\usepackage[utf8x]{inputenc}
+\usepackage{ucs}
+\usepackage[magyar]{babel}
+\usepackage[T1]{fontenc}
+\author{Futsalgen}
+\begin{document}
+\begin{verbatim}
+<table border="0" cellpadding="0" cellspacing="0" style="border-collapse: collapse">
+   <tr>
+      <td class="URES_BARNA" width="10"></td>
+      <td class="FEHER_BARNA_CL13" width="360" height="30"><b>«match.type»</b></td>
+      <td class="FEHER_BARNA_CR13" width="340"><b>Magyar Labdarúgó Szövetség</b></td>
+      <td class="URES_BARNA" width="10"></td>
+   </tr>
+</table> 
+<table border="0" cellpadding="0" cellspacing="0" style="border-collapse: collapse">
+   <tr>
+      <td class="URES_HATTER_1" width="10"></td>
+      <td class="BARNA_HATTER_1_CL13" width="220" height="25">«get_date(match)»<b></b></td>
+      <td class="BARNA_HATTER_1_CR13" width="500"><b>«match.location»</b></td>
+      <td class="URES_HATTER_1" width="10"></td>
+   </tr>
+</table>
+\end{verbatim}
+\end{document}
+'''
+
 }
+
