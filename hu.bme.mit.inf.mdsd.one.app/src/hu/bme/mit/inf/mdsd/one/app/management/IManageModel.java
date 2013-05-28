@@ -1,5 +1,8 @@
 package hu.bme.mit.inf.mdsd.one.app.management;
 
+import java.util.List;
+
+import model.Event;
 import model.Match;
 import model.Role;
 
@@ -159,7 +162,9 @@ startH5N    cpH5Start   idH5Start   shirtH5Start
 	void homeRedCardWithBan(Role role, int time);
 	void visitorRedCardWithBan(Role role, int time);
 	
-	void generateReport();
+	public String[] getEvent(Event event);
+	
+	public List<String[]> getEventList();
 	
 	public void getEventsToLogging();
 }

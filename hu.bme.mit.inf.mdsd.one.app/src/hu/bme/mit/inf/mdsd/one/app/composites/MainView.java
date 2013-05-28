@@ -27,6 +27,8 @@ import org.eclipse.swt.widgets.ExpandItem;
 import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Listener;
 import org.eclipse.swt.widgets.Table;
+import org.eclipse.swt.widgets.TableColumn;
+import org.eclipse.swt.widgets.TableItem;
 import org.eclipse.swt.widgets.Text;
 import org.eclipse.ui.IPartListener2;
 import org.eclipse.ui.IWorkbenchPage;
@@ -371,6 +373,38 @@ public class MainView extends ViewPart implements IPartListener2 {
 
 				text.setText(modelText);
 
+			}
+		});
+	}
+	
+	public void updateTable() {
+
+		Display.getDefault().syncExec(new Runnable() {
+			public void run() {
+				table.removeAll();
+				String[] titles = { "Perc", "Esemény", "Csapat", "Játékos" };
+				for (int loopIndex = 0; loopIndex < titles.length; loopIndex++) {
+					TableColumn column = new TableColumn(table, SWT.NULL);
+					column.setText(titles[loopIndex]);
+				}
+
+				for (int loopIndex = 0; loopIndex < manageModel.getEventList()
+						.size(); loopIndex++) {
+					TableItem item = new TableItem(table, SWT.NULL);
+					item.setText(0,
+							manageModel.getEventList().get(loopIndex)[0]);
+					item.setText(1,
+							manageModel.getEventList().get(loopIndex)[1]);
+					item.setText(2,
+							manageModel.getEventList().get(loopIndex)[2]);
+					item.setText(3,
+							manageModel.getEventList().get(loopIndex)[3]);
+
+				}
+
+				for (int loopIndex = 0; loopIndex < titles.length; loopIndex++) {
+					table.getColumn(loopIndex).pack();
+				}
 			}
 		});
 	}
@@ -2473,6 +2507,8 @@ public class MainView extends ViewPart implements IPartListener2 {
 		fd_btnTOHome.top = new FormAttachment(btnRedHome, 6);
 		fd_btnTOHome.left = new FormAttachment(btnRedHome, 0, SWT.LEFT);
 		btnTOHome.setLayoutData(fd_btnTOHome);
+		
+		// Események táblája:
 
 		table = new Table(compositeMain, SWT.BORDER | SWT.FULL_SELECTION);
 		FormData fd_table = new FormData();
@@ -2483,6 +2519,8 @@ public class MainView extends ViewPart implements IPartListener2 {
 		table.setLayoutData(fd_table);
 		table.setHeaderVisible(true);
 		table.setLinesVisible(true);
+		
+		updateTable();
 
 		compositeMiddle.setSize(compositeMiddle.computeSize(SWT.DEFAULT,
 				SWT.DEFAULT));

@@ -818,25 +818,6 @@ public class ManageModel implements IManageModel {
 	public void setCpH5Start() {
 		match.getHome().setCaptain(match.getHome().getStartingLine().get(4));
 	}
-
-	@Override
-	public void generateReport() {
-
-		// TODO: ezen még ügyködni kell
-
-		System.out.println(match.eResource());
-
-		Resource resource = match.eResource();
-		ResourceSet resourceSet = resource.getResourceSet();
-
-		File tempFile = new File("match.obj");
-		Resource complete_resource = resourceSet.createResource(URI
-				.createFileURI(tempFile.getAbsolutePath()));
-
-		MatchGenerator generator = new MatchGenerator();
-		generator.generateDataModel(match);
-	}
-
 	
 	public void addNewEvent(Role role, int time, EventType et) {
 		Event event = factory.createEvent();
@@ -895,6 +876,35 @@ public class ManageModel implements IManageModel {
 		for (int i = 0; i < event_list.size(); i++) {
 			view.appendTextToLogging(event_list.get(i).toString());
 		}
+	}
+
+	@Override
+	public String[] getEvent(Event event) {
+		int event_id = match.getEvents().indexOf(event);
+		
+		Event e = match.getEvents().get(event_id);
+		String e_time = Long.toString(e.getTime()/60);
+		String e_type = e.getType().toString();
+		String e_team = e.getCommitter().getTeam().getName();
+		String e_commiter = e.getCommitter().getName();
+		
+		String[] result = {e_time, e_type, e_team, e_commiter};
+		
+		return result;
+		
+	}
+
+	@Override
+	public List<String[]> getEventList() {
+		
+		List<String[]> result = new ArrayList<>();
+		
+		List<Event> event_list = match.getEvents();
+		for (int i = 0; i < event_list.size(); i++) {
+			result.add(getEvent(event_list.get(i)));
+		}
+		
+		return result;
 	}
 
 }

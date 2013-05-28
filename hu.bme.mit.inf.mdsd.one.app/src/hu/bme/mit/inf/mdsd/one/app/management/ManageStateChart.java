@@ -306,6 +306,7 @@ public class ManageStateChart implements IManageStateChart {
 				Role role = (Role) dialog.open();
 				view.getManageModel().homeYellowCard(role,
 						helper.getCurrentMatchTime());
+				view.updateTable();
 			}
 		});
 	}
@@ -326,6 +327,7 @@ public class ManageStateChart implements IManageStateChart {
 				Role role = (Role) dialog.open();
 				view.getManageModel().visitorYellowCard(role,
 						helper.getCurrentMatchTime());
+				view.updateTable();
 			}
 		});
 	}
@@ -372,6 +374,7 @@ public class ManageStateChart implements IManageStateChart {
 
 				view.getManageModel().homeRedCard(role,
 						helper.getCurrentMatchTime());
+				view.updateTable();
 			}
 		});
 
@@ -419,6 +422,7 @@ public class ManageStateChart implements IManageStateChart {
 
 				view.getManageModel().visitorRedCard(role,
 						helper.getCurrentMatchTime());
+				view.updateTable();
 			}
 		});
 	}
@@ -447,6 +451,7 @@ public class ManageStateChart implements IManageStateChart {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
+				view.updateTable();
 			}
 		});
 	}
@@ -475,6 +480,7 @@ public class ManageStateChart implements IManageStateChart {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
+				view.updateTable();
 			}
 		});
 	}
