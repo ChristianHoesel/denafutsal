@@ -8,3 +8,6 @@ Require-Bundle: org.eclipse.ui,
  org.eclipse.core.runtime
 Bundle-ActivationPolicy: lazy
 Bundle-RequiredExecutionEnvironment: JavaSE-1.7
+Export-Package: hu.bme.mit.inf.mdsd.one.rest
+Bundle-ClassPath: jersey-bundle-1.17.jar,
+ .
