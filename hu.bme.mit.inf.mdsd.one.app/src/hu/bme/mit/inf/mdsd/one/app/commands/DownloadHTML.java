@@ -36,9 +36,7 @@ public class DownloadHTML extends AbstractHandler {
 			return null;
 		
 		MDSDClient mdsdClient = new MDSDClient();
-		
-		//TODO: cb08dc5ccffde7ec9e13befa8697a74d
-		
+				
 		String htmlId = "cb08dc5ccffde7ec9e13befa8697a74d";
 				
 		try {
@@ -60,5 +58,4 @@ public class DownloadHTML extends AbstractHandler {
 		
 		return null;
 	}
-
 }

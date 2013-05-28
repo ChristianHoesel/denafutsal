@@ -76,5 +76,4 @@ public class UploadHTML extends AbstractHandler {
 
 		return null;
 	}
-
 }

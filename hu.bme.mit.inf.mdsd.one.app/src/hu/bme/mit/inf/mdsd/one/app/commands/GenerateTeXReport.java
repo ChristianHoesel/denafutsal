@@ -21,14 +21,6 @@ public class GenerateTeXReport extends AbstractHandler {
 
 	@Override
 	public Object execute(ExecutionEvent event) throws ExecutionException {
-
-		// IPreferenceStore preferenceStore = PlatformUI.getPreferenceStore();
-		// System.out.println("FRDF " +
-		// preferenceStore.getString(PreferencesPage.OUT_FOLD));
-		// generator.generateDataModelToOutputFolder(model,
-		// preferenceStore.getString(PreferencesPage.OUT_FOLD));
-		
-		//TODO: Megcsinálni rendesen
 		
 		MainView activePart = (MainView) HandlerUtil.getActivePart(event);
 		Match model = activePart.getModel();
@@ -45,7 +37,7 @@ public class GenerateTeXReport extends AbstractHandler {
 
 		IWorkbenchPage activePage = HandlerUtil.getActiveWorkbenchWindow(event)
 				.getActivePage();
-		activePage.hideView(activePage.findView(MainView.ID));
+		//activePage.hideView(activePage.findView(MainView.ID));
 		try {
 			activePage.showView(MainView.ID);
 		} catch (PartInitException e) {
@@ -54,8 +46,6 @@ public class GenerateTeXReport extends AbstractHandler {
 		}
 		
 		MatchGenerator generator = new MatchGenerator();
-		//System.out.println("FRDF " + preferenceStore.getString(PreferencesPage.OUT_FOLD));
-		//generator.generateDataModelToOutputFolder(model, preferenceStore.getString(PreferencesPage.OUT_FOLD));
 		generator.generateTex(model, selected);
 
 		
