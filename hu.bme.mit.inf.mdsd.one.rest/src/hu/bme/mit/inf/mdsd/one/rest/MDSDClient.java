@@ -140,6 +140,42 @@ public class MDSDClient {
 		}
 	}
 	
+	public void writeStream(String fileName, InputStream content) {
+		FileOutputStream fop = null;
+		File file;
+
+		try {
+			file = new File(fileName);
+			fop = new FileOutputStream(file);
+
+			if (!file.exists()) {
+				file.createNewFile();
+			}
+
+			int i;
+
+			while ((i = content.read()) != -1) {
+			    fop.write(i);
+			}
+
+			content.close();
+			
+			fop.flush();
+			fop.close();
+
+		} catch (IOException e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if (fop != null) {
+					fop.close();
+				}
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
+	}
+	
 	/**
 	 * TeX
 	 * 
@@ -151,7 +187,7 @@ public class MDSDClient {
 
 		String URL = GET_PDF_URL + id;
 
-		String entity = null;
+		InputStream entity = null;
 
 		try {
 			WebResource resource = Client.create().resource(URL);
@@ -160,9 +196,9 @@ public class MDSDClient {
 			System.out.println(String.format("GET on [%s], status code [%d]",
 					URL, response.getStatus()));
 
-			entity = response.getEntity(String.class);
+			entity = response.getEntityInputStream();
 
-			writeFile(fileName, entity);
+			writeStream(fileName, entity);
 
 			response.close();
 
@@ -279,6 +315,7 @@ public class MDSDClient {
 		mdsdClient.ping();
 		String pdfId = mdsdClient.uploadTex("E:\\futsal.tex");
 		mdsdClient.getPDF(pdfId, "E:\\futsal+"+pdfId+".pdf");
+		mdsdClient.getPDFLog(pdfId, "E:\\futsal+"+pdfId+".log");
 		String htmlId = mdsdClient.uploadHTML("E:\\643017.html");
 		mdsdClient.getHTML(htmlId, "E:\\futsal+"+htmlId+".html");
 	}
