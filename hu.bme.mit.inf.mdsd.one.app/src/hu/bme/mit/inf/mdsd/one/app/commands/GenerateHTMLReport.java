@@ -40,7 +40,7 @@ public class GenerateHTMLReport extends AbstractHandler {
 
 		IWorkbenchPage activePage = HandlerUtil.getActiveWorkbenchWindow(event)
 				.getActivePage();
-		activePage.hideView(activePage.findView(MainView.ID));
+		//activePage.hideView(activePage.findView(MainView.ID));
 		try {
 			activePage.showView(MainView.ID);
 		} catch (PartInitException e) {
