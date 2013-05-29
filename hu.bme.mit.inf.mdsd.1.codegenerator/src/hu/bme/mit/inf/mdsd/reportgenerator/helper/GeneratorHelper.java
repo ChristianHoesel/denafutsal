@@ -1,9 +1,12 @@
 package hu.bme.mit.inf.mdsd.reportgenerator.helper;
 
+import java.io.BufferedWriter;
 import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.OutputStreamWriter;
+import java.io.Writer;
 
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IFolder;
@@ -202,9 +205,17 @@ public class GeneratorHelper {
 			file.createNewFile();
 		}
 
-		byte[] contentInBytes = content.toString().getBytes();
+		//byte[] contentInBytes = content.toString().getBytes();
 
-		fop.write(contentInBytes);
+		//fop.write(contentInBytes);
+		Writer out = new BufferedWriter(new OutputStreamWriter(
+				fop, "UTF-8"));
+		try {
+			out.write(content.toString());
+		} finally {
+			out.close();
+		}
+		
 		fop.flush();
 		fop.close();
 

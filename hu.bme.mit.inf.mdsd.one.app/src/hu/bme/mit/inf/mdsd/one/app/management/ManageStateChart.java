@@ -245,7 +245,7 @@ public class ManageStateChart implements IManageStateChart {
 	@Override
 	public void manageTime() {
 		
-		new Penalties(Display.getCurrent().getActiveShell()).open();
+		//new Penalties(Display.getCurrent().getActiveShell()).open();
 		
 		if (!helper.needToRunTimer()) {
 			sm.getSCITimer().raiseContinue();

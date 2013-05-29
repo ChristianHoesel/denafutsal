@@ -1,11 +1,7 @@
 package hu.bme.mit.inf.mdsd.one.app.commands;
 
 import hu.bme.mit.inf.mdsd.one.app.composites.MainView;
-import hu.bme.mit.inf.mdsd.one.app.management.ManageModelHelper;
-import hu.bme.mit.inf.mdsd.one.app.management.ViewData;
-import hu.bme.mit.inf.mdsd.one.rest.MDSDClient;
-import hu.bme.mit.inf.mdsd.reportgenerator.templates.MatchGenerator;
-
+import hu.bme.mit.inf.mdsd.reportgenerator.templates.MatchTexGenerator;
 import model.Match;
 
 import org.eclipse.core.commands.AbstractHandler;
@@ -45,8 +41,8 @@ public class GenerateTeXReport extends AbstractHandler {
 			e.printStackTrace();
 		}
 		
-		MatchGenerator generator = new MatchGenerator();
-		generator.generateTex(model, selected);
+		MatchTexGenerator generator = new MatchTexGenerator();
+		generator.generate(model, selected);
 
 		
 		return null;

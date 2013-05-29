@@ -6,6 +6,7 @@ import java.io.IOException;
 import java.util.Collections;
 import java.util.Map;
 
+
 import model.Match;
 
 import org.eclipse.emf.common.util.URI;
@@ -17,8 +18,8 @@ import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
 public class ManageModelHelper {
 
 	private ManageModel mm;
-	//public static final String TESTMODEL = "D:\\University\\runtime-EclipseApplication\\TestProject\\My.model";
-	public static final String TESTMODEL = "E:\\runtime-EclipseApplication\\Model\\My.model";
+	public static final String TESTMODEL = "D:\\University\\runtime-EclipseApplication\\TestProject\\My.model";
+	//public static final String TESTMODEL = "E:\\runtime-EclipseApplication\\Model\\My.model";
 	
 	
 	public ManageModelHelper(ManageModel manageModel) {

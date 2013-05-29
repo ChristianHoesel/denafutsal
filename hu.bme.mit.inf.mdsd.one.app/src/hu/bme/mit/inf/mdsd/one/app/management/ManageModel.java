@@ -1,7 +1,7 @@
 package hu.bme.mit.inf.mdsd.one.app.management;
 
 import hu.bme.mit.inf.mdsd.one.app.composites.MainView;
-import hu.bme.mit.inf.mdsd.reportgenerator.templates.MatchGenerator;
+import hu.bme.mit.inf.mdsd.reportgenerator.templates.MatchHtmlGenerator;
 
 import java.io.File;
 import java.text.DateFormat;
@@ -108,11 +108,11 @@ public class ManageModel implements IManageModel {
 		factory = ModelFactory.eINSTANCE;
 
 		/* Teszteléshez, majd ezt innen kiszedheted nyugodtan */
-		 //match =
-		 //ManageModelHelper.readModelFromFile(ManageModelHelper.TESTMODEL);
+		 match =
+		 ManageModelHelper.readModelFromFile(ManageModelHelper.TESTMODEL);
 		/**/
 
-		ResourceSet rSet = new ResourceSetImpl();
+		/*ResourceSet rSet = new ResourceSetImpl();
 		Resource resource = rSet.createResource(URI.createURI("models.model"));
 		
 		match = factory.createMatch();

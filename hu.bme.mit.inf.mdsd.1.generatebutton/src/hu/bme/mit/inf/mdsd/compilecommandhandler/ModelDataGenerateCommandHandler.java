@@ -38,7 +38,7 @@ public class ModelDataGenerateCommandHandler extends AbstractHandler implements 
 						//System.out.println(dataModel.eResource().getURI());
 						
 						// Let's generate the project with the template
-						MatchGenerator generator = new MatchGenerator();
+						MatchHtmlGenerator generator = new MatchHtmlGenerator();
 						generator.generateDataModel(dataModel);
 					}
 					else showErrorMessage("The selected element isn't the instance of " + Match.class.getCanonicalName()+

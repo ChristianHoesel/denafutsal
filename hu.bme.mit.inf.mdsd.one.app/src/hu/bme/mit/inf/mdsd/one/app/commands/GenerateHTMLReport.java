@@ -1,7 +1,7 @@
 package hu.bme.mit.inf.mdsd.one.app.commands;
 
 import hu.bme.mit.inf.mdsd.one.app.composites.MainView;
-import hu.bme.mit.inf.mdsd.reportgenerator.templates.MatchGenerator;
+import hu.bme.mit.inf.mdsd.reportgenerator.templates.MatchHtmlGenerator;
 import hu.bme.mit.inf.mdsd.one.app.composites.PreferencesPage;
 
 import model.Match;
@@ -49,7 +49,7 @@ public class GenerateHTMLReport extends AbstractHandler {
 		}
 		
 		
-		MatchGenerator generator = new MatchGenerator();
+		MatchHtmlGenerator generator = new MatchHtmlGenerator();
 		//System.out.println("FRDF " + preferenceStore.getString(PreferencesPage.OUT_FOLD));
 		//generator.generateDataModelToOutputFolder(model, preferenceStore.getString(PreferencesPage.OUT_FOLD));
 		generator.generateDataModelToOutputFolder(model, selected);
