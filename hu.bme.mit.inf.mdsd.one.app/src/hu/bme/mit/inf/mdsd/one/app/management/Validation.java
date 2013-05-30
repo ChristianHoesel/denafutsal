@@ -6,6 +6,8 @@ import java.util.Iterator;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.incquery.runtime.exception.IncQueryException;
 
+import constraints.notuniqueid.NotUniqueIdMatch;
+import constraints.notuniqueid.NotUniqueIdMatcher;
 import constraints.notuniqueteamnames.NotUniqueTeamNamesMatch;
 import constraints.notuniqueteamnames.NotUniqueTeamNamesMatcher;
 
@@ -34,5 +36,29 @@ public class Validation {
 		
 		return validation;
 		
+	}
+	
+	public static ValidationObject IdValidation(Resource resource, String error) {
+		ValidationObject validation = new ValidationObject(false, error);
+		NotUniqueIdMatcher matcher;
+		try {
+			matcher = NotUniqueIdMatcher.factory().getMatcher(resource);
+			Collection<NotUniqueIdMatch> matches = matcher.getAllMatches();
+			
+			if (matches.size()==0) {
+				validation.setValid(true);
+				validation.setError(null);
+			}
+			else {
+				validation.setError("Ezzel az azonosítóval már rendelkezik játékos!");
+			}
+			
+			
+		} catch (IncQueryException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return validation;
 	}
 }

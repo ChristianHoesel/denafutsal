@@ -68,52 +68,30 @@ public interface IManageModel {
 	public String getVNText(int id);
 	public void setVNText(int id, Text text, String error);
 	
-	public String getIdH1StartText();
-	public void setIdH1StartText(Text text, String error);
+	public String getIdHStartText(int id);
+	public void setIdHStartText(int id, Text text, String error);
 	
 	public String getShirtH1StartText();
 	public void setShirtH1StartText(Text text, String error);
 	
 	//-----------------------------------------
 	
-	public String getStartH2NText();
-	public void setStartH2NText(Text text);
-	
-	public String getIdH2StartText();
-	public void setIdH2StartText(Text text);
-	
 	public String getShirtH2StartText();
 	public void setShirtH2StartText(Text text);
 	
 	//-----------------------------------------
 	
-	public String getStartH3NText();
-	public void setStartH3NText(Text text);
-	
-	public String getIdH3StartText();
-	public void setIdH3StartText(Text text);
 	
 	public String getShirtH3StartText();
 	public void setShirtH3StartText(Text text);
 	
 	//-----------------------------------------
 	
-	public String getStartH4NText();
-	public void setStartH4NText(Text text);
-	
-	public String getIdH4StartText();
-	public void setIdH4StartText(Text text);
 	
 	public String getShirtH4StartText();
 	public void setShirtH4StartText(Text text);
 	
 	//-----------------------------------------
-	
-	public String getStartH5NText();
-	public void setStartH5NText(Text text);
-	
-	public String getIdH5StartText();
-	public void setIdH5StartText(Text text);
 	
 	public String getShirtH5StartText();
 	public void setShirtH5StartText(Text text);
@@ -156,8 +134,7 @@ startH5N    cpH5Start   idH5Start   shirtH5Start
 	
 	// A Visitor csapat kezdõje:
 	
-	public String getStartV1NText();
-	public void setStartV1NText(Text text, String error);
+
 	
 	public String getIdV1StartText();
 	public void setIdV1StartText(Text text, String error);
@@ -167,8 +144,7 @@ startH5N    cpH5Start   idH5Start   shirtH5Start
 	
 	//-----------------------------------------
 	
-	public String getStartV2NText();
-	public void setStartV2NText(Text text);
+
 	
 	public String getIdV2StartText();
 	public void setIdV2StartText(Text text);
@@ -178,8 +154,7 @@ startH5N    cpH5Start   idH5Start   shirtH5Start
 	
 	//-----------------------------------------
 	
-	public String getStartV3NText();
-	public void setStartV3NText(Text text);
+
 	
 	public String getIdV3StartText();
 	public void setIdV3StartText(Text text);
@@ -189,8 +164,7 @@ startH5N    cpH5Start   idH5Start   shirtH5Start
 	
 	//-----------------------------------------
 	
-	public String getStartV4NText();
-	public void setStartV4NText(Text text);
+
 	
 	public String getIdV4StartText();
 	public void setIdV4StartText(Text text);
@@ -199,9 +173,7 @@ startH5N    cpH5Start   idH5Start   shirtH5Start
 	public void setShirtV4StartText(Text text);
 	
 	//-----------------------------------------
-	
-	public String getStartV5NText();
-	public void setStartV5NText(Text text);
+
 	
 	public String getIdV5StartText();
 	public void setIdV5StartText(Text text);

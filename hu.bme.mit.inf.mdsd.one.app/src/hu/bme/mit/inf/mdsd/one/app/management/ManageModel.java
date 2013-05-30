@@ -507,9 +507,8 @@ public class ManageModel implements IManageModel {
 	/**
 	 **************************************************************************/
 
-
 	/***************************************************************************
-	 * XXX: Home csapat kezdõjátékosok nevének lekérdezése, beállítása, validálása 
+	 * XXX: Home csapat kezdõjátékos nevének lekérdezése, beállítása, validálása
 	 */
 	@Override
 	public String getHNText(int id) {
@@ -518,62 +517,85 @@ public class ManageModel implements IManageModel {
 
 	@Override
 	public void setHNText(int id, Text text, String error) {
-		Boolean valid = true; // Ide kerül majd a validátor
+		match.getHome().getMembers().get(id).setName(text.getText());
+
+		Boolean valid = text.getText().matches("^[a-zA-Z.()][a-zA-Z.() ]*$");
+
 		if (valid) {
-			match.getHome().getMembers().get(id).setName(text.getText());
 			text.setBackground(green);
 		} else {
+			error = error
+					+ "A játékos neve nem tartalmazhat speciális karaktert vagy számot!";
 			view.appendTextToLogging(error);
 			text.setBackground(red);
 		}
-
 	}
 
-	// TODO: Ez elvileg így jó lesz:
+	/**
+	 **************************************************************************/
+	
+	/***************************************************************************
+	 * XXX: Home csapat kezdõjátékos azonosítójának lekérdezése, beállítása,
+	 * validálása
+	 */
+	@Override
+	public String getIdHStartText(int id) {
+		return String.valueOf(match.getHome().getMembers().get(id).getId());
+	}
+
+	@Override
+	public void setIdHStartText(int id, Text text, String error) {
+
+		try {
+			match.getHome().getMembers().get(id)
+					.setId(Integer.parseInt((text.getText())));
+			ValidationObject validation = Validation.IdValidation(resource,
+					error);
+			if (validation.getValid()) {
+				text.setBackground(green);
+			} else {
+				view.appendTextToLogging(validation.getError());
+				text.setBackground(red);
+			}
+		} catch (Exception e) {
+			text.setBackground(red);
+			view.appendTextToLogging(e.toString());
+			view.appendTextToLogging(error
+					+ "Az azonosító csak számokat tartalmazhat!");
+		}
+	}
+
+	/**
+	 **************************************************************************/
+	
+	/***************************************************************************
+	 * XXX: Visitor csapat kezdõjátékos nevének lekérdezése, beállítása, validálása
+	 */
 	@Override
 	public String getVNText(int id) {
 		return match.getVisitor().getStartingLine().get(id).getName();
 	}
 
-	// TODO: Ez elvileg így jó lesz:
 	@Override
 	public void setVNText(int id, Text text, String error) {
-		Boolean valid = true; // Ide kerül majd a validátor
+		match.getVisitor().getMembers().get(id).setName(text.getText());
+
+		Boolean valid = text.getText().matches("^[a-zA-Z.()][a-zA-Z.() ]*$");
+
 		if (valid) {
-			match.getVisitor().getMembers().get(id).setName(text.getText());
 			text.setBackground(green);
 		} else {
+			error = error
+					+ "A játékos neve nem tartalmazhat speciális karaktert vagy számot!";
 			view.appendTextToLogging(error);
 			text.setBackground(red);
 		}
-
 	}
 
-	@Override
-	public String getIdH1StartText() {
-		return String.valueOf(match.getHome().getMembers().get(0).getId());
-	}
+	/**
+	 **************************************************************************/
 
-	@Override
-	public void setIdH1StartText(Text text, String error) {
-		Boolean valid = true; // Ide kerül majd a validátor
-		if (valid) {
-			try {
-				match.getHome().getMembers().get(0)
-						.setId(Integer.parseInt((text.getText())));
-				text.setBackground(green);
-			} catch (Exception e) {
-				text.setBackground(red);
-				view.appendTextToLogging(e.toString());
-				view.appendTextToLogging(error);
-			}
-
-		} else {
-			view.appendTextToLogging(error);
-			text.setBackground(red);
-		}
-
-	}
+	
 
 	@Override
 	public String getShirtH1StartText() {
@@ -603,28 +625,6 @@ public class ManageModel implements IManageModel {
 	}
 
 	@Override
-	public String getStartH2NText() {
-		return match.getHome().getStartingLine().get(1).getName();
-	}
-
-	@Override
-	public void setStartH2NText(Text text) {
-		match.getHome().getMembers().get(1).setName(text.getText());
-	}
-
-	@Override
-	public String getIdH2StartText() {
-		return String.valueOf(match.getHome().getMembers().get(1).getId());
-	}
-
-	@Override
-	public void setIdH2StartText(Text text) {
-		match.getHome().getMembers().get(1)
-				.setId(Integer.parseInt((text.getText())));
-
-	}
-
-	@Override
 	public String getShirtH2StartText() {
 		return String.valueOf(match.getHome().getStartingLine().get(1)
 				.getShirtNo());
@@ -634,29 +634,6 @@ public class ManageModel implements IManageModel {
 	public void setShirtH2StartText(Text text) {
 		match.getHome().getStartingLine().get(1)
 				.setShirtNo(Integer.parseInt(text.getText()));
-
-	}
-
-	@Override
-	public String getStartH3NText() {
-		return match.getHome().getStartingLine().get(2).getName();
-	}
-
-	@Override
-	public void setStartH3NText(Text text) {
-		match.getHome().getMembers().get(2).setName(text.getText());
-
-	}
-
-	@Override
-	public String getIdH3StartText() {
-		return String.valueOf(match.getHome().getMembers().get(2).getId());
-	}
-
-	@Override
-	public void setIdH3StartText(Text text) {
-		match.getHome().getMembers().get(2)
-				.setId(Integer.parseInt((text.getText())));
 
 	}
 
@@ -674,28 +651,6 @@ public class ManageModel implements IManageModel {
 	}
 
 	@Override
-	public String getStartH4NText() {
-		return match.getHome().getStartingLine().get(3).getName();
-	}
-
-	@Override
-	public void setStartH4NText(Text text) {
-		match.getHome().getMembers().get(3).setName(text.getText());
-	}
-
-	@Override
-	public String getIdH4StartText() {
-		return String.valueOf(match.getHome().getMembers().get(3).getId());
-	}
-
-	@Override
-	public void setIdH4StartText(Text text) {
-		match.getHome().getMembers().get(3)
-				.setId(Integer.parseInt((text.getText())));
-
-	}
-
-	@Override
 	public String getShirtH4StartText() {
 		return String.valueOf(match.getHome().getStartingLine().get(3)
 				.getShirtNo());
@@ -705,29 +660,6 @@ public class ManageModel implements IManageModel {
 	public void setShirtH4StartText(Text text) {
 		match.getHome().getStartingLine().get(3)
 				.setShirtNo(Integer.parseInt(text.getText()));
-
-	}
-
-	@Override
-	public String getStartH5NText() {
-		return match.getHome().getStartingLine().get(4).getName();
-	}
-
-	@Override
-	public void setStartH5NText(Text text) {
-		match.getHome().getMembers().get(4).setName(text.getText());
-
-	}
-
-	@Override
-	public String getIdH5StartText() {
-		return String.valueOf(match.getHome().getMembers().get(4).getId());
-	}
-
-	@Override
-	public void setIdH5StartText(Text text) {
-		match.getHome().getMembers().get(4)
-				.setId(Integer.parseInt((text.getText())));
 
 	}
 
@@ -989,23 +921,8 @@ public class ManageModel implements IManageModel {
 
 	}
 
-	public String getStartV1NText() {
-		return match.getVisitor().getStartingLine().get(0).getName();
-	}
 
-	@Override
-	public void setStartV1NText(Text text, String error) {
-		Boolean valid = true; // Ide kerül majd a validátor
-		if (valid) {
-			match.getVisitor().getMembers().get(0).setName(text.getText());
-			text.setBackground(green);
-		} else {
-			view.appendTextToLogging(error);
-			text.setBackground(red);
-		}
-
-	}
-
+	
 	@Override
 	public String getIdV1StartText() {
 		return String.valueOf(match.getVisitor().getMembers().get(0).getId());
@@ -1059,15 +976,7 @@ public class ManageModel implements IManageModel {
 
 	}
 
-	@Override
-	public String getStartV2NText() {
-		return match.getVisitor().getStartingLine().get(1).getName();
-	}
 
-	@Override
-	public void setStartV2NText(Text text) {
-		match.getVisitor().getMembers().get(1).setName(text.getText());
-	}
 
 	@Override
 	public String getIdV2StartText() {
@@ -1091,17 +1000,6 @@ public class ManageModel implements IManageModel {
 	public void setShirtV2StartText(Text text) {
 		match.getVisitor().getStartingLine().get(1)
 				.setShirtNo(Integer.parseInt(text.getText()));
-
-	}
-
-	@Override
-	public String getStartV3NText() {
-		return match.getVisitor().getStartingLine().get(2).getName();
-	}
-
-	@Override
-	public void setStartV3NText(Text text) {
-		match.getVisitor().getMembers().get(2).setName(text.getText());
 
 	}
 
@@ -1130,15 +1028,6 @@ public class ManageModel implements IManageModel {
 
 	}
 
-	@Override
-	public String getStartV4NText() {
-		return match.getVisitor().getStartingLine().get(3).getName();
-	}
-
-	@Override
-	public void setStartV4NText(Text text) {
-		match.getVisitor().getMembers().get(3).setName(text.getText());
-	}
 
 	@Override
 	public String getIdV4StartText() {
@@ -1162,17 +1051,6 @@ public class ManageModel implements IManageModel {
 	public void setShirtV4StartText(Text text) {
 		match.getVisitor().getStartingLine().get(3)
 				.setShirtNo(Integer.parseInt(text.getText()));
-
-	}
-
-	@Override
-	public String getStartV5NText() {
-		return match.getVisitor().getStartingLine().get(4).getName();
-	}
-
-	@Override
-	public void setStartV5NText(Text text) {
-		match.getVisitor().getMembers().get(4).setName(text.getText());
 
 	}
 
@@ -1292,5 +1170,7 @@ public class ManageModel implements IManageModel {
 	public String getVIdText(int i) {
 		return String.valueOf(match.getVisitor().getMembers().get(i).getId());
 	}
+
+
 
 }
