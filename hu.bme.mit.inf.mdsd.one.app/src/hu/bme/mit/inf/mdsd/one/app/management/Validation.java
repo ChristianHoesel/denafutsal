@@ -61,4 +61,15 @@ public class Validation {
 		
 		return validation;
 	}
+	
+	public static ValidationObject FullValidation(Resource resource, String error) {
+		ValidationObject validation = new ValidationObject(false, error);
+		
+		ValidationObject idValidation = IdValidation(resource, error);
+		ValidationObject teamValidation = TeamValidation(resource, error);
+		
+		validation.setValid(idValidation.getValid() && teamValidation.getValid());
+		
+		return validation;
+	}
 }

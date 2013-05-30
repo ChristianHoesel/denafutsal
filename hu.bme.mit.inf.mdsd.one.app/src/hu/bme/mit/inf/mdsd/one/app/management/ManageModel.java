@@ -47,6 +47,7 @@ public class ManageModel implements IManageModel {
 	/**
 	 **************************************************************************/
 	
+	private final static String VALID_NAME = "^[a-zA-Z.()öüóõúéáûíÖÜÓÕÚÉÁÛÍ][a-zA-Z.()öüóõúéáûíÖÜÓÕÚÉÁÛÍ ]*$";
 
 	private ModelFactory factory;
 	private MainView view;
@@ -274,54 +275,10 @@ public class ManageModel implements IManageModel {
 		 */
 	}
 
-	/**
-	 * @param args
-	 */
-	/*
-	 * public static void main(String[] args) {
-	 * 
-	 * ManageModel manageModel = new ManageModel();
-	 * 
-	 * Team homeTeam = manageModel.factory.createTeam();
-	 * homeTeam.setName("1. FC VESZPRÉM");
-	 * 
-	 * Player player_01 = manageModel.factory.createPlayer();
-	 * player_01.setShirtNo(1); player_01.setPosition(Position.FIELD_PLAYER);
-	 * 
-	 * TeamMember teamMember_01 = manageModel.factory.createTeamMember();
-	 * teamMember_01.setId(122398); teamMember_01.setName("KASZA VIKTOR");
-	 * 
-	 * teamMember_01.setPlayerRole(player_01);
-	 * 
-	 * Team visitorTeam = manageModel.factory.createTeam();
-	 * visitorTeam.setName("MAFC");
-	 * 
-	 * 
-	 * 
-	 * Person assistant = manageModel.factory.createPerson();
-	 * assistant.setName("CZINDER IMRE");
-	 * 
-	 * Person thirdReferee = manageModel.factory.createPerson();
-	 * thirdReferee.setName("HORVÁTH ZOLTÁN (A)");
-	 * 
-	 * Person supervisor = manageModel.factory.createPerson();
-	 * supervisor.setName("NAGY LAJOS");
-	 * 
-	 * Match match = manageModel.factory.createMatch(); match.setHome(homeTeam);
-	 * match.setVisitor(visitorTeam);
-	 * 
-	 * match.setReferee(manageModel.referee); match.setAssistant(assistant);
-	 * match.setThirdReferee(thirdReferee); match.setSupervisor(supervisor);
-	 * 
-	 * match.setAgeGroup(AgeGroup.U13); match.setId(0); match.setType(Type.CUP);
-	 * 
-	 * System.out.println(match.getReferee());
-	 * 
-	 * System.out.println();
-	 * 
-	 * }
-	 */
 
+	/***************************************************************************
+	 * XXX: Bíró lekérése, beállítása, validálása
+	 */
 	@Override
 	public String getRefereeText() {
 		return match.getReferee().getName();
@@ -329,16 +286,22 @@ public class ManageModel implements IManageModel {
 
 	@Override
 	public void setRefereeText(Text text, String error) {
-		Boolean valid = true; // Ide kerül majd a validátor
+		match.getReferee().setName(text.getText());
+		
+		Boolean valid = text.getText().matches(VALID_NAME);
+		
 		if (valid) {
-			match.getReferee().setName(text.getText());
 			text.setBackground(green);
 		} else {
+			error = error
+					+ "A bíró neve nem tartalmazhat speciális karaktert vagy számot!";
 			view.appendTextToLogging(error);
 			text.setBackground(red);
 		}
 
 	}
+	/**
+	 **************************************************************************/
 
 	public Match getMatch() {
 		return match;
@@ -348,6 +311,9 @@ public class ManageModel implements IManageModel {
 		this.match = match;
 	}
 
+	/***************************************************************************
+	 * XXX: Asszisztens lekérése, beállítása, validálása
+	 */
 	@Override
 	public String getAssistantText() {
 		return match.getAssistant().getName();
@@ -355,15 +321,20 @@ public class ManageModel implements IManageModel {
 
 	@Override
 	public void setAssistantText(Text text, String error) {
-		Boolean valid = true; // Ide kerül majd a validátor
+		match.getAssistant().setName(text.getText());
+		Boolean valid = text.getText().matches(VALID_NAME);
+		
 		if (valid) {
-			match.getAssistant().setName(text.getText());
 			text.setBackground(green);
 		} else {
+			error = error
+					+ "Az asszisztens neve nem tartalmazhat speciális karaktert vagy számot!";
 			view.appendTextToLogging(error);
 			text.setBackground(red);
 		}
 	}
+	/**
+	 **************************************************************************/
 
 	@Override
 	public String getThirdRefereeRefereeText() {
@@ -508,18 +479,18 @@ public class ManageModel implements IManageModel {
 	 **************************************************************************/
 
 	/***************************************************************************
-	 * XXX: Home csapat kezdõjátékos nevének lekérdezése, beállítása, validálása
+	 * XXX: Home csapat játékos nevének lekérdezése, beállítása, validálása
 	 */
 	@Override
 	public String getHNText(int id) {
-		return match.getHome().getStartingLine().get(id).getName();
+		return match.getHome().getMembers().get(id).getName();
 	}
 
 	@Override
 	public void setHNText(int id, Text text, String error) {
 		match.getHome().getMembers().get(id).setName(text.getText());
 
-		Boolean valid = text.getText().matches("^[a-zA-Z.()][a-zA-Z.() ]*$");
+		Boolean valid = text.getText().matches(VALID_NAME);
 
 		if (valid) {
 			text.setBackground(green);
@@ -539,12 +510,12 @@ public class ManageModel implements IManageModel {
 	 * validálása
 	 */
 	@Override
-	public String getIdHStartText(int id) {
+	public String getIdHText(int id) {
 		return String.valueOf(match.getHome().getMembers().get(id).getId());
 	}
 
 	@Override
-	public void setIdHStartText(int id, Text text, String error) {
+	public void setIdHText(int id, Text text, String error) {
 
 		try {
 			match.getHome().getMembers().get(id)
@@ -573,14 +544,14 @@ public class ManageModel implements IManageModel {
 	 */
 	@Override
 	public String getVNText(int id) {
-		return match.getVisitor().getStartingLine().get(id).getName();
+		return match.getVisitor().getMembers().get(id).getName();
 	}
 
 	@Override
 	public void setVNText(int id, Text text, String error) {
 		match.getVisitor().getMembers().get(id).setName(text.getText());
 
-		Boolean valid = text.getText().matches("^[a-zA-Z.()][a-zA-Z.() ]*$");
+		Boolean valid = text.getText().matches(VALID_NAME);
 
 		if (valid) {
 			text.setBackground(green);
@@ -595,7 +566,39 @@ public class ManageModel implements IManageModel {
 	/**
 	 **************************************************************************/
 
-	
+	/***************************************************************************
+	 * XXX: Visitor csapat játékos azonosítójának lekérdezése, beállítása,
+	 * validálása
+	 */
+	@Override
+	public String getIdVText(int id) {
+		return String.valueOf(match.getVisitor().getMembers().get(id).getId());
+	}
+
+	@Override
+	public void setIdVText(int id, Text text, String error) {
+
+		try {
+			match.getVisitor().getMembers().get(id)
+					.setId(Integer.parseInt((text.getText())));
+			ValidationObject validation = Validation.IdValidation(resource,
+					error);
+			if (validation.getValid()) {
+				text.setBackground(green);
+			} else {
+				view.appendTextToLogging(validation.getError());
+				text.setBackground(red);
+			}
+		} catch (Exception e) {
+			text.setBackground(red);
+			view.appendTextToLogging(e.toString());
+			view.appendTextToLogging(error
+					+ "Az azonosító csak számokat tartalmazhat!");
+		}
+	}
+
+	/**
+	 **************************************************************************/
 
 	@Override
 	public String getShirtH1StartText() {
@@ -923,31 +926,7 @@ public class ManageModel implements IManageModel {
 
 
 	
-	@Override
-	public String getIdV1StartText() {
-		return String.valueOf(match.getVisitor().getMembers().get(0).getId());
-	}
-
-	@Override
-	public void setIdV1StartText(Text text, String error) {
-		Boolean valid = true; // Ide kerül majd a validátor
-		if (valid) {
-			try {
-				match.getVisitor().getMembers().get(0)
-						.setId(Integer.parseInt((text.getText())));
-				text.setBackground(green);
-			} catch (Exception e) {
-				text.setBackground(red);
-				view.appendTextToLogging(e.toString());
-				view.appendTextToLogging(error);
-			}
-
-		} else {
-			view.appendTextToLogging(error);
-			text.setBackground(red);
-		}
-
-	}
+	
 
 	@Override
 	public String getShirtV1StartText() {
@@ -978,17 +957,6 @@ public class ManageModel implements IManageModel {
 
 
 
-	@Override
-	public String getIdV2StartText() {
-		return String.valueOf(match.getVisitor().getMembers().get(1).getId());
-	}
-
-	@Override
-	public void setIdV2StartText(Text text) {
-		match.getVisitor().getMembers().get(1)
-				.setId(Integer.parseInt((text.getText())));
-
-	}
 
 	@Override
 	public String getShirtV2StartText() {
@@ -1003,17 +971,7 @@ public class ManageModel implements IManageModel {
 
 	}
 
-	@Override
-	public String getIdV3StartText() {
-		return String.valueOf(match.getVisitor().getMembers().get(2).getId());
-	}
 
-	@Override
-	public void setIdV3StartText(Text text) {
-		match.getVisitor().getMembers().get(2)
-				.setId(Integer.parseInt((text.getText())));
-
-	}
 
 	@Override
 	public String getShirtV3StartText() {
@@ -1030,18 +988,6 @@ public class ManageModel implements IManageModel {
 
 
 	@Override
-	public String getIdV4StartText() {
-		return String.valueOf(match.getVisitor().getMembers().get(3).getId());
-	}
-
-	@Override
-	public void setIdV4StartText(Text text) {
-		match.getVisitor().getMembers().get(3)
-				.setId(Integer.parseInt((text.getText())));
-
-	}
-
-	@Override
 	public String getShirtV4StartText() {
 		return String.valueOf(match.getVisitor().getStartingLine().get(3)
 				.getShirtNo());
@@ -1051,18 +997,6 @@ public class ManageModel implements IManageModel {
 	public void setShirtV4StartText(Text text) {
 		match.getVisitor().getStartingLine().get(3)
 				.setShirtNo(Integer.parseInt(text.getText()));
-
-	}
-
-	@Override
-	public String getIdV5StartText() {
-		return String.valueOf(match.getVisitor().getMembers().get(4).getId());
-	}
-
-	@Override
-	public void setIdV5StartText(Text text) {
-		match.getVisitor().getMembers().get(4)
-				.setId(Integer.parseInt((text.getText())));
 
 	}
 

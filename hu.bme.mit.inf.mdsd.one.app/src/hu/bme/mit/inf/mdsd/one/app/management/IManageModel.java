@@ -68,8 +68,8 @@ public interface IManageModel {
 	public String getVNText(int id);
 	public void setVNText(int id, Text text, String error);
 	
-	public String getIdHStartText(int id);
-	public void setIdHStartText(int id, Text text, String error);
+	public String getIdHText(int id);
+	public void setIdHText(int id, Text text, String error);
 	
 	public String getShirtH1StartText();
 	public void setShirtH1StartText(Text text, String error);
@@ -134,10 +134,6 @@ startH5N    cpH5Start   idH5Start   shirtH5Start
 	
 	// A Visitor csapat kezdõje:
 	
-
-	
-	public String getIdV1StartText();
-	public void setIdV1StartText(Text text, String error);
 	
 	public String getShirtV1StartText();
 	public void setShirtV1StartText(Text text, String error);
@@ -146,38 +142,42 @@ startH5N    cpH5Start   idH5Start   shirtH5Start
 	
 
 	
-	public String getIdV2StartText();
-	public void setIdV2StartText(Text text);
+	
+	/**
+	 * 
+	 * @param id
+	 * @return
+	 */
+	public String getIdVText(int id);
+	
+	/**
+	 * 
+	 * @param id
+	 * @param text
+	 * @param error
+	 */
+	public void setIdVText(int id, Text text, String error);
+	
+	
+	
 	
 	public String getShirtV2StartText();
 	public void setShirtV2StartText(Text text);
 	
 	//-----------------------------------------
-	
 
-	
-	public String getIdV3StartText();
-	public void setIdV3StartText(Text text);
 	
 	public String getShirtV3StartText();
 	public void setShirtV3StartText(Text text);
 	
 	//-----------------------------------------
-	
 
-	
-	public String getIdV4StartText();
-	public void setIdV4StartText(Text text);
 	
 	public String getShirtV4StartText();
 	public void setShirtV4StartText(Text text);
 	
 	//-----------------------------------------
 
-	
-	public String getIdV5StartText();
-	public void setIdV5StartText(Text text);
-	
 	public String getShirtV5StartText();
 	public void setShirtV5StartText(Text text);
 	
