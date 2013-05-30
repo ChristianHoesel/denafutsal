@@ -13,7 +13,7 @@ import org.eclipse.ui.IWorkbenchPage;
 import org.eclipse.ui.PartInitException;
 import org.eclipse.ui.handlers.HandlerUtil;
 
-public class GenerateTeXReport extends AbstractHandler {
+public class GeneratePdfReport extends AbstractHandler {
 
 	@Override
 	public Object execute(ExecutionEvent event) throws ExecutionException {
@@ -24,13 +24,13 @@ public class GenerateTeXReport extends AbstractHandler {
 		FileDialog fd = new FileDialog(HandlerUtil.getActiveShell(event),
 				SWT.SAVE);
 		fd.setText("Add a name to the file");
-		String[] filterExt = { "*.tex" };
+		String[] filterExt = { "*.pdf" };
 		fd.setFilterExtensions(filterExt);
 		String selected = fd.open();
 
 		if (selected == null)
-			return null;		
-		
+			return null;
+
 		MatchTexGenerator generator = new MatchTexGenerator();
 		generator.generate(model, selected);
 		
