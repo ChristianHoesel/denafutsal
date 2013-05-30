@@ -1,9 +1,7 @@
 package hu.bme.mit.inf.mdsd.one.app.management;
 
 import hu.bme.mit.inf.mdsd.one.app.composites.MainView;
-import hu.bme.mit.inf.mdsd.reportgenerator.templates.MatchHtmlGenerator;
 
-import java.io.File;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -36,14 +34,24 @@ import org.eclipse.swt.widgets.DateTime;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Text;
 
+import hu.bme.mit.inf.mdsd.one.app.management.Validation;
+
 public class ManageModel implements IManageModel {
 
+	/***************************************************************************
+	 * XXX: Színek beállítása:
+	 */
 	final static Device device = Display.getCurrent();
-	final static Color green = new Color(device, 0, 255, 0);
+	final static Color green = new Color(device, 164, 198, 54);
 	final static Color red = new Color(device, 255, 0, 0);
+	/**
+	 **************************************************************************/
+	
 
 	private ModelFactory factory;
 	private MainView view;
+
+	private Resource resource;
 	private Match match;
 
 	private String[] convert2StringArray(List<String> list) {
@@ -98,7 +106,7 @@ public class ManageModel implements IManageModel {
 	public ManageModel(MainView view, Match model) {
 		this.view = view;
 		this.match = model;
-	
+
 		factory = ModelFactory.eINSTANCE;
 	}
 
@@ -108,13 +116,13 @@ public class ManageModel implements IManageModel {
 		factory = ModelFactory.eINSTANCE;
 
 		/* Teszteléshez, majd ezt innen kiszedheted nyugodtan */
-		 match =
-		 ManageModelHelper.readModelFromFile(ManageModelHelper.TESTMODEL);
+		// match =
+		// ManageModelHelper.readModelFromFile(ManageModelHelper.TESTMODEL);
 		/**/
 
-		/*ResourceSet rSet = new ResourceSetImpl();
-		Resource resource = rSet.createResource(URI.createURI("models.model"));
-		
+		ResourceSet rSet = new ResourceSetImpl();
+		resource = rSet.createResource(URI.createURI("models.model"));
+
 		match = factory.createMatch();
 
 		resource.getContents().add(match);
@@ -173,12 +181,12 @@ public class ManageModel implements IManageModel {
 
 			match.getHome().getStartingLine().add(player);
 		}
-		
+
 		for (int i = 5; i < 12; i++) {
 			Player player = factory.createPlayer();
 			player.setShirtNo(i);
 			player.setPosition(Position.FIELD_PLAYER);
-			
+
 			TeamMember teamMember = factory.createTeamMember();
 
 			teamMember.setId(i);
@@ -189,34 +197,34 @@ public class ManageModel implements IManageModel {
 			match.getHome().getMembers().add(teamMember);
 
 		}
-		
+
 		for (int i = 12; i < 20; i++) {
 			StaffMember staffmember = factory.createStaffMember();
 			staffmember.setRole(StaffRole.OTHER);
-			
+
 			TeamMember teamMember = factory.createTeamMember();
-			
+
 			teamMember.setId(i);
 			teamMember.setName(String.format("Staffmember %d", i));
-			
+
 			teamMember.setStaffRole(staffmember);
-			
+
 			match.getHome().getMembers().add(teamMember);
 		}
 
 		for (int i = 0; i < 5; i++) {
 			Player player = factory.createPlayer();
-			player.setShirtNo(i+100);
+			player.setShirtNo(i + 100);
 			if (i == 0) {
 				player.setPosition(Position.GOALKEEPER);
-				match.getVisitor().setCaptain(player);				
+				match.getVisitor().setCaptain(player);
 			} else {
 				player.setPosition(Position.FIELD_PLAYER);
 			}
 			TeamMember teamMember = factory.createTeamMember();
 
-			teamMember.setId(i+100);
-			teamMember.setName(String.format("Player %d", i+100));
+			teamMember.setId(i + 100);
+			teamMember.setName(String.format("Player %d", i + 100));
 
 			teamMember.setPlayerRole(player);
 
@@ -224,43 +232,46 @@ public class ManageModel implements IManageModel {
 
 			match.getVisitor().getStartingLine().add(player);
 		}
-		
+
 		for (int i = 5; i < 12; i++) {
 			Player player = factory.createPlayer();
-			player.setShirtNo(i+100);
+			player.setShirtNo(i + 100);
 			player.setPosition(Position.FIELD_PLAYER);
-			
+
 			TeamMember teamMember = factory.createTeamMember();
 
-			teamMember.setId(i+100);
-			teamMember.setName(String.format("Player %d", i+100));
+			teamMember.setId(i + 100);
+			teamMember.setName(String.format("Player %d", i + 100));
 
 			teamMember.setPlayerRole(player);
 
 			match.getVisitor().getMembers().add(teamMember);
-			
+
 		}
-		
+
 		for (int i = 12; i < 20; i++) {
 			StaffMember staffmember = factory.createStaffMember();
 			staffmember.setRole(StaffRole.OTHER);
-			
+
 			TeamMember teamMember = factory.createTeamMember();
-			
-			teamMember.setId(i+100);
-			teamMember.setName(String.format("Staffmember %d", i+100));
-			
+
+			teamMember.setId(i + 100);
+			teamMember.setName(String.format("Staffmember %d", i + 100));
+
 			teamMember.setStaffRole(staffmember);
-			
+
 			match.getVisitor().getMembers().add(teamMember);
 		}
-		
+
 		/*
-		homeGoal(match.getHome().getMembers().get(0).getPlayerRole(), 123);
-		homeRedCard(match.getHome().getMembers().get(0).getPlayerRole(), 124);
-		homeRedCardWithBan(match.getHome().getMembers().get(0).getPlayerRole(), 125);
-		homeYellowCard(match.getHome().getMembers().get(0).getPlayerRole(), 126);
-		*/
+		 * homeGoal(match.getHome().getMembers().get(0).getPlayerRole(), 123);
+		 * homeRedCard(match.getHome().getMembers().get(0).getPlayerRole(),
+		 * 124);
+		 * homeRedCardWithBan(match.getHome().getMembers().get(0).getPlayerRole
+		 * (), 125);
+		 * homeYellowCard(match.getHome().getMembers().get(0).getPlayerRole(),
+		 * 126);
+		 */
 	}
 
 	/**
@@ -454,19 +465,23 @@ public class ManageModel implements IManageModel {
 
 	}
 
+	/***************************************************************************
+	 * XXX: Csapatok lekérése, beállítása, validálása
+	 */
 	@Override
 	public String getTeamHomeText() {
 		return match.getHome().getName();
 	}
-
+	
 	@Override
 	public void setTeamHomeText(Text text, String error) {
-		Boolean valid = true; // Ide kerül majd a validátor
-		if (valid) {
-			match.getHome().setName(text.getText());
+		match.getHome().setName(text.getText());
+		ValidationObject validation = Validation
+				.TeamValidation(resource, error);
+		if (validation.getValid()) {
 			text.setBackground(green);
 		} else {
-			view.appendTextToLogging(error);
+			view.appendTextToLogging(validation.getError());
 			text.setBackground(red);
 		}
 
@@ -479,42 +494,28 @@ public class ManageModel implements IManageModel {
 
 	@Override
 	public void setTeamVisitorText(Text text, String error) {
-		Boolean valid = true; // Ide kerül majd a validátor
-		if (valid) {
-			match.getVisitor().setName(text.getText());
+		match.getVisitor().setName(text.getText());
+		ValidationObject validation = Validation
+				.TeamValidation(resource, error);
+		if (validation.getValid()) {
 			text.setBackground(green);
 		} else {
-			view.appendTextToLogging(error);
+			view.appendTextToLogging(validation.getError());
 			text.setBackground(red);
 		}
-
 	}
+	/**
+	 **************************************************************************/
 
-	@Override
-	public String getStartH1NText() {
-		return match.getHome().getStartingLine().get(0).getName();
-	}
 
-	@Override
-	public void setStartH1NText(Text text, String error) {
-		Boolean valid = true; // Ide kerül majd a validátor
-		if (valid) {
-			match.getHome().getMembers().get(0).setName(text.getText());
-			text.setBackground(green);
-		} else {
-			view.appendTextToLogging(error);
-			text.setBackground(red);
-		}
-
-	}
-	
-	// TODO: Ez elvileg így jó lesz:
+	/***************************************************************************
+	 * XXX: Home csapat kezdõjátékosok nevének lekérdezése, beállítása, validálása 
+	 */
 	@Override
 	public String getHNText(int id) {
 		return match.getHome().getStartingLine().get(id).getName();
 	}
 
-	// TODO: Ez elvileg így jó lesz:
 	@Override
 	public void setHNText(int id, Text text, String error) {
 		Boolean valid = true; // Ide kerül majd a validátor
@@ -527,7 +528,7 @@ public class ManageModel implements IManageModel {
 		}
 
 	}
-	
+
 	// TODO: Ez elvileg így jó lesz:
 	@Override
 	public String getVNText(int id) {
@@ -873,7 +874,7 @@ public class ManageModel implements IManageModel {
 	public void setCpH5Start() {
 		match.getHome().setCaptain(match.getHome().getStartingLine().get(4));
 	}
-	
+
 	public void addNewEvent(Role role, int time, EventType et) {
 		Event event = factory.createEvent();
 		event.setCommitter(role.getTeamMember());
@@ -882,30 +883,30 @@ public class ManageModel implements IManageModel {
 		match.getEvents().add(event);
 
 	}
-	
+
 	@Override
 	public void homeGoal(Role role, int time) {
-		addNewEvent(role, time, EventType.GOAL);		
+		addNewEvent(role, time, EventType.GOAL);
 	}
 
 	@Override
 	public void visitorGoal(Role role, int time) {
-		addNewEvent(role, time, EventType.GOAL);		
+		addNewEvent(role, time, EventType.GOAL);
 	}
 
 	@Override
 	public void homeYellowCard(Role role, int time) {
-		addNewEvent(role, time, EventType.YELLOW_CARD);		
+		addNewEvent(role, time, EventType.YELLOW_CARD);
 	}
 
 	@Override
 	public void visitorYellowCard(Role role, int time) {
-		addNewEvent(role, time, EventType.YELLOW_CARD);	
+		addNewEvent(role, time, EventType.YELLOW_CARD);
 	}
 
 	@Override
 	public void homeRedCard(Role role, int time) {
-		addNewEvent(role, time, EventType.RED_CARD);	
+		addNewEvent(role, time, EventType.RED_CARD);
 	}
 
 	@Override
@@ -924,9 +925,9 @@ public class ManageModel implements IManageModel {
 		addNewEvent(role, time, EventType.RED_CARD_WITH_BAN);
 
 	}
-	
+
 	public void getEventsToLogging() {
-		
+
 		List<Event> event_list = match.getEvents();
 		for (int i = 0; i < event_list.size(); i++) {
 			view.appendTextToLogging(event_list.get(i).toString());
@@ -936,29 +937,29 @@ public class ManageModel implements IManageModel {
 	@Override
 	public String[] getEvent(Event event) {
 		int event_id = match.getEvents().indexOf(event);
-		
+
 		Event e = match.getEvents().get(event_id);
-		String e_time = Long.toString(e.getTime()/60);
+		String e_time = Long.toString(e.getTime() / 60);
 		String e_type = e.getType().toString();
 		String e_team = e.getCommitter().getTeam().getName();
 		String e_commiter = e.getCommitter().getName();
-		
-		String[] result = {e_time, e_type, e_team, e_commiter};
-		
+
+		String[] result = { e_time, e_type, e_team, e_commiter };
+
 		return result;
-		
+
 	}
 
 	@Override
 	public List<String[]> getEventList() {
-		
+
 		List<String[]> result = new ArrayList<>();
-		
+
 		List<Event> event_list = match.getEvents();
 		for (int i = 0; i < event_list.size(); i++) {
 			result.add(getEvent(event_list.get(i)));
 		}
-		
+
 		return result;
 	}
 
@@ -966,7 +967,7 @@ public class ManageModel implements IManageModel {
 	public int getStaffT8VSelection() {
 		return match.getVisitor().getStaff().get(7).getRole().getValue();
 	}
-	
+
 	@Override
 	public String getStaffT8VCombo() {
 		return match.getVisitor().getStaff().get(7).getRole().toString();
@@ -987,7 +988,6 @@ public class ManageModel implements IManageModel {
 		}
 
 	}
-
 
 	public String getStartV1NText() {
 		return match.getVisitor().getStartingLine().get(0).getName();
@@ -1201,7 +1201,7 @@ public class ManageModel implements IManageModel {
 
 	}
 
-    public String getCaptainVisitor() {
+	public String getCaptainVisitor() {
 		return match.getVisitor().getCaptain().getName();
 	}
 
@@ -1213,7 +1213,8 @@ public class ManageModel implements IManageModel {
 
 	@Override
 	public void setCpV1Start() {
-		match.getVisitor().setCaptain(match.getVisitor().getStartingLine().get(0));
+		match.getVisitor().setCaptain(
+				match.getVisitor().getStartingLine().get(0));
 	}
 
 	@Override
@@ -1224,7 +1225,8 @@ public class ManageModel implements IManageModel {
 
 	@Override
 	public void setCpV2Start() {
-		match.getVisitor().setCaptain(match.getVisitor().getStartingLine().get(1));
+		match.getVisitor().setCaptain(
+				match.getVisitor().getStartingLine().get(1));
 	}
 
 	@Override
@@ -1235,7 +1237,8 @@ public class ManageModel implements IManageModel {
 
 	@Override
 	public void setCpV3Start() {
-		match.getVisitor().setCaptain(match.getVisitor().getStartingLine().get(2));
+		match.getVisitor().setCaptain(
+				match.getVisitor().getStartingLine().get(2));
 	}
 
 	@Override
@@ -1246,7 +1249,8 @@ public class ManageModel implements IManageModel {
 
 	@Override
 	public void setCpV4Start() {
-		match.getVisitor().setCaptain(match.getVisitor().getStartingLine().get(3));
+		match.getVisitor().setCaptain(
+				match.getVisitor().getStartingLine().get(3));
 	}
 
 	@Override
@@ -1257,7 +1261,8 @@ public class ManageModel implements IManageModel {
 
 	@Override
 	public void setCpV5Start() {
-		match.getVisitor().setCaptain(match.getVisitor().getStartingLine().get(4));
+		match.getVisitor().setCaptain(
+				match.getVisitor().getStartingLine().get(4));
 	}
 
 	// TODO: Ez elvileg így jó lesz:
@@ -1266,7 +1271,8 @@ public class ManageModel implements IManageModel {
 		Boolean valid = true; // Ide kerül majd a validátor
 		if (valid) {
 			try {
-				match.getVisitor().getMembers().get(i).setId(Integer.parseInt(text.getText()));
+				match.getVisitor().getMembers().get(i)
+						.setId(Integer.parseInt(text.getText()));
 				text.setBackground(green);
 			} catch (Exception e) {
 				text.setBackground(red);
@@ -1278,14 +1284,13 @@ public class ManageModel implements IManageModel {
 			view.appendTextToLogging(error);
 			text.setBackground(red);
 		}
-		
+
 	}
-	
+
 	// TODO: Ez elvileg így jó lesz:
 	@Override
 	public String getVIdText(int i) {
 		return String.valueOf(match.getVisitor().getMembers().get(i).getId());
 	}
-
 
 }

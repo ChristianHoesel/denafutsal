@@ -21,8 +21,6 @@ public interface IManageModel {
 	public int getAgeGroupSelection();
 	public int getMatchTypeSelection();
 	
-	
-	
 	public String getRefereeText();
 	public void setRefereeText(Text text, String error);
 	
@@ -63,10 +61,6 @@ public interface IManageModel {
 	
 	// A Home csapat kezdõ összeállítása:
 	
-	public String getStartH1NText();
-	public void setStartH1NText(Text text, String error);
-	
-	// TODO: Ez a kettõ a fõ metódus most
 	public String getHNText(int id);
 	public void setHNText(int id, Text text, String error);
 	
