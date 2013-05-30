@@ -3,6 +3,8 @@ package hu.bme.mit.inf.mdsd.one.app.management;
 import java.util.Collection;
 import java.util.Iterator;
 
+import model.Match;
+
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.incquery.runtime.exception.IncQueryException;
 
@@ -76,6 +78,25 @@ public class Validation {
 		return validation;
 	}
 
+	// TODO: Milyen értékek között mozog egy meccs ID?
+	public static ValidationObject MatchIdValidation(Resource resource,
+			String error) {
+		ValidationObject validation = new ValidationObject(false, error);
+		
+		Match match = (Match)resource.getContents().get(0);
+		
+		if (match.getId()>0) {
+			validation.setValid(true);
+			validation.setError(null);
+		}
+		else {
+			validation.setValid(false);
+			validation.setError("Érvénytelen meccs azonosító!");
+		}
+		
+		return validation;
+	}
+	
 	public static ValidationObject FullValidation(Resource resource,
 			String error) throws IncQueryException {
 		ValidationObject validation = new ValidationObject(false, error);
@@ -90,4 +111,6 @@ public class Validation {
 
 		return validation;
 	}
+
+	
 }

@@ -2621,7 +2621,22 @@ public class MainView extends ViewPart implements IPartListener2 {
 		fd_idV7Sub.left = new FormAttachment(cpV7Sub, 6);
 		idV7Sub.setLayoutData(fd_idV7Sub);
 
+		// TODO
 		shirtV1Start = new Text(compositeVisitor, SWT.BORDER);
+		shirtV1Start.addFocusListener(new FocusAdapter() {
+			@Override
+			public void focusLost(FocusEvent e) {
+				Display.getDefault().syncExec(new Runnable() {
+					public void run() {
+						manageModel.setShirtVStartText(0, shirtV1Start, "TODO: ERROR");
+						appendTextToLogging(manageModel.getShirtVStartText(0));
+					}
+				});
+
+			}
+		});
+		setTextFromModel(shirtV1Start, manageModel.getShirtVStartText(0));
+		
 		FormData fd_shirtV1Start = new FormData();
 		fd_shirtV1Start.top = new FormAttachment(startV1N, 0, SWT.TOP);
 		fd_shirtV1Start.left = new FormAttachment(idV1Start, 6);
@@ -2629,6 +2644,20 @@ public class MainView extends ViewPart implements IPartListener2 {
 		shirtV1Start.setLayoutData(fd_shirtV1Start);
 
 		shirtV2Start = new Text(compositeVisitor, SWT.BORDER);
+		shirtV2Start.addFocusListener(new FocusAdapter() {
+			@Override
+			public void focusLost(FocusEvent e) {
+				Display.getDefault().syncExec(new Runnable() {
+					public void run() {
+						manageModel.setShirtVStartText(1, shirtV2Start, "TODO: ERROR");
+						appendTextToLogging(manageModel.getShirtVStartText(1));
+					}
+				});
+
+			}
+		});
+		setTextFromModel(shirtV2Start, manageModel.getShirtVStartText(1));
+		
 		FormData fd_shirtV2Start = new FormData();
 		fd_shirtV2Start.top = new FormAttachment(startV2N, 0, SWT.TOP);
 		fd_shirtV2Start.left = new FormAttachment(idV2Start, 6);
@@ -2636,6 +2665,20 @@ public class MainView extends ViewPart implements IPartListener2 {
 		shirtV2Start.setLayoutData(fd_shirtV2Start);
 
 		shirtV3Start = new Text(compositeVisitor, SWT.BORDER);
+		shirtV3Start.addFocusListener(new FocusAdapter() {
+			@Override
+			public void focusLost(FocusEvent e) {
+				Display.getDefault().syncExec(new Runnable() {
+					public void run() {
+						manageModel.setShirtVStartText(2, shirtV3Start, "TODO: ERROR");
+						appendTextToLogging(manageModel.getShirtVStartText(2));
+					}
+				});
+
+			}
+		});
+		setTextFromModel(shirtV3Start, manageModel.getShirtVStartText(2));
+		
 		FormData fd_shirtV3Start = new FormData();
 		fd_shirtV3Start.top = new FormAttachment(startV3N, 0, SWT.TOP);
 		fd_shirtV3Start.left = new FormAttachment(idV3Start, 6);
@@ -2643,6 +2686,20 @@ public class MainView extends ViewPart implements IPartListener2 {
 		shirtV3Start.setLayoutData(fd_shirtV3Start);
 
 		shirtV4Start = new Text(compositeVisitor, SWT.BORDER);
+		shirtV4Start.addFocusListener(new FocusAdapter() {
+			@Override
+			public void focusLost(FocusEvent e) {
+				Display.getDefault().syncExec(new Runnable() {
+					public void run() {
+						manageModel.setShirtVStartText(3, shirtV4Start, "TODO: ERROR");
+						appendTextToLogging(manageModel.getShirtVStartText(3));
+					}
+				});
+
+			}
+		});
+		setTextFromModel(shirtV4Start, manageModel.getShirtVStartText(3));
+		
 		FormData fd_shirtV4Start = new FormData();
 		fd_shirtV4Start.top = new FormAttachment(startV4N, 0, SWT.TOP);
 		fd_shirtV4Start.left = new FormAttachment(idV4Start, 6);
@@ -2650,6 +2707,20 @@ public class MainView extends ViewPart implements IPartListener2 {
 		shirtV4Start.setLayoutData(fd_shirtV4Start);
 
 		shirtV5Start = new Text(compositeVisitor, SWT.BORDER);
+		shirtV5Start.addFocusListener(new FocusAdapter() {
+			@Override
+			public void focusLost(FocusEvent e) {
+				Display.getDefault().syncExec(new Runnable() {
+					public void run() {
+						manageModel.setShirtVStartText(4, shirtV5Start, "TODO: ERROR");
+						appendTextToLogging(manageModel.getShirtVStartText(4));
+					}
+				});
+
+			}
+		});
+		setTextFromModel(shirtV5Start, manageModel.getShirtVStartText(4));
+		
 		FormData fd_shirtV5Start = new FormData();
 		fd_shirtV5Start.top = new FormAttachment(startV5N, 0, SWT.TOP);
 		fd_shirtV5Start.left = new FormAttachment(idV5Start, 6);
@@ -2657,6 +2728,20 @@ public class MainView extends ViewPart implements IPartListener2 {
 		shirtV5Start.setLayoutData(fd_shirtV5Start);
 
 		shirtV1Sub = new Text(compositeVisitor, SWT.BORDER);
+		shirtV1Sub.addFocusListener(new FocusAdapter() {
+			@Override
+			public void focusLost(FocusEvent e) {
+				Display.getDefault().syncExec(new Runnable() {
+					public void run() {
+						manageModel.setShirtVSubText(0, shirtV1Sub, "TODO: ERROR");
+						appendTextToLogging(manageModel.getShirtVSubText(0));
+					}
+				});
+
+			}
+		});
+		setTextFromModel(shirtV1Sub, manageModel.getShirtVSubText(0));
+		
 		FormData fd_shirtV1Sub = new FormData();
 		fd_shirtV1Sub.top = new FormAttachment(subV1N, 0, SWT.TOP);
 		fd_shirtV1Sub.left = new FormAttachment(idV1Sub, 6);
@@ -2664,6 +2749,20 @@ public class MainView extends ViewPart implements IPartListener2 {
 		shirtV1Sub.setLayoutData(fd_shirtV1Sub);
 
 		shirtV2Sub = new Text(compositeVisitor, SWT.BORDER);
+		shirtV2Sub.addFocusListener(new FocusAdapter() {
+			@Override
+			public void focusLost(FocusEvent e) {
+				Display.getDefault().syncExec(new Runnable() {
+					public void run() {
+						manageModel.setShirtVSubText(1, shirtV2Sub, "TODO: ERROR");
+						appendTextToLogging(manageModel.getShirtVSubText(1));
+					}
+				});
+
+			}
+		});
+		setTextFromModel(shirtV2Sub, manageModel.getShirtVSubText(1));
+		
 		FormData fd_shirtV2Sub = new FormData();
 		fd_shirtV2Sub.top = new FormAttachment(subV2N, 0, SWT.TOP);
 		fd_shirtV2Sub.left = new FormAttachment(idV2Sub, 6);
@@ -2671,6 +2770,20 @@ public class MainView extends ViewPart implements IPartListener2 {
 		shirtV2Sub.setLayoutData(fd_shirtV2Sub);
 
 		shirtV3Sub = new Text(compositeVisitor, SWT.BORDER);
+		shirtV3Sub.addFocusListener(new FocusAdapter() {
+			@Override
+			public void focusLost(FocusEvent e) {
+				Display.getDefault().syncExec(new Runnable() {
+					public void run() {
+						manageModel.setShirtVSubText(2, shirtV3Sub, "TODO: ERROR");
+						appendTextToLogging(manageModel.getShirtVSubText(2));
+					}
+				});
+
+			}
+		});
+		setTextFromModel(shirtV3Sub, manageModel.getShirtVSubText(2));
+		
 		FormData fd_shirtV3Sub = new FormData();
 		fd_shirtV3Sub.top = new FormAttachment(subV3N, 0, SWT.TOP);
 		fd_shirtV3Sub.left = new FormAttachment(idV3Sub, 6);
@@ -2678,6 +2791,20 @@ public class MainView extends ViewPart implements IPartListener2 {
 		shirtV3Sub.setLayoutData(fd_shirtV3Sub);
 
 		shirtV4Sub = new Text(compositeVisitor, SWT.BORDER);
+		shirtV4Sub.addFocusListener(new FocusAdapter() {
+			@Override
+			public void focusLost(FocusEvent e) {
+				Display.getDefault().syncExec(new Runnable() {
+					public void run() {
+						manageModel.setShirtVSubText(3, shirtV4Sub, "TODO: ERROR");
+						appendTextToLogging(manageModel.getShirtVSubText(3));
+					}
+				});
+
+			}
+		});
+		setTextFromModel(shirtV4Sub, manageModel.getShirtVSubText(3));
+		
 		FormData fd_shirtV4Sub = new FormData();
 		fd_shirtV4Sub.top = new FormAttachment(subV4N, 0, SWT.TOP);
 		fd_shirtV4Sub.left = new FormAttachment(idV4Sub, 6);
@@ -2685,6 +2812,20 @@ public class MainView extends ViewPart implements IPartListener2 {
 		shirtV4Sub.setLayoutData(fd_shirtV4Sub);
 
 		shirtV5Sub = new Text(compositeVisitor, SWT.BORDER);
+		shirtV5Sub.addFocusListener(new FocusAdapter() {
+			@Override
+			public void focusLost(FocusEvent e) {
+				Display.getDefault().syncExec(new Runnable() {
+					public void run() {
+						manageModel.setShirtVSubText(4, shirtV5Sub, "TODO: ERROR");
+						appendTextToLogging(manageModel.getShirtVSubText(4));
+					}
+				});
+
+			}
+		});
+		setTextFromModel(shirtV5Sub, manageModel.getShirtVSubText(4));
+		
 		FormData fd_shirtV5Sub = new FormData();
 		fd_shirtV5Sub.top = new FormAttachment(subV5N, 0, SWT.TOP);
 		fd_shirtV5Sub.left = new FormAttachment(idV5Sub, 6);
@@ -2692,6 +2833,20 @@ public class MainView extends ViewPart implements IPartListener2 {
 		shirtV5Sub.setLayoutData(fd_shirtV5Sub);
 
 		shirtV6Sub = new Text(compositeVisitor, SWT.BORDER);
+		shirtV6Sub.addFocusListener(new FocusAdapter() {
+			@Override
+			public void focusLost(FocusEvent e) {
+				Display.getDefault().syncExec(new Runnable() {
+					public void run() {
+						manageModel.setShirtVSubText(5, shirtV6Sub, "TODO: ERROR");
+						appendTextToLogging(manageModel.getShirtVSubText(5));
+					}
+				});
+
+			}
+		});
+		setTextFromModel(shirtV6Sub, manageModel.getShirtVSubText(5));
+		
 		FormData fd_shirtV6Sub = new FormData();
 		fd_shirtV6Sub.top = new FormAttachment(subV6N, 0, SWT.TOP);
 		fd_shirtV6Sub.left = new FormAttachment(idV6Sub, 6);
@@ -2699,6 +2854,20 @@ public class MainView extends ViewPart implements IPartListener2 {
 		shirtV6Sub.setLayoutData(fd_shirtV6Sub);
 
 		shirtV7Sub = new Text(compositeVisitor, SWT.BORDER);
+		shirtV7Sub.addFocusListener(new FocusAdapter() {
+			@Override
+			public void focusLost(FocusEvent e) {
+				Display.getDefault().syncExec(new Runnable() {
+					public void run() {
+						manageModel.setShirtVSubText(6, shirtV7Sub, "TODO: ERROR");
+						appendTextToLogging(manageModel.getShirtVSubText(6));
+					}
+				});
+
+			}
+		});
+		setTextFromModel(shirtV7Sub, manageModel.getShirtVSubText(6));
+		
 		FormData fd_shirtV7Sub = new FormData();
 		fd_shirtV7Sub.top = new FormAttachment(subV7N, 0, SWT.TOP);
 		fd_shirtV7Sub.left = new FormAttachment(idV7Sub, 6);

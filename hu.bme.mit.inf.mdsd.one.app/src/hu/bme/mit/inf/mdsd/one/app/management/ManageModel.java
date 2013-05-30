@@ -346,11 +346,15 @@ public class ManageModel implements IManageModel {
 
 	@Override
 	public void setThirdRefereeRefereeText(Text text, String error) {
-		Boolean valid = true; // Ide kerül majd a validátor
+		match.getThirdReferee().setName(text.getText());
+		
+		Boolean valid = text.getText().matches(VALID_NAME);
+
 		if (valid) {
-			match.getThirdReferee().setName(text.getText());
 			text.setBackground(green);
 		} else {
+			error = error
+					+ "Az 3. bíró neve nem tartalmazhat speciális karaktert vagy számot!";
 			view.appendTextToLogging(error);
 			text.setBackground(red);
 		}
@@ -364,15 +368,18 @@ public class ManageModel implements IManageModel {
 
 	@Override
 	public void setSupervisorText(Text text, String error) {
-		Boolean valid = true; // Ide kerül majd a validátor
+		match.getSupervisor().setName(text.getText());
+		
+		Boolean valid = text.getText().matches(VALID_NAME);
+
 		if (valid) {
-			match.getSupervisor().setName(text.getText());
 			text.setBackground(green);
 		} else {
+			error = error
+					+ "A felügyelõ neve nem tartalmazhat speciális karaktert vagy számot!";
 			view.appendTextToLogging(error);
 			text.setBackground(red);
 		}
-
 	}
 
 	@Override
@@ -386,7 +393,7 @@ public class ManageModel implements IManageModel {
 
 		if (valid) {
 			try {
-				match.setId(Integer.parseInt(text.getText()));
+				
 				text.setBackground(green);
 			} catch (Exception e) {
 				text.setBackground(red);
@@ -396,6 +403,23 @@ public class ManageModel implements IManageModel {
 		} else {
 			view.appendTextToLogging(error);
 			text.setBackground(red);
+		}
+		
+		try {
+			match.setId(Integer.parseInt(text.getText()));
+			ValidationObject validation = Validation.MatchIdValidation(resource,
+					error);
+			if (validation.getValid()) {
+				text.setBackground(green);
+			} else {
+				view.appendTextToLogging(validation.getError());
+				text.setBackground(red);
+			}
+		} catch (Exception e) {
+			text.setBackground(red);
+			view.appendTextToLogging(e.toString());
+			view.appendTextToLogging(error
+					+ "A meccs azonosító csak számokat tartalmazhat!");
 		}
 
 	}
@@ -677,15 +701,32 @@ public class ManageModel implements IManageModel {
 	@Override
 	public void setDateDateTime(DateTime datetime, String error) {
 
-		Boolean valid = true; // Ide kerül majd a validátor
+		match.setDate(new Date(datetime.getYear() - 1900, datetime
+				.getMonth(), datetime.getDay()));
+		
+		Boolean valid = false;
+		
+		Date now = new Date();
+		
+		Date date = new Date(datetime.getYear() - 1900, datetime
+				.getMonth(), datetime.getDay());
+		
+		if (date.after(new Date(1930, 1, 1))) {
+			valid = false;
+			System.out.println("faxom");
+			
+		}
+		else {
+			valid = true;
+		}
+		
 		if (valid) {
-			match.setDate(new Date(datetime.getYear() - 1900, datetime
-					.getMonth(), datetime.getDay()));
-			datetime.setBackground(green);
+			datetime.setBackground(green);			
 		} else {
 			view.appendTextToLogging(error);
 			datetime.setBackground(red);
 		}
+		datetime.redraw();
 
 	}
 
@@ -951,13 +992,13 @@ public class ManageModel implements IManageModel {
 
 	@Override
 	public String getShirtVSubText(int id) {
-		return String.valueOf(match.getVisitor().getStartingLine().get(id)
+		return String.valueOf(match.getVisitor().getSubstitutes().get(id)
 				.getShirtNo());
 	}
 
 	@Override
 	public void setShirtVSubText(int id, Text text, String error) {
-		match.getVisitor().getStartingLine().get(id)
+		match.getVisitor().getSubstitutes().get(id)
 				.setShirtNo(Integer.parseInt(text.getText()));
 
 		ValidationObject validation;
