@@ -27,6 +27,7 @@ import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
+import org.eclipse.incquery.runtime.exception.IncQueryException;
 import org.eclipse.swt.graphics.Color;
 import org.eclipse.swt.graphics.Device;
 import org.eclipse.swt.widgets.Combo;
@@ -44,9 +45,10 @@ public class ManageModel implements IManageModel {
 	final static Device device = Display.getCurrent();
 	final static Color green = new Color(device, 164, 198, 54);
 	final static Color red = new Color(device, 255, 0, 0);
+	final static Color candy_pink = new Color(device, 228, 113, 122); // #E4717A
 	/**
 	 **************************************************************************/
-	
+
 	private final static String VALID_NAME = "^[a-zA-Z.()öüóõúéáûíÖÜÓÕÚÉÁÛÍ][a-zA-Z.()öüóõúéáûíÖÜÓÕÚÉÁÛÍ ]*$";
 
 	private ModelFactory factory;
@@ -275,7 +277,6 @@ public class ManageModel implements IManageModel {
 		 */
 	}
 
-
 	/***************************************************************************
 	 * XXX: Bíró lekérése, beállítása, validálása
 	 */
@@ -287,9 +288,9 @@ public class ManageModel implements IManageModel {
 	@Override
 	public void setRefereeText(Text text, String error) {
 		match.getReferee().setName(text.getText());
-		
+
 		Boolean valid = text.getText().matches(VALID_NAME);
-		
+
 		if (valid) {
 			text.setBackground(green);
 		} else {
@@ -300,6 +301,7 @@ public class ManageModel implements IManageModel {
 		}
 
 	}
+
 	/**
 	 **************************************************************************/
 
@@ -323,7 +325,7 @@ public class ManageModel implements IManageModel {
 	public void setAssistantText(Text text, String error) {
 		match.getAssistant().setName(text.getText());
 		Boolean valid = text.getText().matches(VALID_NAME);
-		
+
 		if (valid) {
 			text.setBackground(green);
 		} else {
@@ -333,6 +335,7 @@ public class ManageModel implements IManageModel {
 			text.setBackground(red);
 		}
 	}
+
 	/**
 	 **************************************************************************/
 
@@ -443,17 +446,23 @@ public class ManageModel implements IManageModel {
 	public String getTeamHomeText() {
 		return match.getHome().getName();
 	}
-	
+
 	@Override
 	public void setTeamHomeText(Text text, String error) {
 		match.getHome().setName(text.getText());
-		ValidationObject validation = Validation
-				.TeamValidation(resource, error);
-		if (validation.getValid()) {
-			text.setBackground(green);
-		} else {
-			view.appendTextToLogging(validation.getError());
-			text.setBackground(red);
+
+		ValidationObject validation;
+		try {
+			validation = Validation.TeamValidation(resource, error);
+			if (validation.getValid()) {
+				text.setBackground(green);
+			} else {
+				view.appendTextToLogging(validation.getError());
+				text.setBackground(red);
+			}
+		} catch (IncQueryException e) {
+			view.appendTextToLogging("Hiba! A validálás nem tudott lefutni!");
+			text.setBackground(candy_pink);
 		}
 
 	}
@@ -466,15 +475,22 @@ public class ManageModel implements IManageModel {
 	@Override
 	public void setTeamVisitorText(Text text, String error) {
 		match.getVisitor().setName(text.getText());
-		ValidationObject validation = Validation
-				.TeamValidation(resource, error);
-		if (validation.getValid()) {
-			text.setBackground(green);
-		} else {
-			view.appendTextToLogging(validation.getError());
-			text.setBackground(red);
+		ValidationObject validation;
+		try {
+			validation = Validation.TeamValidation(resource, error);
+			if (validation.getValid()) {
+				text.setBackground(green);
+			} else {
+				view.appendTextToLogging(validation.getError());
+				text.setBackground(red);
+			}
+		} catch (IncQueryException e) {
+			view.appendTextToLogging("Hiba! A validálás nem tudott lefutni!");
+			text.setBackground(candy_pink);
 		}
+
 	}
+
 	/**
 	 **************************************************************************/
 
@@ -504,7 +520,7 @@ public class ManageModel implements IManageModel {
 
 	/**
 	 **************************************************************************/
-	
+
 	/***************************************************************************
 	 * XXX: Home csapat kezdõjátékos azonosítójának lekérdezése, beállítása,
 	 * validálása
@@ -528,6 +544,10 @@ public class ManageModel implements IManageModel {
 				view.appendTextToLogging(validation.getError());
 				text.setBackground(red);
 			}
+
+		} catch (IncQueryException e) {
+			view.appendTextToLogging("Hiba! A validálás nem tudott lefutni!");
+			text.setBackground(candy_pink);
 		} catch (Exception e) {
 			text.setBackground(red);
 			view.appendTextToLogging(e.toString());
@@ -538,9 +558,10 @@ public class ManageModel implements IManageModel {
 
 	/**
 	 **************************************************************************/
-	
+
 	/***************************************************************************
-	 * XXX: Visitor csapat kezdõjátékos nevének lekérdezése, beállítása, validálása
+	 * XXX: Visitor csapat kezdõjátékos nevének lekérdezése, beállítása,
+	 * validálása
 	 */
 	@Override
 	public String getVNText(int id) {
@@ -589,6 +610,9 @@ public class ManageModel implements IManageModel {
 				view.appendTextToLogging(validation.getError());
 				text.setBackground(red);
 			}
+		} catch (IncQueryException e) {
+			view.appendTextToLogging("Hiba! A validálás nem tudott lefutni!");
+			text.setBackground(candy_pink);
 		} catch (Exception e) {
 			text.setBackground(red);
 			view.appendTextToLogging(e.toString());
@@ -599,85 +623,6 @@ public class ManageModel implements IManageModel {
 
 	/**
 	 **************************************************************************/
-
-	@Override
-	public String getShirtH1StartText() {
-		return String.valueOf(match.getHome().getStartingLine().get(0)
-				.getShirtNo());
-	}
-
-	@Override
-	public void setShirtH1StartText(Text text, String error) {
-		Boolean valid = true; // Ide kerül majd a validátor
-		if (valid) {
-			try {
-				match.getHome().getStartingLine().get(0)
-						.setShirtNo(Integer.parseInt(text.getText()));
-				text.setBackground(green);
-			} catch (Exception e) {
-				text.setBackground(red);
-				view.appendTextToLogging(e.toString());
-				view.appendTextToLogging(error);
-			}
-
-		} else {
-			view.appendTextToLogging(error);
-			text.setBackground(red);
-		}
-
-	}
-
-	@Override
-	public String getShirtH2StartText() {
-		return String.valueOf(match.getHome().getStartingLine().get(1)
-				.getShirtNo());
-	}
-
-	@Override
-	public void setShirtH2StartText(Text text) {
-		match.getHome().getStartingLine().get(1)
-				.setShirtNo(Integer.parseInt(text.getText()));
-
-	}
-
-	@Override
-	public String getShirtH3StartText() {
-		return String.valueOf(match.getHome().getStartingLine().get(2)
-				.getShirtNo());
-	}
-
-	@Override
-	public void setShirtH3StartText(Text text) {
-		match.getHome().getStartingLine().get(2)
-				.setShirtNo(Integer.parseInt(text.getText()));
-
-	}
-
-	@Override
-	public String getShirtH4StartText() {
-		return String.valueOf(match.getHome().getStartingLine().get(3)
-				.getShirtNo());
-	}
-
-	@Override
-	public void setShirtH4StartText(Text text) {
-		match.getHome().getStartingLine().get(3)
-				.setShirtNo(Integer.parseInt(text.getText()));
-
-	}
-
-	@Override
-	public String getShirtH5StartText() {
-		return String.valueOf(match.getHome().getStartingLine().get(4)
-				.getShirtNo());
-	}
-
-	@Override
-	public void setShirtH5StartText(Text text) {
-		match.getHome().getStartingLine().get(4)
-				.setShirtNo(Integer.parseInt(text.getText()));
-
-	}
 
 	@Override
 	public int getAgeGroupSelection() {
@@ -924,92 +869,110 @@ public class ManageModel implements IManageModel {
 
 	}
 
-
-	
-	
-
 	@Override
-	public String getShirtV1StartText() {
-		return String.valueOf(match.getVisitor().getStartingLine().get(0)
+	public String getShirtHStartText(int id) {
+		return String.valueOf(match.getVisitor().getStartingLine().get(id)
 				.getShirtNo());
 	}
 
 	@Override
-	public void setShirtV1StartText(Text text, String error) {
-		Boolean valid = true; // Ide kerül majd a validátor
-		if (valid) {
-			try {
-				match.getVisitor().getStartingLine().get(0)
-						.setShirtNo(Integer.parseInt(text.getText()));
-				text.setBackground(green);
-			} catch (Exception e) {
-				text.setBackground(red);
-				view.appendTextToLogging(e.toString());
-				view.appendTextToLogging(error);
-			}
+	public void setShirtHStartText(int id, Text text, String error) {
+		match.getVisitor().getStartingLine().get(id)
+				.setShirtNo(Integer.parseInt(text.getText()));
 
-		} else {
-			view.appendTextToLogging(error);
-			text.setBackground(red);
+		ValidationObject validation;
+		try {
+			validation = Validation.ShirtValidation(resource, error);
+			if (validation.getValid()) {
+				text.setBackground(green);
+			} else {
+				view.appendTextToLogging(validation.getError());
+				text.setBackground(red);
+			}
+		} catch (IncQueryException e) {
+			view.appendTextToLogging("Hiba! A validálás nem tudott lefutni!");
+			text.setBackground(candy_pink);
 		}
 
 	}
 
-
-
-
 	@Override
-	public String getShirtV2StartText() {
-		return String.valueOf(match.getVisitor().getStartingLine().get(1)
+	public String getShirtHSubText(int id) {
+		return String.valueOf(match.getVisitor().getSubstitutes().get(id)
 				.getShirtNo());
 	}
 
 	@Override
-	public void setShirtV2StartText(Text text) {
-		match.getVisitor().getStartingLine().get(1)
+	public void setShirtHSubText(int id, Text text, String error) {
+		match.getVisitor().getSubstitutes().get(id)
 				.setShirtNo(Integer.parseInt(text.getText()));
 
+		ValidationObject validation;
+		try {
+			validation = Validation.ShirtValidation(resource, error);
+			if (validation.getValid()) {
+				text.setBackground(green);
+			} else {
+				view.appendTextToLogging(validation.getError());
+				text.setBackground(red);
+			}
+		} catch (IncQueryException e) {
+			view.appendTextToLogging("Hiba! A validálás nem tudott lefutni!");
+			text.setBackground(candy_pink);
+		}
 	}
 
-
-
 	@Override
-	public String getShirtV3StartText() {
-		return String.valueOf(match.getVisitor().getStartingLine().get(2)
+	public String getShirtVStartText(int id) {
+		return String.valueOf(match.getVisitor().getStartingLine().get(id)
 				.getShirtNo());
 	}
 
 	@Override
-	public void setShirtV3StartText(Text text) {
-		match.getVisitor().getStartingLine().get(2)
+	public void setShirtVStartText(int id, Text text, String error) {
+		match.getVisitor().getStartingLine().get(id)
 				.setShirtNo(Integer.parseInt(text.getText()));
+
+		ValidationObject validation;
+		try {
+			validation = Validation.ShirtValidation(resource, error);
+			if (validation.getValid()) {
+				text.setBackground(green);
+			} else {
+				view.appendTextToLogging(validation.getError());
+				text.setBackground(red);
+			}
+		} catch (IncQueryException e) {
+			view.appendTextToLogging("Hiba! A validálás nem tudott lefutni!");
+			text.setBackground(candy_pink);
+		}
 
 	}
 
-
 	@Override
-	public String getShirtV4StartText() {
-		return String.valueOf(match.getVisitor().getStartingLine().get(3)
+	public String getShirtVSubText(int id) {
+		return String.valueOf(match.getVisitor().getStartingLine().get(id)
 				.getShirtNo());
 	}
 
 	@Override
-	public void setShirtV4StartText(Text text) {
-		match.getVisitor().getStartingLine().get(3)
+	public void setShirtVSubText(int id, Text text, String error) {
+		match.getVisitor().getStartingLine().get(id)
 				.setShirtNo(Integer.parseInt(text.getText()));
 
-	}
-
-	@Override
-	public String getShirtV5StartText() {
-		return String.valueOf(match.getVisitor().getStartingLine().get(4)
-				.getShirtNo());
-	}
-
-	@Override
-	public void setShirtV5StartText(Text text) {
-		match.getVisitor().getStartingLine().get(4)
-				.setShirtNo(Integer.parseInt(text.getText()));
+		ValidationObject validation;
+		try {
+			validation = Validation.ShirtValidation(resource, error);
+			if (validation.getValid()) {
+				text.setBackground(green);
+			} else {
+				view.appendTextToLogging(validation.getError());
+				text.setBackground(red);
+			}
+		} catch (IncQueryException e) {
+			view.appendTextToLogging("Hiba! A validálás nem tudott lefutni!");
+			text.setBackground(candy_pink);
+		}
 
 	}
 
@@ -1104,7 +1067,5 @@ public class ManageModel implements IManageModel {
 	public String getVIdText(int i) {
 		return String.valueOf(match.getVisitor().getMembers().get(i).getId());
 	}
-
-
 
 }

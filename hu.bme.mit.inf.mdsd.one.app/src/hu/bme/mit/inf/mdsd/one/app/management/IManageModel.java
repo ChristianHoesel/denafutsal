@@ -70,33 +70,6 @@ public interface IManageModel {
 	
 	public String getIdHText(int id);
 	public void setIdHText(int id, Text text, String error);
-	
-	public String getShirtH1StartText();
-	public void setShirtH1StartText(Text text, String error);
-	
-	//-----------------------------------------
-	
-	public String getShirtH2StartText();
-	public void setShirtH2StartText(Text text);
-	
-	//-----------------------------------------
-	
-	
-	public String getShirtH3StartText();
-	public void setShirtH3StartText(Text text);
-	
-	//-----------------------------------------
-	
-	
-	public String getShirtH4StartText();
-	public void setShirtH4StartText(Text text);
-	
-	//-----------------------------------------
-	
-	public String getShirtH5StartText();
-	public void setShirtH5StartText(Text text);
-	
-	//-----------------------------------------
 
 	public String getCaptainHome();
 	
@@ -135,8 +108,22 @@ startH5N    cpH5Start   idH5Start   shirtH5Start
 	// A Visitor csapat kezdõje:
 	
 	
-	public String getShirtV1StartText();
-	public void setShirtV1StartText(Text text, String error);
+	/***************************************************************************
+	 * XXX: Beállítjuk a pólókat:
+	 */
+	public String getShirtHStartText(int id);
+	public void setShirtHStartText(int id, Text text, String error);
+	public String getShirtHSubText(int id);
+	public void setShirtHSubText(int id, Text text, String error);
+	
+	public String getShirtVStartText(int id);
+	public void setShirtVStartText(int id, Text text, String error);
+	public String getShirtVSubText(int id);
+	public void setShirtVSubText(int id, Text text, String error);
+	/**
+	 **************************************************************************/
+	
+	
 	
 	//-----------------------------------------
 	
@@ -157,31 +144,6 @@ startH5N    cpH5Start   idH5Start   shirtH5Start
 	 * @param error
 	 */
 	public void setIdVText(int id, Text text, String error);
-	
-	
-	
-	
-	public String getShirtV2StartText();
-	public void setShirtV2StartText(Text text);
-	
-	//-----------------------------------------
-
-	
-	public String getShirtV3StartText();
-	public void setShirtV3StartText(Text text);
-	
-	//-----------------------------------------
-
-	
-	public String getShirtV4StartText();
-	public void setShirtV4StartText(Text text);
-	
-	//-----------------------------------------
-
-	public String getShirtV5StartText();
-	public void setShirtV5StartText(Text text);
-	
-	//-----------------------------------------
 
 	public String getCaptainVisitor();
 	
