@@ -236,7 +236,7 @@ public class WordUtils {
      */
     public static String capitalizeFully(String str, char... delimiters) {
         str = str.toLowerCase();
-        return capitalize(str, null);
+        return capitalize(str, delimiters);
     }
 
     //-----------------------------------------------------------------------
