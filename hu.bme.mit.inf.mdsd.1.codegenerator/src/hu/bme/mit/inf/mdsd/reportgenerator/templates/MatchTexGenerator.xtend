@@ -50,9 +50,9 @@ def cards(Match match)
 \begin{tabular}{ p{0.6cm} p{4.4cm} p{0.5cm}  p{2cm} | p{0.6cm} p{4.4cm}  p{0.5cm}  p{2cm}  }
 no. & név \hfill \textbf{Sárga-Piros lap} \hfill \vphantom a & lap & azonosító & no. & név \hfill \textbf{Sárga-Piros lap} \hfill \vphantom a & lap & azonosító \\ \hline
 \tabularnewline
-«if(match.home.cards.size > match.visitor.cards.size) match.cardDefs(match.home.cards.size-1)»
-«if(match.home.cards.size < match.visitor.cards.size) match.cardDefs(match.visitor.cards.size-1)»
-«if(match.home.cards.size == match.visitor.cards.size) match.cardDefs(match.visitor.cards.size-1)»
+«if(match.home.cards.size > match.visitor.cards.size) (if (match.home.cards.size>0) match.cardDefs(match.home.cards.size-1) else match.cardDefs(match.home.cards.size))»
+«if(match.home.cards.size < match.visitor.cards.size) (if (match.visitor.cards.size>0) match.cardDefs(match.visitor.cards.size-1) else match.cardDefs(match.visitor.cards.size))»
+«if(match.home.cards.size == match.visitor.cards.size) (if (match.visitor.cards.size>0) match.cardDefs(match.visitor.cards.size-1) else match.cardDefs(match.visitor.cards.size))»
 \tabularnewline
 \hline
 \end{tabular}
@@ -65,9 +65,9 @@ def goals(Match match)
 \begin{tabular}{ p{0.6cm} p{5.3cm}  p{2cm} | p{0.6cm} p{5.3cm}  p{2cm}  }
 no. & név \hfill \textbf{Góllövõk} \hfill \vphantom a & azonosító & no. & név \hfill \textbf{Góllövõk} \hfill \vphantom a & azonosító \\ \hline
 \tabularnewline
-«if(match.home.goals.size > match.visitor.goals.size) match.goalDefs(match.home.goals.size-1)»
-«if(match.home.goals.size < match.visitor.goals.size) match.goalDefs(match.visitor.goals.size-1)»
-«if(match.home.goals.size == match.visitor.goals.size) match.goalDefs(match.visitor.goals.size-1)»
+«if(match.home.goals.size > match.visitor.goals.size) (if (match.home.goals.size>0) match.goalDefs(match.home.goals.size-1) else match.goalDefs(match.home.goals.size))»
+«if(match.home.goals.size < match.visitor.goals.size) (if (match.visitor.goals.size>0) match.goalDefs(match.visitor.goals.size-1) else match.goalDefs(match.visitor.goals.size))»
+«if(match.home.goals.size == match.visitor.goals.size) (if (match.visitor.goals.size>0) match.goalDefs(match.visitor.goals.size-1) else match.goalDefs(match.visitor.goals.size))»
 \tabularnewline
 \hline
 \end{tabular}
@@ -80,9 +80,9 @@ def staff(Match match)
 \begin{tabular}{  p{6.32cm}  p{2cm} | p{6.32cm}  p{2cm}  }
 név \hfill \textbf{Kispad} \hfill \vphantom a & azonosító &  név \hfill \textbf{Kispad} \hfill \vphantom a & azonosító \\ \hline
 \tabularnewline
-«if(match.home.staff.size > match.visitor.staff.size) match.staffDefs(match.home.staff.size-1)»
-«if(match.home.staff.size < match.visitor.staff.size) match.staffDefs(match.visitor.staff.size-1)»
-«if(match.home.staff.size == match.visitor.staff.size) match.staffDefs(match.visitor.staff.size-1)»
+«if(match.home.staff.size > match.visitor.staff.size) (if (match.home.staff.size>0) match.staffDefs(match.home.staff.size-1) else match.staffDefs(match.home.staff.size-1))»
+«if(match.home.staff.size < match.visitor.staff.size) (if (match.home.staff.size>0) match.staffDefs(match.home.staff.size-1) else match.staffDefs(match.home.staff.size))»
+«if(match.home.staff.size == match.visitor.staff.size) (if (match.visitor.staff.size>0) match.staffDefs(match.visitor.staff.size-1) else match.staffDefs(match.visitor.staff.size))»
 \tabularnewline
 \hline
 \end{tabular}'''
@@ -178,10 +178,10 @@ def goalDefs(Match match, int count)
 '''
 «FOR Integer i: 0..count»
 «if(match.home.goals.size > i) match.home.goals.get(i).goalData()
- else{ and }»
+ else{ ''' & & ''' }»
 «and»
 «if(match.visitor.goals.size > i) match.visitor.goals.get(i).goalData()
- else{ and }»
+ else{ ''' & & ''' }»
 «newLine»
 «ENDFOR»
 '''
