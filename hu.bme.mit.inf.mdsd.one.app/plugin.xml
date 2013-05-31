@@ -116,6 +116,11 @@
                   label="Generate report (TeX)"
                   style="push">
             </command>
+            <command
+                  commandId="hu.bme.mit.inf.mdsd.one.app.generatepdf"
+                  label="Generate report (Pdf)"
+                  style="push">
+            </command>
             <separator
                   name="separator5"
                   visible="true">
@@ -245,6 +250,11 @@
                   defaultHandler="hu.bme.mit.inf.mdsd.one.app.commands.DownloadPDFLog"
                   id="hu.bme.mit.inf.mdsd.one.app.downloadpdflog"
                   name="DownloadPDFLog">
+            </command>
+            <command
+                  defaultHandler="hu.bme.mit.inf.mdsd.one.app.commands.GeneratePdfReport"
+                  id="hu.bme.mit.inf.mdsd.one.app.generatepdf"
+                  name="Generate Pdf">
             </command>
             
             

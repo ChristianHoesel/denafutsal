@@ -2,34 +2,45 @@ package hu.bme.mit.inf.mdsd.reportgenerator.templates
 
 import hu.bme.mit.inf.mdsd.reportgenerator.helper.GeneratorHelper
 import hu.bme.mit.inf.mdsd.reportgenerator.helper.WordUtils
+import model.Event
+import model.EventType
 import model.Match
 import model.Player
 import model.Position
 import model.StaffMember
-import model.Event
-import model.EventType
+import java.io.File
 
 class MatchTexGenerator {
 	
 	
-    def generate(Match dataModel, String filename) {
-    	GeneratorHelper::createTex(filename, dataModel.compileTex); 
+    def generate(Match dataModel, String filename) {    
+    	generate(dataModel, filename, false);
+    }
+    def generate(Match dataModel, String filename, boolean isNeedPdf) {
+    	var file = new File(filename).getName();
+    	
+    	if(isNeedPdf)
+    		GeneratorHelper::createTex(filename.replace(file, "main.tex"), dataModel.compileTex(filename.replace("\\", "/").replace(".tex", ""))); 
+    	GeneratorHelper::createTex(filename, dataModel.bodyTex); 
     }
     
     
-def compileTex(Match match) '''
-\documentclass[a4paper]{article}
-\pagestyle{headings}
+def compileTex(Match match, String file) '''
+\documentclass{article}
 \usepackage{array}
-\usepackage[screen,paneltoc,code]{pdfscreen}
-\usepackage{longtable, tabularx, tabu}
+\usepackage{tabularx}
 \usepackage[margin=0.5in]{geometry}
 \usepackage[english]{babel}
 \usepackage[utf8]{inputenc}
 \usepackage{color}
-\author{Futsalgen}
-\marginparsep = 0pt
 \begin{document}
+\input{«file»}
+\end{document}
+'''
+
+def bodyTex(Match match) 
+'''
+\thispagestyle{empty}
 «match.title»
 «line»
 «match.teamsAndScore»
@@ -41,8 +52,8 @@ def compileTex(Match match) '''
 «match.staff»
 «match.goals»
 «match.cards»
-\end{document}
 '''
+
 def cards(Match match) 
 '''
 
