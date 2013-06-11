@@ -48,12 +48,14 @@ public class Validation {
 				validation.setError(null);
 			}
 			else {
-				validation.setError("Ezzel az azonosítóval már rendelkezik játékos!");
+				String error_str = new String("A követekzõ játékosok aznosítója megegyezik: ");
+				for (Iterator<NotUniqueIdMatch> iterator = matches.iterator(); iterator.hasNext();) {
+					NotUniqueIdMatch notUniqueIdMatch = (NotUniqueIdMatch) iterator
+							.next();
+					error_str = error_str + notUniqueIdMatch.getTeamMember().getName() + " ";
+				}
+				validation.setError(error_str);
 			}
-			
-			
-
-		
 		return validation;
 	}
 	
@@ -70,7 +72,15 @@ public class Validation {
 				validation.setError(null);
 			}
 			else {
-				validation.setError("Ezzel a mezszámmal már rendelkezik játékos ebben a csapatban!");
+				String error_str = new String("A követekzõ játékosok mezszáma megegyezik: ");
+				for (Iterator<NotUniqueShirtNoMatch> iterator = matches.iterator(); iterator.hasNext();) {
+					NotUniqueShirtNoMatch notUniqueShirtNoMatch = (NotUniqueShirtNoMatch) iterator
+							.next();
+					error_str = error_str + notUniqueShirtNoMatch.getTeamMember().getName() + " ";
+				}
+				validation.setError(error_str);
+				
+				//validation.setError("Ezzel a mezszámmal már rendelkezik játékos ebben a csapatban!");
 			}
 			
 
